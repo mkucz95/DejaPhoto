@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="button_width">0dp</dimen>
+    <dimen name="button_height">100dp</dimen>
+    <dimen name="widget_height">102dp</dimen>
+    <dimen name="layoutweight">1</dimen>
+
+
+
+</resources>
