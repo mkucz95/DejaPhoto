@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    }
+]

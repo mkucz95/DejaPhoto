@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher.png",
+        "source": "/Users/Justin/Desktop/DejaPhoto/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher_round.png",
+        "source": "/Users/Justin/Desktop/DejaPhoto/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    }
+]

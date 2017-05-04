@@ -1,0 +1,7 @@
+#Wed May 03 21:36:07 PDT 2017
+base.0=/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_3e96b1845e7b1d179b63484ce42b40ee616856fa
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_d3ea7407a54b0f1c8eb032f1799580d8633e7c8c/classes.dex
+base.1=/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_d3ea7407a54b0f1c8eb032f1799580d8633e7c8c
+file.0=/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_3e96b1845e7b1d179b63484ce42b40ee616856fa/classes.dex

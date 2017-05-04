@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_secondary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_dark.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_search_url_text.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_search_url_text.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_tint_seek_thumb.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_light.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_hint_foreground_material_light.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_dark.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_hint_foreground_material_dark.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_btn_colored_text_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_tint_edittext.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_tint_btn_checkable.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_tint_default.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_dark.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_tint_switch_track.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_tint_switch_thumb.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color/abc_tint_spinner.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color/abc_tint_spinner.xml"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_thumb.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_tint_spinner.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_tint_spinner.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_tint_seek_thumb.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_tint_btn_checkable.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_tint_edittext.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_text_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_tint_default.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_track.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/color-v23/abc_tint_switch_track.xml"
+    }
+]
