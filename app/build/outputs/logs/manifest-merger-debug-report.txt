@@ -27,15 +27,15 @@ ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.
 		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:7:22-69
 application
 ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:10:5-40:19
-MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\68959b03052334eadd0df51401d154541fd7e475\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\c93f974d364cc31bf78646096093b277c7ffdd47\output\AndroidManifest.xml:26:5-20
-MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\f04c11bf41da673f30bf83e4aa056c33333a2cda\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\e836a089d61393595f90f2d447632b7f551e8c9a\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\b8ae0326c569a9cae70b0d0f4f9f0fe4da4acfdd\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\7cac32d97f608f2a1f4bdfa2f6a2289111361d7e\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\3474d38ed301f8e0f7829856d00ad5029f6fef31\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\598d21c649cf17798412e8b12626c92a886c9298\output\AndroidManifest.xml:26:5-20
-MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\d5c42d2bcfc5f09f7ae6fed5f2ca5b512df009cb\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\4215f1520dd4ac9b345cae8d16f66fc0647d363a\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\0417d0d1c863875bfe39da90aa07c4ea33cb8fd1\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\08e033bdbfd467e8aeb7ebe61a139c409fa0b329\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\876250376421e04b37fae371a632651b85a87e00\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\b6246aeb0c33506883d5a32832fbb03bca31c838\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\772ec52c52f0544a3a6298ef7cadd81b6d699251\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\6b5f96255c8112f8212a5cb71a3462e66ebee830\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\583053027937f07bcdd4108385af10fd3f6a8bcd\output\AndroidManifest.xml:29:5-20
 	android:label
 		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:13:9-41
 	android:supportsRtl
@@ -88,17 +88,17 @@ ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.
 		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:38:13-64
 uses-sdk
 INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\68959b03052334eadd0df51401d154541fd7e475\output\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\c93f974d364cc31bf78646096093b277c7ffdd47\output\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\f04c11bf41da673f30bf83e4aa056c33333a2cda\output\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\e836a089d61393595f90f2d447632b7f551e8c9a\output\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\b8ae0326c569a9cae70b0d0f4f9f0fe4da4acfdd\output\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\7cac32d97f608f2a1f4bdfa2f6a2289111361d7e\output\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\3474d38ed301f8e0f7829856d00ad5029f6fef31\output\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\598d21c649cf17798412e8b12626c92a886c9298\output\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\d5c42d2bcfc5f09f7ae6fed5f2ca5b512df009cb\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\4215f1520dd4ac9b345cae8d16f66fc0647d363a\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\0417d0d1c863875bfe39da90aa07c4ea33cb8fd1\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\08e033bdbfd467e8aeb7ebe61a139c409fa0b329\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\876250376421e04b37fae371a632651b85a87e00\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\b6246aeb0c33506883d5a32832fbb03bca31c838\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\772ec52c52f0544a3a6298ef7cadd81b6d699251\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\6b5f96255c8112f8212a5cb71a3462e66ebee830\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\583053027937f07bcdd4108385af10fd3f6a8bcd\output\AndroidManifest.xml:21:5-23:58
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\68959b03052334eadd0df51401d154541fd7e475\output\AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
@@ -106,16 +106,16 @@ MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\
 		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
 meta-data#android.support.VERSION
-ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\68959b03052334eadd0df51401d154541fd7e475\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\c93f974d364cc31bf78646096093b277c7ffdd47\output\AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\f04c11bf41da673f30bf83e4aa056c33333a2cda\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\e836a089d61393595f90f2d447632b7f551e8c9a\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\b8ae0326c569a9cae70b0d0f4f9f0fe4da4acfdd\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\7cac32d97f608f2a1f4bdfa2f6a2289111361d7e\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\3474d38ed301f8e0f7829856d00ad5029f6fef31\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\598d21c649cf17798412e8b12626c92a886c9298\output\AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\d5c42d2bcfc5f09f7ae6fed5f2ca5b512df009cb\output\AndroidManifest.xml:25:5-27:34
+ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\4215f1520dd4ac9b345cae8d16f66fc0647d363a\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\0417d0d1c863875bfe39da90aa07c4ea33cb8fd1\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\08e033bdbfd467e8aeb7ebe61a139c409fa0b329\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\876250376421e04b37fae371a632651b85a87e00\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\b6246aeb0c33506883d5a32832fbb03bca31c838\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\772ec52c52f0544a3a6298ef7cadd81b6d699251\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\6b5f96255c8112f8212a5cb71a3462e66ebee830\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\583053027937f07bcdd4108385af10fd3f6a8bcd\output\AndroidManifest.xml:25:5-27:34
 	android:value
-		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\68959b03052334eadd0df51401d154541fd7e475\output\AndroidManifest.xml:27:9-31
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:27:9-31
 	android:name
-		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\68959b03052334eadd0df51401d154541fd7e475\output\AndroidManifest.xml:26:9-47
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:26:9-47

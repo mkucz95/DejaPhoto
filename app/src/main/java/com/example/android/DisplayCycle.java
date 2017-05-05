@@ -1,6 +1,9 @@
 package com.example.android;
 
 import android.media.Image;
+import android.os.Environment;
+
+import java.io.File;
 
 /**
  * Created by Justin on 5/4/17.
@@ -29,13 +32,39 @@ public class DisplayCycle {
     public void DisplayCycle(){ //empty constructor
         this.head = null;
         this.first = null;
+
+        buildDisplayCycle(false);
     }
 
-    public DisplayCycle(Image newImage){ //called when new display cycle object is called
-        this.head = new ImageNode(newImage);
-        this.first = this.head;
-        this.last.setNext(first);
+    public void DisplayCycle(boolean flag){ //empty constructor
+        this.head = null;
+        this.first = null;
 
+        buildDisplayCycle(true);
+    }
+
+    public void buildDisplayCycle(boolean flag){
+     if(flag){ //create display cycle from Camera
+         File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
+         File[] files = dcimDirectory.listFiles();
+         for(File currPicture: files){
+             addToCycle(currPicture.getAbsolutePath());
+         }
+     }
+
+     else{ //build display cycle from DejaAlbum
+
+     }
+
+        String DejaFolder="DejaPhoto";
+        File DejaDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString());
+        File[] files = DejaDirectory.listFiles();
+        for (File CurFile : files) {
+            if (CurFile.isDirectory()) {
+                DejaDirectory=CurFile.getName();
+                break;
+            }
+        }
     }
 }
 

@@ -30,11 +30,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
             Intent intentPrev = new Intent(context, DejaPhotoWidgetProvider.class);
             intentPrev.setAction(PREVIOUS_PIC);
-            /*intentPrev.setAction(KARMA_BUTTON);
-            intentPrev.setAction(RELEASE_BUTTON);
-            intentPrev.setAction(NEXT_PIC);*/
-
-
 
             Intent intentKarma = new Intent(context, DejaPhotoWidgetProvider.class);
             intentKarma.setAction(KARMA_BUTTON);
@@ -45,13 +40,10 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Intent intentNext = new Intent(context, DejaPhotoWidgetProvider.class);
             intentNext.setAction(NEXT_PIC);
 
-
             PendingIntent pendingIntentPrev = PendingIntent.getBroadcast(context, 0, intentPrev, 0);
             PendingIntent pendingIntentKarma = PendingIntent.getBroadcast(context, 0, intentKarma, 0);
             PendingIntent pendingIntentRelease = PendingIntent.getBroadcast(context, 0, intentRelease, 0);
             PendingIntent pendingIntentNext = PendingIntent.getBroadcast(context, 0, intentNext, 0);
-
-
 
             //get layout for our wdiget, give each button on-click listener
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
@@ -59,7 +51,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.karma_btn, pendingIntentKarma);
             views.setOnClickPendingIntent(R.id.release_btn, pendingIntentRelease);
             views.setOnClickPendingIntent(R.id.next_pic, pendingIntentNext);
-
 
             appWidgetManager.updateAppWidget(appWidgetId,views);
         }
@@ -81,8 +72,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             //TODO KARMA
             views.setTextViewText(R.id.karma_btn, "Undo Karma Button");
 
-           /*Intent karmaIntent = new Intent(context, ButtonClicked.class);
-            views.setOnClickFillInIntent(0, karmaIntent);*/
+           Intent karmaIntent = new Intent(context, KarmaClicked.class);
+            views.setOnClickFillInIntent(0, karmaIntent);
 
         }
 

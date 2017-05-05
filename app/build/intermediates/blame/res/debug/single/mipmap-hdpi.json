@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
         "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
@@ -10,9 +14,5 @@
     {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher_round.png",
         "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
-        "source": "C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     }
 ]
