@@ -56,15 +56,15 @@ public class DisplayCycle {
 
      }
 
-        String DejaFolder="DejaPhoto";
-        File DejaDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString());
-        File[] files = DejaDirectory.listFiles();
-        for (File CurFile : files) {
-            if (CurFile.isDirectory()) {
-                DejaDirectory=CurFile.getName();
-                break;
-            }
+
+    }
+
+    public String getImage(boolean flag){
+        if(flag){
+            return "h";
         }
+
+        else return "b";
     }
 }
 
