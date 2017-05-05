@@ -21,8 +21,8 @@ public class DisplayCycle {
         next.setPrev(prev);
     }
 
-    public void addToCycle(Image newImage){//add new node at the end of list
-        ImageNode newNode = new ImageNode(newImage, last, first);
+    public void addToCycle(String picPath){//add new node at the end of list
+        ImageNode newNode = new ImageNode(picPath, last, first);
         last.setNext(newNode);
         first.setPrev(newNode);
         last = newNode;
@@ -43,28 +43,41 @@ public class DisplayCycle {
         buildDisplayCycle(true);
     }
 
-    public void buildDisplayCycle(boolean flag){
-     if(flag){ //create display cycle from Camera
-         File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
-         File[] files = dcimDirectory.listFiles();
-         for(File currPicture: files){
-             addToCycle(currPicture.getAbsolutePath());
+    private void buildDisplayCycle(boolean flag) {
+         if(flag) { //create display cycle from Camera Roll
+             File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
+             File[] dcimPhotos = dcimDirectory.listFiles();
+             if(dcimPhotos != null) { //DCIM contains photos
+                 for (File currPicture : dcimPhotos) {
+                     addToCycle(currPicture.getAbsolutePath());
+                 }
+             }
+             else{
+                 //No photos in DCIM, display default image
+                 //TODO: addToCycle(DEFAULT_IMAGE);
+             }
          }
-     }
 
-     else{ //build display cycle from DejaAlbum
-
-     }
-
-        String DejaFolder="DejaPhoto";
-        File DejaDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString());
-        File[] files = DejaDirectory.listFiles();
-        for (File CurFile : files) {
-            if (CurFile.isDirectory()) {
-                DejaDirectory=CurFile.getName();
-                break;
-            }
-        }
+         else { //create display cycle from DejaPhoto album folder
+             File dejaPhotoDirectory = new File(Environment.getExternalStorageDirectory(), "DejaPhoto"); //get path to DejaPhoto folder
+             if(dejaPhotoDirectory.exists()){
+                 File[] dejaPhotos = dejaPhotoDirectory.listFiles();
+                 if (dejaPhotos != null){ //DejaPhoto album exists, and contains photos
+                     for (File currPicture : dejaPhotos) {
+                         addToCycle(currPicture.getAbsolutePath());
+                     }
+                 }
+                 else{ //DejaPhoto album exists, but empty. Display default image
+                     //TODO: addToCycle(DEFAULT_IMAGE);
+                 }
+             }
+             else{
+                 //DejaPhoto Album does not exist. Create one and display default image
+                 File newFolder = new File(Environment.getExternalStorageDirectory() + File.separator + "DejaPhoto");
+                 newFolder.mkdirs();
+                 //TODO: addToCycle(DEFAULT_IMAGE);
+             }
+         }
     }
 }
 

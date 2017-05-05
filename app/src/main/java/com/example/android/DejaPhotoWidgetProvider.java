@@ -72,8 +72,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             //TODO KARMA
             views.setTextViewText(R.id.karma_btn, "Undo Karma Button");
 
-           Intent karmaIntent = new Intent(context, KarmaClicked.class);
-            views.setOnClickFillInIntent(0, karmaIntent);
+          /* Intent karmaIntent = new Intent(context, KarmaClicked.class);
+            views.setOnClickFillInIntent(0, karmaIntent);*/
 
         }
 
