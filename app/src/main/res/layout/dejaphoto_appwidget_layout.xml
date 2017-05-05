@@ -12,14 +12,14 @@
         android:layout_margin="8dip"
         android:divider="@drawable/divider"
         android:showDividers="middle"
-        android:dividerPadding="12dip"
+        android:dividerPadding="0dp"
         >
 
         <ImageButton
             android:id="@+id/previous_pic"
             android:layout_width="@dimen/arrow_width"
             android:layout_height="match_parent"
-            android:src="@drawable/left_arrow"
+            android:src="@drawable/skip_prev_white"
             android:background="@android:color/transparent"
             />
 
@@ -29,8 +29,10 @@
             android:id="@+id/karma_btn"
             android:layout_width="@dimen/button_width"
             android:layout_height="match_parent"
-            android:text="KARMA"
+            android:text="Karma"
+            android:textAllCaps="false"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:background="@android:color/transparent"
             />
 
@@ -40,7 +42,9 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="match_parent"
             android:text="Release"
+            android:textAllCaps="false"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:background="@android:color/transparent"
             />
 
@@ -49,7 +53,7 @@
             android:id="@+id/next_pic"
             android:layout_width="@dimen/arrow_width"
             android:layout_height="match_parent"
-            android:src="@drawable/right_arrow"
+            android:src="@drawable/skip_next_white"
             android:background="@android:color/transparent"
             />
 
