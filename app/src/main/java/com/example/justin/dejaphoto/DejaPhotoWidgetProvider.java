@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.RemoteViews;
 import android.widget.TextView;
@@ -53,9 +54,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
 
 
-
-
-
             //get layout for our wdiget, give each button on-click listener
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
             views.setOnClickPendingIntent(R.id.previous_pic, pendingIntentPrev);
@@ -72,22 +70,30 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent){
 
         super.onReceive(context, intent);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
 
 
         if(intent.getAction().equals(PREVIOUS_PIC)){
             Toast.makeText(context, "Previous Picture", Toast.LENGTH_SHORT).show();
-
         }
 
         if(intent.getAction().equals(KARMA_BUTTON)){
             Toast.makeText(context, "Karma Not Yet Implemented", Toast.LENGTH_SHORT).show();
             //TODO KARMA
+            views.setTextViewText(R.id.karma_btn, "Undo Karma Button");
+
+           /*Intent karmaIntent = new Intent(context, ButtonClicked.class);
+            views.setOnClickFillInIntent(0, karmaIntent);*/
+
         }
 
 
         if(intent.getAction().equals(RELEASE_BUTTON)){
             Toast.makeText(context, "Picture Release Not Yet Implemented", Toast.LENGTH_SHORT).show();
             //TODO Release
+
+           /* Intent releaseIntent = new Intent(context, ButtonClicked.class);
+            views.setOnClickFillInIntent(0, releaseIntent);*/
         }
 
 

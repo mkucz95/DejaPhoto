@@ -6,22 +6,22 @@
     density="420dpi"
     format="10"
     plugin-version="2.3.1"
-    timestamp="1493945236637"
+    timestamp="1493946945252"
     token="-6783488093855023348"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="459" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="84" />
+        duration="37" />
     <task
         name="verifier"
-        duration="2" />
+        duration="108" />
 
     <artifact
         location="/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
@@ -78,7 +78,7 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1493945236637"
+        timestamp="1493946945252"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/Users/Justin/Desktop/DejaPhoto/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
