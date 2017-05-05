@@ -21,7 +21,8 @@ import java.net.URL;
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
- * helper methods.
+ * When an intent starts this service, this service reads the action (which contains the new
+ * image path) and then sets that image to the wallpaper.
  */
 public class WallpaperChanger extends IntentService {
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
@@ -41,36 +42,22 @@ public class WallpaperChanger extends IntentService {
                DisplayMetrics metrics = new DisplayMetrics(); //get screen dimensions
                int height = metrics.heightPixels;
                int width = metrics.widthPixels;
+               String imagePath = intent.getAction(); //takes info passed from intent
 
-               String imagePath = "TESTSTRING"; //TODO get info from display cycle node
-               String defaultImage = "DEFAULT IMAGE/EMPTY";
-               FileInputStream imgIS = null;
+               try {//convert image path into something code can use
+                   FileInputStream  imgIS  = new FileInputStream(new File(imagePath));
+                   BufferedInputStream bufIS = new BufferedInputStream(imgIS);
+                   Bitmap bitmap = BitmapFactory.decodeStream(bufIS); //
 
-               try {
-                  imgIS  = new FileInputStream(new File(imagePath));
-               }catch(FileNotFoundException e){
+                   try{
+                       wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
+                       wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions
+                   }catch(IOException e){
+                       e.printStackTrace();
+                   }
+               }catch(FileNotFoundException e){ //catch fileinputstream exceptions
                    e.printStackTrace();
                } //trying to get wallpaper from display cycle node
-
-               if (imgIS == null){ //filenotfound
-                   try{
-                       imgIS  = new FileInputStream(new File(defaultImage));
-                   }catch(FileNotFoundException e){
-                       e.printStackTrace();
-                   } //if unsuccesful, then try to load default image
-               }
-               //TODO implement getting imagepath or data from DisplayCycle node
-
-               BufferedInputStream bufIS = new BufferedInputStream(imgIS);
-
-               Bitmap bitmap = BitmapFactory.decodeStream(bufIS);
-
-               try{
-                   wallpaperManager.setBitmap(bitmap);
-                   wallpaperManager.suggestDesiredDimensions(width, height);
-               }catch(IOException e){
-                   e.printStackTrace();
-               }
            }
         stopService(intent);
         }
