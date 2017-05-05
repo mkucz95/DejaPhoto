@@ -20,7 +20,7 @@ import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
-import com.example.justin.dejaphoto.R;
+import com.example.dejaphoto.R;
 
 import java.util.List;
 

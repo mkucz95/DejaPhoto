@@ -1,121 +1,127 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:2:1-44:12
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:2:1-46:12
 	package
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:3:5-43
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:3:5-36
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.MANAGE_DOCUMENTS
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:5:5-75
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:5:5-75
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:5:22-72
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:5:22-72
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:6:5-80
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:6:5-80
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:6:22-77
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:6:22-77
 uses-permission#android.permission.SET_WALLPAPER
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:7:5-71
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:7:5-72
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:7:22-69
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:7:22-69
 application
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:12:5-42:19
-MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/Justin/.android/build-cache/ed80de27ce8c889514d85dc33487285a5f2874fc/output/AndroidManifest.xml:26:5-20
-MERGED from [com.android.support:support-v4:25.3.1] /Users/Justin/.android/build-cache/0f7fd8508507c1be07a8013c1fc2aa70ce2e18ea/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-fragment:25.3.1] /Users/Justin/.android/build-cache/3efbd145bdaf64b9760dcec753a4154b239b4b2f/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-media-compat:25.3.1] /Users/Justin/.android/build-cache/6566f3afeff52802e2485f7b3341ac033521c1c9/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-core-ui:25.3.1] /Users/Justin/.android/build-cache/491ae958d4db7c2839d52a48f255a212d2061b1e/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-core-utils:25.3.1] /Users/Justin/.android/build-cache/f2b1eef429af8fa7fbf72512e59548ec58025b40/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/Justin/.android/build-cache/723e2583f0087f9e504cc39d08964d2cfda47e3a/output/AndroidManifest.xml:26:5-20
-MERGED from [com.android.support:support-compat:25.3.1] /Users/Justin/.android/build-cache/99828dcabc534c1f887add00d40e3da0115f7fba/output/AndroidManifest.xml:29:5-20
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:10:5-44:19
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\4215f1520dd4ac9b345cae8d16f66fc0647d363a\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\0417d0d1c863875bfe39da90aa07c4ea33cb8fd1\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\08e033bdbfd467e8aeb7ebe61a139c409fa0b329\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\876250376421e04b37fae371a632651b85a87e00\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\b6246aeb0c33506883d5a32832fbb03bca31c838\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\772ec52c52f0544a3a6298ef7cadd81b6d699251\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\6b5f96255c8112f8212a5cb71a3462e66ebee830\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\583053027937f07bcdd4108385af10fd3f6a8bcd\output\AndroidManifest.xml:29:5-20
 	android:label
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:15:9-41
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:13:9-41
 	android:supportsRtl
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:17:9-35
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:15:9-35
 	android:roundIcon
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:16:9-54
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:14:9-54
 	android:allowBackup
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:13:9-35
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:11:9-35
 	android:icon
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:14:9-43
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:12:9-43
 	android:theme
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:18:9-40
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:16:9-40
 activity#com.example.android.SettingsActivity
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:19:9-27:20
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:17:9-25:20
 	android:label
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:21:13-45
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:19:13-45
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:20:13-64
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:18:13-64
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:22:13-26:29
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:20:13-24:29
 action#android.intent.action.MAIN
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:23:17-69
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:21:17-69
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:23:25-66
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:21:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:25:17-77
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:23:17-77
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:25:27-74
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:23:27-74
 receiver#com.example.android.DejaPhotoWidgetProvider
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:29:9-37:20
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:27:9-35:20
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:29:19-77
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:27:19-77
 intent-filter#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:30:13-32:29
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:28:13-30:29
 action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:31:17-84
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:29:17-84
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:31:25-81
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:29:25-81
 meta-data#android.appwidget.provider
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:34:13-36:61
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:32:13-34:61
 	android:resource
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:36:17-58
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:34:17-58
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:35:17-58
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:33:17-58
 service#com.example.android.WallpaperChanger
-ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:39:9-41:39
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:37:9-39:40
 	android:exported
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:41:13-37
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:39:13-37
 	android:name
-		ADDED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml:40:13-64
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:38:13-64
+service#com.example.android.WidgetManager
+ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:40:9-42:39
+	android:exported
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:42:13-37
+	android:name
+		ADDED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml:41:13-61
 uses-sdk
-INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/Justin/.android/build-cache/ed80de27ce8c889514d85dc33487285a5f2874fc/output/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:25.3.1] /Users/Justin/.android/build-cache/0f7fd8508507c1be07a8013c1fc2aa70ce2e18ea/output/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:25.3.1] /Users/Justin/.android/build-cache/3efbd145bdaf64b9760dcec753a4154b239b4b2f/output/AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-media-compat:25.3.1] /Users/Justin/.android/build-cache/6566f3afeff52802e2485f7b3341ac033521c1c9/output/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-ui:25.3.1] /Users/Justin/.android/build-cache/491ae958d4db7c2839d52a48f255a212d2061b1e/output/AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-utils:25.3.1] /Users/Justin/.android/build-cache/f2b1eef429af8fa7fbf72512e59548ec58025b40/output/AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/Justin/.android/build-cache/723e2583f0087f9e504cc39d08964d2cfda47e3a/output/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-compat:25.3.1] /Users/Justin/.android/build-cache/99828dcabc534c1f887add00d40e3da0115f7fba/output/AndroidManifest.xml:21:5-23:58
+INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\4215f1520dd4ac9b345cae8d16f66fc0647d363a\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\0417d0d1c863875bfe39da90aa07c4ea33cb8fd1\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\08e033bdbfd467e8aeb7ebe61a139c409fa0b329\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\876250376421e04b37fae371a632651b85a87e00\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\b6246aeb0c33506883d5a32832fbb03bca31c838\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\772ec52c52f0544a3a6298ef7cadd81b6d699251\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\6b5f96255c8112f8212a5cb71a3462e66ebee830\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\583053027937f07bcdd4108385af10fd3f6a8bcd\output\AndroidManifest.xml:21:5-23:58
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mkucz\StudioProjects\DejaPhoto\app\src\main\AndroidManifest.xml
 meta-data#android.support.VERSION
-ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/Justin/.android/build-cache/ed80de27ce8c889514d85dc33487285a5f2874fc/output/AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:support-v4:25.3.1] /Users/Justin/.android/build-cache/0f7fd8508507c1be07a8013c1fc2aa70ce2e18ea/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-fragment:25.3.1] /Users/Justin/.android/build-cache/3efbd145bdaf64b9760dcec753a4154b239b4b2f/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-media-compat:25.3.1] /Users/Justin/.android/build-cache/6566f3afeff52802e2485f7b3341ac033521c1c9/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-core-ui:25.3.1] /Users/Justin/.android/build-cache/491ae958d4db7c2839d52a48f255a212d2061b1e/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-core-utils:25.3.1] /Users/Justin/.android/build-cache/f2b1eef429af8fa7fbf72512e59548ec58025b40/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/Justin/.android/build-cache/723e2583f0087f9e504cc39d08964d2cfda47e3a/output/AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:support-compat:25.3.1] /Users/Justin/.android/build-cache/99828dcabc534c1f887add00d40e3da0115f7fba/output/AndroidManifest.xml:25:5-27:34
+ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\4215f1520dd4ac9b345cae8d16f66fc0647d363a\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\mkucz\.android\build-cache\0417d0d1c863875bfe39da90aa07c4ea33cb8fd1\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\mkucz\.android\build-cache\08e033bdbfd467e8aeb7ebe61a139c409fa0b329\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\mkucz\.android\build-cache\876250376421e04b37fae371a632651b85a87e00\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\mkucz\.android\build-cache\b6246aeb0c33506883d5a32832fbb03bca31c838\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\mkucz\.android\build-cache\772ec52c52f0544a3a6298ef7cadd81b6d699251\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\mkucz\.android\build-cache\6b5f96255c8112f8212a5cb71a3462e66ebee830\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\mkucz\.android\build-cache\583053027937f07bcdd4108385af10fd3f6a8bcd\output\AndroidManifest.xml:25:5-27:34
 	android:value
-		ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/AndroidManifest.xml:27:9-31
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:27:9-31
 	android:name
-		ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/AndroidManifest.xml:26:9-47
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\mkucz\.android\build-cache\4a3f895117e338e4fba425ba5c242e50b73987e2\output\AndroidManifest.xml:26:9-47

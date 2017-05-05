@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import com.example.justin.dejaphoto.R;
+import com.example.dejaphoto.R;
 
 /**
  * Created by Justin on 5/3/17.

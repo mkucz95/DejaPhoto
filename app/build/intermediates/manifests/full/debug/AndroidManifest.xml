@@ -47,6 +47,9 @@
         <service
             android:name="com.example.android.WallpaperChanger"
             android:exported="false" />
+        <service
+            android:name="com.example.android.WidgetManager"
+            android:exported="false" />
     </application>
 
 </manifest>
