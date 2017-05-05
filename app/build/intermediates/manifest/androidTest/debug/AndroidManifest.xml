@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.justin.dejaphoto.test" >
+    package="com.example.android.test" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -10,8 +10,8 @@
         android:name="android.support.test.runner.AndroidJUnitRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
-        android:label="Tests for com.example.justin.dejaphoto"
-        android:targetPackage="com.example.justin.dejaphoto" />
+        android:label="Tests for com.example.android"
+        android:targetPackage="com.example.android" />
 
     <application>
         <uses-library android:name="android.test.runner" />
