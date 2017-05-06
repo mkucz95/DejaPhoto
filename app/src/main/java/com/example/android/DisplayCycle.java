@@ -21,6 +21,7 @@ public class DisplayCycle {
         next.setPrev(prev);
     }
 
+    //TODO not correct implementation
     public void addToCycle(String picPath){//add new node at the end of list
         ImageNode newNode = new ImageNode(picPath, last, first); //create new node object
         last.setNext(newNode);
@@ -29,7 +30,6 @@ public class DisplayCycle {
 
         this.cycleLength++;
     }
-
 
     public void DisplayCycle(){ //empty constructor
         this.first = null;
@@ -48,16 +48,16 @@ public class DisplayCycle {
     private void buildDisplayCycle(boolean flag) {
          if(flag) { //create display cycle from Camera Roll
              File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
-             File[] dcimPhotos = dcimDirectory.listFiles();
+             File cameraDirectory = new File (dcimDirectory.getAbsolutePath()+"/Camera"); //TODO
+
+
+             File[] dcimPhotos = cameraDirectory.listFiles();
              if(dcimPhotos != null) { //DCIM contains photos
                  for (File currPicture : dcimPhotos) { //add each photo's path to cycle as a node
                      addToCycle(currPicture.getAbsolutePath());
                  }
              }
              else{
-                 //No photos in DCIM, display default image
-                 //TODO: addToCycle(DEFAULT_IMAGE);
-
                  addToCycle("DEFAULTPICTURE");
              }
          }

@@ -14,7 +14,7 @@
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">John Smith</string>
 
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string name="pref_title_changeAlbum">Add friends to messages</string>
     <string-array name="pref_example_list_titles">
         <item>Always</item>
         <item>When possible</item>
@@ -68,8 +68,16 @@
 
     <string name="pref_title_new_message_notifications">New message notifications</string>
 
-    <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
 
-    <string name="pref_title_vibrate">Vibrate</string>
+
+    <string name="setting1">Day of Week</string>
+    <string name="setting2">Time</string>
+    <string name="setting3">Location</string>
+    <string name="setting4">Karma</string>
+    <string name="start_text">START APP</string>
+    <string name="settings_text">Settings</string>
+
+
+    <string name="title_activity_main">MainActivity</string>
 </resources>

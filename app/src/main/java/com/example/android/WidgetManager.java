@@ -31,11 +31,12 @@ public class WidgetManager extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
         if (intent != null) {
             final String action = intent.getAction();
             //TODO implement actions
             if (PREVIOUS.equals(action)) {
-              //  imagePath = getImage(true);
+               // imagePath = getImage(true);
             } else if (NEXT.equals(action)) {
                // imagePath = getImage(false);
             }else if (KARMA.equals(action)) {
@@ -48,6 +49,7 @@ public class WidgetManager extends IntentService {
             //includes file path
             Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
             intent.setAction(imagePath);
+            startService(wallpaperIntent);
 
             stopService(intent);
         }

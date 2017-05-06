@@ -50,6 +50,11 @@
         <service
             android:name="com.example.android.WidgetManager"
             android:exported="false" />
+
+        <activity
+            android:name="com.example.android.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
