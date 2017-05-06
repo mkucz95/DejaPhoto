@@ -68,7 +68,8 @@ public class DisplayCycle {
 
     public String updateCycle(){
         //get sharedpreferences to see what the dejavu mode settings are
-        //TODO
+        //TODO implement this method that reranks based on button presses.
+        //iteration 2
         return (String) last.getData();
     }
 

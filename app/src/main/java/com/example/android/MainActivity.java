@@ -1,6 +1,8 @@
 package com.example.android;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startApp(){
+     /*   SharedPreferences sharedPreferences = getSharedPreferences("user_name", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();  shared preferences won't work
+        since it can only store. another option is local storage*/
+
         Intent intent = new Intent(this, BackgroundService.class);
         startService(intent);
     }
