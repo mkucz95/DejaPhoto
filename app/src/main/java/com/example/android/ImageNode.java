@@ -10,7 +10,7 @@ public class ImageNode<String>{
     private  ImageNode<String> previous;
 
 
-    ImageNode(){ //default constructor. all fields are set to null
+   public ImageNode(){ //default constructor. all fields are set to null
         next=null;
         previous = null;
         data=null;

@@ -10,6 +10,8 @@ import android.media.Image;
 import android.support.annotation.MainThread;
 import android.util.DisplayMetrics;
 
+import com.example.dejaphoto.R;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +29,12 @@ import java.net.URL;
 public class WallpaperChanger extends IntentService {
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String CHANGE_WALLPAPER = "com.example.android.action.BAZ";
+    WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+    //call java wallpapermanager api
+
+    DisplayMetrics metrics = new DisplayMetrics(); //get screen dimensions
+    int height = metrics.heightPixels;
+    int width = metrics.widthPixels;
 
     public WallpaperChanger() {
         super("WallpaperChanger");
@@ -36,30 +44,35 @@ public class WallpaperChanger extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
            synchronized (this){
-               WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-               //call java wallpapermanager api
-
-               DisplayMetrics metrics = new DisplayMetrics(); //get screen dimensions
-               int height = metrics.heightPixels;
-               int width = metrics.widthPixels;
                String imagePath = intent.getAction(); //takes info passed from intent
+               Bitmap bitmap;
+                if(imagePath.equals("DEFAULTPICTURE")){
+                    bitmap = BitmapFactory.decodeResource( getResources(), R.drawable.default_picture);
+                    setBackground(bitmap);
+                }
+                else {
+                    try {//convert image path into something code can use
+                        FileInputStream imgIS = new FileInputStream(new File(imagePath));
+                        BufferedInputStream bufIS = new BufferedInputStream(imgIS);
+                        bitmap = BitmapFactory.decodeStream(bufIS); //
 
-               try {//convert image path into something code can use
-                   FileInputStream  imgIS  = new FileInputStream(new File(imagePath));
-                   BufferedInputStream bufIS = new BufferedInputStream(imgIS);
-                   Bitmap bitmap = BitmapFactory.decodeStream(bufIS); //
+                        setBackground(bitmap);
 
-                   try{
-                       wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
-                       wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions
-                   }catch(IOException e){
-                       e.printStackTrace();
-                   }
-               }catch(FileNotFoundException e){ //catch fileinputstream exceptions
-                   e.printStackTrace();
-               } //trying to get wallpaper from display cycle node
+                    } catch (FileNotFoundException e) { //catch fileinputstream exceptions
+                        e.printStackTrace();
+                    } //trying to get wallpaper from display cycle node
+                }
            }
         stopService(intent);
+        }
+    }
+
+    public void setBackground(Bitmap bitmap){ //set wallpaper based on inputted bitmap
+        try {
+            wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
+            wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
