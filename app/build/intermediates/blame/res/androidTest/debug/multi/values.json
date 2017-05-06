@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "outputFile": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,103 +11,7 @@
                     "endOffset": 96
                 },
                 "from": {
-                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\de5937b5553e6fe382485c50ded2796622cc1772\\output\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 229,
-                        "endColumn": 45,
-                        "endOffset": 270
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 45,
-                    "endOffset": 96
-                },
-                "from": {
-                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\c34b9fa4a6ad2e07351549dcd42b771d547a7faf\\output\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 229,
-                        "endColumn": 45,
-                        "endOffset": 270
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 45,
-                    "endOffset": 96
-                },
-                "from": {
-                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\de5937b5553e6fe382485c50ded2796622cc1772\\output\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 229,
-                        "endColumn": 45,
-                        "endOffset": 270
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 45,
-                    "endOffset": 96
-                },
-                "from": {
-                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\c34b9fa4a6ad2e07351549dcd42b771d547a7faf\\output\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 229,
-                        "endColumn": 45,
-                        "endOffset": 270
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 45,
-                    "endOffset": 96
-                },
-                "from": {
-                    "file": "/Users/Justin/.android/build-cache/de5937b5553e6fe382485c50ded2796622cc1772/output/res/values/values.xml",
+                    "file": "C:\\Users\\mkucz\\.android\\build-cache\\c34b9fa4a6ad2e07351549dcd42b771d547a7faf\\output\\res\\values\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

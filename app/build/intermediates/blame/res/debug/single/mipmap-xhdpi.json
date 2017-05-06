@@ -1,69 +1,10 @@
 [
     {
-<<<<<<< HEAD
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher.png",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-=======
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
->>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher.png",
         "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher.png",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
-=======
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher_round.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
->>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
-    },
-    {
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
-=======
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
-        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
->>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     }
 ]

@@ -55,6 +55,11 @@
             android:name="com.example.android.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name="com.example.android.BackgroundService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

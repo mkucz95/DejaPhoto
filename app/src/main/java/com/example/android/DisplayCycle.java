@@ -1,6 +1,5 @@
 package com.example.android;
 
-import android.media.Image;
 import android.os.Environment;
 
 import java.io.File;
@@ -25,12 +24,12 @@ public class DisplayCycle {
     //TODO not correct implementation
     public void addToCycle(String picPath){//add new node at the end of list
         if(first == null && last == null){
-            ImageNode newNode = new ImageNode(picPath, last, first);
+            ImageNode newNode = new ImageNode(new Photo(picPath), last, first);
             this.first = newNode;
             this.last = newNode;
         }
         else {
-            ImageNode newNode = new ImageNode(picPath, last, first); //create new node object
+            ImageNode newNode = new ImageNode(new Photo(picPath), last, first); //create new node object
             last.setNext(newNode);
             first.setPrev(newNode);
             last = newNode;
@@ -58,10 +57,10 @@ public class DisplayCycle {
     public String getImage(boolean next){
         String imgPath;
         if(next){ //return next image in the cycle
-            imgPath = (String) head.getNext().getData();
+            imgPath = (String) head.getNext().getPath();
         }
         else{//return previous image
-            imgPath = (String) head.getPrev().getData();
+            imgPath = (String) head.getPrev().getPath();
         }
         return imgPath;
     }
@@ -70,7 +69,7 @@ public class DisplayCycle {
         //get sharedpreferences to see what the dejavu mode settings are
         //TODO implement this method that reranks based on button presses.
         //iteration 2
-        return (String) last.getData();
+        return (String) last.getPath();
     }
 
     private void buildDisplayCycle(boolean flag) {
