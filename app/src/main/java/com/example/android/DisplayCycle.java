@@ -12,6 +12,7 @@ import java.io.File;
 public class DisplayCycle {
     private ImageNode first; //first node to keep track of circle
     private ImageNode last; //last node in list used to wrap around
+    private ImageNode head; //tracks current position in cycle
     private int cycleLength = 0;
 
     public void removeNode(ImageNode image){ //rearrange pointers
@@ -41,6 +42,7 @@ public class DisplayCycle {
     public void DisplayCycle(){ //empty constructor
         this.first = null;
         this.last = null;
+        this.head = null;
 
         buildDisplayCycle(false);
     }
@@ -48,8 +50,26 @@ public class DisplayCycle {
     public void DisplayCycle(boolean flag){ //empty constructor
         this.first = null;
         this.last=null;
+        this.head = null;
 
         buildDisplayCycle(flag);
+    }
+
+    public String getImage(boolean next){
+        String imgPath;
+        if(next){ //return next image in the cycle
+            imgPath = (String) head.getNext().getData();
+        }
+        else{//return previous image
+            imgPath = (String) head.getPrev().getData();
+        }
+        return imgPath;
+    }
+
+    public String updateCycle(){
+        //get sharedpreferences to see what the dejavu mode settings are
+        //TODO
+        return (String) last.getData();
     }
 
     private void buildDisplayCycle(boolean flag) {
@@ -68,7 +88,6 @@ public class DisplayCycle {
                  addToCycle("DEFAULTPICTURE");
              }
          }
-
 
          //todo NOTE: THIS FEATURE HAS BEEN POSTPONED. FIRST MILESTONE TO JUST CAMERA ALBUM
         /* else { //create display cycle from DejaPhoto album folder

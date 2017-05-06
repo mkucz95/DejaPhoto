@@ -28,7 +28,7 @@ public class ImageNode<String>{
         this.previous = previous;
     } //constructor for imageNode with data passed in
 
-    String getData(){
+    public String getData(){
         return this.data;
     }
 
