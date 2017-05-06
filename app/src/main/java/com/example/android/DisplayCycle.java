@@ -23,10 +23,17 @@ public class DisplayCycle {
 
     //TODO not correct implementation
     public void addToCycle(String picPath){//add new node at the end of list
-        ImageNode newNode = new ImageNode(picPath, last, first); //create new node object
-        last.setNext(newNode);
-        first.setPrev(newNode);
-        last = newNode;
+        if(first == null && last == null){
+            ImageNode newNode = new ImageNode(picPath, last, first);
+            this.first = newNode;
+            this.last = newNode;
+        }
+        else {
+            ImageNode newNode = new ImageNode(picPath, last, first); //create new node object
+            last.setNext(newNode);
+            first.setPrev(newNode);
+            last = newNode;
+        }
 
         this.cycleLength++;
     }

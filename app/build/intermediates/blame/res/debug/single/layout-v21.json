@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_template_custom_big.xml"
     },
@@ -10,36 +11,75 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_template_custom_big.xml"
     },
     {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_action.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout-v21/notification_template_icon_group.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_action.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout-v21/notification_action.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_template_icon_group.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_action.xml"
     },
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_action.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_action.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_template_icon_group.xml"
     },
     {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
-        "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_action.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_template_custom_big.xml"
     },
@@ -58,9 +98,33 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_template_custom_big.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout-v21\\notification_action_tombstone.xml"
     }
 ]

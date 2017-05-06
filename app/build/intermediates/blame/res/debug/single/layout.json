@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_toolbar.xml"
     },
@@ -14,12 +15,29 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_action.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_search_view.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/notification_template_part_time.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_action.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\117da7eb90c668fb997e877485d49c20cbfbd67c\\output\\res\\layout\\design_layout_tab_icon.xml"
     },
@@ -50,12 +68,17 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_part_time.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_search_view.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_lines_media.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\117da7eb90c668fb997e877485d49c20cbfbd67c\\output\\res\\layout\\design_bottom_navigation_item.xml"
     },
@@ -166,20 +189,130 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_item_material.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_media_custom.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_part_time.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_lines_media.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_action.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_lines_media.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dejaphoto_appwidget_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\layout\\dejaphoto_appwidget_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dejaphoto_appwidget_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\dejaphoto_appwidget_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_expanded_menu_layout.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_icon.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_action_tombstone.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_simple.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
@@ -194,16 +327,33 @@
     {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_lines_media.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_media.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\select_dialog_item_material.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_select_dialog_material.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_icon_group.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_media_custom.xml"
     },
@@ -214,24 +364,42 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_item_material.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_part_time.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_radio.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_search_view.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
         "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\117da7eb90c668fb997e877485d49c20cbfbd67c\\output\\res\\layout\\design_navigation_item_header.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_media.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_action_tombstone.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_screen_content_include.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_icon_group.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dejaphoto_appwidget_layout.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\layout\\dejaphoto_appwidget_layout.xml"
     },
@@ -294,12 +462,73 @@
     {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\117da7eb90c668fb997e877485d49c20cbfbd67c\\output\\res\\layout\\design_bottom_sheet_dialog.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
-        "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_select_dialog_material.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/notification_template_part_chronometer.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/dejaphoto_appwidget_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/res/layout/dejaphoto_appwidget_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_media.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
@@ -386,16 +615,101 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_icon.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_action.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_search_view.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_alert_dialog_material.xml"
     },
@@ -414,16 +728,45 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_dialog_title_material.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_screen_toolbar.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_select_dialog_material.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_action_tombstone.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dejaphoto_appwidget_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\layout\\dejaphoto_appwidget_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_template_icon_group.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/notification_template_icon_group.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
@@ -498,12 +841,89 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_template_lines_media.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/notification_template_lines_media.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_template_media_custom.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/notification_template_media_custom.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_lines_media.xml"
     },
@@ -518,12 +938,29 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_lines_media.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_part_chronometer.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_part_time.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_action_tombstone.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
@@ -566,12 +1003,41 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_media.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_bar_title_item.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_toolbar.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_dialog_title_material.xml"
     },
@@ -582,12 +1048,21 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_media.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
     },
@@ -598,12 +1073,25 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dejaphoto_appwidget_layout.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\layout\\dejaphoto_appwidget_layout.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_media_custom.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_mode_bar.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_item_material.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_list_menu_item_checkbox.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_dialog_title_material.xml"
     },
@@ -622,20 +1110,49 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_action_tombstone.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dejaphoto_appwidget_layout.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\dejaphoto_appwidget_layout.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_simple.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_material.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_radio.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
@@ -650,12 +1167,33 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_activity_chooser_view.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
@@ -690,17 +1228,206 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_activity_chooser_view.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_list_menu_item_icon.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
-        "source": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_select_dialog_material.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_action.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_part_time.xml"
     },
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
         "source": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_title_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_template_lines_media.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dejaphoto_appwidget_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\dejaphoto_appwidget_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     }
 ]

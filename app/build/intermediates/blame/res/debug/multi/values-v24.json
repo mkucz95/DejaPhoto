@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+=======
+        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 207
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 342
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +61,11 @@
                     "endOffset": 411
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -68,7 +84,11 @@
                     "endOffset": 475
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -87,7 +107,11 @@
                     "endOffset": 544
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -106,7 +130,11 @@
                     "endOffset": 614
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -119,7 +147,7 @@
         ]
     },
     {
-        "outputFile": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
         "map": [
             {
                 "to": {
@@ -130,7 +158,7 @@
                     "endOffset": 207
                 },
                 "from": {
-                    "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/values-v24/values-v24.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -149,7 +177,7 @@
                     "endOffset": 342
                 },
                 "from": {
-                    "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/values-v24/values-v24.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -168,7 +196,7 @@
                     "endOffset": 411
                 },
                 "from": {
-                    "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/values-v24/values-v24.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -187,7 +215,7 @@
                     "endOffset": 475
                 },
                 "from": {
-                    "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/values-v24/values-v24.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -206,7 +234,7 @@
                     "endOffset": 544
                 },
                 "from": {
-                    "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/values-v24/values-v24.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -225,7 +253,7 @@
                     "endOffset": 614
                 },
                 "from": {
-                    "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/.android/build-cache/991ccf61ab2353d0d158038960035350318c402e/output/res/values-v24/values-v24.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -238,7 +266,7 @@
         ]
     },
     {
-        "outputFile": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
         "map": [
             {
                 "to": {
@@ -249,7 +277,7 @@
                     "endOffset": 207
                 },
                 "from": {
-                    "file": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -268,7 +296,7 @@
                     "endOffset": 342
                 },
                 "from": {
-                    "file": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -287,7 +315,7 @@
                     "endOffset": 411
                 },
                 "from": {
-                    "file": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -306,7 +334,7 @@
                     "endOffset": 475
                 },
                 "from": {
-                    "file": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -325,7 +353,7 @@
                     "endOffset": 544
                 },
                 "from": {
-                    "file": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -344,7 +372,7 @@
                     "endOffset": 614
                 },
                 "from": {
-                    "file": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\.android\\build-cache\\991ccf61ab2353d0d158038960035350318c402e\\output\\res\\values-v24\\values-v24.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -357,7 +385,11 @@
         ]
     },
     {
+<<<<<<< HEAD
         "outputFile": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+=======
+        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
         "map": [
             {
                 "to": {
@@ -368,7 +400,11 @@
                     "endOffset": 207
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -387,7 +423,11 @@
                     "endOffset": 342
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -406,7 +446,11 @@
                     "endOffset": 411
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -425,7 +469,11 @@
                     "endOffset": 475
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -444,7 +492,11 @@
                     "endOffset": 544
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -463,7 +515,130 @@
                     "endOffset": 614
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+=======
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 549,
+                        "endColumn": 69,
+                        "endOffset": 614
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 156,
+                    "endOffset": 207
+                },
+                "from": {
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 156,
+                        "endOffset": 207
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 212,
+                    "endColumn": 134,
+                    "endOffset": 342
+                },
+                "from": {
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 212,
+                        "endColumn": 134,
+                        "endOffset": 342
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 347,
+                    "endColumn": 68,
+                    "endOffset": 411
+                },
+                "from": {
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 347,
+                        "endColumn": 68,
+                        "endOffset": 411
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 416,
+                    "endColumn": 63,
+                    "endOffset": 475
+                },
+                "from": {
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 416,
+                        "endColumn": 63,
+                        "endOffset": 475
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 480,
+                    "endColumn": 68,
+                    "endOffset": 544
+                },
+                "from": {
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 480,
+                        "endColumn": 68,
+                        "endOffset": 544
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 549,
+                    "endColumn": 69,
+                    "endOffset": 614
+                },
+                "from": {
+                    "file": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-v24\\values-v24.xml",
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,

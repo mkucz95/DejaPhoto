@@ -1,13 +1,19 @@
 [
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/deja_photo_widget.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/res/xml/deja_photo_widget.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
     },
@@ -18,12 +24,29 @@
     {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_data_sync.xml",
         "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_data_sync.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_data_sync.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_data_sync.xml"
     },
     {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/pref_general.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/res/xml/pref_general.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
     },
@@ -38,45 +61,104 @@
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
     },
     {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_data_sync.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_data_sync.xml"
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_data_sync.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_data_sync.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\deja_photo_widget.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\deja_photo_widget.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
         "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
     },
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/pref_notification.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/res/xml/pref_notification.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
     },
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_data_sync.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_data_sync.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
     },
     {
-        "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\deja_photo_widget.xml",
-        "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\deja_photo_widget.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\deja_photo_widget.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\deja_photo_widget.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
     },
     {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_data_sync.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_data_sync.xml"
     },
     {
         "merged": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
         "source": "C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
+=======
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\deja_photo_widget.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\deja_photo_widget.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\deja_photo_widget.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\deja_photo_widget.xml"
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_data_sync.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_data_sync.xml"
+>>>>>>> 8d92cafa5afc723cfe192da1b98ba8c49e1f4039
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/pref_headers.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/res/xml/pref_headers.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\C:\\Users\\Justin\\Desktop\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\deja_photo_widget.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/C:\\Users\\Justin\\Desktop\\cse110 Projects\\DejaPhoto\\app\\src\\main\\res\\xml\\deja_photo_widget.xml"
+    },
+    {
+        "merged": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/pref_data_sync.xml",
+        "source": "/Users/Justin/Desktop/cse110 Projects/DejaPhoto/app/src/main/res/xml/pref_data_sync.xml"
     }
 ]
