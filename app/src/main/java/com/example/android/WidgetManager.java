@@ -18,7 +18,7 @@ public class WidgetManager extends IntentService {
     public static final String RELEASE = "release";
 
     // TODO: Rename parameters
-    public static  String imagePath = "DEFAULTPICTURE";
+    public static  String imagePath = "DEFAULT_PICTURE";
 
     public WidgetManager() {
         super("WidgetManager");
@@ -31,13 +31,13 @@ public class WidgetManager extends IntentService {
             final String action = intent.getExtras().getString("button_pressed");
             //TODO implement actions
             if (PREVIOUS.equals(action)) {
-               // imagePath = getImage(true);
+                // imagePath = getImage(true);
             } else if (NEXT.equals(action)) {
-               // imagePath = getImage(false);
+                // imagePath = getImage(false);
             }else if (KARMA.equals(action)) {
-               // imagePath = updateCycle(true);
+                // imagePath = updateCycle(true);
             }else if (RELEASE.equals(action)) {
-               // imagePath = updateCycle(false);
+                // imagePath = updateCycle(false);
             }
 
             //send new intent to the wallpaper changer intent service
