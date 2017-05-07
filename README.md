@@ -2,7 +2,7 @@
 UCSD CSE 110
 
 
-## git workflow:
+### git workflow:
 1. git add * </br>
 1. git commit -m "YOUR COMMENT HERE" </br>
 1. git pull </br>
@@ -11,7 +11,7 @@ UCSD CSE 110
 
 
 
-## if android studio is not working try:
+### if android studio is not working try:
 1. Build > Clean Project
 1. Build > Build APK
 1. Make Project
