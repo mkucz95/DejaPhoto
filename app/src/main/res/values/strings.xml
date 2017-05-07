@@ -86,4 +86,19 @@
 
     <string name="deja_a">Deja Photo</string>
     <string name="camera_a">Camera Roll</string>
+    <string name="switch_mode">Mode</string>
+    <string name="location">Location</string>
+    <string name="time">Time</string>
+    <string name="dow">Day_Of_Week</string>
+    <string name="karma">Karma</string>
+
+    <string name="deja">Deja</string>
+    <string name="photo">Photo</string>
+
+
+    <string name="button1">Choose Album</string>
+    <string name="button2">Add Photo</string>
+    <string name="button3">Settings</string>
+    <string name="button4">Deja Vu Mode</string>
+    <string name="button5">Display</string>
 </resources>
