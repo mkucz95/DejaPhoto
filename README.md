@@ -5,7 +5,7 @@ UCSD CSE 110
 git workflow:
 ============
 
-git add * \n
+git add * '\n'
 git commit -m "YOUR COMMENT HERE" \n
 git pull \n
 
