@@ -63,27 +63,30 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
       //  RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
         Intent clickIntent = new Intent(context, WidgetManager.class);
+        clickIntent.setAction(Intent.ACTION_SEND);
 
         if(intent.getAction().equals(PREVIOUS_PIC)){
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
-            clickIntent.setAction("previous");
+            clickIntent.putExtra("button_pressed","previous");
         }
 
         else if(intent.getAction().equals(KARMA_BUTTON)){
             Toast.makeText(context, KARMA_BUTTON, Toast.LENGTH_SHORT).show();
            // views.setTextViewText(R.id.karma_btn, "Undo Karma Button");
-            clickIntent.setAction("karma");
+            clickIntent.putExtra("button_pressed","karma");
         }
 
         else if(intent.getAction().equals(RELEASE_BUTTON)){
             Toast.makeText(context, RELEASE_BUTTON , Toast.LENGTH_SHORT).show();
-            clickIntent.setAction("release");
+            clickIntent.putExtra("button_pressed", "release");
         }
 
         else if(intent.getAction().equals(NEXT_PIC)){
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
-            clickIntent.setAction("next");
+            clickIntent.putExtra("button_pressed", "next");
         }
+
+        clickIntent.setType("text/plain");
         context.startService(clickIntent); //call widgetmanager
     }
 

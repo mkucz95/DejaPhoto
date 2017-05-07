@@ -28,7 +28,7 @@ public class WidgetManager extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         if (intent != null) {
-            final String action = intent.getAction();
+            final String action = intent.getExtras().getString("button_pressed");
             //TODO implement actions
             if (PREVIOUS.equals(action)) {
                // imagePath = getImage(true);
