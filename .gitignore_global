@@ -39,3 +39,10 @@ build/
 
 #NDK
 obj/
+
+
+/.idea/
+/.gradle/
+/app/build/
+/build/
+/local.properties
