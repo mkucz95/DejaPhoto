@@ -8,10 +8,7 @@ git workflow:
 git add * </br>
 git commit -m "YOUR COMMENT HERE" </br>
 git pull </br>
-
-
-manually merge and fix any conflicts. if there were conflicts repeat previous 3 steps </br>
-
+<small>manually merge and fix any conflicts. if there were conflicts repeat previous 3 steps</small> </br>
 git push
 
 
