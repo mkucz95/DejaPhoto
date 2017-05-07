@@ -3,6 +3,7 @@ UCSD CSE 110
 
 
 git workflow:
+============
 
 git add *
 git commit -m "YOUR COMMENT HERE"
@@ -12,11 +13,11 @@ git pull
 manually merge and fix any conflicts. if there were conflicts repeat previous 3 steps
 
 git push
-============
+
 
 
 if android studio is not working try:
-------------
+============
 Build > Clean Project
 Build > Build APK
 Make Project
