@@ -10,7 +10,9 @@ UCSD CSE 110
 1. git push
 
 ###### fix merge conflicts
-Click [here] (https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/)
+`CONFLICT (content): Merge conflict in styleguide.md
+Automatic merge failed; fix conflicts and then commit the result `
+https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/
 
 
 ### if android studio is not working try:
