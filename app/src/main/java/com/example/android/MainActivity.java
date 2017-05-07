@@ -12,6 +12,10 @@ import android.view.View;
 
 import com.example.dejaphoto.R;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -21,6 +25,30 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /* TODO SAVE DISPLAY CYCLE SO THAT IT IS ACCESIBLE
+        //create display cycle and store in internal storage
+        DisplayCycle displayCycle = new DisplayCycle(true); //true flag builds from camera dcim
+        String FILENAME = "display_cycle";
+
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fos.write(displayCycle.getBytes());
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        startApp(); //TODO can start app without pressing the button
+        */
+        Intent intent = new Intent(this, BackgroundService.class);
+        startService(intent);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,15 +57,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
-
-    public void startApp(){
-     /*   SharedPreferences sharedPreferences = getSharedPreferences("user_name", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();  shared preferences won't work
-        since it can only store. another option is local storage*/
-
-        Intent intent = new Intent(this, BackgroundService.class);
-        startService(intent);
     }
 
 }

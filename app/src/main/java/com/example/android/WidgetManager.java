@@ -43,7 +43,10 @@ public class WidgetManager extends IntentService {
             //send new intent to the wallpaper changer intent service
             //includes file path
             Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
-            intent.setAction(imagePath);
+            wallpaperIntent.setAction(Intent.ACTION_SEND);
+            wallpaperIntent.putExtra("image_path", imagePath);
+            wallpaperIntent.setType("text/plain");
+
             startService(wallpaperIntent); //change the wallpaper
 
             stopService(intent); //stop the widgetManager service
