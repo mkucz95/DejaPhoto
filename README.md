@@ -2,7 +2,7 @@
 UCSD CSE 110
 
 
-git workflow:
+## git workflow:
 ============
 
 1. git add * </br>
@@ -13,7 +13,7 @@ git workflow:
 
 
 
-if android studio is not working try:
+## if android studio is not working try:
 ============
 1. Build > Clean Project
 1. Build > Build APK
@@ -21,11 +21,11 @@ if android studio is not working try:
 
 ------------
 
-Red J next to java files:
+# Red J next to java files:
 1. click on DejaPhoto
 1. press F4 button
 1. select app as a source folder and press 'OK'
 
 -------------
 
-Project cannot find java packages: sync gradle projects
+# Project cannot find java packages: sync gradle projects
