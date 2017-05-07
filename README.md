@@ -9,9 +9,12 @@ UCSD CSE 110
      1. *manually merge and fix any conflicts. if there were conflicts repeat previous 3 steps* </br>
 1. git push
 
-###### fix merge conflicts
+#### fix merge conflicts
+*example message*
 `CONFLICT (content): Merge conflict in styleguide.md
 Automatic merge failed; fix conflicts and then commit the result `
+
+*solution: *
 https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/
 
 
