@@ -9,6 +9,8 @@ UCSD CSE 110
      1. *manually merge and fix any conflicts. if there were conflicts repeat previous 3 steps* </br>
 1. git push
 
+###### fix merge conflicts
+Click [here] (https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/)
 
 
 ### if android studio is not working try:
