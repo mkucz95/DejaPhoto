@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_set.xml",
+        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\activity_set.xml"
+    },
+    {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\bc0ebf048dd7d5cabb0bdf9d17573d4d34c76f79\\output\\res\\layout\\abc_action_menu_layout.xml"
     },
@@ -28,6 +32,10 @@
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\bc0ebf048dd7d5cabb0bdf9d17573d4d34c76f79\\output\\res\\layout\\notification_action.xml"
     },
     {
+        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_album.xml",
+        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\activity_album.xml"
+    },
+    {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\7a170d529770a65222aa131a520a95917447307f\\output\\res\\layout\\design_menu_item_action_area.xml"
     },
@@ -38,6 +46,14 @@
     {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\bc0ebf048dd7d5cabb0bdf9d17573d4d34c76f79\\output\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_album.xml",
+        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\content_album.xml"
+    },
+    {
+        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_set.xml",
+        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\content_set.xml"
     },
     {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
@@ -156,6 +172,10 @@
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\bc0ebf048dd7d5cabb0bdf9d17573d4d34c76f79\\output\\res\\layout\\notification_action_tombstone.xml"
     },
     {
+        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_mode.xml",
+        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\activity_mode.xml"
+    },
+    {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\bc0ebf048dd7d5cabb0bdf9d17573d4d34c76f79\\output\\res\\layout\\abc_action_mode_bar.xml"
     },
@@ -222,5 +242,9 @@
     {
         "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
         "source": "C:\\Users\\mkucz\\.android\\build-cache\\bc0ebf048dd7d5cabb0bdf9d17573d4d34c76f79\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_mode.xml",
+        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\layout\\content_mode.xml"
     }
 ]

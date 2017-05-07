@@ -22,6 +22,7 @@ public class Photo {
         this.location = null;
         this.time = null;
         this.day = null;
+       // this.populatePhotoInfo(imagePath);TODO
        //TODO get variable information from imagePath
         //TODO  create separate function
     }
@@ -67,5 +68,9 @@ public void populatePhotoInfo(Photo photo){
 
     public void setKarma(boolean karma) {
         this.karma = karma;
+    }
+
+    public void populatePhotoInfo(String imagePath){
+        //get location, time and day information from photo path and set to object variables
     }
 }
