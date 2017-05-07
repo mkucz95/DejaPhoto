@@ -21,11 +21,11 @@ UCSD CSE 110
 
 ------------
 
-# Red J next to java files:
+ Red J next to java files:
 1. click on DejaPhoto
 1. press F4 button
 1. select app as a source folder and press 'OK'
 
 -------------
 
-# Project cannot find java packages: sync gradle projects
+ Project cannot find java packages: sync gradle projects
