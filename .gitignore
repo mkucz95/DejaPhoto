@@ -19,6 +19,10 @@ local.properties
 # Windows thumbnail db
 Thumbs.db
 
+git rm --cached _windows*
+_windows
+
+
 # OSX files
 .DS_Store
 
