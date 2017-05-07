@@ -12,7 +12,6 @@ public class DisplayCycle {
     private ImageNode first; //first node to keep track of circle
     private ImageNode last; //last node in list used to wrap around
     private ImageNode head; //tracks current position in cycle
-    private int cycleLength = 0;
 
     public void removeNode(ImageNode image){ //rearrange pointers
         ImageNode prev = image.getPrev();
@@ -34,8 +33,7 @@ public class DisplayCycle {
             first.setPrev(newNode);
             last = newNode;
         }
-
-        this.cycleLength++;
+        head = last; //our first image is the last one in the list
     }
 
     public void DisplayCycle(){ //empty constructor
@@ -65,11 +63,26 @@ public class DisplayCycle {
         return imgPath;
     }
 
-    public String updateCycle(){
+    public String updateCycle(boolean flag){
         //get sharedpreferences to see what the dejavu mode settings are
         //TODO implement this method that reranks based on button presses.
         //iteration 2
+        if(flag){
+            //increment karma for current picture
+            //rerank pictures
+            head = last;
+        }else{
+            //remove current picture from display cycle
+            //move head
+        }
         return (String) last.getPath();
+    }
+
+    public String rerank(){
+        //TODO
+        //get shared preferences about settings (location, time, day)
+        //sort displaycycle by the settings
+        return "t";
     }
 
     private void buildDisplayCycle(boolean flag) {

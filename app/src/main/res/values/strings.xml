@@ -80,4 +80,10 @@
 
 
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_album">Album</string>
+    <string name="title_activity_mode">Mode</string>
+    <string name="title_activity_set">Set</string>
+
+    <string name="deja_a">Deja Photo</string>
+    <string name="camera_a">Camera Roll</string>
 </resources>

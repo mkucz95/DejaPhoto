@@ -3,7 +3,6 @@ package com.example.android;
 import android.app.IntentService;
 import android.content.Intent;
 
-
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
@@ -19,11 +18,7 @@ public class WidgetManager extends IntentService {
     public static final String RELEASE = "release";
 
     // TODO: Rename parameters
-    public static final String EXTRA_PARAM1 = "com.example.android.extra.PARAM1";
-    public static final String EXTRA_PARAM2 = "com.example.android.extra.PARAM2";
-    public static  String imagePath = "";
-
-
+    public static  String imagePath = "DEFAULTPICTURE";
 
     public WidgetManager() {
         super("WidgetManager");
@@ -49,9 +44,9 @@ public class WidgetManager extends IntentService {
             //includes file path
             Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
             intent.setAction(imagePath);
-            startService(wallpaperIntent);
+            startService(wallpaperIntent); //change the wallpaper
 
-            stopService(intent);
+            stopService(intent); //stop the widgetManager service
         }
     }
 

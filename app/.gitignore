@@ -1,1 +1,4 @@
 /build
+
+
+git rm --cached app/src/app.iml
