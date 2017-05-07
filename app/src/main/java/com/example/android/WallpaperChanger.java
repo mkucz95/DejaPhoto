@@ -28,7 +28,6 @@ import java.net.URL;
  */
 public class WallpaperChanger extends IntentService {
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String CHANGE_WALLPAPER = "com.example.android.action.BAZ";
     WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
     //call java wallpapermanager api
 

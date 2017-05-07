@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\7b56cb8a9db6873cc68fc61e600628981dd2b138\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_60c8af4f596ce7c402ad4d25e854afbb27c5cbc7\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\4cfe308334ded81c420e26b3c7d1d7fb0e99af42\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_6b2e01633700598ea576599ce880879cc39ce694.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\4cfe308334ded81c420e26b3c7d1d7fb0e99af42\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6b2e01633700598ea576599ce880879cc39ce694\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\51f2f07c4bd9bb5ca177365f68b6b7c49cfc31bd\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a898f316adc1ab958ec948178c32e9161d0d24df\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="11156a20f2559ca17824d065934bc982df255953">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_f13edbc958f9b20c14dff462e8434ece29697280\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\SDK\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_968c242462bb6006939558239fa64dc8a8f72083\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\0218c2c5fb2fe65134a7468c05ecefcaedebef78\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d1285f5206ab127b970c74e3d09cd0fc988af24d\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\85e92c07a2b20fec49866573a6a4ca0c256a347d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_ad9f6ec94c490b56182ba3c1a8d4c3a13ddc8db3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\0218c2c5fb2fe65134a7468c05ecefcaedebef78\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_d1285f5206ab127b970c74e3d09cd0fc988af24d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\c15915a870754c215c94f97120e259c8243853e6\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_9ccaffd368276fea5d1fc66ee7915946e0435129.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Android\SDK\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_968c242462bb6006939558239fa64dc8a8f72083.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\c15915a870754c215c94f97120e259c8243853e6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9ccaffd368276fea5d1fc66ee7915946e0435129\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\8a66a7ee45aded6fa572c3ef61992c801051d3d1\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_41b56ed5592a80a6543a1e5089463728001a766a\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\7a170d529770a65222aa131a520a95917447307f\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_a2c412f76cd7f557df7565c568d3da0c367722af.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\7a170d529770a65222aa131a520a95917447307f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a2c412f76cd7f557df7565c568d3da0c367722af\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\51f2f07c4bd9bb5ca177365f68b6b7c49cfc31bd\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_a898f316adc1ab958ec948178c32e9161d0d24df.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\5b51f610675889e345acaa1ada99eb2ac87e6e9c\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_f83e511dda1e67bc076db0c7581431eddd830cfa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\8a66a7ee45aded6fa572c3ef61992c801051d3d1\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_41b56ed5592a80a6543a1e5089463728001a766a.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\SDK\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.3.1_4f3831924a4e26603f9d025005d1a5eb72a84b50\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\5b51f610675889e345acaa1ada99eb2ac87e6e9c\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f83e511dda1e67bc076db0c7581431eddd830cfa\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Android\SDK\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\support-annotations-25.3.1_4f3831924a4e26603f9d025005d1a5eb72a84b50.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_61a4dd71c421b86fe03702999fc167dba3cf6c68\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\ee255888927367ca2e75c05f8a24a05505417175\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_64a6e2e2123e4ae4cd2a8ebe58d9c1f4b457ebdd\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\ee255888927367ca2e75c05f8a24a05505417175\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_64a6e2e2123e4ae4cd2a8ebe58d9c1f4b457ebdd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\6ccb6935bdcb261861d2aa307146beaa9dd74db3\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_bd673fcd15fd5e18bdf55c0056749eb1f87908f1.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\6ccb6935bdcb261861d2aa307146beaa9dd74db3\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_bd673fcd15fd5e18bdf55c0056749eb1f87908f1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\85e92c07a2b20fec49866573a6a4ca0c256a347d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ad9f6ec94c490b56182ba3c1a8d4c3a13ddc8db3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\bc0ebf048dd7d5cabb0bdf9d17573d4d34c76f79\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_64a573b78bc6a4758eeb2184d7454efde3fd31ca\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mkucz\.android\build-cache\ded470508241cd9566e67f365d735a9a5b34d332\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9576d84e039c7a3c3b0e66b8ef6770bb90a7cd92\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\bc0ebf048dd7d5cabb0bdf9d17573d4d34c76f79\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_64a573b78bc6a4758eeb2184d7454efde3fd31ca.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\ded470508241cd9566e67f365d735a9a5b34d332\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_9576d84e039c7a3c3b0e66b8ef6770bb90a7cd92.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mkucz\.android\build-cache\7b56cb8a9db6873cc68fc61e600628981dd2b138\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\mkucz\StudioProjects\DejaPhoto\app\build\intermediates\pre-dexed\debug\classes_60c8af4f596ce7c402ad4d25e854afbb27c5cbc7.jar" />
+    </item>
+
+</items>

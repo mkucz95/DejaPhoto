@@ -12,7 +12,6 @@ public class DisplayCycle {
     private ImageNode first; //first node to keep track of circle
     private ImageNode last; //last node in list used to wrap around
     private ImageNode head; //tracks current position in cycle
-    private int cycleLength = 0;
 
     public void removeNode(ImageNode image){ //rearrange pointers
         ImageNode prev = image.getPrev();
@@ -34,8 +33,7 @@ public class DisplayCycle {
             first.setPrev(newNode);
             last = newNode;
         }
-
-        this.cycleLength++;
+        head = last; //our first image is the last one in the list
     }
 
     public void DisplayCycle(){ //empty constructor
