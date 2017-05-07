@@ -27,9 +27,6 @@ import java.net.URL;
  * image path) and then sets that image to the wallpaper.
  */
 public class WallpaperChanger extends IntentService {
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-    //call java wallpapermanager api
 
     DisplayMetrics metrics = new DisplayMetrics(); //get screen dimensions
     int height = metrics.heightPixels;
@@ -43,10 +40,10 @@ public class WallpaperChanger extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
            synchronized (this){
-               String imagePath = intent.getAction(); //takes info passed from intent
+               String imagePath = intent.getExtras().getString("image_path"); //takes info passed from intent
                Bitmap bitmap;
 
-                if(imagePath.equals("DEFAULTPICTURE")){
+                if(imagePath=="DEFAULTPICTURE"){
                     bitmap = BitmapFactory.decodeResource( getResources(), R.drawable.default_picture);
                     setBackground(bitmap);
                 }
@@ -69,6 +66,9 @@ public class WallpaperChanger extends IntentService {
     }
 
     public void setBackground(Bitmap bitmap){ //set wallpaper based on inputted bitmap
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+        //call java wallpapermanager api
+
         try {
             wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
             wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions

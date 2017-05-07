@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\smc028\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
         "source": "C:\\Users\\smc028\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
     },
@@ -18,5 +19,9 @@
     {
         "merged": "C:\\Users\\smc028\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
         "source": "C:\\Users\\smc028\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
+=======
+        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\deja_photo_widget.xml",
+        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\deja_photo_widget.xml"
+>>>>>>> 630a2f984d2f800c385069b78e0527902c50c305
     }
 ]
