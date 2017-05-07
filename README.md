@@ -15,14 +15,16 @@ git workflow:
 
 if android studio is not working try:
 ============
-Build > Clean Project
-Build > Build APK
-Make Project
+1. Build > Clean Project
+1. Build > Build APK
+1. Make Project
 
 ------------
 
 Red J next to java files:
-click on DejaPhoto, press F4 button, then select app as a source folder and press 'OK'
+1. click on DejaPhoto
+1. press F4 button
+1. select app as a source folder and press 'OK'
 
 -------------
 
