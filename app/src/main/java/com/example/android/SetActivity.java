@@ -95,5 +95,4 @@ public class SetActivity extends AppCompatActivity {
             }
         });
     }
-
 }
