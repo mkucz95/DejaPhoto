@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+        "outputFile": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 327
                 },
                 "from": {
-                    "file": "C:\\Users\\mkucz\\.android\\build-cache\\4a3f895117e338e4fba425ba5c242e50b73987e2\\output\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "file": "/Users/Michael/.android/build-cache/3d165e4fd34334c1976ffb6b41f1f6e2d9b2e1b2/output/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

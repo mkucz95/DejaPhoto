@@ -65,11 +65,26 @@ public class DisplayCycle {
         return imgPath;
     }
 
-    public String updateCycle(){
+    public String updateCycle(boolean flag){
         //get sharedpreferences to see what the dejavu mode settings are
         //TODO implement this method that reranks based on button presses.
         //iteration 2
+        if(flag){
+            //increment karma for current picture
+            //rerank pictures
+            head = last;
+        }else{
+            //remove current picture from display cycle
+            //move head
+        }
         return (String) last.getPath();
+    }
+
+    public String rerank(){
+        //TODO
+        //get shared preferences about settings (location, time, day)
+        //sort displaycycle by the settings
+        return "t";
     }
 
     private void buildDisplayCycle(boolean flag) {

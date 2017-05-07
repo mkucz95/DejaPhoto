@@ -60,6 +60,19 @@
             android:name="com.example.android.BackgroundService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity
+            android:name="com.example.android.AlbumActivity"
+            android:label="@string/title_activity_album"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.android.ModeActivity"
+            android:label="@string/title_activity_mode"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.android.SetActivity"
+            android:label="@string/title_activity_set"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

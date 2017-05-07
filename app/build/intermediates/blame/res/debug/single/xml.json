@@ -1,22 +1,22 @@
 [
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_notification.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_notification.xml"
+        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/deja_photo_widget.xml",
+        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/xml/deja_photo_widget.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_data_sync.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_data_sync.xml"
+        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/pref_headers.xml",
+        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/xml/pref_headers.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_headers.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_headers.xml"
+        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/pref_notification.xml",
+        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/xml/pref_notification.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\pref_general.xml"
+        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/pref_general.xml",
+        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/xml/pref_general.xml"
     },
     {
-        "merged": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\build\\intermediates\\res\\merged\\debug\\xml\\deja_photo_widget.xml",
-        "source": "C:\\Users\\mkucz\\StudioProjects\\DejaPhoto\\app\\src\\main\\res\\xml\\deja_photo_widget.xml"
+        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/xml/pref_data_sync.xml",
+        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/xml/pref_data_sync.xml"
     }
 ]
