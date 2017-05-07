@@ -5,12 +5,12 @@ UCSD CSE 110
 git workflow:
 ============
 
-git add * '\n'
-git commit -m "YOUR COMMENT HERE" \n
-git pull \n
+git add * </br>
+git commit -m "YOUR COMMENT HERE" </br>
+git pull </br>
 
 
-manually merge and fix any conflicts. if there were conflicts repeat previous 3 steps \n
+manually merge and fix any conflicts. if there were conflicts repeat previous 3 steps </br>
 
 git push
 
