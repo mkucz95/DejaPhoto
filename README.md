@@ -10,11 +10,11 @@ UCSD CSE 110
 1. git push
 
 #### fix merge conflicts
-*example message*
+*example message* </br>
 `CONFLICT (content): Merge conflict in styleguide.md
 Automatic merge failed; fix conflicts and then commit the result `
 
-*solution: *
+*solution: *</br>
 https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/
 
 
