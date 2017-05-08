@@ -1,8 +1,12 @@
 package com.example.android;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Environment;
 
 import java.io.File;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Justin on 5/4/17.
