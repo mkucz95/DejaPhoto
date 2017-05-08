@@ -19,7 +19,7 @@ import static android.content.ContentValues.TAG;
  * get the address name by the latitude and logtitude from class GetLatAndLng
  */
 
-public class FindLocaitonName extends Service {
+public class FindLocationName extends Service {
 
     /**
      * Created by wl36901 on 2017/5/8.
@@ -29,7 +29,7 @@ public class FindLocaitonName extends Service {
         //get the informatino from the sql table
         private String locationName;//encode the location informaiton to country, city, street
 
-        private FindLocaitonName(String path) {
+         FindLocationName(String path) {
             this.path = path;
 
         }
