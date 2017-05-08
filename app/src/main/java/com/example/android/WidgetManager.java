@@ -30,6 +30,7 @@ public class WidgetManager extends IntentService {
 
         if (intent != null) {
             final String action = intent.getExtras().getString("button_pressed");
+
             //TODO implement actions
             if (PREVIOUS.equals(action)) {
                  imagePath = getImage(0);
@@ -60,10 +61,10 @@ public class WidgetManager extends IntentService {
 
     public String getImage(int next){
         Intent imageIntent = new Intent(this, ChangeImage.class);
-        if(next == 0) imageIntent.setAction(NEXT);
-        else if(next == 1) imageIntent.setAction(PREVIOUS);
+        if(next == 0) imageIntent.setAction(PREVIOUS);
+        else if(next == 1) imageIntent.setAction(NEXT);
         else if (next == 2) imageIntent.setAction(KARMA);
-        else if (next == 3)imageIntent.setAction(KARMA);
+        else if (next == 3)imageIntent.setAction(RELEASE);
 
         startService(imageIntent);
 

@@ -61,33 +61,42 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent){
 
         super.onReceive(context, intent);
+        String pressed = "button_pressed";
+        Boolean buttonPressed = false;
       //  RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
         Intent clickIntent = new Intent(context, WidgetManager.class);
         clickIntent.setAction(Intent.ACTION_SEND);
+        clickIntent.setType("text/plain");
 
         if(intent.getAction().equals(PREVIOUS_PIC)){
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
-            clickIntent.putExtra("button_pressed","previous");
+            clickIntent.putExtra(pressed,"previous");
+            buttonPressed = true;
         }
 
         else if(intent.getAction().equals(KARMA_BUTTON)){
             Toast.makeText(context, KARMA_BUTTON, Toast.LENGTH_SHORT).show();
            // views.setTextViewText(R.id.karma_btn, "Undo Karma Button");
-            clickIntent.putExtra("button_pressed","karma");
+            clickIntent.putExtra(pressed,"karma");
+            buttonPressed = true;
         }
 
         else if(intent.getAction().equals(RELEASE_BUTTON)){
             Toast.makeText(context, RELEASE_BUTTON , Toast.LENGTH_SHORT).show();
-            clickIntent.putExtra("button_pressed", "release");
+            clickIntent.putExtra(pressed, "release");
+            buttonPressed = true;
         }
 
         else if(intent.getAction().equals(NEXT_PIC)){
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
-            clickIntent.putExtra("button_pressed", "next");
+            clickIntent.putExtra(pressed, "next");
+            buttonPressed = true;
         }
 
-        clickIntent.setType("text/plain");
-        context.startService(clickIntent); //call widgetmanager
+        if (buttonPressed){
+            context.startService(clickIntent); //call widgetmanager
+        }
+
     }
 
 
