@@ -8,38 +8,27 @@ import android.content.SharedPreferences;
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
  * <p>
- * TODO: Customize class - update intent actions, extra parameters and static
- * helper methods.
+ *     this service takes in image paths as strings and saves them to the sharedpreferences
  */
 public class SaveDisplayCycle extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String SAVE_SHAREDPREF = "SAVE_SHAREDPREF";
+//actions
+   private static final String ACTION_SAVE_SHAREDPREF = "com.example.android.SAVE_SHAREDPREF";
 
-    // TODO: Rename parameters
+//parameters
     private static final String PIC_PATH = "pic_path";
 
     public SaveDisplayCycle() {
         super("SaveDisplayCycle");
-    }
-
-    /**
-     * Starts this service to perform action Foo with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *
-     * @see IntentService
-     */
-    // TODO: Customize helper method
-
+    }//start this service
 
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
 
-            if (SAVE_SHAREDPREF.equals(action)) {
+            if (ACTION_SAVE_SHAREDPREF.equals(action)) {
                 final String picPath = intent.getStringExtra(PIC_PATH);
-                int counter = getNextImgCounter(); //increments counter
+                int counter = getNextImgCounter(); //increments counter ie ('0', "C") ("1", ":C/")
                 handleSharedPref(picPath, counter);
             }
 
@@ -49,7 +38,7 @@ public class SaveDisplayCycle extends IntentService {
 
     private void handleSharedPref(String picPath, int counter) {
         /*
-        * we need to keep track of a coutner so that we can put the images to a new location in the
+        * we need to keep track of a counter so that we can put the images to a new location in the
         * shared preferences. a different number corresponds to each uri
          */
         String counterString = Integer.toString(counter);
@@ -67,16 +56,20 @@ public class SaveDisplayCycle extends IntentService {
     }
 
     public int getNextImgCounter(){
-        int currImgCount=0;
         SharedPreferences counterPreferences = getSharedPreferences("counter", MODE_PRIVATE);
-        currImgCount = counterPreferences.getInt("counter", currImgCount); //get current level of counter
+        String currImgCount = counterPreferences.getString("counter", ""); //get current level of counter
 
-        int nextImgCount = ++currImgCount;
+        int intImgCount = Integer.parseInt(currImgCount);
+        int nextImgCount = ++intImgCount;
 
         //save the new number of images into shared preferences
         SharedPreferences.Editor counterEditor = counterPreferences.edit();
-        counterEditor.putInt("counter", nextImgCount);
+        counterEditor.putString("counter", Integer.toString(nextImgCount));
         counterEditor.apply();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("head", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("head", Integer.toString(nextImgCount)); //move head to last element in list
 
         return nextImgCount;
     }

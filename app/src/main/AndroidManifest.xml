@@ -76,8 +76,6 @@
             </intent-filter>
             />
         </service>
-
-
         <service
             android:name="com.example.android.ChangeImage"
             android:exported="false">
@@ -86,7 +84,15 @@
                 <action android:name="android.intent.action.RELEASE" />
                 <action android:name="android.intent.action.NEXT" />
                 <action android:name="android.intent.action.PREVIOUS" />
-        </intent-filter></service>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.example.android.BuildDisplayCycle"
+            android:exported="false">
+            <intent-filter>
+            <action android:name="android.intent.action.BUILD_CYCLE" />
+        </intent-filter>
+        </service>
     </application>
 
 </manifest>

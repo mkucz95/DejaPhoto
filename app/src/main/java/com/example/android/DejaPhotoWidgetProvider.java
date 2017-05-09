@@ -20,8 +20,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String RELEASE_BUTTON = "Picture Release Not Yet Implemented";
     public static String NEXT_PIC = "Next Picture";
 
-
-
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
 

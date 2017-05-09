@@ -25,29 +25,19 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /* TODO SAVE DISPLAY CYCLE SO THAT IT IS ACCESIBLE
-        //create display cycle and store in internal storage
-        DisplayCycle displayCycle = new DisplayCycle(true); //true flag builds from camera dcim
-        String FILENAME = "display_cycle";
+        Intent backgroundIntent = new Intent(this, BackgroundService.class);
+        startService(backgroundIntent);  //starts service that keeps track of time and location
 
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
+        SharedPreferences.Editor editor = counterPref.edit();
+        editor.putInt("counter", 0); //initialize the counter to 0
 
-        try {
-            fos.write(displayCycle.getBytes());
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        editor.apply();
 
-        startApp(); //TODO can start app without pressing the button
-        */
-        Intent intent = new Intent(this, BackgroundService.class);
-        startService(intent);
+        Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
+        displayCycleIntent.putExtra("source", true);
+        startService(displayCycleIntent);
+        //starts service that first builds and calls another service to save display cycle
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
