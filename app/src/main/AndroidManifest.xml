@@ -63,11 +63,14 @@
         <activity
             android:name="com.example.android.ModeActivity"
             android:label="@string/title_activity_mode"
+            android:parentActivityName="com.example.android.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.example.android.SetActivity"
+            android:parentActivityName="com.example.android.MainActivity"
             android:label="@string/title_activity_set"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <service
             android:name="com.example.android.ChangeImage"
             android:exported="false">
