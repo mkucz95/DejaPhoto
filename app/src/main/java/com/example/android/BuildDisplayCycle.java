@@ -21,7 +21,9 @@ import java.util.ArrayList;
  * https://developer.android.com/reference/android/database/Cursor.html
  */
 public class BuildDisplayCycle extends IntentService {
-    private static final String BUILD_CYCLE = "com.example.android.action.BUILD";
+    private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
+    private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
+    String[] paths;
 
     public BuildDisplayCycle() {
         super("BuildDisplayCycle");
@@ -33,9 +35,12 @@ public class BuildDisplayCycle extends IntentService {
             final String action = intent.getAction();
            //boolean sourceFolder = intent.getExtras().getBoolean("source");
 
-            if (BUILD_CYCLE.equals(action)) {
+            if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
                 buildFromMedia();
+            }
+            else if(ACTION_RERANK_BUILD.equals(action)){
+                buildFromString(paths);
             }
 
             stopService(intent);
@@ -43,6 +48,8 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     private void buildFromFile(boolean sourceFolder) {
+        clearSharedPreferences("display_cycle");
+
         if (sourceFolder) {
             File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
             File cameraDirectory = new File(dcimDirectory.getAbsolutePath() + "/Camera"); //TODO
@@ -62,6 +69,19 @@ public class BuildDisplayCycle extends IntentService {
         }
     }
 
+    private void buildFromString(String[] paths) { //would be used to get sorted information
+            int picNum=0;
+
+            if (paths != null) { //DCIM contains photos
+                for (String currPicture : paths) { //add each photo's path to cycle as a node
+                    picNum++;
+                    savePicture(currPicture, picNum);
+                }
+            } else {
+                savePicture("DEFAULTPICTURE", picNum);
+            }
+    }
+
     private void buildFromMedia() {
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = getProjections(uri); //which columns we will get (all in this case)
@@ -74,7 +94,7 @@ public class BuildDisplayCycle extends IntentService {
         * null                  // The sort order for the returned rows
         */
 
-        int picNum = 0;
+        int picNum=0, numPics = 0;
 
         if(null==cr) {
             System.out.println("ERROR null==cr in BuildDisplayCycle");
@@ -85,15 +105,19 @@ public class BuildDisplayCycle extends IntentService {
 
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
+            int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
 
             while(cr.moveToNext()) { //go through all the images
-                String uripath = cr.getString(0);  //get the path/data
+                /*String released = cr.getString(description);
+                if(released == "released") continue; //read release from image description
+                */
+                String uripath = cr.getString(pathIndex);  //get the path/date
                 picNum++;
                 savePicture(uripath, picNum);
             }
+            numPics = cr.getCount();
         }
 
-        int numPics = cr.getCount();
         //save the number of pictures we have in get count
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
         SharedPreferences.Editor editor = counterPref.edit();
@@ -103,6 +127,26 @@ public class BuildDisplayCycle extends IntentService {
             if (cr != null) {
                 cr.close();
             }
+    }
+
+
+    public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
+        //add the key-value pair of picPath/counter to shared preferences
+        SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
+        //name of the preference is display cycle
+        SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
+        //save the coutner as a key string (will be searched by this string
+        //the value of the pair is the absolute path to the image
+        displayCycleEditor.putString(path, Integer.toString(picNum));
+        displayCycleEditor.apply();
+    }
+
+    public void clearSharedPreferences(String type){
+        SharedPreferences sharedPreferences = getSharedPreferences(type, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        //display cycle cleared
     }
 
     public String[]  getProjections(Uri uri){ //which columns we will get defined by elements of array
@@ -116,6 +160,8 @@ public class BuildDisplayCycle extends IntentService {
 
         ArrayList<String> projectionList = new ArrayList<>();
         projectionList.add(MediaStore.Images.Media.DATA);
+        projectionList.add(MediaStore.Images.ImageColumns.DESCRIPTION);
+
         if(karma){
             projectionList.add("b");
         }
@@ -127,18 +173,7 @@ public class BuildDisplayCycle extends IntentService {
             projectionList.add(MediaStore.Images.ImageColumns.LONGITUDE);
         }
 
-       String[] projection =  projectionList.toArray(new String[projectionList.size()]);
+        String[] projection =  projectionList.toArray(new String[projectionList.size()]);
         return projection;
-    }
-
-    public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
-        //add the key-value pair of picPath/counter to shared preferences
-        SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
-        //name of the preference is display cycle
-        SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
-        //save the coutner as a key string (will be searched by this string
-        //the value of the pair is the absolute path to the image
-        displayCycleEditor.putString(path, Integer.toString(picNum));
-        displayCycleEditor.apply();
     }
 }

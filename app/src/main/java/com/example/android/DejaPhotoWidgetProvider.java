@@ -12,6 +12,7 @@ import com.example.dejaphoto.R;
 
 /**
  * Created by Justin on 5/3/17.
+ * This class uses android APIs to create a widget that is responsive to presses on buttons
  */
 
 public class DejaPhotoWidgetProvider extends AppWidgetProvider {
