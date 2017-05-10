@@ -101,4 +101,5 @@
     <string name="button3">Settings</string>
     <string name="button4">Deja Vu Mode</string>
     <string name="button5">Display</string>
+    <string name="title_activity_display">DisplayActivity</string>
 </resources>

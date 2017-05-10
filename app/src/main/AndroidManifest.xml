@@ -65,6 +65,10 @@
             android:name="com.example.android.SetActivity"
             android:label="@string/title_activity_set"
             android:parentActivityName="com.example.android.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.android.DisplayActivity"
+            android:label="@string/title_activity_display"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

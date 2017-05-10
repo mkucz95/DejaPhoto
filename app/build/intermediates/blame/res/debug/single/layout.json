@@ -160,6 +160,10 @@
         "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/layout/activity_album.xml"
     },
     {
+        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/activity_display.xml",
+        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/layout/activity_display.xml"
+    },
+    {
         "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/design_navigation_menu_item.xml",
         "source": "/Users/Michael/.android/build-cache/106d410dabc5bd2181187c133f381e9b295561c3/output/res/layout/design_navigation_menu_item.xml"
     },
@@ -194,6 +198,10 @@
     {
         "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
         "source": "/Users/Michael/.android/build-cache/3d165e4fd34334c1976ffb6b41f1f6e2d9b2e1b2/output/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/content_display.xml",
+        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/layout/content_display.xml"
     },
     {
         "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
