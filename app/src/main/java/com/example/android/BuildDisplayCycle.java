@@ -9,9 +9,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.jar.Manifest;
 
 /**
  * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
@@ -83,6 +85,8 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     private void buildFromMedia() {
+
+
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.ImageColumns.LATITUDE}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
