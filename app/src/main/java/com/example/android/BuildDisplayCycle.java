@@ -46,8 +46,6 @@ public class BuildDisplayCycle extends IntentService {
         if (sourceFolder) {
             File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
             File cameraDirectory = new File(dcimDirectory.getAbsolutePath() + "/Camera"); //TODO
-            Intent intent = new Intent(getApplicationContext(), SaveDisplayCycle.class);
-            intent.setAction("SAVE_SHAREDPREF");
 
             int picNum=0;
 
