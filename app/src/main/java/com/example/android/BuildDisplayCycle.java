@@ -21,8 +21,8 @@ import java.util.ArrayList;
  * https://developer.android.com/reference/android/database/Cursor.html
  */
 public class BuildDisplayCycle extends IntentService {
-    private static final String BUILD_CYCLE = "com.example.android.action.BUILD_CYCLE";
-    private static final String RERANK_BUILD = "com.example.android.action.RERANK_BUILD";
+    private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
+    private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
     String[] paths;
 
     public BuildDisplayCycle() {
@@ -35,11 +35,11 @@ public class BuildDisplayCycle extends IntentService {
             final String action = intent.getAction();
            //boolean sourceFolder = intent.getExtras().getBoolean("source");
 
-            if (BUILD_CYCLE.equals(action)) {
+            if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
                 buildFromMedia();
             }
-            else if(RERANK_BUILD.equals(action)){
+            else if(ACTION_RERANK_BUILD.equals(action)){
                 buildFromString(paths);
             }
 
@@ -95,7 +95,7 @@ public class BuildDisplayCycle extends IntentService {
         * null                  // The sort order for the returned rows
         */
 
-        int picNum = 0;
+        int picNum=0, numPics = 0;
 
         if(null==cr) {
             System.out.println("ERROR null==cr in BuildDisplayCycle");
@@ -109,17 +109,16 @@ public class BuildDisplayCycle extends IntentService {
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
 
             while(cr.moveToNext()) { //go through all the images
-                String released = cr.getString(description);
-
+                /*String released = cr.getString(description);
                 if(released == "released") continue; //read release from image description
-
+                */
                 String uripath = cr.getString(pathIndex);  //get the path/date
                 picNum++;
                 savePicture(uripath, picNum);
             }
+            numPics = cr.getCount();
         }
 
-        int numPics = cr.getCount();
 
         //save the number of pictures we have in get count
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
@@ -147,8 +146,7 @@ public class BuildDisplayCycle extends IntentService {
         SharedPreferences sharedPreferences = getSharedPreferences(type, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.commit();
-
+        editor.apply();
         //display cycle cleared
     }
 

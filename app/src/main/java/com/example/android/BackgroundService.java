@@ -64,8 +64,11 @@ public class BackgroundService extends Service {
         am.setRepeating(AlarmManager.RTC, startTime, repeatTime, sender);
 
         /*immediately change the wallpaper when this method is called*/
-        Intent i = new Intent(this, WallpaperChanger.class);
-        startService(i); //startActivity(i);
+        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
+        clickIntent.setAction(Intent.ACTION_SEND);
+        clickIntent.setType("text/plain");
+        clickIntent.putExtra("button_pressed", "next");
+        startService(clickIntent); //calls widgetmanager as if the 'next' button was pressed
     }
 
     public class Receiver extends BroadcastReceiver

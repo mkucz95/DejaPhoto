@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String BUILD_CYCLE = "com.example.android.action.BUILD_CYCLE";
+    private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
        // displayCycleIntent.putExtra("source", true);
-        displayCycleIntent.setAction(BUILD_CYCLE);
+       // displayCycleIntent.setAction(ACTION_BUILD_CYCLE); TODO this causes crash
         startService(displayCycleIntent);
         //starts service that first builds and calls another service to save display cycle
 
