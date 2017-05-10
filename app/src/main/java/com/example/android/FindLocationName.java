@@ -31,7 +31,6 @@ public class FindLocationName extends Service {
 
          FindLocationName(String path) {
             this.path = path;
-
         }
 
         String findLocation() {
