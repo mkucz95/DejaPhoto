@@ -14,6 +14,10 @@ import java.io.File;
 
 /**
  * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
+ * and https://developer.android.com/reference/android/provider/MediaStore.Images.Media.html#query(android.content.ContentResolver, android.net.Uri, java.lang.String[], java.lang.String, java.lang.String)
+ * https://developer.android.com/reference/android/provider/MediaStore.Images.ImageColumns.html#BUCKET_ID
+ * https://developer.android.com/reference/android/provider/MediaStore.MediaColumns.html#DATA
+ * https://developer.android.com/reference/android/database/Cursor.html
  */
 public class BuildDisplayCycle extends IntentService {
     private static final String BUILD_CYCLE = "com.example.android.action.BUILD";
