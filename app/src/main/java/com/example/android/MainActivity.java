@@ -3,7 +3,10 @@ package com.example.android;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,14 +31,9 @@ public class MainActivity extends AppCompatActivity {
         Intent backgroundIntent = new Intent(this, BackgroundService.class);
         startService(backgroundIntent);  //starts service that keeps track of time and location
 
-        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
-        SharedPreferences.Editor editor = counterPref.edit();
-        editor.putInt("counter", 0); //initialize the counter to 0
-
-        editor.apply();
 
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-        displayCycleIntent.putExtra("source", true);
+       // displayCycleIntent.putExtra("source", true);
         startService(displayCycleIntent);
         //starts service that first builds and calls another service to save display cycle
 

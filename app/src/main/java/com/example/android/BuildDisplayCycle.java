@@ -1,19 +1,19 @@
 package com.example.android;
 
 import android.app.IntentService;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 
 import java.io.File;
 
 /**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * <p>
- * TODO: Customize class - update intent actions, extra parameters and static
- * helper methods.
+ * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
  */
 public class BuildDisplayCycle extends IntentService {
     private static final String BUILD_CYCLE = "com.example.android.action.BUILD";
@@ -26,10 +26,11 @@ public class BuildDisplayCycle extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-           boolean sourceFolder = intent.getExtras().getBoolean("source");
+           //boolean sourceFolder = intent.getExtras().getBoolean("source");
 
             if (BUILD_CYCLE.equals(action)) {
-                buildFromFile(sourceFolder);
+                //buildFromFile(sourceFolder);
+                buildFromMedia();
             }
 
             stopService(intent);
@@ -43,17 +44,74 @@ public class BuildDisplayCycle extends IntentService {
             Intent intent = new Intent(getApplicationContext(), SaveDisplayCycle.class);
             intent.setAction("SAVE_SHAREDPREF");
 
+            int picNum=0;
+
             File[] dcimPhotos = cameraDirectory.listFiles();
             if (dcimPhotos != null) { //DCIM contains photos
                 for (File currPicture : dcimPhotos) { //add each photo's path to cycle as a node
-                    intent.putExtra("pic_path", currPicture.getAbsolutePath()); //todo, maybe have to clear intent every time
-                    startService(intent);
+                    picNum++;
+                    savePicture(currPicture.getAbsolutePath(), picNum);
                 }
             } else {
-                intent.putExtra("pic_path", "DEFAULTPICTURE"); //when the folder contains no pictures
-                startService(intent);
+                savePicture("DEFAULTPICTURE", picNum);
             }
         } else {
         }
+    }
+
+    private void buildFromMedia() {
+        Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        String[] projection = {MediaStore.Images.Media.DATA, }; //which columns we will get (all in this case)
+        Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
+
+        /*
+        * query(uri,             // The content URI of the images
+        * projection,            // The columns to return for each row (each diff image is new row)
+        * null,                 //selection criteria
+        * null,                 //selection criteria
+        * null                  // The sort order for the returned rows
+        */
+
+        int picNum = 0;
+
+        if(null==cr) {
+            System.out.println("ERROR null==cr in BuildDisplayCycle");
+        }else if( cr.getCount()<1) {
+          //todo handle no images present---- send default image
+            savePicture("DEFAULTPICTURE", picNum);
+        } else { //handle returned data
+
+            cr.moveToFirst();
+            int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
+
+            while(cr.moveToNext()) { //go through all the images
+                String uripath = cr.getString(0);  //get the path/data
+                picNum++;
+                savePicture(uripath, picNum);
+            }
+        }
+
+        int numPics = cr.getCount();
+
+        //save the number of pictures we have in get count
+        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
+        SharedPreferences.Editor editor = counterPref.edit();
+        editor.putInt("counter", numPics); //initialize the counter to 0
+        editor.apply();
+
+            if (cr != null) {
+                cr.close();
+            }
+    }
+
+    public void savePicture(String path, int picNum){ //puts picture to shared preferences
+        //add the key-value pair of picPath/counter to shared preferences
+        SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
+        //name of the preference is display cycle
+        SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
+        //save the coutner as a key string (will be searched by this string
+        //the value of the pair is the absolute path to the image
+        displayCycleEditor.putString(path, Integer.toString(picNum));
+        displayCycleEditor.apply();
     }
 }

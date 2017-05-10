@@ -44,7 +44,7 @@ public class WallpaperChanger extends IntentService {
                 String imagePath = intent.getExtras().getString("image_path"); //takes info passed from intent
                 Bitmap bitmap;
                 System.out.println(imagePath);
-                if(imagePath.equals("DEFAULT_PICTURE")){
+                if(imagePath.equals("DEFAULTPICTURE")){
                     bitmap = BitmapFactory.decodeResource( this.getResources(), R.drawable.default_picture);
                     setBackground(bitmap);
                 }

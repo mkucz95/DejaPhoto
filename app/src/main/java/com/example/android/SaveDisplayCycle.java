@@ -31,7 +31,6 @@ public class SaveDisplayCycle extends IntentService {
                 int counter = getNextImgCounter(); //increments counter ie ('0', "C") ("1", ":C/")
                 handleSharedPref(picPath, counter);
             }
-
             stopService(intent); //stop this intent service
         }
     }
@@ -56,15 +55,15 @@ public class SaveDisplayCycle extends IntentService {
     }
 
     public int getNextImgCounter(){
+        int currImgCount = 0;
         SharedPreferences counterPreferences = getSharedPreferences("counter", MODE_PRIVATE);
-        String currImgCount = counterPreferences.getString("counter", ""); //get current level of counter
+        currImgCount = counterPreferences.getInt("counter", currImgCount); //get current level of counter
 
-        int intImgCount = Integer.parseInt(currImgCount);
-        int nextImgCount = ++intImgCount;
+        int nextImgCount = ++currImgCount;
 
         //save the new number of images into shared preferences
         SharedPreferences.Editor counterEditor = counterPreferences.edit();
-        counterEditor.putString("counter", Integer.toString(nextImgCount));
+        counterEditor.putInt("counter", nextImgCount);
         counterEditor.apply();
 
         SharedPreferences sharedPreferences = getSharedPreferences("head", MODE_PRIVATE);

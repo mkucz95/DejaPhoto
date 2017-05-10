@@ -35,7 +35,7 @@ public class ChangeImage extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            String newHead;
+            int newHead;
             if (ACTION_PREVIOUS.equals(action)) { //move to previous pic
                  newHead = moveHead(NEXT_PIC);
                 changeImgToDisplay(newHead);
@@ -53,46 +53,50 @@ public class ChangeImage extends IntentService {
         }
     }
 
-    private String moveHead(String direction){
+    private int moveHead(String direction){
 
         SharedPreferences headPref = getSharedPreferences("head", MODE_PRIVATE);
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
 
-        String currHead = headPref.getString("head", "");
-        String counterString = counterPref.getString("counter", "" );
+        int counterInt=0;
+        int currHead = 0;
+        currHead= headPref.getInt("head", currHead);
+        counterInt = counterPref.getInt("counter", counterInt );
 
-        int counterInt = Integer.parseInt(counterString);
-        int headInt = Integer.parseInt(currHead);
 
-        System.out.println("THIS IS HEAD VAL: "+ headInt);
+        System.out.println("THIS IS HEAD VAL: "+ currHead);
         System.out.println("THIS IS COUNTER VAL: "+ counterInt);
 
         if(counterInt==0){ //there are no images in the list
-            return "DEFAULTPICTURE";
+            return -1;
         }
 
         //change the head based on which button was pressed
-        if(direction.equalsIgnoreCase(PREV_PIC) && headInt == 0) headInt=counterInt;
-        else if(direction.equalsIgnoreCase(PREV_PIC) && headInt != 0) headInt--;
-        else if (direction.equalsIgnoreCase(NEXT_PIC) && headInt == counterInt) headInt = 0;
-        else if (direction.equalsIgnoreCase(NEXT_PIC) && headInt != counterInt) headInt++;
+        if(direction.equalsIgnoreCase(PREV_PIC) && currHead == 0) currHead=counterInt;
+        else if(direction.equalsIgnoreCase(PREV_PIC) && currHead != 0) currHead--;
+        else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead == counterInt) currHead = 0;
+        else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead != counterInt) currHead++;
 
-        String newHead = Integer.toString(headInt);
-
+        int newHead = currHead;
         SharedPreferences.Editor editor = headPref.edit();
-        editor.putString("head", newHead); //add the new head as a number to the shared pref
+        editor.putInt("head", newHead); //add the new head as a number to the shared pref
         editor.apply();
 
         return newHead;
     }
 
-    private void changeImgToDisplay(String newHead){//changes the image by calling wallpaper service
+    private void changeImgToDisplay(int newHead){//changes the image by calling wallpaper service
         //send new intent to the wallpaper changer intent service
         //includes file path
-        SharedPreferences sharedPreferences = getSharedPreferences("head", MODE_PRIVATE);
-        String newPath = sharedPreferences.getString(newHead, "");
-
-        System.out.println("THIS SHOULD BE SYSTEM PATH"+ newPath);
+        String newPath;
+        if(newHead>0) {
+            String head = Integer.toString(newHead);
+            SharedPreferences sharedPreferences = getSharedPreferences("head", MODE_PRIVATE);
+            newPath = sharedPreferences.getString(head, "");
+            System.out.println("THIS SHOULD BE SYSTEM PATH" + newPath);
+        } else{
+            newPath = "DEFAULTPICTURE";
+        }
 
         Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
         wallpaperIntent.setAction(Intent.ACTION_SEND);

@@ -36,22 +36,11 @@ public class BackgroundService extends Service {
         super.onDestroy();
     }
 
-
-
-
     //@Override
     @RequiresApi(api = Build.VERSION_CODES.N)
 //    public void run(){
     public void WallpaperAutoChange(){
         //TODO implement AlarmManager
-        /*if there are no buttons pressed for more than a certain time
-        automatically call getImage() on display cycle and
-         */
-        //only happens when buttons are not pressed
-
-//        Intent changeWallpaper = new Intent(this, WidgetManager.class);
-//        changeWallpaper.setAction("next");
-//        startService(changeWallpaper);
 
         /*Below code is to obtain time it has been since service starts*/
         Calendar calendar = Calendar.getInstance();
