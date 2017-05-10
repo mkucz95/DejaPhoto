@@ -27,12 +27,9 @@ import java.net.URL;
  * image path) and then sets that image to the wallpaper.
  */
 public class WallpaperChanger extends IntentService {
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String CHANGE_WALLPAPER = "com.example.android.action.BAZ";
-    WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-    //call java wallpapermanager api
 
     DisplayMetrics metrics = new DisplayMetrics(); //get screen dimensions
+    //getWindowManager().getDefaultDisplay().getMetrics(metrics);
     int height = metrics.heightPixels;
     int width = metrics.widthPixels;
 
@@ -43,18 +40,18 @@ public class WallpaperChanger extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
-           synchronized (this){
-               String imagePath = intent.getAction(); //takes info passed from intent
-               Bitmap bitmap;
-
+            synchronized (this){
+                String imagePath = intent.getExtras().getString("image_path"); //takes info passed from intent
+                Bitmap bitmap;
+                System.out.println(imagePath);
                 if(imagePath.equals("DEFAULTPICTURE")){
-                    bitmap = BitmapFactory.decodeResource( getResources(), R.drawable.default_picture);
+                    bitmap = BitmapFactory.decodeResource( this.getResources(), R.drawable.default_picture);
                     setBackground(bitmap);
                 }
 
                 else {
                     try {//convert image path into something code can use
-                        FileInputStream imgIS = new FileInputStream(new File(imagePath));
+                        FileInputStream imgIS = new FileInputStream(new File("@drawable/default_picture"));
                         BufferedInputStream bufIS = new BufferedInputStream(imgIS);
                         bitmap = BitmapFactory.decodeStream(bufIS); //
 
@@ -64,15 +61,18 @@ public class WallpaperChanger extends IntentService {
                         e.printStackTrace();
                     } //trying to get wallpaper from display cycle node
                 }
-           }
-        stopService(intent);
+            }
+            stopService(intent);
         }
     }
 
     public void setBackground(Bitmap bitmap){ //set wallpaper based on inputted bitmap
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+        //call java wallpapermanager api
+
         try {
             wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
-            wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions
+            //wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions
         } catch (IOException e) {
             e.printStackTrace();
         }

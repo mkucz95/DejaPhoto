@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
-
+/*
+CURRENTLY NOT REQUIRED FOR MILESTONE 1
+ */
 public class AlbumActivity extends AppCompatActivity {
 
     @Override

@@ -2,7 +2,7 @@ package com.example.android;
 
 import android.app.IntentService;
 import android.content.Intent;
-
+import android.content.SharedPreferences;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -11,19 +11,14 @@ import android.content.Intent;
  * TODO: Customize class - update intent actions and extra parameters.
  */
 public class WidgetManager extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    public static final String PREVIOUS = "previous";
-    public static final String NEXT = "next";
-    public static final String KARMA = "karma";
-    public static final String RELEASE = "release";
+    //ACTION DEFINITIONS
+    private static final String ACTION_PREVIOUS = "com.example.android.PREVIOUS";
+    private static final String ACTION_NEXT = "com.example.android.NEXT";
+    private static final String ACTION_KARMA = "com.example.android.KARMA";
+    public static final String ACTION_RELEASE = "com.example.android.RELEASE";
 
     // TODO: Rename parameters
-    public static final String EXTRA_PARAM1 = "com.example.android.extra.PARAM1";
-    public static final String EXTRA_PARAM2 = "com.example.android.extra.PARAM2";
-    public static  String imagePath = "";
-
-
+    public static  String imagePath = "DEFAULT_PICTURE";
 
     public WidgetManager() {
         super("WidgetManager");
@@ -33,25 +28,22 @@ public class WidgetManager extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         if (intent != null) {
-            final String action = intent.getAction();
+            final String action = intent.getExtras().getString("button_pressed");
+            Intent imageIntent = new Intent(this, ChangeImage.class);
+
             //TODO implement actions
-            if (PREVIOUS.equals(action)) {
-               // imagePath = getImage(true);
-            } else if (NEXT.equals(action)) {
-               // imagePath = getImage(false);
-            }else if (KARMA.equals(action)) {
-               // imagePath = updateCycle(true);
-            }else if (RELEASE.equals(action)) {
-               // imagePath = updateCycle(false);
+            if ("previous".equals(action)) {
+                imageIntent.setAction(ACTION_PREVIOUS);
+            } else if ("next".equals(action)) {
+                imageIntent.setAction(ACTION_NEXT);
+            }else if ("karma".equals(action)) {
+                imageIntent.setAction(ACTION_KARMA);
+            }else if ("release".equals(action)) {
+                imageIntent.setAction(ACTION_RELEASE);
             }
 
-            //send new intent to the wallpaper changer intent service
-            //includes file path
-            Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
-            intent.setAction(imagePath);
-            startService(wallpaperIntent);
-
-            stopService(intent);
+            startService(imageIntent); //change the image
+            stopService(intent); //stop the widgetManager service
         }
     }
 
@@ -59,4 +51,5 @@ public class WidgetManager extends IntentService {
     public int onStartCommand(Intent intent, int flags, int startId){
         return super.onStartCommand(intent, flags, startId);
     }
+
 }

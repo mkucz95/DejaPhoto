@@ -39,11 +39,13 @@ public void populatePhotoInfo(Photo photo){
     }
 
     public String getLocation() {
-        return location;
+        FindLocationName findLocationName = new FindLocationName(imagePath);
+        return findLocationName.findLocation();
     }
 
     public void setLocation(String location) {
-        this.location = location;
+
+
     }
 
     public Time getTime() {

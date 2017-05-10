@@ -12,15 +12,14 @@ import com.example.dejaphoto.R;
 
 /**
  * Created by Justin on 5/3/17.
+ * This class uses android APIs to create a widget that is responsive to presses on buttons
  */
 
 public class DejaPhotoWidgetProvider extends AppWidgetProvider {
-    public static String PREVIOUS_PIC = "Pressed Back Button";
-    public static String KARMA_BUTTON = "Pressed Karma Button";
-    public static String RELEASE_BUTTON = "Pressed Release Button";
-    public static String NEXT_PIC = "Pressed Next Button";
-
-
+    public static String PREVIOUS_PIC = "Previous Picture";
+    public static String KARMA_BUTTON = "Karma Not Yet Implemented";
+    public static String RELEASE_BUTTON = "Picture Release Not Yet Implemented";
+    public static String NEXT_PIC = "Next Picture";
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
@@ -61,31 +60,42 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent){
 
         super.onReceive(context, intent);
+        String pressed = "button_pressed";
+        Boolean buttonPressed = false;
       //  RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
         Intent clickIntent = new Intent(context, WidgetManager.class);
-
+        clickIntent.setAction(Intent.ACTION_SEND);
+        clickIntent.setType("text/plain");
 
         if(intent.getAction().equals(PREVIOUS_PIC)){
-            Toast.makeText(context, "Previous Picture", Toast.LENGTH_SHORT).show();
-            clickIntent.setAction("previous");
+            Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
+            clickIntent.putExtra(pressed,"previous");
+            buttonPressed = true;
         }
 
         else if(intent.getAction().equals(KARMA_BUTTON)){
-            Toast.makeText(context, "Karma Not Yet Implemented", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, KARMA_BUTTON, Toast.LENGTH_SHORT).show();
            // views.setTextViewText(R.id.karma_btn, "Undo Karma Button");
-            clickIntent.setAction("karma");
+            clickIntent.putExtra(pressed,"karma");
+            buttonPressed = true;
         }
 
         else if(intent.getAction().equals(RELEASE_BUTTON)){
-            Toast.makeText(context, "Picture Release Not Yet Implemented", Toast.LENGTH_SHORT).show();
-            clickIntent.setAction("release");
+            Toast.makeText(context, RELEASE_BUTTON , Toast.LENGTH_SHORT).show();
+            clickIntent.putExtra(pressed, "release");
+            buttonPressed = true;
         }
 
         else if(intent.getAction().equals(NEXT_PIC)){
-            Toast.makeText(context, "Next Picture", Toast.LENGTH_SHORT).show();
-            clickIntent.setAction("next");
+            Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
+            clickIntent.putExtra(pressed, "next");
+            buttonPressed = true;
         }
-        context.startService(clickIntent); //call widgetmanager
+
+        if (buttonPressed){
+            context.startService(clickIntent); //call widgetmanager
+        }
+
     }
 
 

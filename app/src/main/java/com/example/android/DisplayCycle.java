@@ -1,8 +1,12 @@
 package com.example.android;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Environment;
 
 import java.io.File;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Justin on 5/4/17.
@@ -13,13 +17,6 @@ public class DisplayCycle {
     private ImageNode last; //last node in list used to wrap around
     private ImageNode head; //tracks current position in cycle
     private int cycleLength = 0;
-
-    public void removeNode(ImageNode image){ //rearrange pointers
-        ImageNode prev = image.getPrev();
-        ImageNode next = image.getNext();
-        prev.setNext(next);
-        next.setPrev(prev);
-    }
 
     //TODO not correct implementation
     public void addToCycle(String picPath){//add new node at the end of list
@@ -34,19 +31,11 @@ public class DisplayCycle {
             first.setPrev(newNode);
             last = newNode;
         }
-
-        this.cycleLength++;
+        cycleLength++;
+        head = last; //our first image is the last one in the list
     }
 
-    public void DisplayCycle(){ //empty constructor
-        this.first = null;
-        this.last = null;
-        this.head = null;
-
-        buildDisplayCycle(false);
-    }
-
-    public void DisplayCycle(boolean flag){ //empty constructor
+    public DisplayCycle(boolean flag){ //empty constructor
         this.first = null;
         this.last=null;
         this.head = null;
@@ -72,19 +61,44 @@ public class DisplayCycle {
         if(flag){
             //increment karma for current picture
             //rerank pictures
-            head = last;
+            head.getData().setKarma(true);  //this picture now has karma
+            head = rerank(this); //TODO not sure if this is done right
+
+            return head.getPath();
         }else{
             //remove current picture from display cycle
             //move head
+           head =  deleteNode(head);
+            if(head==null){ //if there are now no images in the display cycle
+                return "DEFAULTPICTURE";
+            }
+            return head.getPath();
         }
-        return (String) last.getPath();
     }
 
-    public String rerank(){
+    public ImageNode deleteNode(ImageNode current){
+       if(cycleLength==1){
+           return null;
+       }
+       else {
+           ImageNode temp = current;
+           ImageNode next = current.getNext();
+           ImageNode previous = current.getPrev();
+
+           temp = previous;
+           temp.setNext(next);
+
+           return temp;
+       }
+
+       //delete from storage if not in camera folder
+    }
+
+    public ImageNode rerank(DisplayCycle displayCycle){
         //TODO
         //get shared preferences about settings (location, time, day)
         //sort displaycycle by the settings
-        return "t";
+        return displayCycle.last;
     }
 
     private void buildDisplayCycle(boolean flag) {
@@ -92,13 +106,13 @@ public class DisplayCycle {
              File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
              File cameraDirectory = new File (dcimDirectory.getAbsolutePath()+"/Camera"); //TODO
 
-
              File[] dcimPhotos = cameraDirectory.listFiles();
              if(dcimPhotos != null) { //DCIM contains photos
                  for (File currPicture : dcimPhotos) { //add each photo's path to cycle as a node
                      addToCycle(currPicture.getAbsolutePath());
                  }
              }
+
              else{
                  addToCycle("DEFAULTPICTURE");
              }
