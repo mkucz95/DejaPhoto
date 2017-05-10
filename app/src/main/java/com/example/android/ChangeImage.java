@@ -44,10 +44,10 @@ public class ChangeImage extends IntentService {
                 changeImgToDisplay(newHead);
             }
             else if (ACTION_KARMA.equals(action)) {
-                //updateCycle
+                //updateCycle TODO
             }
             else if (ACTION_RELEASE.equals(action)) {
-                //updateCycle
+                //updateCycle TODO
            }
             stopService(intent); //stop this intent service
         }

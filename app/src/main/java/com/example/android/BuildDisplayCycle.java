@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
@@ -65,9 +66,8 @@ public class BuildDisplayCycle extends IntentService {
 
     private void buildFromMedia() {
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {MediaStore.Images.Media.DATA, }; //which columns we will get (all in this case)
+        String[] projection = getProjections(uri); //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
-
         /*
         * query(uri,             // The content URI of the images
         * projection,            // The columns to return for each row (each diff image is new row)
@@ -96,7 +96,6 @@ public class BuildDisplayCycle extends IntentService {
         }
 
         int numPics = cr.getCount();
-
         //save the number of pictures we have in get count
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
         SharedPreferences.Editor editor = counterPref.edit();
@@ -108,7 +107,33 @@ public class BuildDisplayCycle extends IntentService {
             }
     }
 
-    public void savePicture(String path, int picNum){ //puts picture to shared preferences
+    public String[]  getProjections(Uri uri){ //which columns we will get defined by elements of array
+        /* TODO
+        get shared preferences for what the user set
+         */
+        boolean karma = false;
+        boolean time = false;
+        boolean day = false;
+        boolean location = false;
+
+        ArrayList<String> projectionList = new ArrayList<>();
+        projectionList.add(MediaStore.Images.Media.DATA);
+        if(karma){
+            projectionList.add("b");
+        }
+        if(time || day){
+            projectionList.add(MediaStore.Images.ImageColumns.DATE_TAKEN);
+        }
+        if(location){
+            projectionList.add(MediaStore.Images.ImageColumns.LATITUDE);
+            projectionList.add(MediaStore.Images.ImageColumns.LONGITUDE);
+        }
+
+       String[] projection =  projectionList.toArray(new String[projectionList.size()]);
+        return projection;
+    }
+
+    public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
         //add the key-value pair of picPath/counter to shared preferences
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
         //name of the preference is display cycle
