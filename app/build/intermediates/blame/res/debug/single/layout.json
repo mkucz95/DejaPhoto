@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/activity_mode.xml",
-        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/layout/activity_mode.xml"
-    },
-    {
         "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/notification_action.xml",
         "source": "/Users/Michael/.android/build-cache/3d165e4fd34334c1976ffb6b41f1f6e2d9b2e1b2/output/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/activity_mode.xml",
+        "source": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/src/main/res/layout/activity_mode.xml"
     },
     {
         "merged": "/Users/Michael/AndroidStudioProjects/DejaPhoto/app/build/intermediates/res/merged/debug/layout/design_bottom_sheet_dialog.xml",
