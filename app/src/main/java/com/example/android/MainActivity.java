@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+<<<<<<< HEAD
         Button album = (Button) findViewById(R.id.bt_1);
         Button dejaMode = (Button) findViewById(R.id.bt_4);
         Button settings = (Button) findViewById(R.id.bt_3);
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+=======
+>>>>>>> 559b2c423f93780a1cd960072cb9bc6f2f579ec3
         Intent backgroundIntent = new Intent(this, BackgroundService.class);
         startService(backgroundIntent);  //starts service that keeps track of time and location
 
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
     public void launchActivity() {
         Intent intent = new Intent(this, AlbumActivity.class);
         startActivity(intent);
@@ -124,4 +128,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+=======
+>>>>>>> 559b2c423f93780a1cd960072cb9bc6f2f579ec3
 }

@@ -71,7 +71,24 @@
             android:parentActivityName="com.example.android.MainActivity"
             android:label="@string/title_activity_set"
             android:theme="@style/AppTheme.NoActionBar"/>
-
+        <service
+            android:name="com.example.android.ChangeImage"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.KARMA" />
+                <action android:name="android.intent.action.RELEASE" />
+                <action android:name="android.intent.action.NEXT" />
+                <action android:name="android.intent.action.PREVIOUS" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.example.android.BuildDisplayCycle"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BUILD_CYCLE" />
+                <action android:name="android.intent.action.RERANK_BUILD"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

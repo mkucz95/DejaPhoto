@@ -16,6 +16,8 @@ import com.example.dejaphoto.R;
 
 import com.example.dejaphoto.R;
 
+import com.example.dejaphoto.R;
+
 public class SetActivity extends AppCompatActivity {
 
     @Override
