@@ -93,8 +93,9 @@
             android:name="com.example.android.BuildDisplayCycle"
             android:exported="false">
             <intent-filter>
-            <action android:name="android.intent.action.BUILD_CYCLE" />
-        </intent-filter>
+                <action android:name="android.intent.action.BUILD_CYCLE" />
+                <action android:name="com.example.android.action.RERANK_BUILD"/>
+            </intent-filter>
         </service>
     </application>
 

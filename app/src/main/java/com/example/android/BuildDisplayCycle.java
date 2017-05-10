@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
@@ -20,7 +21,9 @@ import java.io.File;
  * https://developer.android.com/reference/android/database/Cursor.html
  */
 public class BuildDisplayCycle extends IntentService {
-    private static final String BUILD_CYCLE = "com.example.android.action.BUILD";
+    private static final String BUILD_CYCLE = "com.example.android.action.BUILD_CYCLE";
+    private static final String RERANK_BUILD = "com.example.android.action.RERANK_BUILD";
+    String[] paths;
 
     public BuildDisplayCycle() {
         super("BuildDisplayCycle");
@@ -36,17 +39,20 @@ public class BuildDisplayCycle extends IntentService {
                 //buildFromFile(sourceFolder);
                 buildFromMedia();
             }
+            else if(RERANK_BUILD.equals(action)){
+                buildFromString(paths);
+            }
 
             stopService(intent);
         }
     }
 
     private void buildFromFile(boolean sourceFolder) {
+        clearSharedPreferences("display_cycle");
+
         if (sourceFolder) {
             File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
             File cameraDirectory = new File(dcimDirectory.getAbsolutePath() + "/Camera"); //TODO
-            Intent intent = new Intent(getApplicationContext(), SaveDisplayCycle.class);
-            intent.setAction("SAVE_SHAREDPREF");
 
             int picNum=0;
 
@@ -63,9 +69,22 @@ public class BuildDisplayCycle extends IntentService {
         }
     }
 
+    private void buildFromString(String[] paths) { //would be used to get sorted information
+            int picNum=0;
+
+            if (paths != null) { //DCIM contains photos
+                for (String currPicture : paths) { //add each photo's path to cycle as a node
+                    picNum++;
+                    savePicture(currPicture, picNum);
+                }
+            } else {
+                savePicture("DEFAULTPICTURE", picNum);
+            }
+    }
+
     private void buildFromMedia() {
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {MediaStore.Images.Media.DATA, }; //which columns we will get (all in this case)
+        String[] projection = getProjections(uri); //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
 
         /*
@@ -87,9 +106,14 @@ public class BuildDisplayCycle extends IntentService {
 
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
+            int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
 
             while(cr.moveToNext()) { //go through all the images
-                String uripath = cr.getString(0);  //get the path/data
+                String released = cr.getString(description);
+
+                if(released == "released") continue; //read release from image description
+
+                String uripath = cr.getString(pathIndex);  //get the path/date
                 picNum++;
                 savePicture(uripath, picNum);
             }
@@ -117,5 +141,42 @@ public class BuildDisplayCycle extends IntentService {
         //the value of the pair is the absolute path to the image
         displayCycleEditor.putString(path, Integer.toString(picNum));
         displayCycleEditor.apply();
+    }
+
+    public void clearSharedPreferences(String type){
+        SharedPreferences sharedPreferences = getSharedPreferences(type, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+
+        //display cycle cleared
+    }
+
+    public String[]  getProjections(Uri uri){ //which columns we will get defined by elements of array
+        /* TODO
+        get shared preferences for what the user set
+         */
+        boolean karma = false;
+        boolean time = false;
+        boolean day = false;
+        boolean location = false;
+
+        ArrayList<String> projectionList = new ArrayList<>();
+        projectionList.add(MediaStore.Images.Media.DATA);
+        projectionList.add(MediaStore.Images.ImageColumns.DESCRIPTION);
+
+        if(karma){
+            projectionList.add("b");
+        }
+        if(time || day){
+            projectionList.add(MediaStore.Images.ImageColumns.DATE_TAKEN);
+        }
+        if(location){
+            projectionList.add(MediaStore.Images.ImageColumns.LATITUDE);
+            projectionList.add(MediaStore.Images.ImageColumns.LONGITUDE);
+        }
+
+        String[] projection =  projectionList.toArray(new String[projectionList.size()]);
+        return projection;
     }
 }
