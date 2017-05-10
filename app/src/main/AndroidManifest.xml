@@ -68,16 +68,6 @@
             android:name="com.example.android.SetActivity"
             android:label="@string/title_activity_set"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <service
-            android:name="com.example.android.SaveDisplayCycle"
-            android:exported="false"
-            android:label="Save">
-            <intent-filter>
-                <action android:name="android.intent.action.SAVE_SHAREDPREF" />
-            </intent-filter>
-            />
-        </service>
         <service
             android:name="com.example.android.ChangeImage"
             android:exported="false">
