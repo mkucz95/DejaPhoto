@@ -142,7 +142,7 @@ public class BuildDisplayCycle extends IntentService {
         SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
         //save the coutner as a key string (will be searched by this string
         //the value of the pair is the absolute path to the image
-        displayCycleEditor.putString(path, Integer.toString(picNum));
+        displayCycleEditor.putString(Integer.toString(picNum), path);
         displayCycleEditor.apply();
     }
 
