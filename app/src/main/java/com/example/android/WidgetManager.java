@@ -27,7 +27,7 @@ public class WidgetManager extends IntentService {
         if (intent != null) {
                 final String action = intent.getExtras().getString("button_pressed");
 
-                System.out.println(intent.getExtras());
+                //System.out.println(intent.getExtras());
                 Intent imageIntent = new Intent(this, ChangeImage.class);
 
                 //TODO implement actions
@@ -43,7 +43,6 @@ public class WidgetManager extends IntentService {
 
                 startService(imageIntent); //change the image
                 stopService(intent); //stop the widgetManager service
-
         }
     }
 

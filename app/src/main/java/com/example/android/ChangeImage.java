@@ -58,16 +58,16 @@ public class ChangeImage extends IntentService {
         SharedPreferences headPref = getSharedPreferences("head", MODE_PRIVATE);
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
 
-        int counterInt=0;
+        int counterInt = 0;
         int currHead = 0;
         currHead= headPref.getInt("head", currHead);
-        counterInt = counterPref.getInt("counter", counterInt );
+        counterInt = counterPref.getInt("counter", counterInt);
 
 
         System.out.println("THIS IS HEAD VAL: "+ currHead);
         System.out.println("THIS IS COUNTER VAL: "+ counterInt);
 
-        if(counterInt==0){ //there are no images in the list
+        if(counterInt==-1){ //there are no images in the list
             return -1;
         }
 
@@ -79,6 +79,7 @@ public class ChangeImage extends IntentService {
 
         int newHead = currHead;
         SharedPreferences.Editor editor = headPref.edit();
+        editor.clear();
         editor.putInt("head", newHead); //add the new head as a number to the shared pref
         editor.apply();
 
@@ -91,8 +92,7 @@ public class ChangeImage extends IntentService {
         String accessPoint = Integer.toString(newHead);
         String newPath = "";
 
-        if(newHead>0) {
-            String head = Integer.toString(newHead);
+        if(newHead>=0) {
             SharedPreferences sharedPreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
             newPath = sharedPreferences.getString(accessPoint, ""); //get path from display cycle
 
