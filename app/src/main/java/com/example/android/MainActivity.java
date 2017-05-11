@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("Directory: " + android.os.Environment.DIRECTORY_DCIM);
+        System.out.println("BUILDING DISPLAY CYCLE...");
         requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 startService(backgroundIntent);  //starts service that keeps track of time and location
                 Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
                 // displayCycleIntent.putExtra("source", true);
+                System.out.println("Calling BuildDisplayCycle...");
                 displayCycleIntent.setAction(ACTION_BUILD_CYCLE);
                 startService(displayCycleIntent);
                 //starts service that first builds and calls another service to save display cycle
