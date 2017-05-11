@@ -17,9 +17,6 @@ public class WidgetManager extends IntentService {
     private static final String ACTION_KARMA = "com.example.android.KARMA";
     public static final String ACTION_RELEASE = "com.example.android.RELEASE";
 
-    // TODO: Rename parameters
-    public static  String imagePath = "DEFAULT_PICTURE";
-
     public WidgetManager() {
         super("WidgetManager");
     }
@@ -43,7 +40,6 @@ public class WidgetManager extends IntentService {
                 } else if ("release".equals(action)) {
                     imageIntent.setAction(ACTION_RELEASE);
                 }
-
 
                 startService(imageIntent); //change the image
                 stopService(intent); //stop the widgetManager service

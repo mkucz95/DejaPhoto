@@ -88,11 +88,14 @@ public class ChangeImage extends IntentService {
     private void changeImgToDisplay(int newHead){//changes the image by calling wallpaper service
         //send new intent to the wallpaper changer intent service
         //includes file path
-        String newPath;
+        String accessPoint = Integer.toString(newHead);
+        String newPath = "";
+
         if(newHead>0) {
             String head = Integer.toString(newHead);
-            SharedPreferences sharedPreferences = getSharedPreferences("head", MODE_PRIVATE);
-            newPath = sharedPreferences.getString(head, "");
+            SharedPreferences sharedPreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
+            newPath = sharedPreferences.getString(accessPoint, ""); //get path from display cycle
+
             System.out.println("THIS SHOULD BE SYSTEM PATH" + newPath);
         } else{
             newPath = "DEFAULTPICTURE";
@@ -100,7 +103,7 @@ public class ChangeImage extends IntentService {
 
         Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
         wallpaperIntent.setAction(Intent.ACTION_SEND);
-        wallpaperIntent.putExtra("image_path", newPath);
+        wallpaperIntent.putExtra("image_path", newPath); //send path as extra on the intent
         wallpaperIntent.setType("text/plain");
 
         startService(wallpaperIntent); //change the wallpaper
