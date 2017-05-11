@@ -125,7 +125,6 @@ public class BuildDisplayCycle extends IntentService {
                 String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
                 picNum++;
                 savePicture(uripath, picNum);
-                System.out.println("Number of pics" + picNum);
             }
         }
 
@@ -148,6 +147,8 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
+        System.out.println("Number of pics" + picNum);
+
         //add the key-value pair of picPath/counter to shared preferences
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
         //name of the preference is display cycle
