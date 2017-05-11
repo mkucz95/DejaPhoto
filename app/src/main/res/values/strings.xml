@@ -79,7 +79,7 @@
     <string name="settings_text">Settings</string>
 
 
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">DejaPhoto</string>
     <string name="title_activity_album">Album</string>
     <string name="title_activity_mode">Mode</string>
     <string name="title_activity_set">Set</string>
@@ -87,7 +87,7 @@
     <string name="deja_a">Deja Photo</string>
     <string name="camera_a">Camera Roll</string>
     <string name="switch_mode">Mode</string>
-    <string name="location">Location</string>
+    <string name="latitude">Location</string>
     <string name="time">Time</string>
     <string name="dow">Day_Of_Week</string>
     <string name="karma">Karma</string>

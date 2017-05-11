@@ -9,70 +9,57 @@ import java.sql.Time;
 
 public class Photo {
     private String imagePath;
-    private String location;
-    private Time time;
-    private Date day;
+    private String latitude;
+    private String longitude;
+    private String date_taken;
+    private String description;
     private boolean karma = false;
+    private boolean released = false;
 
     public Photo(){}
 
-    //constructor
-    public Photo(String imagePath) {
+    //constructor gets information from the rerank method
+    public Photo(String imagePath, String description, String date_taken, String latitude, String longitude)
+    {
         this.imagePath = imagePath;
-        this.location = null;
-        this.time = null;
-        this.day = null;
-       // this.populatePhotoInfo(imagePath);TODO
-       //TODO get variable information from imagePath
-        //TODO  create separate function
+        this.description = description;
+        this.date_taken = date_taken;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.karma = decodeDescription(description, true);
+        this.released = decodeDescription(description, false);
     }
-public void populatePhotoInfo(Photo photo){
-    //TODO get variable information from imagePath
-}
+
 //SETTERS AND GETTERS
-    public String getImagePath() {
+    public String getPath() {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public String[] getLatLong() {
+      /*  FindLocationName findLocationName = new FindLocationName(imagePath);
+        return findLocationName.findLocation();*/
+
+      String[] latLong = {this.latitude, this.longitude};
+      return latLong;
     }
 
-    public String getLocation() {
-        FindLocationName findLocationName = new FindLocationName(imagePath);
-        return findLocationName.findLocation();
-    }
-
-    public void setLocation(String location) {
-
-
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
-    public Date getDay() {
-        return day;
-    }
-
-    public void setDay(Date day) {
-        this.day = day;
+    public String getDateTaken() {
+        return date_taken;
     }
 
     public boolean isKarma() {
         return karma;
     }
+    public boolean isReleased() {return released;}
 
-    public void setKarma(boolean karma) {
-        this.karma = karma;
+    private boolean decodeDescription(String description, boolean action) {
+        if (action) { //trying to decode karma
+            if (description.toLowerCase().contains("karma")) return true;
+        } else { //decoding release
+            if (description.toLowerCase().contains("released")) return true;
+        }
+
+        return false; //neither karma nor released
     }
 
-    public void populatePhotoInfo(String imagePath){
-        //get location, time and day information from photo path and set to object variables
-    }
 }

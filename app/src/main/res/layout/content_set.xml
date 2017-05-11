@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:checked="false"
         android:gravity="start"
-        android:text="@string/location"
+        android:text="@string/latitude"
         android:textColor="#58D68D"
         android:textSize="20sp" />
 

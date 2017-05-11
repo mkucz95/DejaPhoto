@@ -122,6 +122,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();  shared preferences won't work
         since it can only store. another option is local storage*/
 
+        Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
+        // displayCycleIntent.putExtra("source", true);
+        Log.i("BuildCycle", "Calling BuildDisplayCycle...");
+        displayCycleIntent.setAction(Intent.ACTION_SEND);
+        displayCycleIntent.putExtra("method", "fromMedia");
+        startService(displayCycleIntent);
+
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

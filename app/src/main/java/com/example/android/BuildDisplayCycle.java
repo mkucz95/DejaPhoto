@@ -85,12 +85,13 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     private void buildFromString(String[] paths) { //would be used to get sorted information
-            int picNum=0;
+            int picNum=-1;
 
             if (paths != null) { //DCIM contains photos
+                picNum = 0;
                 for (String currPicture : paths) { //add each photo's path to cycle as a node
-                    picNum++;
-                    savePicture(currPicture, picNum);
+
+                    savePicture(currPicture, ++picNum);
                 }
             } else {
                 savePicture("DEFAULTPICTURE", picNum);
