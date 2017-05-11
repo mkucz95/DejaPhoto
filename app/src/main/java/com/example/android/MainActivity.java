@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             //Request Permissions
-            System.out.println("Requesting Permission");
+            Log.i("permission", "Requesting Permission");
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
         }
@@ -152,8 +153,9 @@ public class MainActivity extends AppCompatActivity {
                 startService(backgroundIntent);  //starts service that keeps track of time and location
                 Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
                 // displayCycleIntent.putExtra("source", true);
-                System.out.println("Calling BuildDisplayCycle...");
-                displayCycleIntent.setAction(ACTION_BUILD_CYCLE);
+                Log.i("BuildCycle", "Calling BuildDisplayCycle...");
+                displayCycleIntent.setAction(Intent.ACTION_SEND);
+                displayCycleIntent.putExtra("method", "fromMedia");
                 startService(displayCycleIntent);
                 //starts service that first builds and calls another service to save display cycle
 
