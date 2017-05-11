@@ -93,7 +93,7 @@ public class ChangeImage extends IntentService {
             String head = Integer.toString(newHead);
             SharedPreferences sharedPreferences = getSharedPreferences("head", MODE_PRIVATE);
             newPath = sharedPreferences.getString(head, "");
-            System.out.println("THIS SHOULD BE SYSTEM PATH" + newPath);
+            System.out.println("THIS SHOULD BE SYSTEM PATH" + newPath + " IS THE SYSTEM PATH");
         } else{
             newPath = "DEFAULTPICTURE";
         }

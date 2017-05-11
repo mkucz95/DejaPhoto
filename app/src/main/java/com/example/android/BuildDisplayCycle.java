@@ -45,6 +45,11 @@ public class BuildDisplayCycle extends IntentService {
                 buildFromString(paths);
             }
 
+            /*
+            else if(ACTION_NEW_PHOTO.equals(action)){
+            }
+            */
+
             stopService(intent);
         }
     }

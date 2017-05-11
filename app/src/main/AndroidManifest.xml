@@ -96,6 +96,6 @@
             android:name="com.example.android.UpdateImageInfo"
             android:grantUriPermissions = "true"
             android:exported="false"></service>
-    </application>
+</application>
 
 </manifest>
