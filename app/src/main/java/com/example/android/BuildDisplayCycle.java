@@ -28,6 +28,7 @@ import static android.content.Intent.ACTION_SEND_MULTIPLE;
 public class BuildDisplayCycle extends IntentService {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
+    private static final String TAG = "BuildCycle";
 
     public BuildDisplayCycle() {
         super("BuildDisplayCycle");
@@ -40,18 +41,20 @@ public class BuildDisplayCycle extends IntentService {
         /*   String method = intent.getExtras().getString("method");
 
             if(method.equals("fromMedia")) {
-                Log.i("BuildCycle", "Building cycle from media...");
+                Log.i(TAG, "Building cycle from media...");
                 buildFromMedia();
             }*/
 
            if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
-                Log.i("BuildCycle", "Building cycle from media...");
+                Log.i(TAG, "Building cycle from media...");
                 buildFromMedia();
             }
             else if(ACTION_RERANK_BUILD.equals(action)){
                 System.out.println("Building Cycle from String...");
-               String[] paths = intent.getExtras().getStringArray("new_cycle");
+               Intent rerankIntent = new Intent(this, Rerank.class);
+
+               String[] paths = rerankIntent.getExtras().getStringArray("new_cycle");
 
                 buildFromString(paths);
             }
@@ -60,7 +63,7 @@ public class BuildDisplayCycle extends IntentService {
           /*  else if(ACTION_NEW_PHOTO.equals(action)){
             }*/
 
-            Log.i("BuildCycle", "Stopping service");
+            Log.i(TAG, "Stopping service");
 
             stopService(intent);
         }
@@ -112,8 +115,8 @@ public class BuildDisplayCycle extends IntentService {
         String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
 
-        Log.i("BuildCycle", "uri to access"+uri.toString());
-        Log.i("BuildCycle", "name, cr.count "+cr.getColumnName(0)+cr.getCount());
+        Log.i(TAG, "uri to access"+uri.toString());
+        Log.i(TAG, "name, cr.count "+cr.getColumnName(0)+cr.getCount());
 
         /*
         * query(uri,             // The content URI of the images
@@ -126,13 +129,13 @@ public class BuildDisplayCycle extends IntentService {
         int picNum=-1;
 
         if(null == cr) {
-            Log.i("BuildCycle", "ERROR null==cr in BuildDisplayCycle");
+            Log.i(TAG, "ERROR null==cr in BuildDisplayCycle");
         }else if( cr.getCount()<1) {
-            Log.i("BuildCycle", "NO IMAGES PRESENT");
+            Log.i(TAG, "NO IMAGES PRESENT");
           //todo handle no images present---- send default image
             savePicture("DEFAULTPICTURE", picNum);
         } else { //handle returned data
-            Log.i("BuildCycle", "IMAGES PRESENT");
+            Log.i(TAG, "IMAGES PRESENT");
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
@@ -145,7 +148,7 @@ public class BuildDisplayCycle extends IntentService {
                 String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
                 picNum++;
 
-                Log.i("BuildCycle", uripath);
+                Log.i(TAG, uripath);
 
                 savePicture(uripath, picNum);
             }
@@ -159,7 +162,7 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
-        Log.i("BuildCycle", "# of pics: " + picNum);
+        Log.i(TAG, "# of pics: " + picNum);
 
         //add the key-value pair of picPath/counter to shared preferences
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);

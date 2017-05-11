@@ -28,6 +28,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
+    private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
+
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 99;
 
@@ -125,8 +127,9 @@ public class MainActivity extends AppCompatActivity {
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
         // displayCycleIntent.putExtra("source", true);
         Log.i("BuildCycle", "Calling BuildDisplayCycle...");
-        displayCycleIntent.setAction(Intent.ACTION_SEND);
-        displayCycleIntent.putExtra("method", "fromMedia");
+        displayCycleIntent.setAction(ACTION_RERANK_BUILD);
+       /* displayCycleIntent.setAction(Intent.ACTION_SEND);
+        displayCycleIntent.putExtra("method", "fromMedia");*/
         startService(displayCycleIntent);
 
         Intent intent = new Intent(Intent.ACTION_MAIN);

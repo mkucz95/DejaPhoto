@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +53,8 @@ public class BackgroundService extends Service {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         long startTime = calendar.getTimeInMillis();
+
+        //TODO GET USER TIME FROM SHARED PREFERENCES
 
         /*set time of auto Wallpaper change: 5 min*/
         /*multiply 1000 because unit is mulli*/
