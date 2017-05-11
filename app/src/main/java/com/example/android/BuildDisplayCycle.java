@@ -104,7 +104,7 @@ public class BuildDisplayCycle extends IntentService {
         * null                  // The sort order for the returned rows
         */
 
-        int picNum=0, numPics = 0;
+        int picNum=0;
 
         if(null==cr) {
             System.out.println("ERROR null==cr in BuildDisplayCycle");
@@ -124,15 +124,15 @@ public class BuildDisplayCycle extends IntentService {
 
                 String uripath = cr.getString(pathIndex);  //get the path/date
                 picNum++;
-                savePicture(uripath, picNum-1);
+                savePicture(uripath, picNum);
+                System.out.println("Number of pics" + picNum);
             }
-            numPics = cr.getCount();
         }
 
         //save the number of pictures we have in get count
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
         SharedPreferences.Editor editor = counterPref.edit();
-        editor.putInt("counter", numPics-1); //initialize the counter to 0
+        editor.putInt("counter", picNum); //initialize the counter to 0
         editor.apply();
 
             if (cr != null) {
