@@ -16,6 +16,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.jar.Manifest;
 
+import static android.content.Intent.ACTION_SEND_MULTIPLE;
+
 /**
  * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
  * and https://developer.android.com/reference/android/provider/MediaStore.Images.Media.html#query(android.content.ContentResolver, android.net.Uri, java.lang.String[], java.lang.String, java.lang.String)
@@ -26,7 +28,6 @@ import java.util.jar.Manifest;
 public class BuildDisplayCycle extends IntentService {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
-    String[] paths;
 
     public BuildDisplayCycle() {
         super("BuildDisplayCycle");
@@ -36,26 +37,29 @@ public class BuildDisplayCycle extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-           String method = intent.getExtras().getString("method");
+        /*   String method = intent.getExtras().getString("method");
 
             if(method.equals("fromMedia")) {
                 Log.i("BuildCycle", "Building cycle from media...");
                 buildFromMedia();
-            }
-          /*  if (ACTION_BUILD_CYCLE.equals(action)) {
+            }*/
+
+           if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
                 Log.i("BuildCycle", "Building cycle from media...");
                 buildFromMedia();
             }
             else if(ACTION_RERANK_BUILD.equals(action)){
                 System.out.println("Building Cycle from String...");
+               String[] paths = intent.getExtras().getStringArray("new_cycle");
+
                 buildFromString(paths);
             }
 
-            /*
-            else if(ACTION_NEW_PHOTO.equals(action)){
-            }
-            */
+
+          /*  else if(ACTION_NEW_PHOTO.equals(action)){
+            }*/
+
             Log.i("BuildCycle", "Stopping service");
 
             stopService(intent);
@@ -64,27 +68,30 @@ public class BuildDisplayCycle extends IntentService {
 
     private void buildFromFile(boolean sourceFolder) {
         clearSharedPreferences("display_cycle");
+        int picNum=-1;
 
         if (sourceFolder) {
             File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
             File cameraDirectory = new File(dcimDirectory.getAbsolutePath() + "/Camera"); //TODO
 
-            int picNum=0;
-
             File[] dcimPhotos = cameraDirectory.listFiles();
             if (dcimPhotos != null) { //DCIM contains photos
+                picNum = 0;
                 for (File currPicture : dcimPhotos) { //add each photo's path to cycle as a node
-                    picNum++;
-                    savePicture(currPicture.getAbsolutePath(), picNum);
+                    savePicture(currPicture.getAbsolutePath(), ++picNum);
                 }
             } else {
                 savePicture("DEFAULTPICTURE", picNum);
             }
         } else {
         }
+
+        saveHeadCount(picNum);
+
     }
 
     private void buildFromString(String[] paths) { //would be used to get sorted information
+        clearDisplayCycle();
             int picNum=-1;
 
             if (paths != null) { //DCIM contains photos
@@ -96,6 +103,8 @@ public class BuildDisplayCycle extends IntentService {
             } else {
                 savePicture("DEFAULTPICTURE", picNum);
             }
+
+            saveHeadCount(picNum);
     }
 
     private void buildFromMedia() {
@@ -142,18 +151,7 @@ public class BuildDisplayCycle extends IntentService {
             }
         }
 
-        //save the number of pictures we have in get count
-        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
-        SharedPreferences headPref = getSharedPreferences("head", MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = counterPref.edit();
-        SharedPreferences.Editor headEdit = headPref.edit();
-
-        editor.putInt("counter", picNum); //initialize the counter to the number we have
-        headEdit.putInt("head", 0); //start head at 0
-
-        headEdit.apply();
-        editor.apply();
+        saveHeadCount(picNum); //save information to shared preferences
 
             if (cr != null) {
                 cr.close();
@@ -179,5 +177,32 @@ public class BuildDisplayCycle extends IntentService {
         editor.clear();
         editor.apply();
         //display cycle cleared
+    }
+
+    public void clearDisplayCycle(){
+        SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
+        SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
+
+        displayCycleEditor.clear(); //remove all images from display cycle
+
+        displayCycleEditor.apply();
+    }
+
+    public void saveHeadCount(int numImages){
+        //save the number of pictures we have in get count
+        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
+        SharedPreferences headPref = getSharedPreferences("head", MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = counterPref.edit();
+        SharedPreferences.Editor headEdit = headPref.edit();
+
+        editor.clear();
+        editor.putInt("counter", numImages); //initialize the counter to the number we have
+
+        headEdit.clear();
+        headEdit.putInt("head", 0); //start head at 0
+
+        headEdit.apply();
+        editor.apply();
     }
 }

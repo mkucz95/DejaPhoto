@@ -38,6 +38,8 @@ public class UpdateImageInfo extends IntentService {
             } else if (ACTION_RELEASE.equals(action)) {
                 modifyImage(path, "released");
             }
+
+            stopService(intent);
         }
     }
 

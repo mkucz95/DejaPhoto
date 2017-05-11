@@ -48,7 +48,7 @@ public class ChangeImage extends IntentService {
                 //updateCycle TODO
             }
             else if (ACTION_RELEASE.equals(action)) {
-                //updateCycle TODO
+
            }
             stopService(intent); //stop this intent service
         }

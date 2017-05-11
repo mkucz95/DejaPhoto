@@ -26,22 +26,36 @@ public class WidgetManager extends IntentService {
 
         if (intent != null) {
                 final String action = intent.getExtras().getString("button_pressed");
+                boolean changeImage = false;
+                boolean released = false;
+                boolean karma = false;
 
-                //System.out.println(intent.getExtras());
                 Intent imageIntent = new Intent(this, ChangeImage.class);
+                Intent updateIntent = new Intent(this, UpdateImageInfo.class);
+                Intent rerankIntent = new Intent(this, Rerank.class);
 
-                //TODO implement actions
+
+            //TODO implement actions
                 if ("previous".equals(action)) {
                     imageIntent.setAction(ACTION_PREVIOUS);
+                    changeImage = true;
                 } else if ("next".equals(action)) {
                     imageIntent.setAction(ACTION_NEXT);
-                } else if ("karma".equals(action)) {
-                    imageIntent.setAction(ACTION_KARMA);
+                    changeImage = true;
+                }
+                else if ("karma".equals(action)) {
+                    updateIntent.setAction(ACTION_KARMA);
+                    karma = true;
                 } else if ("release".equals(action)) {
-                    imageIntent.setAction(ACTION_RELEASE);
+                    updateIntent.setAction(ACTION_RELEASE);
+                    released = true;
                 }
 
-                startService(imageIntent); //change the image
+
+            if(changeImage) startService(imageIntent); //change the image
+            if(released || karma) startService(updateIntent); //update information of picture
+            if(released) startService(rerankIntent);
+
                 stopService(intent); //stop the widgetManager service
         }
     }

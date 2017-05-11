@@ -3,9 +3,11 @@
     package="com.example.dejaphoto">
 
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="25" />
-    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_INTERNAL_STORAGE"
         android:maxSdkVersion="25" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -55,7 +57,7 @@
         <service
             android:name="com.example.android.BackgroundService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name="com.example.android.AlbumActivity"
@@ -69,8 +71,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.example.android.SetActivity"
-            android:parentActivityName="com.example.android.MainActivity"
             android:label="@string/title_activity_set"
+            android:parentActivityName="com.example.android.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service
@@ -85,8 +87,8 @@
         </service>
         <service
             android:name="com.example.android.BuildDisplayCycle"
-            android:grantUriPermissions = "true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <intent-filter>
                 <action android:name="android.intent.action.BUILD_CYCLE" />
                 <action android:name="android.intent.action.RERANK_BUILD" />
@@ -94,8 +96,15 @@
         </service>
         <service
             android:name="com.example.android.UpdateImageInfo"
-            android:grantUriPermissions = "true"
-            android:exported="false"></service>
-</application>
+            android:exported="false"
+            android:grantUriPermissions="true"/>
+        <service
+            android:name="com.example.android.Rerank"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.RERANK_BUILD" />
+            </intent-filter>
+        </service>
+    </application>
 
 </manifest>

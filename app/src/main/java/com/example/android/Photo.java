@@ -5,6 +5,7 @@ import java.sql.Time;
 
 /**
  * Created by mkucz on 5/5/2017.
+ * Each photo object has relevant information needed to rank it according to specifications
  */
 
 public class Photo {
@@ -50,7 +51,12 @@ public class Photo {
     public boolean isKarma() {
         return karma;
     }
+
     public boolean isReleased() {return released;}
+
+    public String getDescription() {
+        return description;
+    }
 
     private boolean decodeDescription(String description, boolean action) {
         if (action) { //trying to decode karma
