@@ -7,8 +7,8 @@ package com.example.android;
 public class ImageNode<T> {
 
     private Photo data;
-    private  ImageNode<Photo> next;
-    private  ImageNode<Photo> previous;
+   public  ImageNode<Photo> next;
+    public  ImageNode<Photo> previous;
 
 
     public Photo getData() {

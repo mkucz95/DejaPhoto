@@ -14,7 +14,9 @@ import android.os.IBinder;
 import android.support.annotation.RequiresApi; /*for WallpaperAuto()'s Calendar*/
 
 public class BackgroundService extends Service {
-    public BackgroundService() {
+    public BackgroundService()
+    {
+       // WallpaperAutoChange();
     }
 
     @Override

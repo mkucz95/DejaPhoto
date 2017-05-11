@@ -6,6 +6,7 @@ import android.os.Environment;
 
 import java.io.File;
 
+import static android.content.Context.DISPLAY_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -13,10 +14,11 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class DisplayCycle {
-    private ImageNode first; //first node to keep track of circle
-    private ImageNode last; //last node in list used to wrap around
-    private ImageNode head; //tracks current position in cycle
-    private int cycleLength = 0;
+//    private ReRank reRank;
+    public ImageNode first; //first node to keep track of circle
+    public ImageNode last; //last node in list used to wrap around
+    public ImageNode head; //tracks current position in cycle
+    public int cycleLength = 0;
 
     //TODO not correct implementation
     public void addToCycle(String picPath){//add new node at the end of list
@@ -59,8 +61,9 @@ public class DisplayCycle {
         //TODO implement this method that reranks based on button presses.
         //iteration 2
         if(flag){
+
             //increment karma for current picture
-            //rerank pictures
+            //ReRank pictures
             head.getData().setKarma(true);  //this picture now has karma
             head = rerank(this); //TODO not sure if this is done right
 
@@ -98,6 +101,7 @@ public class DisplayCycle {
         //TODO
         //get shared preferences about settings (location, time, day)
         //sort displaycycle by the settings
+
         return displayCycle.last;
     }
 
