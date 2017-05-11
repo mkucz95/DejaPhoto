@@ -55,7 +55,7 @@
         <service
             android:name="com.example.android.BackgroundService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"/>
 
         <activity
             android:name="com.example.android.AlbumActivity"

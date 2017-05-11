@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("BUILDING DISPLAY CYCLE...");
         requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

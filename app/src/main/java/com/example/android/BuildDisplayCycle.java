@@ -93,8 +93,6 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     private void buildFromMedia() {
-
-
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.ImageColumns.LATITUDE}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
@@ -107,7 +105,7 @@ public class BuildDisplayCycle extends IntentService {
         * null                  // The sort order for the returned rows
         */
 
-        int picNum=0;
+        int picNum=-1;
 
         if(null == cr) {
             System.out.println("ERROR null==cr in BuildDisplayCycle");
@@ -120,7 +118,7 @@ public class BuildDisplayCycle extends IntentService {
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
-
+            picNum = 0;
             while(cr.moveToNext()) { //go through all the images
                 /*String released = cr.getString(description);
                 if(released == "released") continue; //read release from image description
