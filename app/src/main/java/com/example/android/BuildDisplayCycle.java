@@ -98,7 +98,7 @@ public class BuildDisplayCycle extends IntentService {
 
     private void buildFromMedia() {
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.ImageColumns.LATITUDE}; //which columns we will get (all in this case)
+        String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
 
         Log.i("BuildCycle", uri.toString());
@@ -121,7 +121,7 @@ public class BuildDisplayCycle extends IntentService {
           //todo handle no images present---- send default image
             savePicture("DEFAULTPICTURE", picNum);
         } else { //handle returned data
-            System.out.println("IMAGES PRESENT");
+            Log.i("BuildCycle", "IMAGES PRESENT");
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
