@@ -38,9 +38,10 @@ public class BuildDisplayCycle extends IntentService {
             final String action = intent.getAction();
            String method = intent.getExtras().getString("method");
 
-            Log.i("BuildCycle", "Building cycle from media...");
-            buildFromMedia();
-
+            if(method.equals("fromMedia")) {
+                Log.i("BuildCycle", "Building cycle from media...");
+                buildFromMedia();
+            }
           /*  if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
                 Log.i("BuildCycle", "Building cycle from media...");
@@ -55,7 +56,7 @@ public class BuildDisplayCycle extends IntentService {
             else if(ACTION_NEW_PHOTO.equals(action)){
             }
             */
-            System.out.println("Stopping service");
+            Log.i("BuildCycle", "Stopping service");
 
             stopService(intent);
         }
@@ -101,8 +102,8 @@ public class BuildDisplayCycle extends IntentService {
         String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
 
-        Log.i("BuildCycle", uri.toString());
-
+        Log.i("BuildCycle", "uri to access"+uri.toString());
+        Log.i("BuildCycle", "name, cr.count "+cr.getColumnName(0)+cr.getCount());
 
         /*
         * query(uri,             // The content URI of the images
@@ -136,7 +137,6 @@ public class BuildDisplayCycle extends IntentService {
 
                 Log.i("BuildCycle", uripath);
 
-
                 savePicture(uripath, picNum);
             }
         }
@@ -160,7 +160,7 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
-        System.out.println("Number of pics: " + picNum);
+        Log.i("BuildCycle", "# of pics: " + picNum);
 
         //add the key-value pair of picPath/counter to shared preferences
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
