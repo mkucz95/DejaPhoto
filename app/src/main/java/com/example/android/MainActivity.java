@@ -27,12 +27,13 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
+    private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 99;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        System.out.println("Directory: " + android.os.Environment.DIRECTORY_DCIM);
         requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         // Make sure it's our original READ_CONTACTS request
         if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
             if (grantResults.length == 1 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Read External Storage permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
                 Intent backgroundIntent = new Intent(this, BackgroundService.class);
