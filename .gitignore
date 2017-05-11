@@ -1,4 +1,3 @@
-
 ### Windows template
 # Windows thumbnail cache files
 Thumbs.db
@@ -35,9 +34,10 @@ bin/
 gen/
 out/
 
-# Gradle files
+# Gradle filesg
 .gradle/
 build/
+
 
 # Local configuration file (sdk path, etc)
 local.properties

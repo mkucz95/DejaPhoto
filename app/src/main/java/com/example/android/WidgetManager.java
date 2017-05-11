@@ -17,9 +17,6 @@ public class WidgetManager extends IntentService {
     private static final String ACTION_KARMA = "com.example.android.KARMA";
     public static final String ACTION_RELEASE = "com.example.android.RELEASE";
 
-    // TODO: Rename parameters
-    public static  String imagePath = "DEFAULT_PICTURE";
-
     public WidgetManager() {
         super("WidgetManager");
     }
@@ -28,22 +25,24 @@ public class WidgetManager extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         if (intent != null) {
-            final String action = intent.getExtras().getString("button_pressed");
-            Intent imageIntent = new Intent(this, ChangeImage.class);
+                final String action = intent.getExtras().getString("button_pressed");
 
-            //TODO implement actions
-            if ("previous".equals(action)) {
-                imageIntent.setAction(ACTION_PREVIOUS);
-            } else if ("next".equals(action)) {
-                imageIntent.setAction(ACTION_NEXT);
-            }else if ("karma".equals(action)) {
-                imageIntent.setAction(ACTION_KARMA);
-            }else if ("release".equals(action)) {
-                imageIntent.setAction(ACTION_RELEASE);
-            }
+                //System.out.println(intent.getExtras());
+                Intent imageIntent = new Intent(this, ChangeImage.class);
 
-            startService(imageIntent); //change the image
-            stopService(intent); //stop the widgetManager service
+                //TODO implement actions
+                if ("previous".equals(action)) {
+                    imageIntent.setAction(ACTION_PREVIOUS);
+                } else if ("next".equals(action)) {
+                    imageIntent.setAction(ACTION_NEXT);
+                } else if ("karma".equals(action)) {
+                    imageIntent.setAction(ACTION_KARMA);
+                } else if ("release".equals(action)) {
+                    imageIntent.setAction(ACTION_RELEASE);
+                }
+
+                startService(imageIntent); //change the image
+                stopService(intent); //stop the widgetManager service
         }
     }
 

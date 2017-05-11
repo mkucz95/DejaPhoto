@@ -9,9 +9,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.jar.Manifest;
 
 /**
  * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
@@ -33,15 +36,27 @@ public class BuildDisplayCycle extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-           //boolean sourceFolder = intent.getExtras().getBoolean("source");
+           String method = intent.getExtras().getString("method");
 
-            if (ACTION_BUILD_CYCLE.equals(action)) {
+            if(method.equals("fromMedia")) {
+                Log.i("BuildCycle", "Building cycle from media...");
+                buildFromMedia();
+            }
+          /*  if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
+                Log.i("BuildCycle", "Building cycle from media...");
                 buildFromMedia();
             }
             else if(ACTION_RERANK_BUILD.equals(action)){
+                System.out.println("Building Cycle from String...");
                 buildFromString(paths);
             }
+
+            /*
+            else if(ACTION_NEW_PHOTO.equals(action)){
+            }
+            */
+            Log.i("BuildCycle", "Stopping service");
 
             stopService(intent);
         }
@@ -84,8 +99,12 @@ public class BuildDisplayCycle extends IntentService {
 
     private void buildFromMedia() {
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = getProjections(uri); //which columns we will get (all in this case)
+        String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
+
+        Log.i("BuildCycle", "uri to access"+uri.toString());
+        Log.i("BuildCycle", "name, cr.count "+cr.getColumnName(0)+cr.getCount());
+
         /*
         * query(uri,             // The content URI of the images
         * projection,            // The columns to return for each row (each diff image is new row)
@@ -94,34 +113,45 @@ public class BuildDisplayCycle extends IntentService {
         * null                  // The sort order for the returned rows
         */
 
-        int picNum=0, numPics = 0;
+        int picNum=-1;
 
-        if(null==cr) {
-            System.out.println("ERROR null==cr in BuildDisplayCycle");
+        if(null == cr) {
+            Log.i("BuildCycle", "ERROR null==cr in BuildDisplayCycle");
         }else if( cr.getCount()<1) {
+            Log.i("BuildCycle", "NO IMAGES PRESENT");
           //todo handle no images present---- send default image
             savePicture("DEFAULTPICTURE", picNum);
         } else { //handle returned data
-
+            Log.i("BuildCycle", "IMAGES PRESENT");
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
-
+            picNum = 0;
             while(cr.moveToNext()) { //go through all the images
                 /*String released = cr.getString(description);
                 if(released == "released") continue; //read release from image description
                 */
-                String uripath = cr.getString(pathIndex);  //get the path/date
+
+                String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
                 picNum++;
+
+                Log.i("BuildCycle", uripath);
+
                 savePicture(uripath, picNum);
             }
-            numPics = cr.getCount();
         }
 
         //save the number of pictures we have in get count
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
+        SharedPreferences headPref = getSharedPreferences("head", MODE_PRIVATE);
+
         SharedPreferences.Editor editor = counterPref.edit();
-        editor.putInt("counter", numPics); //initialize the counter to 0
+        SharedPreferences.Editor headEdit = headPref.edit();
+
+        editor.putInt("counter", picNum); //initialize the counter to the number we have
+        headEdit.putInt("head", 0); //start head at 0
+
+        headEdit.apply();
         editor.apply();
 
             if (cr != null) {
@@ -129,15 +159,16 @@ public class BuildDisplayCycle extends IntentService {
             }
     }
 
-
     public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
+        Log.i("BuildCycle", "# of pics: " + picNum);
+
         //add the key-value pair of picPath/counter to shared preferences
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
         //name of the preference is display cycle
         SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
         //save the coutner as a key string (will be searched by this string
         //the value of the pair is the absolute path to the image
-        displayCycleEditor.putString(path, Integer.toString(picNum));
+        displayCycleEditor.putString(Integer.toString(picNum), path);
         displayCycleEditor.apply();
     }
 
@@ -147,33 +178,5 @@ public class BuildDisplayCycle extends IntentService {
         editor.clear();
         editor.apply();
         //display cycle cleared
-    }
-
-    public String[]  getProjections(Uri uri){ //which columns we will get defined by elements of array
-        /* TODO
-        get shared preferences for what the user set
-         */
-        boolean karma = false;
-        boolean time = false;
-        boolean day = false;
-        boolean location = false;
-
-        ArrayList<String> projectionList = new ArrayList<>();
-        projectionList.add(MediaStore.Images.Media.DATA);
-        projectionList.add(MediaStore.Images.ImageColumns.DESCRIPTION);
-
-        if(karma){
-            projectionList.add("b");
-        }
-        if(time || day){
-            projectionList.add(MediaStore.Images.ImageColumns.DATE_TAKEN);
-        }
-        if(location){
-            projectionList.add(MediaStore.Images.ImageColumns.LATITUDE);
-            projectionList.add(MediaStore.Images.ImageColumns.LONGITUDE);
-        }
-
-        String[] projection =  projectionList.toArray(new String[projectionList.size()]);
-        return projection;
     }
 }
