@@ -39,9 +39,11 @@ public class BuildDisplayCycle extends IntentService {
 
             if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
+                System.out.println("Building cycle from media...");
                 buildFromMedia();
             }
             else if(ACTION_RERANK_BUILD.equals(action)){
+                System.out.println("Building Cycle from String...");
                 buildFromString(paths);
             }
 
@@ -49,6 +51,7 @@ public class BuildDisplayCycle extends IntentService {
             else if(ACTION_NEW_PHOTO.equals(action)){
             }
             */
+            System.out.println("Stopping service");
 
             stopService(intent);
         }
@@ -106,13 +109,14 @@ public class BuildDisplayCycle extends IntentService {
 
         int picNum=0;
 
-        if(null==cr) {
+        if(null == cr) {
             System.out.println("ERROR null==cr in BuildDisplayCycle");
         }else if( cr.getCount()<1) {
+            System.out.println("NO IMAGES PRESENT");
           //todo handle no images present---- send default image
             savePicture("DEFAULTPICTURE", picNum);
         } else { //handle returned data
-
+            System.out.println("IMAGES PRESENT");
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);

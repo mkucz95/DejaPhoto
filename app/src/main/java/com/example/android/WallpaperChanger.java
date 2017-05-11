@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.util.DisplayMetrics;
 
@@ -43,7 +44,6 @@ public class WallpaperChanger extends IntentService {
             synchronized (this){
                 String imagePath = intent.getExtras().getString("image_path"); //takes info passed from intent
                 Bitmap bitmap;
-                System.out.println(imagePath);
                 if(imagePath.equals("DEFAULTPICTURE")){
                     bitmap = BitmapFactory.decodeResource( this.getResources(), R.drawable.default_picture);
                     setBackground(bitmap);
@@ -51,10 +51,14 @@ public class WallpaperChanger extends IntentService {
 
                 else {
                     try {//convert image path into something code can use
-                        FileInputStream imgIS = new FileInputStream(new File("@drawable/default_picture"));
+                        System.out.println("Not using default picture...");
+                        System.out.println("IMAGEPATH: " + imagePath);
+                        FileInputStream imgIS = new FileInputStream(new File(imagePath));
+                        System.out.println("1");
                         BufferedInputStream bufIS = new BufferedInputStream(imgIS);
+                        System.out.println("2");
                         bitmap = BitmapFactory.decodeStream(bufIS); //
-
+                        System.out.println("Setting background...");
                         setBackground(bitmap);
 
                     } catch (FileNotFoundException e) { //catch fileinputstream exceptions

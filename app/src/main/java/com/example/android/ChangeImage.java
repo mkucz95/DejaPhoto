@@ -91,17 +91,20 @@ public class ChangeImage extends IntentService {
         String accessPoint = Integer.toString(newHead);
         String newPath = "";
 
-        if(newHead>0) {
+        if(newHead >= 0) {
             String head = Integer.toString(newHead);
             SharedPreferences sharedPreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
-            newPath = sharedPreferences.getString(accessPoint, ""); //get path from display cycle
+            newPath = sharedPreferences.getString(accessPoint, "defaultValue"); //get path from display cycle
 
+            System.out.println("Access point: " + accessPoint);
             System.out.println("THIS SHOULD BE SYSTEM PATH" + newPath);
         } else{
             newPath = "DEFAULTPICTURE";
         }
 
         Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
+
+        System.out.println("NEW PATH: " + newPath);
         wallpaperIntent.setAction(Intent.ACTION_SEND);
         wallpaperIntent.putExtra("image_path", newPath); //send path as extra on the intent
         wallpaperIntent.setType("text/plain");
