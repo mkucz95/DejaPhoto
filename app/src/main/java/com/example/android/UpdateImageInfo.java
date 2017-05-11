@@ -3,8 +3,6 @@ package com.example.android;
 import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -15,8 +13,8 @@ import android.provider.MediaStore;
 public class UpdateImageInfo extends IntentService {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_FOO = "com.example.android.action.FOO";
-    private static final String ACTION_BAZ = "com.example.android.action.BAZ";
+    private static final String ACTION_KARMA = "com.example.android.action.KARMA";
+    private static final String ACTION_RELEASE = "com.example.android.action.RELEASE";
 
     public UpdateImageInfo() {
         super("UpdateImageInfo");
@@ -35,9 +33,9 @@ public class UpdateImageInfo extends IntentService {
             final String action = intent.getAction();
             final String path = intent.getExtras().toString();
 
-            if (ACTION_FOO.equals(action)) {
+            if (ACTION_KARMA.equals(action)) {
                 modifyImage(path, "karma");
-            } else if (ACTION_BAZ.equals(action)) {
+            } else if (ACTION_RELEASE.equals(action)) {
                 modifyImage(path, "released");
             }
         }

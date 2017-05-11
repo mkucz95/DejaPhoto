@@ -124,7 +124,7 @@ public class BuildDisplayCycle extends IntentService {
 
                 String uripath = cr.getString(pathIndex);  //get the path/date
                 picNum++;
-                savePicture(uripath, picNum);
+                savePicture(uripath, picNum-1);
             }
             numPics = cr.getCount();
         }
@@ -132,7 +132,7 @@ public class BuildDisplayCycle extends IntentService {
         //save the number of pictures we have in get count
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
         SharedPreferences.Editor editor = counterPref.edit();
-        editor.putInt("counter", numPics); //initialize the counter to 0
+        editor.putInt("counter", numPics-1); //initialize the counter to 0
         editor.apply();
 
             if (cr != null) {
