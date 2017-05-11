@@ -126,17 +126,23 @@ public class BuildDisplayCycle extends IntentService {
                 if(released == "released") continue; //read release from image description
                 */
 
-                String uripath = cr.getString(pathIndex);  //get the path/date
+                String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
                 picNum++;
                 savePicture(uripath, picNum);
-                System.out.println("Number of pics" + picNum);
             }
         }
 
         //save the number of pictures we have in get count
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
+        SharedPreferences headPref = getSharedPreferences("head", MODE_PRIVATE);
+
         SharedPreferences.Editor editor = counterPref.edit();
-        editor.putInt("counter", picNum); //initialize the counter to 0
+        SharedPreferences.Editor headEdit = headPref.edit();
+
+        editor.putInt("counter", picNum); //initialize the counter to the number we have
+        headEdit.putInt("head", 0); //start head at 0
+
+        headEdit.apply();
         editor.apply();
 
             if (cr != null) {
@@ -145,6 +151,8 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
+        System.out.println("Number of pics" + picNum);
+
         //add the key-value pair of picPath/counter to shared preferences
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
         //name of the preference is display cycle
