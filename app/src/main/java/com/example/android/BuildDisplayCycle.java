@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,11 +36,15 @@ public class BuildDisplayCycle extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-           //boolean sourceFolder = intent.getExtras().getBoolean("source");
+           String method = intent.getExtras().getString("method");
 
-            if (ACTION_BUILD_CYCLE.equals(action)) {
+            System.out.println("Building Cycle from Media.....");
+            Log.i("BuildCycle", "Building cycle from media...");
+            buildFromMedia();
+
+          /*  if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
-                System.out.println("Building cycle from media...");
+                Log.i("BuildCycle", "Building cycle from media...");
                 buildFromMedia();
             }
             else if(ACTION_RERANK_BUILD.equals(action)){
@@ -99,6 +104,11 @@ public class BuildDisplayCycle extends IntentService {
         String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.ImageColumns.LATITUDE}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
 
+        Log.i("BuildCycle", uri.toString());
+        Log.i("BuildCycle", projection.toString());
+        Log.i("BuildCycle", cr.toString());
+
+
         /*
         * query(uri,             // The content URI of the images
         * projection,            // The columns to return for each row (each diff image is new row)
@@ -151,7 +161,7 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
-        System.out.println("Number of pics" + picNum);
+        System.out.println("Number of pics: " + picNum);
 
         //add the key-value pair of picPath/counter to shared preferences
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
