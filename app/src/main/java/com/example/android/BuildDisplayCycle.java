@@ -38,7 +38,6 @@ public class BuildDisplayCycle extends IntentService {
             final String action = intent.getAction();
            String method = intent.getExtras().getString("method");
 
-            System.out.println("Building Cycle from Media.....");
             Log.i("BuildCycle", "Building cycle from media...");
             buildFromMedia();
 
@@ -105,8 +104,6 @@ public class BuildDisplayCycle extends IntentService {
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
 
         Log.i("BuildCycle", uri.toString());
-        Log.i("BuildCycle", projection.toString());
-        Log.i("BuildCycle", cr.toString());
 
 
         /*
@@ -120,9 +117,9 @@ public class BuildDisplayCycle extends IntentService {
         int picNum=0;
 
         if(null == cr) {
-            System.out.println("ERROR null==cr in BuildDisplayCycle");
+            Log.i("BuildCycle", "ERROR null==cr in BuildDisplayCycle");
         }else if( cr.getCount()<1) {
-            System.out.println("NO IMAGES PRESENT");
+            Log.i("BuildCycle", "NO IMAGES PRESENT");
           //todo handle no images present---- send default image
             savePicture("DEFAULTPICTURE", picNum);
         } else { //handle returned data
@@ -138,6 +135,10 @@ public class BuildDisplayCycle extends IntentService {
 
                 String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
                 picNum++;
+
+                Log.i("BuildCycle", uripath);
+
+
                 savePicture(uripath, picNum);
             }
         }
