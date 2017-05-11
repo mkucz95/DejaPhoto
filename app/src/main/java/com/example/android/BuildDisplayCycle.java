@@ -121,7 +121,7 @@ public class BuildDisplayCycle extends IntentService {
           //todo handle no images present---- send default image
             savePicture("DEFAULTPICTURE", picNum);
         } else { //handle returned data
-            System.out.println("IMAGES PRESENT");
+            Log.i("BuildCycle", "IMAGES PRESENT");
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);

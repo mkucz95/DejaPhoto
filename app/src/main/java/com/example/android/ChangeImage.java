@@ -3,6 +3,7 @@ package com.example.android;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -64,8 +65,8 @@ public class ChangeImage extends IntentService {
         counterInt = counterPref.getInt("counter", counterInt);
 
 
-        System.out.println("THIS IS HEAD VAL: "+ currHead);
-        System.out.println("THIS IS COUNTER VAL: "+ counterInt);
+        Log.d("WallpaperChanger", "currHead: "+ currHead);
+        Log.d("WallpaperChanger","counterInt"+ counterInt);
 
         if(counterInt==-1){ //there are no images in the list
             return -1;
@@ -97,14 +98,14 @@ public class ChangeImage extends IntentService {
             newPath = sharedPreferences.getString(accessPoint, "defaultValue"); //get path from display cycle
 
             System.out.println("Access point: " + accessPoint);
-            System.out.println("THIS SHOULD BE SYSTEM PATH" + newPath);
+            Log.d("ChangeImage", "Path Recieved" + newPath);
         } else{
             newPath = "DEFAULTPICTURE";
         }
 
         Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
 
-        System.out.println("NEW PATH: " + newPath);
+        Log.d("WallpaperChanger", "NEW PATH: " + newPath);
         wallpaperIntent.setAction(Intent.ACTION_SEND);
         wallpaperIntent.putExtra("image_path", newPath); //send path as extra on the intent
         wallpaperIntent.setType("text/plain");
