@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -28,7 +29,8 @@ public class UpdateImageInfo extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            final String path = intent.getExtras().toString();
+            final String path = intent.getStringExtra("path");
+            Log.d(TAG, "path: "+path);
 
             if (ACTION_KARMA.equals(action)) {
                 modifyImage(path, "karma");

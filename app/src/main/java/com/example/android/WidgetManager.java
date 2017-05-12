@@ -3,6 +3,7 @@ package com.example.android;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -44,11 +45,23 @@ public class WidgetManager extends IntentService {
                     changeImage = true;
                 }
                 else if ("karma".equals(action)) {
-                    updateIntent.setAction(ACTION_KARMA);
-                    karma = true;
+                    if(getCounter() != -1) {//only call karma if we have one or more pictures!
+                        updateIntent.setAction(ACTION_KARMA);
+                        updateIntent.putExtra("path", getPath());
+                        karma = true;
+                    }
+                    else{
+                       // Toast.makeText(this.getApplicationContext(), "Cannot Add Karma", Toast.LENGTH_SHORT).show();
+                    }
                 } else if ("release".equals(action)) {
-                    updateIntent.setAction(ACTION_RELEASE);
-                    released = true;
+                    if(getCounter() != -1) { //only call release if we have one or more pictures!
+                        updateIntent.setAction(ACTION_RELEASE);
+                        updateIntent.putExtra("path", getPath());
+                        released = true;
+                    }
+                    else{
+                      //  Toast.makeText(this.getApplicationContext(), "Cannot Release Image", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
 
@@ -63,6 +76,20 @@ public class WidgetManager extends IntentService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         return super.onStartCommand(intent, flags, startId);
+    }
+    //return the counter #
+    public int getCounter(){
+        SharedPreferences counter = getSharedPreferences("counter", MODE_PRIVATE);
+        return  counter.getInt("counter", -1);
+    }
+
+    //find what the current head is, and return the path at that head
+    public String getPath(){
+        SharedPreferences head = getSharedPreferences("head", MODE_PRIVATE);
+        int num = head.getInt("head", -1);
+
+        SharedPreferences displayCycle = getSharedPreferences("display_cycle", MODE_PRIVATE);
+        return displayCycle.getString(Integer.toString(num), "DEFAULTVALUE");
     }
 
 }

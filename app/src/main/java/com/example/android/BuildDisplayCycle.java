@@ -109,7 +109,7 @@ public class BuildDisplayCycle extends IntentService {
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
 
         Log.i(TAG, "uri to access"+uri.toString());
-        Log.i(TAG, "name, cr.count "+cr.getColumnName(0)+cr.getCount());
+        Log.i(TAG, "name, "+cr.getColumnName(0)+"cr.count "+ cr.getCount());
 
         /*
         * query(uri,             // The content URI of the images
