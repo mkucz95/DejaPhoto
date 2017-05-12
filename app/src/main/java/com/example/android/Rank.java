@@ -43,6 +43,7 @@ public class Rank {
 
                 java.sql.Date date = new java.sql.Date(curMiliSecond);                         //long to Date type
                 String dayOfWeek = getWeekOfDate(date);              // Date type to  day of week
+                int dayInt = week(dayOfWeek);
 
 
                 double photo1Lat = Double.parseDouble(o1.getLatLong().toString());
@@ -79,8 +80,7 @@ public class Rank {
                 //both off
                 if (!isLocaOn && !isTimeOn && !o1.isKarma() && o2.isKarma())
                     return -1;
-                else
-                    return 0;
+
 
                 //both on
                 if (distance1 -1000 > distance2  && abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour))
