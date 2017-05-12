@@ -20,18 +20,21 @@ public class Rerank extends IntentService {
     private static final String TAG = "RerankService";
     public ArrayList<Photo> list;
 
+    private String myLat = "", myLong = "";
+
     public Rerank() {
         super("Rerank");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String myLat = "", myLong = "";
-        
+
+
         if (intent != null) {
             gatherCycleInfo(); //populate the arraylist from file
 
             //create new rank from the arraylist we collected, and pass in settings user chose
+            getMyLocation();
             Rank newRank = new Rank(list, getSettings(), myLat, myLong );
             String[] newPaths =  newRank.getPaths(); //extract paths of relevant pictures
 
@@ -43,6 +46,10 @@ public class Rerank extends IntentService {
 
             stopService(intent);
         }
+    }
+
+    public void getMyLocation(){
+        //TODO GET CURRENT LOCATION
     }
 
     /*

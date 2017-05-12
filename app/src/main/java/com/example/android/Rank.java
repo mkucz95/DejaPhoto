@@ -71,7 +71,7 @@ public class Rank{
         return pathArray;
     }
 
-   public void setMyLocation(String localLat, String localLong){ //TODO get local information
+   public void setMyLocation(String localLat, String localLong){
         this.localLat = Double.parseDouble(localLat);
         this.localLng = Double.parseDouble(localLong);
     }
