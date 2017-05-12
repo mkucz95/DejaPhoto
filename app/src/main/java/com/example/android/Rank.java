@@ -83,112 +83,112 @@ public class Rank {
                     /*day of the week differenct*/
                     else if (dayIntDiff1 > dayIntDiff2)
                         return -1;
-                }else
+                } else
 
 
-                //location on and time off
-                if (isLocaOn && !isTimeOn) {
-                    //both photo take out of 1000 curcle
-                    if (distance1 > 1000 && distance2 > 1000 && distance1 > distance2)
-                        return -1;
-
-                        //photo1 is out of the curcle
-                    else if (distance1 > 1000 && distance2 <= 1000)
-                        return -1;
-
-                        //both photos are in the circle
-                    else if (distance1 <= 1000 && distance2 <= 1000 && !o1.isKarma() && o2.isKarma())
-                        return -1;
-                    else
-                        return 0;
-                }else
-
-                //both off
-                if (!isLocaOn && !isTimeOn && !o1.isKarma() && o2.isKarma())
-                    return -1;
-
-
-                //both on
-                //photo1 and photo2 both are in the circle like the photo location switch off
-                else if(distance1 < 1000 && distance2 <1000){
-                    if (dayIntDiff1 == dayIntDiff2) {
-                        if (abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour)) {
+                    //location on and time off
+                    if (isLocaOn && !isTimeOn) {
+                        //both photo take out of 1000 curcle
+                        if (distance1 > 1000 && distance2 > 1000 && distance1 > distance2)
                             return -1;
-                        } else if (!o1.isKarma() && o2.isKarma())
+
+                            //photo1 is out of the curcle
+                        else if (distance1 > 1000 && distance2 <= 1000)
+                            return -1;
+
+                            //both photos are in the circle
+                        else if (distance1 <= 1000 && distance2 <= 1000 && !o1.isKarma() && o2.isKarma())
                             return -1;
                         else
                             return 0;
                     }
+
+                    //both off
+                    else if (!isLocaOn && !isTimeOn && !o1.isKarma() && o2.isKarma())
+                        return -1;
+
+
+                        //both on
+                        //photo1 and photo2 both are in the circle like the photo location switch off
+                    else if (distance1 < 1000 && distance2 < 1000) {
+                        if (dayIntDiff1 == dayIntDiff2) {
+                            if (abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour)) {
+                                return -1;
+                            } else if (!o1.isKarma() && o2.isKarma())
+                                return -1;
+                            else
+                                return 0;
+                        }
                     /*day of the week differenct*/
-                    else if (dayIntDiff1 > dayIntDiff2)
-                        return -1;
-                }
-
-                //photo1 is in the circle and photo 2 is out of the circle
-                else if (distance1 < 1000 && distance2 > 1000) {
-                    //depend of the day of the week and karma situation
-                    if (dayIntDiff1 > dayIntDiff2 && !o1.isKarma() && o2.isKarma())
-                        return -1;//abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour))
-
-                    else if(dayIntDiff1 == dayIntDiff2 && !o1.isKarma() && o2.isKarma() && abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour) )
-                        return -1;
-                    else
-                        return 0;
-                }
-
-                //photo 1 is out of the circle ,and photo 2 is in the circle
-                else if (distance1 > 1000 && distance2 < 1000) {
-
-                    //photo2 time differece is smaller
-                    if(dayIntDiff1 >= dayIntDiff2)
-                        return -1;
-                    else if(dayIntDiff1 == dayIntDiff2  && abs(abs(o1.getHour() - hour) - 2) >= abs(o2.getHour() - hour) )
-                        return -1;
-
-                    //photo2 time diff is bigger but karmaa true, photoe1 karma false
-                    else if(dayIntDiff1 < dayIntDiff2 || (dayIntDiff1 == dayIntDiff2  && abs(abs(o1.getHour() - hour) - 2) < abs(o2.getHour() - hour) )
-                           && !o1.isKarma() && o2.isKarma() )
-                        return -1;
-                    else return 0;
-
-                }
-
-                //photo 1 and photo 2 are in the circle
-                else if (distance1 > 1000 && distance2 > 1000) {// && abs(abs(o1.getHour() - hour) - 2) < abs(o2.getHour() - hour)) {
-
-                    //photo2 close
-                    if(distance1 > distance2){
-
-                        //photo2 time distance is smaller or equal
-                        if(dayIntDiff1 >= dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 && abs(abs(o1.getHour() - hour) - 2) >= abs(o2.getHour() - hour) ))
+                        else if (dayIntDiff1 > dayIntDiff2)
                             return -1;
+                    }
 
-                        //photo 2 time distance is bigger  depend on karma
-                        else if(dayIntDiff1 < dayIntDiff2 && !o1.isKarma() &&o2.isKarma()||
-                                (dayIntDiff1 == dayIntDiff2 && abs(abs(o1.getHour() - hour) - 2) < abs(o2.getHour() - hour) ) && !o1.isKarma() && o2.isKarma() )
+                    //photo1 is in the circle and photo 2 is out of the circle
+                    else if (distance1 < 1000 && distance2 > 1000) {
+                        //depend of the day of the week and karma situation
+                        if (dayIntDiff1 > dayIntDiff2 && !o1.isKarma() && o2.isKarma())
+                            return -1;//abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour))
+
+                        else if (dayIntDiff1 == dayIntDiff2 && !o1.isKarma() && o2.isKarma() && abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour))
                             return -1;
                         else
                             return 0;
+                    }
+
+                    //photo 1 is out of the circle ,and photo 2 is in the circle
+                    else if (distance1 > 1000 && distance2 < 1000) {
+
+                        //photo2 time differece is smaller
+                        if (dayIntDiff1 >= dayIntDiff2)
+                            return -1;
+                        else if (dayIntDiff1 == dayIntDiff2 && abs(abs(o1.getHour() - hour) - 2) >= abs(o2.getHour() - hour))
+                            return -1;
+
+                            //photo2 time diff is bigger but karmaa true, photoe1 karma false
+                        else if (dayIntDiff1 < dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 && abs(abs(o1.getHour() - hour) - 2) < abs(o2.getHour() - hour))
+                                && !o1.isKarma() && o2.isKarma())
+                            return -1;
+                        else return 0;
+
+                    }
+
+                    //photo 1 and photo 2 are in the circle
+                    else if (distance1 > 1000 && distance2 > 1000) {
+
+                        //photo2 close
+                        if (distance1 > distance2) {
+
+                            //photo2 time distance is smaller or equal
+                            if (dayIntDiff1 >= dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 && abs(abs(o1.getHour() - hour) - 2) >= abs(o2.getHour() - hour)))
+                                return -1;
+
+                                //photo 2 time distance is bigger  depend on karma
+                            else if (dayIntDiff1 < dayIntDiff2 && !o1.isKarma() && o2.isKarma() ||
+                                    (dayIntDiff1 == dayIntDiff2 && abs(abs(o1.getHour() - hour) - 2) < abs(o2.getHour() - hour)) && !o1.isKarma() && o2.isKarma())
+                                return -1;
+                            else
+                                return 0;
+                        }
                     }
 
                     //photo 2 is far
-                    else if (distance1 < distance2){
+                    else if (distance1 < distance2) {
 
                         //photo 2 time diff is small and o2.karma, o1,not karma
-                        if(dayIntDiff1 > dayIntDiff2 && !o1.isKarma() && o2.isKarma() ||
-                                (dayIntDiff1 == dayIntDiff2 && abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour) ) && !o1.isKarma() && o2.isKarma() )
+                        if (dayIntDiff1 > dayIntDiff2 && !o1.isKarma() && o2.isKarma() ||
+                                (dayIntDiff1 == dayIntDiff2 && abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour)) && !o1.isKarma() && o2.isKarma())
                             return -1;
                         else
                             return 0;
                     }
-                } else return 0;
+                return 0;
+            }
 
-        }
+
+        };
+        Collections.sort(photo, comparator);
     }
-
-    ;
-        Collections.sort(photo,comparator);
-}
 
     public String[] getPaths() { //ONLY CALL AFTER FULLY RERANKED!!!
         ArrayList<String> paths = new ArrayList<>();
@@ -230,17 +230,17 @@ public class Rank {
     public static int week(String s) {
         if (s.equals("Sunday"))
             return 0;
-        if (s.equals("Monday"))
+        else if (s.equals("Monday"))
             return 1;
-        if (s.equals("Tuesday"))
+        else if (s.equals("Tuesday"))
             return 2;
-        if (s.equals("Wednsday"))
+        else if (s.equals("Wednsday"))
             return 3;
-        if (s.equals("Thursday"))
+        else if (s.equals("Thursday"))
             return 4;
-        if (s.equals("Friday"))
+        else if (s.equals("Friday"))
             return 5;
-        if (s.equals("Saterday"))
+        else
             return 6;
 
     }
