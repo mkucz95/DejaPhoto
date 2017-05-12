@@ -1,15 +1,24 @@
 package com.example.android;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import java.util.ArrayList;
+
+import static com.example.android.MainActivity.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION;
 
 /**
  * This intent service creates a new rank object which has the correct order of the pictures
@@ -35,10 +44,10 @@ public class Rerank extends IntentService {
 
             //create new rank from the arraylist we collected, and pass in settings user chose
             getMyLocation();
-            Rank newRank = new Rank(list, getSettings(), myLat, myLong );
-            String[] newPaths =  newRank.getPaths(); //extract paths of relevant pictures
+            Rank newRank = new Rank(list, getSettings(), myLat, myLong);
+            String[] newPaths = newRank.getPaths(); //extract paths of relevant pictures
 
-            Log.i(TAG, "this is path0: "+newPaths[0]); //test to see first path
+            Log.i(TAG, "this is path0: " + newPaths[0]); //test to see first path
 
             Intent cycleIntent = new Intent(this, BuildDisplayCycle.class);
             cycleIntent.setAction(ACTION_RERANK_BUILD); //build new display cycle
@@ -48,8 +57,26 @@ public class Rerank extends IntentService {
         }
     }
 
-    public void getMyLocation(){
-        //TODO GET CURRENT LOCATION
+    public void getMyLocation() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+            // TODO: REQUEST PERMISSIONS IF NOT SET
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            //ActivityCompat.requestPermissions(MainActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+
+            return;
+        }
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+        Log.i("GetMyLocation", "My Long: "+myLong+", My Lat: " + myLat);
+        this.myLat = Double.toString(latitude);
+        this.myLong = Double.toString(longitude);
     }
 
     /*
@@ -125,5 +152,6 @@ public class Rerank extends IntentService {
 
       return settings;
     }
+
 
 }

@@ -15,7 +15,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,11 +34,20 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 99;
+    public static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 100;
+    public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 101;
+    public static int screenWidth;
+    public static int screenHeight;
+    public static DisplayMetrics metrics;
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestPermission();
+        getScreenDimensions();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -138,6 +149,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void getScreenDimensions(){
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        this.screenWidth = metrics.widthPixels;
+        this.screenHeight = metrics.heightPixels;
+        this.metrics = metrics;
+    }
+
     public void requestPermission(){
         Log.i("permission", "checking permission...");
         //Check permissions
@@ -157,6 +176,17 @@ public class MainActivity extends AppCompatActivity {
             displayCycleIntent.putExtra("method", "fromMedia");
             startService(displayCycleIntent);
         }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //Request Permissions
+            Log.i("LocationPermission", "Requesting permission");
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+        else{
+            Log.i("LocationPermission", "Permission already granted");
+        }
         Log.i("permission", "done with permissions");
 
     }
@@ -166,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                                              int[] grantResults) {
         Log.i("permission", "Requesting Permission");
         if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
-            Log.i("permission", "checking...");
+            Log.i("permission", "checking storage permissions...");
             if (grantResults.length == 1 &&
                 grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.i("permission", "Permission Now Granted...");
@@ -186,7 +216,17 @@ public class MainActivity extends AppCompatActivity {
                 //Permission denied
                 Toast.makeText(this, "Read External Storage permission denied", Toast.LENGTH_SHORT).show();
             }
-        } else {
+        }
+        else if(requestCode == MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION){
+            if (grantResults.length == 1 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

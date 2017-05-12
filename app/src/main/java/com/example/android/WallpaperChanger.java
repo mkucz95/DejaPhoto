@@ -9,14 +9,17 @@ import android.content.Intent;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.location.Geocoder;
 import android.location.LocationListener;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
@@ -30,6 +33,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Locale;
+
+import static android.graphics.Bitmap.Config.RGB_565;
+import static java.security.AccessController.getContext;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -46,6 +52,7 @@ public class WallpaperChanger extends IntentService {
     public RemoteViews rviews;
 
 
+
     public WallpaperChanger() {
         super("WallpaperChanger");
     }
@@ -55,8 +62,11 @@ public class WallpaperChanger extends IntentService {
         if (intent != null) {
             synchronized (this){
                 String imagePath = intent.getExtras().getString("image_path"); //takes info passed from intent
+                //int height = MainActivity.screenHeight;
+                //int width = MainActivity.screenWidth;
                 Bitmap bitmap;
                 if(imagePath.equals("DEFAULTPICTURE")){
+                    //bitmap = Bitmap.createBitmap(width, height, RGB_565);
                     bitmap = BitmapFactory.decodeResource( this.getResources(), R.drawable.default_picture);
                     setBackground(bitmap);
                 }
@@ -69,6 +79,7 @@ public class WallpaperChanger extends IntentService {
                         FileInputStream imgIS = new FileInputStream(new File(imagePath));
                         BufferedInputStream bufIS = new BufferedInputStream(imgIS);
                         bitmap = BitmapFactory.decodeStream(bufIS); //
+                        bitmap = checkOrientation(imagePath, bitmap);
                         Log.i("WallpaperChanger", "Setting background...");
                         setBackground(bitmap);
                         updateWidget(imagePath);
@@ -105,6 +116,54 @@ public class WallpaperChanger extends IntentService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //Checks to see if we need to change the image orientation
+    public Bitmap checkOrientation(String imagePath, Bitmap bitmap){
+        Log.i("checkOrientation", "Checking orientation...");
+        try {
+            ExifInterface ei = new ExifInterface(imagePath);
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
+
+            switch (orientation) {
+
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    Log.i("checkOrientation", "Rotate 90");
+                    bitmap = rotateImage(bitmap, 90);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    Log.i("checkOrientation", "Rotate 180");
+                    bitmap = rotateImage(bitmap, 180);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    Log.i("checkOrientation", "Rotate 270");
+                    bitmap = rotateImage(bitmap, 270);
+                    break;
+
+                case ExifInterface.ORIENTATION_NORMAL:
+                    Log.i("checkOrientation", "Orientation Normal");
+
+
+                default:
+                    break;
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return bitmap;
+
+    }
+
+    //Rotates the bitmap accordingly
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Log.i("orientation", "Rotation: " + angle);
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
     }
 
     @Override
