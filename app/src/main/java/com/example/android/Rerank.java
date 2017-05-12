@@ -36,7 +36,7 @@ public class Rerank extends IntentService {
             Log.i(TAG, "this is path0: "+newPaths[0]); //test to see first path
 
             Intent cycleIntent = new Intent(this, BuildDisplayCycle.class);
-            cycleIntent.setAction(ACTION_RERANK_BUILD);
+            cycleIntent.setAction(ACTION_RERANK_BUILD); //build new display cycle
             cycleIntent.putExtra("new_cycle", newPaths); //send new string array
 
             stopService(intent);

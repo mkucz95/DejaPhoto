@@ -35,9 +35,7 @@ public class WidgetManager extends IntentService {
                 Intent updateIntent = new Intent(this, UpdateImageInfo.class);
                 Intent rerankIntent = new Intent(this, Rerank.class);
 
-
-            //TODO implement actions
-                if ("previous".equals(action)) {
+             if ("previous".equals(action)) {
                     imageIntent.setAction(ACTION_PREVIOUS);
                     changeImage = true;
                 } else if ("next".equals(action)) {
@@ -64,10 +62,9 @@ public class WidgetManager extends IntentService {
                     }
                 }
 
-
             if(changeImage) startService(imageIntent); //change the image
             if(released || karma) startService(updateIntent); //update information of picture
-            if(released) startService(rerankIntent);
+            if(released) startService(rerankIntent); //once released rerank the service
 
                 stopService(intent); //stop the widgetManager service
         }

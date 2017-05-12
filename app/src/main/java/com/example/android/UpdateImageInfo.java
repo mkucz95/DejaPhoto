@@ -30,14 +30,13 @@ public class UpdateImageInfo extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             final String path = intent.getStringExtra("path");
-            Log.d(TAG, "path: "+path);
+            Log.i(TAG, "path: "+path);
 
             if (ACTION_KARMA.equals(action)) {
                 modifyImage(path, "karma");
             } else if (ACTION_RELEASE.equals(action)) {
                 modifyImage(path, "released");
             }
-
             stopService(intent);
         }
     }

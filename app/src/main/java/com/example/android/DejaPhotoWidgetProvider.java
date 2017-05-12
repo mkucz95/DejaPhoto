@@ -23,8 +23,8 @@ import org.w3c.dom.Text;
 
 public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String PREVIOUS_PIC = "Previous Picture";
-    public static String KARMA_BUTTON = "Karma Not Yet Implemented";
-    public static String RELEASE_BUTTON = "Picture Release Not Yet Implemented";
+    public static String KARMA_BUTTON = "Karma Added";
+    public static String RELEASE_BUTTON = "Picture Released";
     public static String NEXT_PIC = "Next Picture";
     public static String SET_LOCATION = "Set Location";
 

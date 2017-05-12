@@ -28,6 +28,8 @@ import static android.content.Intent.ACTION_SEND_MULTIPLE;
 public class BuildDisplayCycle extends IntentService {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
+    private static final String ACTION_NEW = "com.example.android.NEW";
+
     private static final String TAG = "BuildCycle";
 
     public BuildDisplayCycle() {
@@ -54,6 +56,8 @@ public class BuildDisplayCycle extends IntentService {
                String[] paths = rerankIntent.getExtras().getStringArray("new_cycle");
                 buildFromString(paths);
             }
+
+            displayImage();  //once building the cycle is finished, display the first image
 
             Log.i(TAG, "Stopping service");
             stopService(intent);
@@ -202,5 +206,12 @@ public class BuildDisplayCycle extends IntentService {
 
         headEdit.apply();
         editor.apply();
+    }
+
+    private void displayImage(){
+        Intent intent = new Intent(this, ChangeImage.class);
+        intent.setAction(ACTION_NEW);
+
+        startService(intent);
     }
 }

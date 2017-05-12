@@ -20,8 +20,7 @@ public class ChangeImage extends IntentService {
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_PREVIOUS = "com.example.android.PREVIOUS";
     private static final String ACTION_NEXT = "com.example.android.NEXT";
-    private static final String ACTION_KARMA = "com.example.android.KARMA";
-    public static final String ACTION_RELEASE = "com.example.android.RELEASE";
+    private static final String ACTION_NEW = "com.example.android.NEW";
 
 //parameters
     private static final String NEXT_PIC = "next";
@@ -44,13 +43,19 @@ public class ChangeImage extends IntentService {
                 newHead = moveHead(NEXT_PIC);
                 changeImgToDisplay(newHead);
             }
-            else if (ACTION_KARMA.equals(action)) {
-                //updateCycle TODO
+            else if (ACTION_NEW.equals(action)) { //move to next pic
+                displayFirstImage();
             }
-            else if (ACTION_RELEASE.equals(action)) {
-
-           }
             stopService(intent); //stop this intent service
+        }
+    }
+
+    private void displayFirstImage(){
+        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
+        int counter = counterPref.getInt("counter", -1);
+
+        if(counter!=-1){
+            changeImgToDisplay(0);
         }
     }
 
