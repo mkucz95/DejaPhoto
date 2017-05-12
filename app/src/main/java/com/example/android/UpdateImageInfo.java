@@ -15,8 +15,6 @@ import android.util.Log;
  * to add whether the image has karma or is 'released'
  */
 public class UpdateImageInfo extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_KARMA = "com.example.android.action.KARMA";
     private static final String ACTION_RELEASE = "com.example.android.action.RELEASE";
     public static final String TAG = "UpdateImageInfo";
@@ -86,6 +84,7 @@ public class UpdateImageInfo extends IntentService {
                             .withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                                     cr.getInt(cr.getColumnIndex(MediaStore.Images.ImageColumns._ID)));
 
+                    //update(@thisUri, with values from ContentValues ...)
                   int numUpdated =  getContentResolver().update(currUri, newUserValue,
                            MediaStore.Images.Media._ID + "= ?", null);
 

@@ -3,6 +3,7 @@ package com.example.android;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -19,7 +20,6 @@ public class Rerank extends IntentService {
     private static final String TAG = "RerankService";
     public ArrayList<Photo> list;
 
-
     public Rerank() {
         super("Rerank");
     }
@@ -29,7 +29,8 @@ public class Rerank extends IntentService {
         if (intent != null) {
             gatherCycleInfo(); //populate the arraylist from file
 
-            Rank newRank = new Rank(list); //create new rank from the arraylist we collected
+            //create new rank from the arraylist we collected, and pass in settings user chose
+            Rank newRank = new Rank(list, getSettings());
             String[] newPaths =  newRank.getPaths(); //extract paths of relevant pictures
 
             Log.i(TAG, "this is path0: "+newPaths[0]); //test to see first path
@@ -97,6 +98,23 @@ public class Rerank extends IntentService {
             cr.close();
         }
         this.list = pictures;
+    }
+
+
+    /*
+    this function accessed shared preferences to see what settings the user has selected for their
+    ranking, and returns that in a boolean array, default is true for all settings!
+     */
+    public boolean[] getSettings(){
+        boolean[] settings = {true, true, true, true};
+        String[] type = {"location", "time", "day", "karma"};
+
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+      for(int i=0; i<settings.length; i++) {
+          settings[i] = sharedPreferences.getBoolean(type[i], true);
+      }
+
+      return settings;
     }
 
 }

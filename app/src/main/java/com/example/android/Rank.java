@@ -25,11 +25,16 @@ public class Rank extends Activity{  //extends aplication is fix for getApplicat
     String weekDay;
     double myTime;
     private ArrayList<Photo> photo = new ArrayList<>();
+    private boolean[] settings; //location, time, day, karma
+
     //each photo is populated with all the information we need
 
 
-    public Rank(ArrayList<Photo> list) { //TODO IMPLEMENT
+    public Rank(ArrayList<Photo> list, boolean[] settings) { //TODO IMPLEMENT
         this.photo = list;
+        this.settings = settings;
+
+
         //TODO sort();
 
      /*   length = dc.cycleLength;
