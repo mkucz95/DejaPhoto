@@ -87,7 +87,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed,"previous");
             buttonPressed = true;
-            imageChanged = true;
         }
 
         else if(intent.getAction().equals(KARMA_BUTTON)){
@@ -107,7 +106,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed, "next");
             buttonPressed = true;
-            imageChanged = true;
         }
 
         if (buttonPressed){

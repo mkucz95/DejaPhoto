@@ -1,31 +1,28 @@
 package com.example.android;
 
 import android.app.IntentService;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 
 /**
  * A service that is called when karma is increased, picture released or user moves further
+ * It goes into the MediaStore sqlite database and then changes the description field of each image
+ * to add whether the image has karma or is 'released'
  */
 public class UpdateImageInfo extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_KARMA = "com.example.android.action.KARMA";
     private static final String ACTION_RELEASE = "com.example.android.action.RELEASE";
+    public static final String TAG = "UpdateImageInfo";
 
     public UpdateImageInfo() {
         super("UpdateImageInfo");
     }
 
-    /**
-     * Starts this service to perform action Baz with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *
-     * @see IntentService
-     */
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -54,6 +51,8 @@ public class UpdateImageInfo extends IntentService {
         * null,                 //selection criteria
         * null                  // The sort order for the returned rows
         */
+        Log.i(TAG, "modifyImage called with string: "+infoToAdd);
+
 
         if(null==cr) {
             System.out.println("ERROR null==cr in modifyImage");
@@ -64,36 +63,32 @@ public class UpdateImageInfo extends IntentService {
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
 
+            Log.i(TAG, "looking for image");
+
+
             while(cr.moveToNext()) { //go through all the images
-                /*String released = cr.getString(description);
-                if(released == "released") continue; //read release from image description
-                */
                 String uripath = cr.getString(pathIndex);  //get the path/date
-                if(uripath == path){
-                    //TODO ADD KARMA OR RELEASE TO IMAGE
-                    // Defines an object to contain the updated values
+                Log.i(TAG, "looking for image: "+ path+"    ----    image in this row: "+ uripath);
 
+                if(uripath.equals(path)){
                     ContentValues newUserValue = new ContentValues();
-
-                    // Defines selection criteria for the rows you want to update
-                    String selectionClause = ""; //UserDictionary.Words.LOCALE +  "LIKE ?";
-                    String[] mSelectionArgs = {""}; //{"en_%"};
 
                     // Defines a variable to contain the number of updated rows
                     int rowsUpdated = 1;
+                    String currString = cr.getString(description);
+                    String newDescription = currString+","+infoToAdd;
+                    newUserValue.put(MediaStore.Images.ImageColumns.DESCRIPTION, newDescription);
 
-                    /*
-                     * Sets the updated value and updates the selected words.
-                     */
+                    //get uri of image we are trying to edit
+                    Uri currUri= ContentUris
+                            .withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                    cr.getInt(cr.getColumnIndex(MediaStore.Images.ImageColumns._ID)));
 
-                    newUserValue.putNull(MediaStore.Images.ImageColumns.DESCRIPTION);
+                    //update(@thisUri, with values from ContentValues ...)
+                  int numUpdated =  getContentResolver().update(currUri, newUserValue,
+                           MediaStore.Images.Media._ID + "= ?", null);
 
-                    rowsUpdated = getContentResolver().update(
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,   // the user dictionary content URI
-                            newUserValue,                       // the columns to update
-                            selectionClause,                    // the column to select on
-                            mSelectionArgs                     // the value to compare to
-                    );
+                    Log.i(TAG, "updated: "+ numUpdated+" rows");
                 }
             }
         }
