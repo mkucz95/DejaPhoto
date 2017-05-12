@@ -71,12 +71,12 @@ public class WallpaperChanger extends IntentService {
                         bitmap = BitmapFactory.decodeStream(bufIS); //
                         Log.i("WallpaperChanger", "Setting background...");
                         setBackground(bitmap);
+                        updateWidget(imagePath);
 
                     } catch (FileNotFoundException e) { //catch fileinputstream exceptions
                         e.printStackTrace();
                     } //trying to get wallpaper from display cycle node
                 }
-                updateWidget(imagePath);
             }
             stopService(intent);
         }
