@@ -2,15 +2,15 @@ package com.example.android;
 
 
 import android.app.Application;
-import android.app.Service;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import static java.lang.Math.pow;
@@ -18,11 +18,11 @@ import static java.lang.Math.sqrt;
 import static java.lang.StrictMath.abs;
 
 public class Rank extends Application{  //extends aplication is fix for getApplication context
-    int length = 0;
+//    int length = 0;
     double localLat;
     double localLng;
-    String weekDay;
-    double myTime;
+//    String weekDay;
+    double curTime;
     private ArrayList<Photo> photo = new ArrayList<>();
     //each photo is populated with all the information we need
 
@@ -31,10 +31,55 @@ public class Rank extends Application{  //extends aplication is fix for getAppli
         this.photo = gatherCycleInfo();
         //TODO sort();
 
+        String path1="";
+
+        /*we still not get the information*/
+        final double localLat = Double.parseDouble("get the locallat from the located gps");
+        final double localLng = Double.parseDouble("get the locallat from the located gps");
+
+        Date date = new Date(0);
+        curTime = date.getTime();
+
+        double distance2 = 0;    // distance from one picture to local center
+        double timeDif1 = 0;     // time different from the priority to the current time (double type)
+        double timeDif2 = 0;     // time different from one picture to the current time
+        boolean isKarma1 = false;  // priority Karmal
+        boolean isKarma2 = false;
+        double time = 0;
+
+
+        /*setting sort interface Comparator*/
+        Comparator<Photo> comparator = new Comparator<Photo>(){
+
+            @Override
+            public int compare(Photo o1, Photo o2) {
+                double photo1Lat = Double.parseDouble(o1.getLatLong().toString());
+                double photo1Lng = Double.parseDouble(o1.getLatLong().toString());
+                double photo2Lat = Double.parseDouble(o2.getLatLong().toString());
+                double photo2Lng = Double.parseDouble(o2.getLatLong().toString());
+                double distance1 = sqrt(pow((localLat - photo1Lat), 2) + pow((localLng - photo1Lng), 2));
+                double distance2  = sqrt(pow((localLat - photo1Lat), 2) + pow((localLng - photo1Lng), 2));
+                double timeDif1 = abs(curTime - Double.parseDouble(o1.getDateTaken().toString()));
+                double timeDif2 = abs(curTime - Double.parseDouble(o2.getDateTaken().toString()));
+                Boolean isKarmal = o1.isKarma();
+                Boolean isKarma2 = o2.isKarma();
+                if (distance2 < distance1 && timeDif2 < timeDif1) {
+                   return -1;
+                } else if (distance2 < distance1 && timeDif2 > timeDif1) {
+                    if (isKarma2 && !isKarmal)
+                         return -1;
+                }
+                return 1;
+            }
+        };
+        Collections.sort(photo,comparator);
+
+
+
      /*   length = dc.cycleLength;
 
         Date myDate = new Date(0);
-        myTime = myDate.getTime();
+        curTime = myDate.getTime();
         weekDay = "Sunday"; */
     }
 
@@ -77,25 +122,14 @@ public class Rank extends Application{  //extends aplication is fix for getAppli
 
                 //assume we know the photo token time is varible time
                 //we do not sure the return typle of the time function
-        timeDif1 = abs(myTime - time);
+        timeDif1 = abs(curTime - time);
 
                 //assume we know the iskarma value
 
         for (int i = 0; i <= length - 1; i++) {
             while (cur != dc.last) {
 
-//                //  photo 1
-//                GetLatAndLng getLatAndLng = new GetLatAndLng();
-//                latLng = getLatAndLng.getlocation(String path1);
-//                photoLat = latLng[0];
-//                photoLng = latLng[1];
-//                distance1 = sqrt(pow((localLat - photoLat), 2) + pow((localLng - photoLng), 2));
-//
-//                //assume we know the photo token time is varible time
-//                // we do not sure the return typle of the time function
-//                timeDif1 = abs(myTime - time);
-//
-//                assume we know the iskarma value
+
 
                 cur = cur.next;
                    // photo 2
@@ -108,7 +142,7 @@ public class Rank extends Application{  //extends aplication is fix for getAppli
 
                 //assume we know the photo token time is varible time
                 //we do not sure the return typle of the time function
-                timeDif2 = abs(myTime - time);
+                timeDif2 = abs(curTime - time);
 
                 //assume we know the iskarma value
 
