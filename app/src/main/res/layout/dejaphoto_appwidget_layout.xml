@@ -4,57 +4,63 @@
     android:layout_height="match_parent"
     android:padding="@dimen/widget_margin">
 
+    <TextView
+        android:id="@+id/display_location"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="55dp"
+        android:text="Location"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
+        android:background="@drawable/widget_shape_location"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/widget_shape"
-        android:orientation="horizontal"
+        android:layout_height="50dp"
         android:layout_margin="8dip"
+        android:background="@drawable/widget_shape"
         android:divider="@drawable/divider"
-        android:showDividers="middle"
         android:dividerPadding="0dp"
-        >
+        android:showDividers="middle">
 
         <ImageButton
             android:id="@+id/previous_pic"
             android:layout_width="@dimen/arrow_width"
             android:layout_height="match_parent"
-            android:src="@drawable/skip_prev_white"
             android:background="@android:color/transparent"
-            />
+            android:src="@drawable/skip_prev_white" />
 
         <Button
             android:id="@+id/karma_btn"
             android:layout_width="@dimen/button_width"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:text="Karma"
             android:textAllCaps="false"
-            android:layout_weight="1"
             android:textColor="@android:color/white"
-            android:background="@android:color/transparent"
-            android:textSize="25dp"
-            />
+            android:textSize="25dp" />
 
         <Button
             android:id="@+id/release_btn"
             android:layout_width="@dimen/button_width"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:text="Release"
             android:textAllCaps="false"
-            android:layout_weight="1"
             android:textColor="@android:color/white"
-            android:background="@android:color/transparent"
-            android:textSize="25dp"
-            />
+            android:textSize="25dp" />
 
         <ImageButton
             android:id="@+id/next_pic"
             android:layout_width="@dimen/arrow_width"
             android:layout_height="match_parent"
-            android:src="@drawable/skip_next_white"
             android:background="@android:color/transparent"
-            />
-
+            android:src="@drawable/skip_next_white" />
     </LinearLayout>
+
 
 </FrameLayout>

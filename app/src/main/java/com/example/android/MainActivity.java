@@ -139,24 +139,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void requestPermission(){
+        Log.i("permission", "checking permission...");
         //Check permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             //Request Permissions
-            Log.i("permission", "Requesting Permission");
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
         }
+        else{
+            Intent backgroundIntent = new Intent(this, BackgroundService.class);
+            startService(backgroundIntent);  //starts service that keeps track of time and location
+            Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
+            // displayCycleIntent.putExtra("source", true);
+            Log.i("permission", "Permission already granted...");
+            displayCycleIntent.setAction(ACTION_BUILD_CYCLE);
+            displayCycleIntent.putExtra("method", "fromMedia");
+            startService(displayCycleIntent);
+        }
+        Log.i("permission", "done with permissions");
 
     }
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                              String permissions[],
                                              int[] grantResults) {
-        // Make sure it's our original READ_CONTACTS request
+        Log.i("permission", "Requesting Permission");
         if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
+            Log.i("permission", "checking...");
             if (grantResults.length == 1 &&
                 grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.i("permission", "Permission Now Granted...");
                 Toast.makeText(this, "Read External Storage permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
                 Intent backgroundIntent = new Intent(this, BackgroundService.class);

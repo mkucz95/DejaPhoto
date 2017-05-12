@@ -1,14 +1,20 @@
 package com.example.android;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Justin on 5/3/17.
@@ -20,6 +26,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String KARMA_BUTTON = "Karma Not Yet Implemented";
     public static String RELEASE_BUTTON = "Picture Release Not Yet Implemented";
     public static String NEXT_PIC = "Next Picture";
+    public static String SET_LOCATION = "Set Location";
+
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
@@ -39,11 +47,15 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Intent intentNext = new Intent(context, DejaPhotoWidgetProvider.class);
             intentNext.setAction(NEXT_PIC);//define action to take when next is pressed
 
+            //Intent intentLocation = new Intent(context, DejaPhotoWidgetProvider.class);
+           // intentLocation.setAction(SET_LOCATION);
+
             //create pending intent ready to act
             PendingIntent pendingIntentPrev = PendingIntent.getBroadcast(context, 0, intentPrev, 0);
             PendingIntent pendingIntentKarma = PendingIntent.getBroadcast(context, 0, intentKarma, 0);
             PendingIntent pendingIntentRelease = PendingIntent.getBroadcast(context, 0, intentRelease, 0);
             PendingIntent pendingIntentNext = PendingIntent.getBroadcast(context, 0, intentNext, 0);
+            //PendingIntent pendingIntentLocation = PendingIntent.getBroadcast(context, 0, intentLocation, 0);
 
             //get layout for our widget, give each button on-click listener
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
@@ -51,10 +63,13 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.karma_btn, pendingIntentKarma);
             views.setOnClickPendingIntent(R.id.release_btn, pendingIntentRelease);
             views.setOnClickPendingIntent(R.id.next_pic, pendingIntentNext);
+            //views.setOnClickPendingIntent(R.id.display_location, pendingIntentLocation);
 
             appWidgetManager.updateAppWidget(appWidgetId,views);
         }
     }
+
+
 
     @Override
     public void onReceive(Context context, Intent intent){
@@ -62,6 +77,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
         String pressed = "button_pressed";
         Boolean buttonPressed = false;
+        Boolean imageChanged = false;
       //  RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
         Intent clickIntent = new Intent(context, WidgetManager.class);
         clickIntent.setAction(Intent.ACTION_SEND);
@@ -71,6 +87,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed,"previous");
             buttonPressed = true;
+            imageChanged = true;
         }
 
         else if(intent.getAction().equals(KARMA_BUTTON)){
@@ -90,6 +107,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed, "next");
             buttonPressed = true;
+            imageChanged = true;
         }
 
         if (buttonPressed){
@@ -97,7 +115,5 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         }
 
     }
-
-
 
 }

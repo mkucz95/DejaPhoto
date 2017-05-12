@@ -36,8 +36,13 @@ public class BuildDisplayCycle extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.i("displayCycle", "In buildDisplayCycle");
+        Log.i("displayCycle", intent.toString());
+
         if (intent != null) {
             final String action = intent.getAction();
+            Log.i("displayCycle", action);
+
         /*   String method = intent.getExtras().getString("method");
 
             if(method.equals("fromMedia")) {
@@ -111,6 +116,8 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     private void buildFromMedia() {
+        clearDisplayCycle(); //just in case
+
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
@@ -140,18 +147,19 @@ public class BuildDisplayCycle extends IntentService {
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
             picNum = 0;
-            while(cr.moveToNext()) { //go through all the images
+           do{ //go through all the images
                 /*String released = cr.getString(description);
                 if(released == "released") continue; //read release from image description
                 */
 
-                String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
-                picNum++;
+               String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
 
-                Log.i(TAG, uripath);
+               Log.i(TAG, uripath);
+               Log.i(TAG, "INDEX OF PICTURE: "+picNum);
 
-                savePicture(uripath, picNum);
-            }
+               savePicture(uripath, picNum);
+               picNum++;
+           } while(cr.moveToNext());
         }
 
         saveHeadCount(picNum); //save information to shared preferences
@@ -162,7 +170,7 @@ public class BuildDisplayCycle extends IntentService {
     }
 
     public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
-        Log.i(TAG, "# of pics: " + picNum);
+        Log.i(TAG, "# of pics: " + (picNum + 1));
 
         //add the key-value pair of picPath/counter to shared preferences
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
@@ -185,10 +193,11 @@ public class BuildDisplayCycle extends IntentService {
     public void clearDisplayCycle(){
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
         SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
-
         displayCycleEditor.clear(); //remove all images from display cycle
-
         displayCycleEditor.apply();
+
+        clearSharedPreferences("head");
+        clearSharedPreferences("counter");
     }
 
     public void saveHeadCount(int numImages){

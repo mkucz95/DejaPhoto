@@ -38,10 +38,10 @@ public class ChangeImage extends IntentService {
             final String action = intent.getAction();
             int newHead;
             if (ACTION_PREVIOUS.equals(action)) { //move to previous pic
-                 newHead = moveHead(NEXT_PIC);
+                 newHead = moveHead(PREV_PIC);
                 changeImgToDisplay(newHead);
             } else if (ACTION_NEXT.equals(action)) { //move to next pic
-                newHead = moveHead(PREV_PIC);
+                newHead = moveHead(NEXT_PIC);
                 changeImgToDisplay(newHead);
             }
             else if (ACTION_KARMA.equals(action)) {
@@ -60,23 +60,36 @@ public class ChangeImage extends IntentService {
         SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
 
         int counterInt = 0;
-        int currHead = 0;
-        currHead= headPref.getInt("head", currHead);
+        int currHead;
+        currHead= headPref.getInt("head", 0);
         counterInt = counterPref.getInt("counter", counterInt);
 
 
-        Log.d("WallpaperChanger", "currHead: "+ currHead);
-        Log.d("WallpaperChanger","counterInt"+ counterInt);
+        Log.d("ChangeImage", "currHead: "+ currHead);
+        Log.d("ChangeImage","counterInt"+ counterInt);
 
         if(counterInt==-1){ //there are no images in the list
             return -1;
         }
 
         //change the head based on which button was pressed
-        if(direction.equalsIgnoreCase(PREV_PIC) && currHead == 0) currHead=counterInt;
-        else if(direction.equalsIgnoreCase(PREV_PIC) && currHead != 0) currHead--;
-        else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead == counterInt) currHead = 0;
-        else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead != counterInt) currHead++;
+        if(direction.equalsIgnoreCase(PREV_PIC) && currHead == 0) {
+            currHead = counterInt;
+            Log.i("changeImage", "Prev, currHead == 0");
+        }
+        else if(direction.equalsIgnoreCase(PREV_PIC) && currHead != 0) {
+            currHead--;
+            Log.i("changeImage", "Prev, currHead != 0");
+        }
+        else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead == counterInt) {
+            currHead = 0;
+            Log.i("changeImage", "Next, currHead: " + currHead + "  == counterInt: " + counterInt);
+
+        }
+        else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead != counterInt) {
+            currHead++;
+            Log.i("changeImage", "Next, currHead: " + currHead + "  != counterInt: " + counterInt);
+        }
 
         int newHead = currHead;
         SharedPreferences.Editor editor = headPref.edit();
@@ -105,7 +118,7 @@ public class ChangeImage extends IntentService {
 
         Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
 
-        Log.d("WallpaperChanger", "NEW PATH: " + newPath);
+        Log.d("ChangeImage", "NEW PATH: " + newPath);
         wallpaperIntent.setAction(Intent.ACTION_SEND);
         wallpaperIntent.putExtra("image_path", newPath); //send path as extra on the intent
         wallpaperIntent.setType("text/plain");

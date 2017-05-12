@@ -17,7 +17,7 @@ import android.support.annotation.RequiresApi; /*for WallpaperAuto()'s Calendar*
 public class BackgroundService extends Service {
     public BackgroundService()
     {
-       // WallpaperAutoChange();
+       //wallpaperAutoChange();
     }
 
     @Override
@@ -41,8 +41,8 @@ public class BackgroundService extends Service {
 
     //@Override
     @RequiresApi(api = Build.VERSION_CODES.N)
-//    public void run(){
-    public void WallpaperAutoChange(){
+
+    public void wallpaperAutoChange(){
         //TODO implement AlarmManager
 
         /*Below code is to obtain time it has been since service starts*/

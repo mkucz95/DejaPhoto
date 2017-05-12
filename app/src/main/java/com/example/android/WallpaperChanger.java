@@ -1,16 +1,24 @@
 package com.example.android;
 
+import android.app.Activity;
 import android.app.IntentService;
 import android.app.WallpaperManager;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Geocoder;
+import android.location.LocationListener;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.RemoteViews;
+import android.widget.TextView;
 
 import com.example.dejaphoto.R;
 
@@ -21,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Locale;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -34,6 +43,8 @@ public class WallpaperChanger extends IntentService {
     //getWindowManager().getDefaultDisplay().getMetrics(metrics);
     int height = metrics.heightPixels;
     int width = metrics.widthPixels;
+    public RemoteViews rviews;
+
 
     public WallpaperChanger() {
         super("WallpaperChanger");
@@ -53,21 +64,35 @@ public class WallpaperChanger extends IntentService {
                 else {
                     try {//convert image path into something code can use
                         Log.d("WallpaperChanger", "USING IMAGEPATH: " + imagePath);
+                        //FindLocationName locationName = new FindLocationName(imagePath);
+                        //TextView locationView = (TextView) Activity.findViewById(R.id.display_location);
                         FileInputStream imgIS = new FileInputStream(new File(imagePath));
-                        System.out.println("1");
                         BufferedInputStream bufIS = new BufferedInputStream(imgIS);
-                        System.out.println("2");
                         bitmap = BitmapFactory.decodeStream(bufIS); //
-                       Log.i("WallpaperChanger", "Setting background...");
+                        Log.i("WallpaperChanger", "Setting background...");
                         setBackground(bitmap);
 
                     } catch (FileNotFoundException e) { //catch fileinputstream exceptions
                         e.printStackTrace();
                     } //trying to get wallpaper from display cycle node
                 }
+                updateWidget(imagePath);
             }
             stopService(intent);
         }
+    }
+
+    public void updateWidget(String path){
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        ComponentName AppWidget = new ComponentName(this.getPackageName(), DejaPhotoWidgetProvider.class.getName());
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
+
+        rviews = new RemoteViews(AppWidget.getPackageName(), R.layout.dejaphoto_appwidget_layout);
+        Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
+        PhotoLocation locName = new PhotoLocation(path, gc);
+        rviews.setTextViewText(R.id.display_location, locName.locationName);
+        Log.i("updateLocation", "Updating location...");
+        appWidgetManager.updateAppWidget(appWidgetIds, rviews);
     }
 
     public void setBackground(Bitmap bitmap){ //set wallpaper based on inputted bitmap
