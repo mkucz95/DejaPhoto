@@ -1,6 +1,7 @@
 package com.example.android;
 
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
 import android.content.Intent;
@@ -17,7 +18,7 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.lang.StrictMath.abs;
 
-public class Rank extends Application{  //extends aplication is fix for getApplication context
+public class Rank extends Activity{  //extends aplication is fix for getApplication context
     int length = 0;
     double localLat;
     double localLng;
@@ -27,8 +28,8 @@ public class Rank extends Application{  //extends aplication is fix for getAppli
     //each photo is populated with all the information we need
 
 
-    public Rank() { //TODO IMPLEMENT
-        this.photo = gatherCycleInfo();
+    public Rank(ArrayList<Photo> list) { //TODO IMPLEMENT
+        this.photo = list;
         //TODO sort();
 
      /*   length = dc.cycleLength;
@@ -46,11 +47,8 @@ public class Rank extends Application{  //extends aplication is fix for getAppli
             if(this.photo.get(i).isReleased()) paths.add(this.photo.get(i).getPath());
         } //add only images without released in their fields
 
-        String[] pathArray = paths.toArray(new String[paths.size()]);
-
-        return pathArray;
+        return paths.toArray(new String[paths.size()]);
     }
-
 
    /* public void sort(boolean location, boolean day, boolean time, boolean karma){
         //TODO
@@ -132,59 +130,4 @@ public class Rank extends Application{  //extends aplication is fix for getAppli
             //dc.first = temp;
     }
 }*/
-
-        public ArrayList<Photo> gatherCycleInfo(){
-            ArrayList<Photo> pictures = new ArrayList<>();
-
-            Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-            String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
-            Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
-
-            Log.i("BuildCycle", "uri to access"+uri.toString());
-            Log.i("BuildCycle", "name, cr.count "+cr.getColumnName(0)+cr.getCount());
-
-        /*
-        * query(uri,             // The content URI of the images
-        * projection,            // The columns to return for each row (each diff image is new row)
-        * null,                 //selection criteria
-        * null,                 //selection criteria
-        * null                  // The sort order for the returned rows
-        */
-
-            if(null == cr) {
-                Log.i("Rerank", "ERROR null==cr in BuildDisplayCycle");
-            }else if( cr.getCount()<1) {
-                Log.i("Rerank", "NO IMAGES PRESENT");
-            } else { //handle returned data
-                Log.i("Rerank", "IMAGES PRESENT");
-                cr.moveToFirst();
-
-                int[] columns = {cr.getColumnIndex(MediaStore.MediaColumns.DATA),
-                cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION),
-                cr.getColumnIndex(MediaStore.Images.ImageColumns.DATE_TAKEN),
-                cr.getColumnIndex(MediaStore.Images.ImageColumns.LATITUDE),
-                cr.getColumnIndex(MediaStore.Images.ImageColumns.LONGITUDE)};
-
-                while(cr.moveToNext()) { //go through all the images
-                /*String released = cr.getString(description);
-                if(released == "released") continue; //read release from image description
-                */
-
-                    Photo photo = new Photo(cr.getString(columns[0]), cr.getString(columns[0]), cr.getString(columns[0]),
-                        cr.getString(columns[0]),cr.getString(columns[0]));
-
-                    pictures.add(photo);
-
-                    Log.i("Rerank", "added new photo object to list");
-                }
-            }
-
-            if (cr != null) {
-                cr.close();
-            }
-
-            return pictures;
-        }
-
-
 }
