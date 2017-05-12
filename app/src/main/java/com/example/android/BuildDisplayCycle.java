@@ -36,40 +36,26 @@ public class BuildDisplayCycle extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.i("displayCycle", "In buildDisplayCycle");
-        Log.i("displayCycle", intent.toString());
+        Log.i(TAG, intent.toString());
 
         if (intent != null) {
             final String action = intent.getAction();
-            Log.i("displayCycle", action);
-
-        /*   String method = intent.getExtras().getString("method");
-
-            if(method.equals("fromMedia")) {
-                Log.i(TAG, "Building cycle from media...");
-                buildFromMedia();
-            }*/
+            Log.i(TAG, action);
 
            if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
-                Log.i(TAG, "Building cycle from media...");
+                Log.i(TAG, "Building cycle from MEDIA...");
                 buildFromMedia();
             }
             else if(ACTION_RERANK_BUILD.equals(action)){
-                System.out.println("Building Cycle from String...");
+                System.out.println("Building Cycle from STRING...");
                Intent rerankIntent = new Intent(this, Rerank.class);
 
                String[] paths = rerankIntent.getExtras().getStringArray("new_cycle");
-
                 buildFromString(paths);
             }
 
-
-          /*  else if(ACTION_NEW_PHOTO.equals(action)){
-            }*/
-
             Log.i(TAG, "Stopping service");
-
             stopService(intent);
         }
     }
@@ -176,7 +162,7 @@ public class BuildDisplayCycle extends IntentService {
         SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
         //name of the preference is display cycle
         SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
-        //save the coutner as a key string (will be searched by this string
+        //save the counter as a key string (will be searched by this string
         //the value of the pair is the absolute path to the image
         displayCycleEditor.putString(Integer.toString(picNum), path);
         displayCycleEditor.apply();
