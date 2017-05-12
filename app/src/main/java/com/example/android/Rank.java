@@ -40,14 +40,6 @@ public class Rank extends Application{  //extends aplication is fix for getAppli
         Date date = new Date(0);
         curTime = date.getTime();
 
-        double distance2 = 0;    // distance from one picture to local center
-        double timeDif1 = 0;     // time different from the priority to the current time (double type)
-        double timeDif2 = 0;     // time different from one picture to the current time
-        boolean isKarma1 = false;  // priority Karmal
-        boolean isKarma2 = false;
-        double time = 0;
-
-
         /*setting sort interface Comparator*/
         Comparator<Photo> comparator = new Comparator<Photo>(){
 
