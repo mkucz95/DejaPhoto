@@ -26,11 +26,13 @@ public class Rerank extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        String myLat = "", myLong = "";
+        
         if (intent != null) {
             gatherCycleInfo(); //populate the arraylist from file
 
             //create new rank from the arraylist we collected, and pass in settings user chose
-            Rank newRank = new Rank(list, getSettings());
+            Rank newRank = new Rank(list, getSettings(), myLat, myLong );
             String[] newPaths =  newRank.getPaths(); //extract paths of relevant pictures
 
             Log.i(TAG, "this is path0: "+newPaths[0]); //test to see first path
