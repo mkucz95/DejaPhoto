@@ -1,14 +1,9 @@
 package com.example.android;
 
 
-import android.app.Application;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -17,10 +12,14 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.lang.StrictMath.abs;
 
-public class Rank{
+public class Rank {
     private double localLat;
     private double localLng;
-    double curTime;
+
+    /*we still not get the two varible value*/
+    boolean isLocaOn = true;
+    boolean isTimeOn = true;
+
     private ArrayList<Photo> photo = new ArrayList<>();
     //each photo is populated with all the information we need
     private boolean[] settings; //location, time, day, karma
@@ -33,37 +32,75 @@ public class Rank{
         sort(); //sort the array list
     }
 
-    public void sort(){
-        /*setting sort interface Comparator*/
-        Comparator<Photo> comparator = new Comparator<Photo>(){
+    public void sort() {
+        /*setting sort interface Conections's Comparator*/
+        Comparator<Photo> comparator = new Comparator<Photo>() {
             @Override
             public int compare(Photo o1, Photo o2) {
+                long curMiliSecond = System.currentTimeMillis();
+                long hour = Long.parseLong(getHour(curMiliSecond));
+                SimpleDateFormat sdf1 = new SimpleDateFormat();
+
+                java.sql.Date date = new java.sql.Date(curMiliSecond);                         //long to Date type
+                String dayOfWeek = getWeekOfDate(date);              // Date type to  day of week
+
+
                 double photo1Lat = Double.parseDouble(o1.getLatLong().toString());
                 double photo1Lng = Double.parseDouble(o1.getLatLong().toString());
                 double photo2Lat = Double.parseDouble(o2.getLatLong().toString());
                 double photo2Lng = Double.parseDouble(o2.getLatLong().toString());
+
+
                 double distance1 = sqrt(pow((localLat - photo1Lat), 2) + pow((localLng - photo1Lng), 2));
-                double distance2  = sqrt(pow((localLat - photo1Lat), 2) + pow((localLng - photo1Lng), 2));
-                double timeDif1 = abs(curTime - Double.parseDouble(o1.getDateTaken().toString()));
-                double timeDif2 = abs(curTime - Double.parseDouble(o2.getDateTaken().toString()));
-                Boolean isKarmal = o1.isKarma();
-                Boolean isKarma2 = o2.isKarma();
-                if (distance2 < distance1 && timeDif2 < timeDif1) {
-                    return -1;
-                } else if (distance2 < distance1 && timeDif2 > timeDif1) {
-                    if (isKarma2 && !isKarmal)
+                double distance2 = sqrt(pow((localLat - photo1Lat), 2) + pow((localLng - photo1Lng), 2));
+
+
+                //location off  and time on
+                if (!isLocaOn && isTimeOn) {
+                    if (abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour)) {
                         return -1;
+                    } else if (!o1.isKarma() && o2.isKarma())
+                        return -1;
+                    else
+                        return 0;
                 }
-                return 1;
+
+
+                //location on and time off
+                if (isLocaOn && !isTimeOn) {
+                    if (distance1 - 1000 > distance2) {
+                        return -1;
+                    } else if (!o1.isKarma() && o2.isKarma())
+                        return -1;
+                    else
+                        return 0;
+                }
+
+                //both off
+                if (!isLocaOn && !isTimeOn && !o1.isKarma() && o2.isKarma())
+                    return -1;
+                else
+                    return 0;
+
+                //both on
+                if (distance1 -1000 > distance2  && abs(abs(o1.getHour() - hour) - 2) > abs(o2.getHour() - hour))
+                    return -1;
+                else if (distance1 -1000 > distance2 && abs(abs(o1.getHour() - hour) - 2) < abs(o2.getHour() - hour)) {
+                    if (o1.isKarma() && !o2.isKarma())
+                        return -1;
+                    else
+                        return 0;
+                }
+                  else   return 0;
             }
         };
-        Collections.sort(photo,comparator);
+        Collections.sort(photo, comparator);
     }
 
-    public String[] getPaths(){ //ONLY CALL AFTER FULLY RERANKED!!!
+    public String[] getPaths() { //ONLY CALL AFTER FULLY RERANKED!!!
         ArrayList<String> paths = new ArrayList<>();
-        for(int i = 0; i<this.photo.size(); i++){
-            if(this.photo.get(i).isReleased()) paths.add(this.photo.get(i).getPath());
+        for (int i = 0; i < this.photo.size(); i++) {
+            if (this.photo.get(i).isReleased()) paths.add(this.photo.get(i).getPath());
         } //add only images without released in their fields
 
         String[] pathArray = paths.toArray(new String[paths.size()]);
@@ -71,8 +108,47 @@ public class Rank{
         return pathArray;
     }
 
-   public void setMyLocation(String localLat, String localLong){
+    public void setMyLocation(String localLat, String localLong) {
         this.localLat = Double.parseDouble(localLat);
         this.localLng = Double.parseDouble(localLong);
+    }
+
+
+    //long time from 1970 transfer day of week
+    public static String getWeekOfDate(java.sql.Date dt) {
+        String[] weekDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saterday"};
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
+    }
+
+    public static String getHour(long l) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH");
+        return sdf.format(l);
+
+    }
+
+
+    //day of week -> int for compare
+    public static int week(String s) {
+        if (s.equals("Sunday"))
+            return 0;
+        if (s.equals("Monday"))
+            return 1;
+        if (s.equals("Tuesday"))
+            return 2;
+        if (s.equals("Wednsday"))
+            return 3;
+        if (s.equals("Thursday"))
+            return 4;
+        if (s.equals("Friday"))
+            return 5;
+        if (s.equals("Saterday"))
+            return 6;
+
     }
 }

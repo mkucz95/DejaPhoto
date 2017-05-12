@@ -2,6 +2,8 @@ package com.example.android;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by mkucz on 5/5/2017.
@@ -13,6 +15,8 @@ public class Photo {
     private String latitude;
     private String longitude;
     private String date_taken;
+    private long hour;
+    private String dayOfWeek;
     private String description;
     private boolean karma = false;
     private boolean released = false;
@@ -25,13 +29,33 @@ public class Photo {
         this.imagePath = imagePath;
         this.description = description;
         this.date_taken = date_taken;
+
+        long temp = Long.parseLong(date_taken.toString());  //string to long   (millSec)
+        Date date = new Date(temp);                         //long to Date type
+        this.dayOfWeek = getWeekOfDate(date);              // Date type to  day of week
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH");
+        this.hour = Long.parseLong(sdf.format(temp));
+
         this.latitude = latitude;
         this.longitude = longitude;
         this.karma = decodeDescription(description, true);
         this.released = decodeDescription(description, false);
     }
 
-//SETTERS AND GETTERS
+    //long time from 1970 transfer day of week
+    public static String getWeekOfDate(Date dt) {
+        String[] weekDays = {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saterday"};
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
+    }
+
+    //SETTERS AND GETTERS
     public String getPath() {
         return imagePath;
     }
@@ -43,6 +67,9 @@ public class Photo {
       String[] latLong = {this.latitude, this.longitude};
       return latLong;
     }
+    public String getDayOfWeek() { return dayOfWeek;}
+
+    public long getHour(){return hour;}
 
     public String getDateTaken() {
         return date_taken;
