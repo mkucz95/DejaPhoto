@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -26,11 +27,11 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String KARMA_BUTTON = "Karma Added";
     public static String RELEASE_BUTTON = "Picture Released";
     public static String NEXT_PIC = "Next Picture";
+    Alarm alarm = new Alarm();
 
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
-
         for(int i=0; i<N; i++){ //
             int appWidgetId = appWidgetIds[i];
 
@@ -65,46 +66,66 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     }
 
 
-
     @Override
-    public void onReceive(Context context, Intent intent){
-
+    public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         String pressed = "button_pressed";
-        Boolean buttonPressed = false;
         Intent clickIntent = new Intent(context, WidgetManager.class);
         clickIntent.setAction(Intent.ACTION_SEND);
         clickIntent.setType("text/plain");
 
-        if(intent.getAction().equals(PREVIOUS_PIC)){
+        Boolean buttonpressed = false; //needed to prevent crash
+
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
+
+        if (intent.getAction().equals(PREVIOUS_PIC)) {
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
-            clickIntent.putExtra(pressed,"previous");
-            buttonPressed = true;
-        }
+            clickIntent.putExtra(pressed, "previous");
+            buttonpressed = true;
 
-        else if(intent.getAction().equals(KARMA_BUTTON)){
+        } else if (intent.getAction().equals(KARMA_BUTTON)) {
+            undoManager(context, "karma", views);
+
             Toast.makeText(context, KARMA_BUTTON, Toast.LENGTH_SHORT).show();
-           // views.setTextViewText(R.id.karma_btn, "Undo Karma Button");
-            clickIntent.putExtra(pressed,"karma");
-            buttonPressed = true;
-        }
+            clickIntent.putExtra(pressed, "karma");
+            buttonpressed = true;
+        } else if (intent.getAction().equals(RELEASE_BUTTON)) {
+            undoManager(context, "release", views);
 
-        else if(intent.getAction().equals(RELEASE_BUTTON)){
-            Toast.makeText(context, RELEASE_BUTTON , Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, RELEASE_BUTTON, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed, "release");
-            buttonPressed = true;
-        }
+            buttonpressed = true;
 
-        else if(intent.getAction().equals(NEXT_PIC)){
+        } else if (intent.getAction().equals(NEXT_PIC)) {
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed, "next");
-            buttonPressed = true;
+            buttonpressed = true;
         }
 
-        if (buttonPressed){
-            context.startService(clickIntent); //call widgetmanager
+        if (buttonpressed) context.startService(clickIntent); //call widgetmanager
+    }
+
+    public void undoManager(Context context, String action, RemoteViews views){
+        AlarmManager am =null;//= (AlarmManager) getNextAlarm(Context.ALARM_SERVICE);
+        if(false){
+            alarm.setAlarm(context);
+            alarm.sendInfo(action);
+
+            views.setTextViewText(R.id.karma_btn, "Undo"); //change the current button to undo
+
+            //post toast message based on action
+            if(action == "karma") Toast.makeText(context, KARMA_BUTTON, Toast.LENGTH_SHORT).show();
+            else Toast.makeText(context, RELEASE_BUTTON, Toast.LENGTH_SHORT).show();
         }
 
+        else { //when the user presses button a second time before the alarm timer runs out
+            //alarm.cancelAlarm(context);
+            if(action == "karma") views.setTextViewText(R.id.karma_btn, action);
+            else views.setTextViewText(R.id.release_btn, action);
+
+            Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
 }

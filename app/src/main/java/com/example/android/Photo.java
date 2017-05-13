@@ -51,6 +51,7 @@ public class Photo {
         this.released = decodeDescription(description, false);
     }
 
+
     //long time from 1970 transfer day of week
     public static String getWeekOfDate(Date dt) {
         String[] weekDays = {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
