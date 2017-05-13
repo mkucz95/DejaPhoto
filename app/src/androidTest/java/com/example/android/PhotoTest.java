@@ -35,20 +35,20 @@ public class PhotoTest{
 
     @Test
     public void testKarmaTrue(){
-        assertEquals(true, newPhoto.decodeDescription("karma", true));
+        assertEquals(true, newPhoto.decodeDescription(newPhoto.getDescription(), true));
     }
 
     @Test
     public void testReleasedTrue(){
-        assertEquals(true, newPhoto.decodeDescription("released", true));
+        assertEquals(true, newPhoto.decodeDescription(newPhoto.getDescription(), false));
     }
     @Test
     public void testKarmaFalse(){
-        assertEquals(false, photo2.decodeDescription("karma", true));
+        assertEquals(false, photo2.decodeDescription(photo2.getDescription(), true));
     }
 
     @Test
     public void testReleasedFalse(){
-        assertEquals(false, photo2.decodeDescription("released", true));
+        assertEquals(false, photo2.decodeDescription(photo2.getDescription(), false));
     }
 }

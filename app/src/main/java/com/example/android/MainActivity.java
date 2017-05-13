@@ -93,15 +93,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     public void launchActivity() {
@@ -132,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         since it can only store. another option is local storage*/
 
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-        Log.i("BuildCycle", "Calling BuildDisplayCycle...");
+        Log.i("MainActivity", "Calling BuildDisplayCycle...");
         displayCycleIntent.setAction(ACTION_RERANK_BUILD);
         startService(displayCycleIntent);
 

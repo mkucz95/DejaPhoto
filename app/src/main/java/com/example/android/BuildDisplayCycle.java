@@ -1,22 +1,13 @@
 package com.example.android;
 
 import android.app.IntentService;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.jar.Manifest;
-
-import static android.content.Intent.ACTION_SEND_MULTIPLE;
 
 /**
  * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
@@ -29,7 +20,7 @@ public class BuildDisplayCycle extends IntentService {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
     private static final String ACTION_NEW = "com.example.android.NEW";
-
+    private static final String ACTION_RERANK_DISPLAY = "com.example.android.RERANK_DISPLAY";
     private static final String TAG = "BuildCycle";
 
     public BuildDisplayCycle() {
@@ -48,16 +39,24 @@ public class BuildDisplayCycle extends IntentService {
                 //buildFromFile(sourceFolder);
                 Log.i(TAG, "Building cycle from MEDIA...");
                 buildFromMedia();
-            }
+                displayImage();  //once building the cycle is finished, display the first image
+           }
             else if(ACTION_RERANK_BUILD.equals(action)){
-                System.out.println("Building Cycle from STRING...");
-               Intent rerankIntent = new Intent(this, Rerank.class);
+                Log.i(TAG, "Building Cycle from STRING...");
 
-               String[] paths = rerankIntent.getExtras().getStringArray("new_cycle");
-                buildFromString(paths);
-            }
+               Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
+               startService(rerankIntent);
 
-            displayImage();  //once building the cycle is finished, display the first image
+            } else if(ACTION_RERANK_DISPLAY.equals(action)){
+               Log.i(TAG, "RERANK INTENT: " + intent.getExtras());
+               //Log.i(TAG, "RERANK INTENT EXTRAS: " + rerankIntent.getExtras());
+               Bundle newPaths = intent.getExtras();
+               String[] paths = newPaths.getStringArray("new_cycle");
+
+               //String[] paths = rerankIntent.getExtras().getStringArray("new_cycle");
+               buildFromString(paths);
+               displayImage();  //once building the cycle is finished, display the first image
+           }
 
             Log.i(TAG, "Stopping service");
             stopService(intent);
@@ -66,13 +65,17 @@ public class BuildDisplayCycle extends IntentService {
 
     private void buildFromString(String[] paths) { //would be used to get sorted information
         clearDisplayCycle();
-            int picNum=-1;
+        clearSharedPreferences("head");
+        clearSharedPreferences("counter");
+
+        int picNum=-1;
 
             if (paths != null) { //DCIM contains photos
                 picNum = 0;
                 for (String currPicture : paths) { //add each photo's path to cycle as a node
 
-                    savePicture(currPicture, ++picNum);
+                    savePicture(currPicture, picNum);
+                    picNum++;
                 }
             } else {
                 savePicture("DEFAULTPICTURE", picNum);
@@ -83,6 +86,8 @@ public class BuildDisplayCycle extends IntentService {
 
     private void buildFromMedia() {
         clearDisplayCycle(); //just in case
+        clearSharedPreferences("head");
+        clearSharedPreferences("counter");
 
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
@@ -115,8 +120,8 @@ public class BuildDisplayCycle extends IntentService {
            do{ //go through all the images
                String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
 
-               Log.i(TAG, uripath);
-               Log.i(TAG, "INDEX OF PICTURE: "+picNum);
+               Log.i(TAG+" fromMedia", uripath);
+               Log.i(TAG+" fromMedia", "INDEX OF PICTURE: "+picNum);
 
                savePicture(uripath, picNum);
                picNum++;

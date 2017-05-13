@@ -1,6 +1,8 @@
 package com.example.android;
 
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,7 +31,7 @@ public class Rank {
         this.photo = list;
         this.settings = settings;
         setMyLocation(localLat, localLong);
-        sort(); //sort the array list
+        //sort(); //sort the array list
     }
 
     public void sort() {
@@ -193,7 +195,8 @@ public class Rank {
     public String[] getPaths() { //ONLY CALL AFTER FULLY RERANKED!!!
         ArrayList<String> paths = new ArrayList<>();
         for (int i = 0; i < this.photo.size(); i++) {
-            if (this.photo.get(i).isReleased()) paths.add(this.photo.get(i).getPath());
+            if (!this.photo.get(i).isReleased()) paths.add(this.photo.get(i).getPath());
+            Log.i("RankClass", "~~~~~~~~~~~~~~~~~~~~~~~this is path: "+this.photo.get(i).getPath() + "=================released?--- "+this.photo.get(i).isReleased());
         } //add only images without released in their fields
 
         String[] pathArray = paths.toArray(new String[paths.size()]);
