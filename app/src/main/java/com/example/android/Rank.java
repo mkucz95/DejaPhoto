@@ -31,7 +31,7 @@ public class Rank {
         this.photo = list;
         this.settings = settings;
         setMyLocation(localLat, localLong);
-        //sort(); //sort the array list
+        sort(); //sort the array list
     }
 
     public void sort() {
@@ -52,11 +52,14 @@ public class Rank {
         for(int i = 0 ;i<photo.size() -1 ;i++) {
             for (int j = 1; j < photo.size() - 1; j++) {
 
+                String[] photo1GPS = photo.get(j - 1).getLatLong();
+                String[] photo2GPS = photo.get(j).getLatLong();
 
-                double photo1Lat = Double.parseDouble(photo.get(j - 1).getLatLong().toString());
-                double photo1Lng = Double.parseDouble(photo.get(j - 1).getLatLong().toString());
-                double photo2Lat = Double.parseDouble(photo.get(j).getLatLong().toString());
-                double photo2Lng = Double.parseDouble(photo.get(j).getLatLong().toString());
+
+                double photo1Lat = Double.parseDouble(photo1GPS[0]);
+                double photo1Lng = Double.parseDouble(photo1GPS[1]);
+                double photo2Lat = Double.parseDouble(photo2GPS[0]);
+                double photo2Lng = Double.parseDouble(photo2GPS[1]);
                 int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());       //photo1 's interger for the day of week
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
