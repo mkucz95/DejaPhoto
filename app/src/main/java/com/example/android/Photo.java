@@ -21,6 +21,10 @@ public class Photo {
     private boolean karma = false;
     private boolean released = false;
 
+    public Photo(){
+
+    }
+
     //constructor gets information from the rerank method
     public Photo(String imagePath, String description, String date_taken, String latitude, String longitude)
     {

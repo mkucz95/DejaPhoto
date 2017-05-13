@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.RequiresApi; /*for WallpaperAuto()'s Calendar*/
+import android.util.Log;
 
 public class BackgroundService extends Service {
     public BackgroundService()
@@ -31,6 +32,7 @@ public class BackgroundService extends Service {
         /*Thread thread = new Thread(new MyThread(startId)); //TODO the mythread call gives error
         thread.start();*/
         //run();
+        wallpaperAutoChange();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -59,6 +61,7 @@ public class BackgroundService extends Service {
         /*set time of auto Wallpaper change: 5 min*/
         /*multiply 1000 because unit is mulli*/
         long repeatTime = 5*60*60*1000;
+        Log.d("test befor alarm "," ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         /*Let AlarmManager know that wallpaper needs to be changed*/
         Intent intent = new Intent(this, Receiver.class);
@@ -67,6 +70,8 @@ public class BackgroundService extends Service {
 
         /* setRepeating() : so that it repeats itself*/
         am.setRepeating(AlarmManager.RTC, startTime, repeatTime, sender);
+
+        Log.d("test alarm","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
         /*immediately change the wallpaper when this method is called*/
         Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);

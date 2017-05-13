@@ -34,6 +34,7 @@ public class Rank {
         //sort(); //sort the array list
     }
 
+
     public void sort() {
 
         Photo temp = new Photo();
