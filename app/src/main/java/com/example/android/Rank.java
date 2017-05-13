@@ -2,6 +2,7 @@ package com.example.android;
 
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,14 +63,24 @@ public class Rank {
                 String[] photo1GPS = photo.get(j - 1).getLatLong();
                 String[] photo2GPS = photo.get(j).getLatLong();
 
-                if (photo1GPS[0] == "") photo1Lat = 0;
-                else photo1Lat = Double.parseDouble(photo1GPS[0]);
-                if (photo1GPS[1] == "") photo1Lng = 0;
-                else photo1Lng = Double.parseDouble(photo1GPS[1]);
-                if (photo2GPS[0] == "") photo2Lat = 0;
-                else photo2Lat = Double.parseDouble(photo2GPS[0]);
-                if (photo2GPS[1] == "") photo2Lng = 0;
-                else photo2Lng = Double.parseDouble(photo2GPS[1]);
+                try{
+                    photo1Lat = Double.parseDouble(photo1GPS[0]);
+                    photo1Lng = Double.parseDouble(photo1GPS[1]);
+                    photo2Lat = Double.parseDouble(photo2GPS[0]);
+                    photo2Lng = Double.parseDouble(photo2GPS[1]);
+                }catch(Exception e){
+                    //no location information in the pictures
+                }
+
+//                if (photo1GPS[0] == "") {}  //no location information in the photoes.
+//                else photo1Lat = Double.parseDouble(photo1GPS[0]);
+//                if (photo1GPS[1] == ""){}
+//                else photo1Lng = Double.parseDouble(photo1GPS[1]);
+//                if (photo2GPS[0] == "") {}
+//                else photo2Lat = Double.parseDouble(photo2GPS[0]);
+//                if (photo2GPS[1] == "") {}
+//                else photo2Lng = Double.parseDouble(photo2GPS[1]);
+
                 int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());       //photo1 's interger for the day of week
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
@@ -135,127 +146,128 @@ public class Rank {
                 }
 
                 //both off
-                else if (!isLocaOn && !isTimeOn && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
-                    temp = photo.get(j - 1);
-                    photo.set((j - 1), photo.get(j));
-                    photo.set(j, temp);
+                else if (!isLocaOn && !isTimeOn) {
+                    if (!isLocaOn && !isTimeOn && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
+                        temp = photo.get(j - 1);
+                        photo.set((j - 1), photo.get(j));
+                        photo.set(j, temp);
+                    }
                 }
 
 
                 //both on
-                //photo1 and photo2 both are in the circle like the photo location switch off
-                else if (distance1 < 1000 && distance2 < 1000) {
-                    if (dayIntDiff1 == dayIntDiff2) {
-                        if (abs(abs(photo.get(j - 1).getHour() - hour) - 2) > abs(photo.get(j).getHour() - hour)) {
-                            temp = photo.get(j - 1);
-                            photo.set((j - 1), photo.get(j));
-                            photo.set(j, temp);
-                        } else if (!photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
-                            temp = photo.get(j - 1);
-                            photo.set((j - 1), photo.get(j));
-                            photo.set(j, temp);
-                        }
+                else if (isTimeOn && isLocaOn) {
 
-                    }
+                    //photo1 and photo2 both are in the circle like the photo location switch off
+                    if (distance1 < 1000 && distance2 < 1000) {
+                        if (dayIntDiff1 == dayIntDiff2) {
+                            if (abs(abs(photo.get(j - 1).getHour() - hour) - 2) > abs(photo.get(j).getHour() - hour)) {
+                                temp = photo.get(j - 1);
+                                photo.set((j - 1), photo.get(j));
+                                photo.set(j, temp);
+                            } else if (!photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
+                                temp = photo.get(j - 1);
+                                photo.set((j - 1), photo.get(j));
+                                photo.set(j, temp);
+                            }
+
+                        }
                     /*day of the week differenct*/
-                    else if (dayIntDiff1 > dayIntDiff2) {
-                        temp = photo.get(j - 1);
-                        photo.set((j - 1), photo.get(j));
-                        photo.set(j, temp);
-                    }
-                }
-
-                //photo1 is in the circle and photo 2 is out of the circle
-                else if (distance1 < 1000 && distance2 > 1000) {
-                    //depend of the day of the week and karma situation
-                    if (dayIntDiff1 > dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
-                        temp = photo.get(j - 1);
-                        photo.set((j - 1), photo.get(j));
-                        photo.set(j, temp);
-                    } else if (dayIntDiff1 == dayIntDiff2 && !photo.get(j - 1).isKarma() &&
-                            photo.get(j).isKarma() && abs(abs(photo.get(j - 1).getHour() - hour) - 2) >
-                            abs(photo.get(j).getHour() - hour)) {
-                        temp = photo.get(j - 1);
-                        photo.set((j - 1), photo.get(j));
-                        photo.set(j, temp);
+                        else if (dayIntDiff1 > dayIntDiff2) {
+                            temp = photo.get(j - 1);
+                            photo.set((j - 1), photo.get(j));
+                            photo.set(j, temp);
+                        }
                     }
 
-                }
-
-                //photo 1 is out of the circle ,and photo 2 is in the circle
-                else if (distance1 > 1000 && distance2 < 1000) {
-
-                    //photo2 time differece is smaller
-                    if (dayIntDiff1 >= dayIntDiff2) {
-                        temp = photo.get(j - 1);
-                        photo.set((j - 1), photo.get(j));
-                        photo.set(j, temp);
-                    } else if (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2)
-                            >= abs(photo.get(j).getHour() - hour)) {
-                        temp = photo.get(j - 1);
-                        photo.set((j - 1), photo.get(j));
-                        photo.set(j, temp);
-                    }
-
-                    //photo2 time diff is bigger but karmaa true, photoe1 karma false
-                    else if (dayIntDiff1 < dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2) < abs(photo.get(j).getHour() - hour))
-                            && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
-                        temp = photo.get(j - 1);
-                        photo.set((j - 1), photo.get(j));
-                        photo.set(j, temp);
-
-                    }
-
-
-                }
-
-                //photo 1 and photo 2 are in the circle
-                else if (distance1 > 1000 && distance2 > 1000) {
-
-                    //photo2 close
-                    if (distance1 > distance2) {
-
-                        //photo2 time distance is smaller or equal
-                        if (dayIntDiff1 >= dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 &&
-                                abs(abs(photo.get(j - 1).getHour() - hour) - 2) >=
-                                        abs(photo.get(j).getHour() - hour))) {
+                    //photo1 is in the circle and photo 2 is out of the circle
+                    else if (distance1 < 1000 && distance2 > 1000) {
+                        //depend of the day of the week and karma situation
+                        if (dayIntDiff1 > dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
+                            temp = photo.get(j - 1);
+                            photo.set((j - 1), photo.get(j));
+                            photo.set(j, temp);
+                        } else if (dayIntDiff1 == dayIntDiff2 && !photo.get(j - 1).isKarma() &&
+                                photo.get(j).isKarma() && abs(abs(photo.get(j - 1).getHour() - hour) - 2) >
+                                abs(photo.get(j).getHour() - hour)) {
                             temp = photo.get(j - 1);
                             photo.set((j - 1), photo.get(j));
                             photo.set(j, temp);
                         }
 
-                        //photo 2 time distance is bigger  depend on karma
-                        else if (dayIntDiff1 < dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma() ||
-                                (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2)
-                                        < abs(photo.get(j).getHour() - hour)) && !photo.get(j - 1).isKarma()
-                                        && photo.get(j).isKarma()) {
+                    }
+
+                    //photo 1 is out of the circle ,and photo 2 is in the circle
+                    else if (distance1 > 1000 && distance2 < 1000) {
+
+                        //photo2 time differece is smaller
+                        if (dayIntDiff1 >= dayIntDiff2) {
+                            temp = photo.get(j - 1);
+                            photo.set((j - 1), photo.get(j));
+                            photo.set(j, temp);
+                        } else if (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2)
+                                >= abs(photo.get(j).getHour() - hour)) {
+                            temp = photo.get(j - 1);
+                            photo.set((j - 1), photo.get(j));
+                            photo.set(j, temp);
+                        }
+
+                        //photo2 time diff is bigger but karmaa true, photoe1 karma false
+                        else if (dayIntDiff1 < dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2) < abs(photo.get(j).getHour() - hour))
+                                && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
                             temp = photo.get(j - 1);
                             photo.set((j - 1), photo.get(j));
                             photo.set(j, temp);
 
                         }
 
-                    }
-                }
 
-                //photo 2 is far
-                else if (distance1 < distance2) {
-
-                    //photo 2 time diff is small and o2.karma, o1,not karma
-                    if (dayIntDiff1 > dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma() ||
-                            (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2) >
-                                    abs(photo.get(j).getHour() - hour)) && !photo.get(j - 1).isKarma() &&
-                                    photo.get(j).isKarma()) {
-                        temp = photo.get(j - 1);
-                        photo.set((j - 1), photo.get(j));
-                        photo.set(j, temp);
                     }
 
-                }
+                    //photo 1 and photo 2 are in the circle
+                    else if (distance1 > 1000 && distance2 > 1000) {
 
+                        //photo2 close
+                        if (distance1 > distance2) {
+
+                            //photo2 time distance is smaller or equal
+                            if (dayIntDiff1 >= dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 &&
+                                    abs(abs(photo.get(j - 1).getHour() - hour) - 2) >=
+                                            abs(photo.get(j).getHour() - hour))) {
+                                temp = photo.get(j - 1);
+                                photo.set((j - 1), photo.get(j));
+                                photo.set(j, temp);
+                            }
+
+                            //photo 2 time distance is bigger  depend on karma
+                            else if (dayIntDiff1 < dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma() ||
+                                    (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2)
+                                            < abs(photo.get(j).getHour() - hour)) && !photo.get(j - 1).isKarma()
+                                            && photo.get(j).isKarma()) {
+                                temp = photo.get(j - 1);
+                                photo.set((j - 1), photo.get(j));
+                                photo.set(j, temp);
+
+                            }
+
+                        }
+
+                        //photo 2 is far
+                        else if (distance1 < distance2) {
+
+                            //photo 2 time diff is small and o2.karma, o1,not karma
+                            if (dayIntDiff1 > dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma() ||
+                                    (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2) >
+                                            abs(photo.get(j).getHour() - hour)) && !photo.get(j - 1).isKarma() &&
+                                            photo.get(j).isKarma()) {
+                                temp = photo.get(j - 1);
+                                photo.set((j - 1), photo.get(j));
+                                photo.set(j, temp);
+                            }
+                        }
+                    }
+                }
             }
-
-
         }
         Log.d("test sort", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
