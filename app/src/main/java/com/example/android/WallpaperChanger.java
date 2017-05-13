@@ -1,27 +1,18 @@
 package com.example.android;
 
-import android.app.Activity;
 import android.app.IntentService;
 import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.location.Geocoder;
-import android.location.LocationListener;
 import android.media.ExifInterface;
-import android.media.Image;
-import android.os.Bundle;
-import android.support.annotation.MainThread;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 
 import com.example.dejaphoto.R;
 
@@ -30,12 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Locale;
-
-import static android.graphics.Bitmap.Config.RGB_565;
-import static java.security.AccessController.getContext;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -62,11 +48,8 @@ public class WallpaperChanger extends IntentService {
         if (intent != null) {
             synchronized (this){
                 String imagePath = intent.getExtras().getString("image_path"); //takes info passed from intent
-                //int height = MainActivity.screenHeight;
-                //int width = MainActivity.screenWidth;
                 Bitmap bitmap;
                 if(imagePath.equals("DEFAULTPICTURE")){
-                    //bitmap = Bitmap.createBitmap(width, height, RGB_565);
                     bitmap = BitmapFactory.decodeResource( this.getResources(), R.drawable.default_picture);
                     setBackground(bitmap);
                 }
@@ -74,8 +57,6 @@ public class WallpaperChanger extends IntentService {
                 else {
                     try {//convert image path into something code can use
                         Log.d("WallpaperChanger", "USING IMAGEPATH: " + imagePath);
-                        //FindLocationName locationName = new FindLocationName(imagePath);
-                        //TextView locationView = (TextView) Activity.findViewById(R.id.display_location);
                         FileInputStream imgIS = new FileInputStream(new File(imagePath));
                         BufferedInputStream bufIS = new BufferedInputStream(imgIS);
                         bitmap = BitmapFactory.decodeStream(bufIS); //
@@ -102,6 +83,12 @@ public class WallpaperChanger extends IntentService {
         Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
         PhotoLocation locName = new PhotoLocation(path, gc);
         rviews.setTextViewText(R.id.display_location, locName.locationName);
+        if(locName.locationName != " ") {
+            rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_white);
+        }
+        else{
+            rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_transp);
+        }
         Log.i("updateLocation", "Updating location...");
         appWidgetManager.updateAppWidget(appWidgetIds, rviews);
     }
@@ -118,6 +105,7 @@ public class WallpaperChanger extends IntentService {
         }
     }
 
+
     //Checks to see if we need to change the image orientation
     public Bitmap checkOrientation(String imagePath, Bitmap bitmap){
         Log.i("checkOrientation", "Checking orientation...");
@@ -126,30 +114,23 @@ public class WallpaperChanger extends IntentService {
             int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
 
             switch (orientation) {
-
                 case ExifInterface.ORIENTATION_ROTATE_90:
                     Log.i("checkOrientation", "Rotate 90");
                     bitmap = rotateImage(bitmap, 90);
                     break;
-
                 case ExifInterface.ORIENTATION_ROTATE_180:
                     Log.i("checkOrientation", "Rotate 180");
                     bitmap = rotateImage(bitmap, 180);
                     break;
-
                 case ExifInterface.ORIENTATION_ROTATE_270:
                     Log.i("checkOrientation", "Rotate 270");
                     bitmap = rotateImage(bitmap, 270);
                     break;
-
                 case ExifInterface.ORIENTATION_NORMAL:
                     Log.i("checkOrientation", "Orientation Normal");
-
-
                 default:
                     break;
             }
-
         } catch (IOException e){
             e.printStackTrace();
         }

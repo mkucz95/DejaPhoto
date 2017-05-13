@@ -1,8 +1,54 @@
 package com.example.android;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import static org.junit.Assert.assertEquals;
+import org.junit.runners.JUnit4;
+
+
 /**
  * Created by mkucz on 5/11/2017.
  */
 
-public class PhotoTest {
+@RunWith(JUnit4.class)
+public class PhotoTest{
+
+    String path = "/storage/emulated/0/IMG_1156.JPG";
+    String lat = "34.44296666666666";
+    String longitude = "-118.5743111111111";
+    String time = Long.toString(System.currentTimeMillis());
+    Photo newPhoto = new Photo(path, "asidnsandasdnaskarmajnsdjanreleased", time , lat, longitude);
+    Photo photo2 = new Photo(path, "WRONGWRONGWRONGWRONG", time , lat, longitude);
+
+
+    @Test
+    public void test1(){
+    Date date = new Date();
+        java.sql.Date dateSql = new java.sql.Date(System.currentTimeMillis());
+
+        SimpleDateFormat today = new SimpleDateFormat("EEEE");
+        assertEquals(today.format(date), newPhoto.getWeekOfDate(dateSql));
+    }
+
+    @Test
+    public void testKarmaTrue(){
+        assertEquals(true, newPhoto.decodeDescription("karma", true));
+    }
+
+    @Test
+    public void testReleasedTrue(){
+        assertEquals(true, newPhoto.decodeDescription("released", true));
+    }
+    @Test
+    public void testKarmaFalse(){
+        assertEquals(false, photo2.decodeDescription("karma", true));
+    }
+
+    @Test
+    public void testReleasedFalse(){
+        assertEquals(false, photo2.decodeDescription("released", true));
+    }
 }

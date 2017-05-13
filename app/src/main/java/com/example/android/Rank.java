@@ -116,7 +116,7 @@ public class Rank {
 
     //long time from 1970 transfer day of week
     public static String getWeekOfDate(java.sql.Date dt) {
-        String[] weekDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saterday"};
+        String[] weekDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(dt);
@@ -147,7 +147,7 @@ public class Rank {
             return 4;
         if (s.equals("Friday"))
             return 5;
-        if (s.equals("Saterday"))
+        if (s.equals("Saturday"))
             return 6;
 
         return -1;

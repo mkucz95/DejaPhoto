@@ -64,30 +64,6 @@ public class BuildDisplayCycle extends IntentService {
         }
     }
 
-    private void buildFromFile(boolean sourceFolder) {
-        clearSharedPreferences("display_cycle");
-        int picNum=-1;
-
-        if (sourceFolder) {
-            File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
-            File cameraDirectory = new File(dcimDirectory.getAbsolutePath() + "/Camera"); //TODO
-
-            File[] dcimPhotos = cameraDirectory.listFiles();
-            if (dcimPhotos != null) { //DCIM contains photos
-                picNum = 0;
-                for (File currPicture : dcimPhotos) { //add each photo's path to cycle as a node
-                    savePicture(currPicture.getAbsolutePath(), ++picNum);
-                }
-            } else {
-                savePicture("DEFAULTPICTURE", picNum);
-            }
-        } else {
-        }
-
-        saveHeadCount(picNum);
-
-    }
-
     private void buildFromString(String[] paths) { //would be used to get sorted information
         clearDisplayCycle();
             int picNum=-1;
@@ -129,7 +105,6 @@ public class BuildDisplayCycle extends IntentService {
             Log.i(TAG, "ERROR null==cr in BuildDisplayCycle");
         }else if( cr.getCount()<1) {
             Log.i(TAG, "NO IMAGES PRESENT");
-          //todo handle no images present---- send default image
             savePicture("DEFAULTPICTURE", picNum);
         } else { //handle returned data
             Log.i(TAG, "IMAGES PRESENT");
@@ -138,10 +113,6 @@ public class BuildDisplayCycle extends IntentService {
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
             picNum = 0;
            do{ //go through all the images
-                /*String released = cr.getString(description);
-                if(released == "released") continue; //read release from image description
-                */
-
                String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
 
                Log.i(TAG, uripath);
@@ -215,3 +186,28 @@ public class BuildDisplayCycle extends IntentService {
         startService(intent);
     }
 }
+
+/*
+    private void buildFromFile(boolean sourceFolder) {
+        clearSharedPreferences("display_cycle");
+        int picNum=-1;
+
+        if (sourceFolder) {
+            File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
+            File cameraDirectory = new File(dcimDirectory.getAbsolutePath() + "/Camera");
+
+            File[] dcimPhotos = cameraDirectory.listFiles();
+            if (dcimPhotos != null) { //DCIM contains photos
+                picNum = 0;
+                for (File currPicture : dcimPhotos) { //add each photo's path to cycle as a node
+                    savePicture(currPicture.getAbsolutePath(), ++picNum);
+                }
+            } else {
+                savePicture("DEFAULTPICTURE", picNum);
+            }
+        } else {
+        }
+
+        saveHeadCount(picNum);
+
+    }*/
