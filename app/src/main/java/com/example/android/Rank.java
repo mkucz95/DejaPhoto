@@ -36,31 +36,40 @@ public class Rank {
 
 
     public void sort() {
+        Log.d("before sort", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         Photo temp = new Photo();
         long curMiliSecond = System.currentTimeMillis();
         long hour = Long.parseLong(getHour(curMiliSecond));
         SimpleDateFormat sdf1 = new SimpleDateFormat();
-        
-        
+
+
         java.sql.Date date = new java.sql.Date(curMiliSecond);                         //long to Date type
         String dayOfWeek = getWeekOfDate(date);              // Date type to  day of week
         int dayInt = week(dayOfWeek);                       //the integer for the day of week
-        
+
         int dayIntDiff1 = 0;      //dayPhoto1 compare to dayInt
         int dayIntDiff2 = 0;
 
-        for(int i = 0 ;i<photo.size() -1 ;i++) {
+        double photo1Lat = 0;
+        double photo1Lng = 0;
+        double photo2Lat = 0;
+        double photo2Lng = 0;
+
+        for (int i = 0; i < photo.size() - 1; i++) {
             for (int j = 1; j < photo.size() - 1; j++) {
 
                 String[] photo1GPS = photo.get(j - 1).getLatLong();
                 String[] photo2GPS = photo.get(j).getLatLong();
 
-
-                double photo1Lat = Double.parseDouble(photo1GPS[0]);
-                double photo1Lng = Double.parseDouble(photo1GPS[1]);
-                double photo2Lat = Double.parseDouble(photo2GPS[0]);
-                double photo2Lng = Double.parseDouble(photo2GPS[1]);
+                if (photo1GPS[0] == "") photo1Lat = 0;
+                else photo1Lat = Double.parseDouble(photo1GPS[0]);
+                if (photo1GPS[1] == "") photo1Lng = 0;
+                else photo1Lng = Double.parseDouble(photo1GPS[1]);
+                if (photo2GPS[0] == "") photo2Lat = 0;
+                else photo2Lat = Double.parseDouble(photo2GPS[0]);
+                if (photo2GPS[1] == "") photo2Lng = 0;
+                else photo2Lng = Double.parseDouble(photo2GPS[1]);
                 int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());       //photo1 's interger for the day of week
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
@@ -78,7 +87,7 @@ public class Rank {
                 else dayIntDiff2 = abs(dayPhoto2 - dayInt);
 
 
-               // location off  and time on
+                // location off  and time on
                 if (!isLocaOn && isTimeOn) {
 
                     /*day of the week equal*/
@@ -96,8 +105,8 @@ public class Rank {
                     /*day of the week differenct*/
                     else if (dayIntDiff1 > dayIntDiff2)
                         temp = photo.get(j - 1);
-                        photo.set((j - 1), photo.get(j));
-                        photo.set(j, temp);
+                    photo.set((j - 1), photo.get(j));
+                    photo.set(j, temp);
                 }
 
 
@@ -110,15 +119,15 @@ public class Rank {
                         photo.set(j, temp);
                     }
 
-                        //photo1 is out of the curcle
+                    //photo1 is out of the curcle
                     else if (distance1 > 1000 && distance2 <= 1000) {
                         temp = photo.get(j - 1);
                         photo.set((j - 1), photo.get(j));
                         photo.set(j, temp);
                     }
 
-                        //both photos are in the circle
-                    else if (distance1 <= 1000 && distance2 <= 1000 && !photo.get(j-1).isKarma() && photo.get(j).isKarma()) {
+                    //both photos are in the circle
+                    else if (distance1 <= 1000 && distance2 <= 1000 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
                         temp = photo.get(j - 1);
                         photo.set((j - 1), photo.get(j));
                         photo.set(j, temp);
@@ -126,22 +135,22 @@ public class Rank {
                 }
 
                 //both off
-                else if (!isLocaOn && !isTimeOn && !photo.get(j-1).isKarma() && photo.get(j).isKarma()) {
+                else if (!isLocaOn && !isTimeOn && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
                     temp = photo.get(j - 1);
                     photo.set((j - 1), photo.get(j));
                     photo.set(j, temp);
                 }
 
 
-                    //both on
-                    //photo1 and photo2 both are in the circle like the photo location switch off
+                //both on
+                //photo1 and photo2 both are in the circle like the photo location switch off
                 else if (distance1 < 1000 && distance2 < 1000) {
                     if (dayIntDiff1 == dayIntDiff2) {
-                        if (abs(abs(photo.get(j-1).getHour() - hour) - 2) > abs(photo.get(j).getHour() - hour)) {
+                        if (abs(abs(photo.get(j - 1).getHour() - hour) - 2) > abs(photo.get(j).getHour() - hour)) {
                             temp = photo.get(j - 1);
                             photo.set((j - 1), photo.get(j));
                             photo.set(j, temp);
-                        } else if (!photo.get(j-1).isKarma() && photo.get(j).isKarma()) {
+                        } else if (!photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
                             temp = photo.get(j - 1);
                             photo.set((j - 1), photo.get(j));
                             photo.set(j, temp);
@@ -159,15 +168,13 @@ public class Rank {
                 //photo1 is in the circle and photo 2 is out of the circle
                 else if (distance1 < 1000 && distance2 > 1000) {
                     //depend of the day of the week and karma situation
-                    if (dayIntDiff1 > dayIntDiff2 && !photo.get(j-1).isKarma() && photo.get(j).isKarma()){
+                    if (dayIntDiff1 > dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
                         temp = photo.get(j - 1);
                         photo.set((j - 1), photo.get(j));
                         photo.set(j, temp);
-                    }
-
-                    else if (dayIntDiff1 == dayIntDiff2 && !photo.get(j-1).isKarma() &&
-                            photo.get(j).isKarma() && abs(abs(photo.get(j-1).getHour() - hour) - 2) >
-                            abs(photo.get(j).getHour() - hour)){
+                    } else if (dayIntDiff1 == dayIntDiff2 && !photo.get(j - 1).isKarma() &&
+                            photo.get(j).isKarma() && abs(abs(photo.get(j - 1).getHour() - hour) - 2) >
+                            abs(photo.get(j).getHour() - hour)) {
                         temp = photo.get(j - 1);
                         photo.set((j - 1), photo.get(j));
                         photo.set(j, temp);
@@ -179,21 +186,20 @@ public class Rank {
                 else if (distance1 > 1000 && distance2 < 1000) {
 
                     //photo2 time differece is smaller
-                    if (dayIntDiff1 >= dayIntDiff2){
+                    if (dayIntDiff1 >= dayIntDiff2) {
                         temp = photo.get(j - 1);
                         photo.set((j - 1), photo.get(j));
                         photo.set(j, temp);
-                    }
-                    else if (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j-1).getHour() - hour) - 2)
-                            >= abs(photo.get(j).getHour() - hour)){
+                    } else if (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2)
+                            >= abs(photo.get(j).getHour() - hour)) {
                         temp = photo.get(j - 1);
                         photo.set((j - 1), photo.get(j));
                         photo.set(j, temp);
                     }
 
-                        //photo2 time diff is bigger but karmaa true, photoe1 karma false
-                    else if (dayIntDiff1 < dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j-1).getHour() - hour) - 2) < abs(photo.get(j).getHour() - hour))
-                            && !photo.get(j-1).isKarma() && photo.get(j).isKarma()){
+                    //photo2 time diff is bigger but karmaa true, photoe1 karma false
+                    else if (dayIntDiff1 < dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2) < abs(photo.get(j).getHour() - hour))
+                            && !photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
                         temp = photo.get(j - 1);
                         photo.set((j - 1), photo.get(j));
                         photo.set(j, temp);
@@ -211,18 +217,18 @@ public class Rank {
 
                         //photo2 time distance is smaller or equal
                         if (dayIntDiff1 >= dayIntDiff2 || (dayIntDiff1 == dayIntDiff2 &&
-                                abs(abs(photo.get(j-1).getHour() - hour) - 2) >=
-                                        abs(photo.get(j).getHour() - hour))){
+                                abs(abs(photo.get(j - 1).getHour() - hour) - 2) >=
+                                        abs(photo.get(j).getHour() - hour))) {
                             temp = photo.get(j - 1);
                             photo.set((j - 1), photo.get(j));
                             photo.set(j, temp);
                         }
 
-                            //photo 2 time distance is bigger  depend on karma
-                        else if (dayIntDiff1 < dayIntDiff2 && !photo.get(j-1).isKarma() && photo.get(j).isKarma() ||
-                                (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j-1).getHour() - hour) - 2)
-                                        < abs(photo.get(j).getHour() - hour)) && !photo.get(j-1).isKarma()
-                                        && photo.get(j).isKarma()){
+                        //photo 2 time distance is bigger  depend on karma
+                        else if (dayIntDiff1 < dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma() ||
+                                (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2)
+                                        < abs(photo.get(j).getHour() - hour)) && !photo.get(j - 1).isKarma()
+                                        && photo.get(j).isKarma()) {
                             temp = photo.get(j - 1);
                             photo.set((j - 1), photo.get(j));
                             photo.set(j, temp);
@@ -236,10 +242,10 @@ public class Rank {
                 else if (distance1 < distance2) {
 
                     //photo 2 time diff is small and o2.karma, o1,not karma
-                    if (dayIntDiff1 > dayIntDiff2 && !photo.get(j-1).isKarma() && photo.get(j).isKarma() ||
-                            (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j-1).getHour() - hour) - 2) >
-                                    abs(photo.get(j).getHour() - hour)) && !photo.get(j-1).isKarma() &&
-                                    photo.get(j).isKarma()){
+                    if (dayIntDiff1 > dayIntDiff2 && !photo.get(j - 1).isKarma() && photo.get(j).isKarma() ||
+                            (dayIntDiff1 == dayIntDiff2 && abs(abs(photo.get(j - 1).getHour() - hour) - 2) >
+                                    abs(photo.get(j).getHour() - hour)) && !photo.get(j - 1).isKarma() &&
+                                    photo.get(j).isKarma()) {
                         temp = photo.get(j - 1);
                         photo.set((j - 1), photo.get(j));
                         photo.set(j, temp);
@@ -250,11 +256,10 @@ public class Rank {
             }
 
 
-
-            }
         }
+        Log.d("test sort", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
 
-        
 
 //        /*setting sort interface Conections's Comparator*/
 //        Comparator<Photo> comparator = new Comparator<Photo>() {
@@ -412,13 +417,13 @@ public class Rank {
 //
 //        };
 //        Collections.sort(photo, comparator);
-  //  }
+    //  }
 
     public String[] getPaths() { //ONLY CALL AFTER FULLY RERANKED!!!
         ArrayList<String> paths = new ArrayList<>();
         for (int i = 0; i < this.photo.size(); i++) {
             if (!this.photo.get(i).isReleased()) paths.add(this.photo.get(i).getPath());
-            Log.i("RankClass", "~~~~~~~~~~~~~~~~~~~~~~~this is path: "+this.photo.get(i).getPath() + "=================released?--- "+this.photo.get(i).isReleased());
+            Log.i("RankClass", "~~~~~~~~~~~~~~~~~~~~~~~this is path: " + this.photo.get(i).getPath() + "=================released?--- " + this.photo.get(i).isReleased());
         } //add only images without released in their fields
 
         String[] pathArray = paths.toArray(new String[paths.size()]);
@@ -427,8 +432,10 @@ public class Rank {
     }
 
     public void setMyLocation(String localLat, String localLong) {
-        this.localLat = Double.parseDouble(localLat);
-        this.localLng = Double.parseDouble(localLong);
+        if (localLat == "") this.localLat = 0;
+        else this.localLat = Double.parseDouble(localLat);
+        if (localLong == "") this.localLng = 0;
+        else this.localLng = Double.parseDouble(localLong);
     }
 
 

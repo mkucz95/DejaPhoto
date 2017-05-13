@@ -17,8 +17,10 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.android.MainActivity.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION;
 
@@ -42,9 +44,12 @@ public class Rerank extends IntentService {
         if (intent != null) {
             ArrayList<Photo> list = gatherCycleInfo(); //populate the arraylist from file
 
+
+            Log.d("rerank test1","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             //create new rank from the arraylist we collected, and pass in settings user chose
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ getting location...");
             getMyLocation();
+            Log.d("rerank test2","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ got my location");
             Rank newRank = new Rank(list, getSettings(), myLat, myLong);
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
@@ -81,16 +86,29 @@ public class Rerank extends IntentService {
 
             return;
         }
+
+        String provider = "";
         Log.i(TAG, "------------------------In getMyLocation");
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        Log.i(TAG, "------------------------Got Location: " + location);
-        double longitude = location.getLongitude();
-        Log.i(TAG, "------------------------Set Longitude t: " + longitude);
-        double latitude = location.getLatitude();
-        Log.i(TAG, "------------------------Set Latitude t: " + latitude);
-        Log.i(TAG, "------------------------My Long: "+myLong+", My Lat: " + myLat);
-        this.myLat = Double.toString(latitude);
-        this.myLong = Double.toString(longitude);
+        List <String> providerList = lm.getProviders(true);
+        if(providerList.contains(LocationManager.GPS_PROVIDER)){
+            provider = LocationManager.GPS_PROVIDER;
+        }else if (providerList.contains(LocationManager.NETWORK_PROVIDER))
+            provider = LocationManager.NETWORK_PROVIDER;
+        else
+            Toast.makeText(this,"no location provider to use",Toast.LENGTH_SHORT).show();
+        Location location = lm.getLastKnownLocation(provider);
+        if(location != null){
+
+
+            Log.i(TAG, "------------------------Got Location: " + location);
+            double longitude = location.getLongitude();
+            Log.i(TAG, "------------------------Set Longitude t: " + longitude);
+            double latitude = location.getLatitude();
+            Log.i(TAG, "------------------------Set Latitude t: " + latitude);
+            Log.i(TAG, "------------------------My Long: " + myLong + ", My Lat: " + myLat);
+            this.myLat = Double.toString(latitude);
+            this.myLong = Double.toString(longitude);
+        }
     }
 
     /*
