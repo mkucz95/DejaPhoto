@@ -9,8 +9,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -25,9 +27,8 @@ import static com.example.android.MainActivity.MY_PERMISSIONS_REQUEST_ACCESS_FIN
  * that are supposed to be displayed. this is then sent to the build display cycle
  */
 public class Rerank extends IntentService {
-    private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
+    private static final String ACTION_RERANK_DISPLAY = "com.example.android.RERANK_DISPLAY";
     private static final String TAG = "RerankService";
-    public ArrayList<Photo> list;
 
     private String myLat = "", myLong = "";
 
@@ -37,21 +38,28 @@ public class Rerank extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
-
+        Log.i(TAG, "Intent Handled");
         if (intent != null) {
-            gatherCycleInfo(); //populate the arraylist from file
+            ArrayList<Photo> list = gatherCycleInfo(); //populate the arraylist from file
 
             //create new rank from the arraylist we collected, and pass in settings user chose
+            Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ getting location...");
             getMyLocation();
+            Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ got my location");
             Rank newRank = new Rank(list, getSettings(), myLat, myLong);
+            Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
             String[] newPaths = newRank.getPaths(); //extract paths of relevant pictures
-
             Log.i(TAG, "this is path0: " + newPaths[0]); //test to see first path
 
+            Bundle data = new Bundle();
+            data.putStringArray("new_cycle", newPaths);
+
             Intent cycleIntent = new Intent(this, BuildDisplayCycle.class);
-            cycleIntent.setAction(ACTION_RERANK_BUILD); //build new display cycle
-            cycleIntent.putExtra("new_cycle", newPaths); //send new string array
+            cycleIntent.setAction(ACTION_RERANK_DISPLAY); //build new display cycle
+            cycleIntent.putExtras(data);
+            Log.i(TAG, "cycle intent extras: " + cycleIntent.getExtras());
+
+            startService(cycleIntent);
 
             stopService(intent);
         }
@@ -61,6 +69,8 @@ public class Rerank extends IntentService {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
             // TODO: REQUEST PERMISSIONS IF NOT SET
+            Log.i(TAG, "------------------------Getting Permissions");
+
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -71,10 +81,14 @@ public class Rerank extends IntentService {
 
             return;
         }
+        Log.i(TAG, "------------------------In getMyLocation");
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Log.i(TAG, "------------------------Got Location: " + location);
         double longitude = location.getLongitude();
+        Log.i(TAG, "------------------------Set Longitude t: " + longitude);
         double latitude = location.getLatitude();
-        Log.i("GetMyLocation", "My Long: "+myLong+", My Lat: " + myLat);
+        Log.i(TAG, "------------------------Set Latitude t: " + latitude);
+        Log.i(TAG, "------------------------My Long: "+myLong+", My Lat: " + myLat);
         this.myLat = Double.toString(latitude);
         this.myLong = Double.toString(longitude);
     }
@@ -84,11 +98,15 @@ public class Rerank extends IntentService {
     and creates an arraylist that is then used to create a new display cycle rank
      */
 
-    public void gatherCycleInfo(){
+    public ArrayList<Photo> gatherCycleInfo(){
         ArrayList<Photo> pictures = new ArrayList<>();
 
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
+        String[] projection = {MediaStore.Images.Media.DATA,
+                MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.ImageColumns.DATE_TAKEN,
+                MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE};
+        //which columns we will get (all in this case)
+
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
 
         /*
@@ -106,34 +124,39 @@ public class Rerank extends IntentService {
         } else { //handle returned data
             Log.i(TAG, "IMAGES PRESENT");
             Log.i(TAG, "uri to access"+uri.toString());
-            Log.i(TAG, "name, cr.count "+cr.getColumnName(0)+cr.getCount());
+            Log.i(TAG, "name "+cr.getColumnName(0)+", cr.count "+ cr.getCount());
 
             cr.moveToFirst();
+
 
             int[] columns = {cr.getColumnIndex(MediaStore.MediaColumns.DATA),
                     cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION),
                     cr.getColumnIndex(MediaStore.Images.ImageColumns.DATE_TAKEN),
                     cr.getColumnIndex(MediaStore.Images.ImageColumns.LATITUDE),
                     cr.getColumnIndex(MediaStore.Images.ImageColumns.LONGITUDE)};
+            //used below to access the columns we want
 
-            while(cr.moveToNext()) { //go through all the images
-                /*String released = cr.getString(description);
-                if(released == "released") continue; //read release from image description
-                */
+             do{ //go through all the images
 
-                Photo photo = new Photo(cr.getString(columns[0]), cr.getString(columns[0]), cr.getString(columns[0]),
-                        cr.getString(columns[0]),cr.getString(columns[0]));
+                 for(int i = 0; i<5; i++){
+                     Log.i(TAG, "column"+i+" ----------------------------------- "+cr.getString(columns[i]));
+                 }
 
-                pictures.add(photo);
+                 Photo photo = new Photo(cr.getString(columns[0]), cr.getString(columns[1]),
+                         cr.getString(columns[2]), cr.getString(columns[3]),
+                         cr.getString(columns[4]));
+
+                 pictures.add(photo);
 
                 Log.i(TAG, "added new photo object to list");
-            }
+            } while(cr.moveToNext());
         }
 
         if (cr != null) {
             cr.close();
         }
-        this.list = pictures;
+
+        return pictures;
     }
 
 

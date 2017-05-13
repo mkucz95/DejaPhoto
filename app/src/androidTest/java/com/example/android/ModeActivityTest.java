@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.support.design.widget.TabLayout;
 import android.support.test.rule.ActivityTestRule;
 import android.widget.Switch;
 
@@ -11,34 +12,25 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 
 /**
- * Created by mkucz on 5/11/2017.
+ * Created by Justin on 5/12/17.
  */
 
-public class SetActivityTest {
-
+public class ModeActivityTest {
 
     @Rule
-    public ActivityTestRule<SetActivity> activity = new ActivityTestRule<>(SetActivity.class);
+    public ActivityTestRule<ModeActivity> activity = new ActivityTestRule<>(ModeActivity.class);
 
     @Test
     public void test1(){
 
-        Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_location);
+        Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_mode);
         Boolean checked = sw.isChecked();
         String txt = sw.getText().toString();
         if(checked){
-            assertEquals("Location On", txt);
+            assertEquals("Mode On", txt);
         }
         else{
-            assertEquals("Location", txt);
+            assertEquals("Mode", txt);
         }
-
     }
-
-    @Test
-    public void test2(){
-        //TODO Check user time input
-    }
-
-
 }

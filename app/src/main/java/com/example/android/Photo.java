@@ -21,13 +21,17 @@ public class Photo {
     private boolean karma = false;
     private boolean released = false;
 
-    public Photo(){}
-
     //constructor gets information from the rerank method
     public Photo(String imagePath, String description, String date_taken, String latitude, String longitude)
     {
+
         this.imagePath = imagePath;
-        this.description = description;
+
+
+        if(description==null) this.description = "none";
+        else this.description = description;
+
+
         this.date_taken = date_taken;
 
         long temp = Long.parseLong(date_taken.toString());  //string to long   (millSec)
@@ -45,7 +49,7 @@ public class Photo {
 
     //long time from 1970 transfer day of week
     public static String getWeekOfDate(Date dt) {
-        String[] weekDays = {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saterday"};
+        String[] weekDays = {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(dt);
@@ -85,7 +89,9 @@ public class Photo {
         return description;
     }
 
-    private boolean decodeDescription(String description, boolean action) {
+    public boolean decodeDescription(String description, boolean action) {
+        if(description==null) return false;
+
         if (action) { //trying to decode karma
             if (description.toLowerCase().contains("karma")) return true;
         } else { //decoding release

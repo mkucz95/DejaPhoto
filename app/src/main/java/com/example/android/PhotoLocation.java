@@ -21,6 +21,9 @@ import static android.content.ContentValues.TAG;
 public class PhotoLocation{
 
     public String locationName;
+    String city;
+    String state;
+    String address;
     ExifInterface exif;
     Double Longitude, Latitude;
 
@@ -40,6 +43,7 @@ public class PhotoLocation{
             Log.i("PhotoLocation", "Longitude: "+LONG);
             Log.i("PhotoLocation", "Latitude ref: " + LAT_REF);
             Log.i("PhotoLocation", "Longitude ref: "+LONG_REF);
+            Log.i("PhotoLocation", "IMAGE PATH: " + path);
 
             //Convert EXIF data to real latitude/longitude values
             if((LAT !=null) && (LAT_REF !=null) && (LONG != null) && (LONG_REF !=null)) {
@@ -62,19 +66,40 @@ public class PhotoLocation{
             }
             Log.i("PhotoLocation", "Latitude: " + Latitude);
             Log.i("PhotoLocation", "Longitude: " + Longitude);
-            List<Address> addresses = gc.getFromLocation(Latitude, Longitude, 1);
-            if (addresses.size() > 0) {
-                locationName = addresses.get(0).getLocality();         //Get city information
-                if(locationName == null){                              //If no city info available
-                    locationName = addresses.get(0).getAddressLine(0); //Get street address
+            if(LAT != null && LONG != null) {
+                List<Address> addresses = gc.getFromLocation(Latitude, Longitude, 1);
+                if (addresses.size() > 0) {
+                    city = addresses.get(0).getLocality();         //Get city information
+                    address = addresses.get(0).getAddressLine(0); //Get street address
+                    state = addresses.get(0).getAdminArea();        //Get state
+
+                    if (city != null || address != null || state != null) {
+                        if (city != null && address != null && state != null) {
+                            locationName = city + ", " + state;
+                        } else if (city != null && state != null) {
+                            locationName = city + ", " + state;
+                        } else if (address != null && state != null) {
+                            locationName = address + ", " + state;
+                        } else if (address != null && city != null) {
+                            locationName = address + ", " + city;
+                        } else if (city != null) {
+                            locationName = city;
+                        } else if (address != null) {
+                            locationName = address;
+                        } else {
+                            locationName = state;
+                        }
+                    } else {
+                        locationName = " ";
+                    }
+                    Log.i("PhotoLocation", "Location: " + locationName);
+                } else {                                                   // No EXIF data available
+                    Log.i("PhotoLocation", "No Location Found");
+                    locationName = " ";
                 }
-                if(locationName == null){                              //still no location info found
-                    locationName = "No Location Found";
-                }
-                Log.i("PhotoLocation", "Location: " + locationName);
-            } else {                                                   // No EXIF data available
-                Log.i("PhotoLocation", "No Location Found");
-                locationName = "No Location Found";
+            }
+            else{
+                locationName = " ";
             }
         }
         catch (Exception e){

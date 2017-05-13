@@ -67,7 +67,7 @@ public class ChangeImage extends IntentService {
         int counterInt = 0;
         int currHead;
         currHead= headPref.getInt("head", 0);
-        counterInt = counterPref.getInt("counter", counterInt);
+        counterInt = counterPref.getInt("counter", counterInt)-1;
 
 
         Log.d("ChangeImage", "currHead: "+ currHead);

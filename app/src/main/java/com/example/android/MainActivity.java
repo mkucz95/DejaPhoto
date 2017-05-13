@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 99;
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 100;
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 101;
-    public static int screenWidth;
-    public static int screenHeight;
-    public static DisplayMetrics metrics;
 
 
 
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestPermission();
-        getScreenDimensions();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -97,15 +93,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     public void launchActivity() {
@@ -136,11 +123,8 @@ public class MainActivity extends AppCompatActivity {
         since it can only store. another option is local storage*/
 
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-        // displayCycleIntent.putExtra("source", true);
-        Log.i("BuildCycle", "Calling BuildDisplayCycle...");
+        Log.i("MainActivity", "Calling BuildDisplayCycle...");
         displayCycleIntent.setAction(ACTION_RERANK_BUILD);
-       /* displayCycleIntent.setAction(Intent.ACTION_SEND);
-        displayCycleIntent.putExtra("method", "fromMedia");*/
         startService(displayCycleIntent);
 
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -149,13 +133,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getScreenDimensions(){
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        this.screenWidth = metrics.widthPixels;
-        this.screenHeight = metrics.heightPixels;
-        this.metrics = metrics;
-    }
 
     public void requestPermission(){
         Log.i("permission", "checking permission...");
@@ -205,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent backgroundIntent = new Intent(this, BackgroundService.class);
                 startService(backgroundIntent);  //starts service that keeps track of time and location
                 Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-                // displayCycleIntent.putExtra("source", true);
                 Log.i("BuildCycle", "Calling BuildDisplayCycle...");
                 displayCycleIntent.setAction(Intent.ACTION_SEND);
                 displayCycleIntent.putExtra("method", "fromMedia");
