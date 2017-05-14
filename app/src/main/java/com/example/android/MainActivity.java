@@ -61,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
        // Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_5);
         Button interval = (Button) findViewById(R.id.bt_6);
+        Button playApp = (Button) findViewById(R.id.bt_7);
+
+        playApp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startRerank();
+            }
+        } );
 
       /*  album.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
     public void setInterval() {
         Intent intent = new Intent(this, IntervalActivity.class);
         startActivity(intent);
+    }
+
+    public void startRerank(){
+        Intent intent = new Intent (this,Rerank.class);
+        startService(intent);
     }
 
 
