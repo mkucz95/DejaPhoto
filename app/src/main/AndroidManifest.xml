@@ -38,6 +38,20 @@
                 android:resource="@xml/deja_photo_widget" />
         </receiver>
 
+
+
+        //for myReceiver.java , register broadcast receiver
+        <receiver android:name="com.example.android.myReceiver">  //omgggg
+            <intent-filter>
+                <action android:name="com.example.android"/>
+            </intent-filter>
+        </receiver>
+
+
+
+
+
+
         <service
             android:name="com.example.android.WallpaperChanger"
             android:exported="false" />

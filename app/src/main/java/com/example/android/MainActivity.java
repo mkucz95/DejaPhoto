@@ -41,14 +41,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //Amanda code , dont touch
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
-        clickIntent.setAction(Intent.ACTION_SEND);
-        clickIntent.setType("text/plain");
-        clickIntent.putExtra("button_pressed", "next");
-        //startService(clickIntent);
-        PendingIntent pending = PendingIntent.getService(this, 0, clickIntent, 0);
-        am.setRepeating(AlarmManager.RTC, 0, 5000, pending);
+        Intent receiverIntent = new Intent(getApplicationContext(), myReceiver.class);
+//        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
+//        clickIntent.setAction(Intent.ACTION_SEND);
+//        clickIntent.setType("text/plain");
+//        clickIntent.putExtra("button_pressed", "next");
+//        PendingIntent pending = PendingIntent.getService(this, 0, clickIntent, 0);
+        PendingIntent pending = PendingIntent.getBroadcast(this, 0, receiverIntent, 0);
+        am.setRepeating(AlarmManager.RTC, 0, 5, pending);
+        //Amanda code, dont touch
+
+
 
         System.out.println(Manifest.permission.READ_EXTERNAL_STORAGE.equals(PackageManager.PERMISSION_GRANTED));
 
@@ -105,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void launchActivity() {
         Intent intent = new Intent(this, AlbumActivity.class);
