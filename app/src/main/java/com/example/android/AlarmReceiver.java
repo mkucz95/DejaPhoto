@@ -7,12 +7,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+/*
+this class is used to track the 15 seconds a user has to undo karma or release. if they don't undo
+then it sends and intent service to
+
+implemented based on a similar class structure as the DJWidgetProvider.java
+ */
+
 public class AlarmReceiver extends BroadcastReceiver
 /*gets system messages when the system or other applications send broadcasts
 * if the broadcast matches our class, it executes the onRecieve method
  */
 {
-    private static final String ACTION_KARMA = "com.example.android.KARMA";
 
     @Override
     public void onReceive(Context context, Intent intent)

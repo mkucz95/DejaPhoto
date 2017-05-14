@@ -1,6 +1,8 @@
 package com.example.android;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,6 +50,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //Amanda code , dont touch
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent receiverIntent = new Intent(getApplicationContext(), myReceiver.class);
+//        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
+//        clickIntent.setAction(Intent.ACTION_SEND);
+//        clickIntent.setType("text/plain");
+//        clickIntent.putExtra("button_pressed", "next");
+//        PendingIntent pending = PendingIntent.getService(this, 0, clickIntent, 0);
+        PendingIntent pending = PendingIntent.getBroadcast(this, 0, receiverIntent, 0);
+        am.setRepeating(AlarmManager.RTC, 0, 5, pending);
+        //Amanda code, dont touch
+
+
+
         System.out.println(Manifest.permission.READ_EXTERNAL_STORAGE.equals(PackageManager.PERMISSION_GRANTED));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
        // Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_5);
         Button interval = (Button) findViewById(R.id.bt_6);
+        Button playApp = (Button) findViewById(R.id.bt_7);
+
+        playApp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startRerank();
+            }
+        } );
 
       /*  album.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     public void launchActivity() {
         Intent intent = new Intent(this, AlbumActivity.class);
         startActivity(intent);
@@ -128,6 +154,11 @@ public class MainActivity extends AppCompatActivity {
     public void setInterval() {
         Intent intent = new Intent(this, IntervalActivity.class);
         startActivity(intent);
+    }
+
+    public void startRerank(){
+        Intent intent = new Intent (this,Rerank.class);
+        startService(intent);
     }
 
 
