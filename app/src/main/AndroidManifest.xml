@@ -32,11 +32,26 @@
         <receiver android:name="com.example.android.DejaPhotoWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.KARMA"/>
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/deja_photo_widget" />
         </receiver>
+
+
+
+        //for myReceiver.java , register broadcast receiver
+        <receiver android:name="com.example.android.myReceiver">  //omgggg
+            <intent-filter>
+                <action android:name="com.example.android"/>
+            </intent-filter>
+        </receiver>
+
+
+
+
+
 
         <service
             android:name="com.example.android.WallpaperChanger"
@@ -113,6 +128,13 @@
                 <action android:name= "android.intent.action.RERANK_DISPLAY" />
             </intent-filter>
         </service>
+        <receiver android:name="com.example.android.AlarmReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.KARMA"/>
+                <action android:name="android.intent.action.RELEASE"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

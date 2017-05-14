@@ -3,6 +3,7 @@ package com.example.android;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -46,6 +47,8 @@ public class WidgetManager extends IntentService {
                     if(getCounter() != -1) {//only call karma if we have one or more pictures!
                         updateIntent.setAction(ACTION_KARMA);
                         updateIntent.putExtra("path", getPath());
+                       // Toast.makeText(this.getApplicationContext(), "Karma Addded", Toast.LENGTH_SHORT).show();
+                        Log.i("AlarmReciever", "widget manager recieved karma intent");
                         karma = true;
                     }
                     else{
@@ -55,6 +58,9 @@ public class WidgetManager extends IntentService {
                     if(getCounter() != -1) { //only call release if we have one or more pictures!
                         updateIntent.setAction(ACTION_RELEASE);
                         updateIntent.putExtra("path", getPath());
+                        //Toast.makeText(this.getApplicationContext(), "Photo Released", Toast.LENGTH_SHORT).show();
+                        Log.i("AlarmReciever", "widget manager recieved release intent");
+
                         released = true;
                     }
                     else{

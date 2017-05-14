@@ -6,6 +6,9 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.SystemClock;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -14,9 +17,6 @@ import com.example.dejaphoto.R;
 /**
  * Created by Justin on 5/3/17.
  * This class uses android APIs to create a widget that is responsive to presses on buttons
- *
- * NB if current alarm implementation does not work, then we can use context.getSystemService to
- * instatiate new AlarmManager
  */
 
 public class DejaPhotoWidgetProvider extends AppWidgetProvider {
@@ -24,8 +24,14 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String KARMA_BUTTON = "Karma Added";
     public static String RELEASE_BUTTON = "Picture Released";
     public static String NEXT_PIC = "Next Picture";
-    AlarmReceiver alarm = new AlarmReceiver();
-    //this class is a broadcast reciever and contains alarm manager
+    private static final String ACTION_KARMA = "com.example.android.KARMA";
+    private static final String ACTION_RELEASE = "com.example.android.RELEASE";
+
+    AlarmManager karmaAlarm;
+    AlarmManager releaseAlarm;
+    PendingIntent karmaPI;
+    PendingIntent releasePI;
+
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
@@ -71,56 +77,130 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         clickIntent.setAction(Intent.ACTION_SEND);
         clickIntent.setType("text/plain");
 
-        Boolean buttonpressed = false; //needed to prevent crash
+        boolean changePicture = false; //needed to prevent crash
+        boolean actionNeeded = false;
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
 
         if (intent.getAction().equals(PREVIOUS_PIC)) {
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed, "previous");
-            buttonpressed = true;
+            changePicture = true;
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
             undoManager(context, "karma", views);
 
-            Toast.makeText(context, KARMA_BUTTON, Toast.LENGTH_SHORT).show();
-            clickIntent.putExtra(pressed, "karma");
-            buttonpressed = true;
+           // clickIntent.putExtra(pressed, "karma");
+            actionNeeded = true;
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
             undoManager(context, "release", views);
-            Toast.makeText(context, RELEASE_BUTTON, Toast.LENGTH_SHORT).show();
-            clickIntent.putExtra(pressed, "release");
-            buttonpressed = true;
+            //clickIntent.putExtra(pressed, "release");
+            actionNeeded = true;
 
         } else if (intent.getAction().equals(NEXT_PIC)) {
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed, "next");
-            buttonpressed = true;
+            changePicture = true;
         }
 
-        if (buttonpressed) context.startService(clickIntent); //call widgetmanager
+        if (changePicture) context.startService(clickIntent); //call widgetmanager
     }
 
     public void undoManager(Context context, String action, RemoteViews views){
-        if(alarm.isSet()!=null){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
-            alarm.setAlarm(context);//new alarm for karma button
-            alarm.sendInfo(action); //
+        //TODO Potentially cancel alarm with 2nd alarm
+        this.karmaAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        this.releaseAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-            if(action.equals("karma"))views.setTextViewText(R.id.karma_btn, "Undo"); //change the karma button to undo
-            else views.setTextViewText(R.id.release_btn, "Undo");
-            //post toast message based on action
-            if(action == "karma") Toast.makeText(context, KARMA_BUTTON, Toast.LENGTH_SHORT).show();
-            else Toast.makeText(context, RELEASE_BUTTON, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+
+        boolean alarmKarma = getAlarm("karma", context);
+        //alarm not set and button karma was pressed
+
+        boolean alarmRelease = getAlarm("release", context);
+        //alarm not set and release button pressed
+
+
+        if(!alarmKarma && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
+            //Log.i("undoManager", (PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE)).toString());
+            intent.putExtra("action", "karma");
+            this.karmaPI = PendingIntent.getBroadcast(context, 0, intent, 0);
+            karmaAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 10000, karmaPI); // Millisec * Second * Minute
+
+            Log.i("undoManager", "Karma text set to undo");
+            views.setTextViewText(R.id.karma_btn, "Undo");
+
+            setAlarm("karma", context, true); //switch alarm on
+
+            Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
         }
 
-        else { //when the user presses button a second time before the alarm timer runs out
-            if(action == "karma") views.setTextViewText(R.id.karma_btn, action);
-            else views.setTextViewText(R.id.release_btn, action);
+        else if(!alarmRelease  && action.equals("release") ){
+            intent.putExtra("action", "release");
+            releasePI = PendingIntent.getBroadcast(context, 0, intent, 0);
+            releaseAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 10000, releasePI); // Millisec * Second * Minute
 
-            alarm.cancelAlarm(context); //cancel the alarm that was set
+            Log.i("undoManager", "Release text set to undo");
+            views.setTextViewText(R.id.release_btn, "Undo");
+
+            setAlarm("release", context, true);
+            if(alarmKarma){
+                karmaAlarm.cancel(karmaPI);
+                karmaPI.cancel();
+                setAlarm("karma", context, false);
+            }
+
+            Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
+
+        }
+
+        else if (alarmKarma && action.equals("karma") ){ //when the user presses button a second time before the alarm timer runs out
+            //alarm.cancelAlarm(context);
+            Log.i("undoManager", "alarmKarma : " + alarmKarma);
+            views.setTextViewText(R.id.karma_btn, action);
+
+            if(karmaPI != null) {
+                karmaAlarm.cancel(karmaPI); // Millisec * Second * Minute
+                karmaPI.cancel();
+            }
 
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
+
+            setAlarm("karma", context, false);
+
+
         }
+
+        else if(alarmRelease && action.equals("release")){ //release alarm on
+            Log.i("undoManager", "alarmRelease : " + alarmRelease);
+
+
+            views.setTextViewText(R.id.release_btn, action);
+            Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
+
+            if(releasePI != null) {
+                releaseAlarm.cancel(releasePI); // Millisec * Second * Minute
+                releasePI.cancel();
+            }
+
+            setAlarm("release", context, false);
+
+        }
+    }
+
+    public boolean getAlarm(String type, Context context){
+        SharedPreferences sharedPref = context.getSharedPreferences("alarm", 0);
+        return sharedPref.getBoolean(type, false);
+    }
+
+    public void setAlarm(String type, Context context, boolean pref){
+        SharedPreferences sharedPref = context.getSharedPreferences("alarm", 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(type, pref);
+        editor.apply();
     }
 
 }

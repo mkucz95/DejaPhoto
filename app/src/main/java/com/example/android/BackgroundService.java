@@ -40,6 +40,14 @@ public class BackgroundService extends Service {
     public void onDestroy(){
         super.onDestroy();
     }
+
+
+
+
+
+
+
+
 //
 //    //@Override
 //    @RequiresApi(api = Build.VERSION_CODES.N)
@@ -70,8 +78,6 @@ public class BackgroundService extends Service {
 //
 //        /* setRepeating() : so that it repeats itself*/
 //        am.setRepeating(AlarmManager.RTC, startTime, repeatTime, sender);
-//
-//        Log.d("test alarm","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 //
 //        /*immediately change the wallpaper when this method is called*/
 //        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
