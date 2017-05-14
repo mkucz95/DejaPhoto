@@ -1,6 +1,7 @@
 package com.example.android;
 
 
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
@@ -8,12 +9,12 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+//import java.util.Collections;
+//import java.util.Comparator;
+//import java.util.Date;
+//
+//import static java.lang.Math.pow;
+//import static java.lang.Math.sqrt;
 import static java.lang.StrictMath.abs;
 
 public class Rank {
@@ -21,6 +22,7 @@ public class Rank {
     private double localLng;
 
     /*we still not get the two varible value*/
+
     boolean isLocaOn = true;
     boolean isTimeOn = true;
 
@@ -29,19 +31,35 @@ public class Rank {
     private boolean[] settings; //location, time, day, karma
 
 
-    public Rank(ArrayList<Photo> list, boolean[] settings, String localLat, String localLong) {
+    public Rank(ArrayList<Photo> list, boolean[] settings, String localLat, String localLong,boolean b1,boolean b2) {
         this.photo = list;
         this.settings = settings;
         setMyLocation(localLat, localLong);
+        isTimeOn = b1;
+        isLocaOn =b2;
+
         sort(); //sort the array list
+        Log.d("finish sort","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        for(Photo x : photo){
+            Log.d("photo name",x.getDayOfWeek()+" , "+x.getDateTaken().toString());
+        }
+
     }
 
 
     public void sort() {
-        Log.d("before sort", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        if(isTimeOn)
+//        Log.d("test on", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        else
+//            Log.d("false ","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//        if(isLocaOn)
+//            Log.d("test loc on ","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        else
+//            Log.d("false","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
         Photo temp = new Photo();
         long curMiliSecond = System.currentTimeMillis();
+//        Log.d("test system time",curMiliSecond+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         long hour = Long.parseLong(getHour(curMiliSecond));
         SimpleDateFormat sdf1 = new SimpleDateFormat();
 
@@ -71,7 +89,10 @@ public class Rank {
                     photo2Lng = Double.parseDouble(photo2GPS[1]);
                 }catch(Exception e){
                     //no location information in the pictures
+//                    return;
+                    Log.d("test catch","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 }
+//                Log.d("test try catch","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 //                if (photo1GPS[0] == "") {}  //no location information in the photoes.
 //                else photo1Lat = Double.parseDouble(photo1GPS[0]);
@@ -87,9 +108,12 @@ public class Rank {
 
                 float [] dist = new float[1];
                 Location.distanceBetween(localLat,localLng,photo1Lat,photo1Lng,dist);
+                Log.d("test location","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 double distance1 = dist[0]/3.28;   //meter to feet
+                Log.d("test distance 1",distance1+"");
                 Location.distanceBetween(localLat,localLng,photo2Lat,photo2Lng,dist);
                 double distance2 = dist[0]/3.28;
+                Log.d("test distance2",distance2+"");
 
                 /*find the real different on the day of the week*/
                 if (abs(dayPhoto1 - dayInt) > 3)
@@ -272,7 +296,7 @@ public class Rank {
                 }
             }
         }
-        Log.d("test sort", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        Log.d("test sort", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
 

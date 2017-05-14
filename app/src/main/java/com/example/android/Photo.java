@@ -1,5 +1,7 @@
 package com.example.android;
 
+import android.util.Log;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -72,8 +74,10 @@ public class Photo {
     public String[] getLatLong() {
       /*  FindLocationName findLocationName = new FindLocationName(imagePath);
         return findLocationName.findLocation();*/
-
+     Log.d("test latlng","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
       String[] latLong = {this.latitude, this.longitude};
+        Log.d("lattitud",latitude+"");
+        Log.d("logtitude",longitude+"");
       return latLong;
     }
     public String getDayOfWeek() { return dayOfWeek;}

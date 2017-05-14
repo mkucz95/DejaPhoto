@@ -40,6 +40,11 @@ public class Rerank extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Log.i(TAG, "Intent Handled");
         if (intent != null) {
+
+            SharedPreferences sharedPreferences = getSharedPreferences("settings",0);
+
+            boolean isLocaOn = sharedPreferences.getBoolean("time",false);
+            boolean isTimeOn = sharedPreferences.getBoolean("location",false);
             ArrayList<Photo> list = gatherCycleInfo(); //populate the arraylist from file
 
 
@@ -49,7 +54,7 @@ public class Rerank extends IntentService {
             getMyLocation();
             Log.d("rerank test2","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ got my location");
-            Rank newRank = new Rank(list, getSettings(), myLat, myLong);
+            Rank newRank = new Rank(list, getSettings(), myLat, myLong, isTimeOn,isLocaOn);
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
             String[] newPaths = newRank.getPaths(); //extract paths of relevant pictures
             Log.i(TAG, "this is path0: " + newPaths[0]); //test to see first path
