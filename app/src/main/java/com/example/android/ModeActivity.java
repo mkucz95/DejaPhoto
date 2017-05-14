@@ -39,9 +39,9 @@ public class ModeActivity extends AppCompatActivity {
         mode = (Switch) findViewById(R.id.s_mode);
 
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("dejaVuMode", 0);
 
-        if(sharedPreferences.getBoolean("Mode Preference", false) == true) {
+        if(sharedPreferences.getBoolean("modeSetting", false) == true) {
             mode.setChecked(true);
         }
         else {
@@ -61,7 +61,7 @@ public class ModeActivity extends AppCompatActivity {
 
                     l.setBackgroundColor(Color.parseColor("#2DC0C5"));
                     Toast.makeText(getApplicationContext(),
-                            "Deja vu mode is on", Toast.LENGTH_SHORT).show();
+                            "Deja Vu - On", Toast.LENGTH_SHORT).show();
 
                 }
                 else {
@@ -69,27 +69,34 @@ public class ModeActivity extends AppCompatActivity {
 
                     l.setBackgroundColor(Color.parseColor("#1BEA44"));
                     Toast.makeText(getApplicationContext(),
-                            "Deja vu mode is off", Toast.LENGTH_SHORT).show();
+                            "Deja Vu - Off", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }
 
     public void saveSharedPref(boolean type){
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("dejaVuMode", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putBoolean("Mode Preference", type);
+        editor.putBoolean("modeSetting", type);
         editor.commit();
+
+        if(!type){ //if dejavu mode is off, then the others settings should all be off
+            setPreferences(false);
+        }
+    }
+
+    public void setPreferences(boolean setting){ //our way to turn dejavu mode off is to turn all other off
+        SharedPreferences settingsPref = getApplicationContext().getSharedPreferences("settings", 0);
+        SharedPreferences.Editor edit = settingsPref.edit();
+
+        edit.putBoolean("location", setting);
+        edit.putBoolean("time", setting);
+        edit.putBoolean("day", setting);
+        edit.putBoolean("karma", setting);
+
+        edit.commit();
     }
 
 }
