@@ -1,6 +1,8 @@
 package com.example.android;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
         requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
+        clickIntent.setAction(Intent.ACTION_SEND);
+        clickIntent.setType("text/plain");
+        clickIntent.putExtra("button_pressed", "next");
+        //startService(clickIntent);
+        PendingIntent pending = PendingIntent.getService(this, 0, clickIntent, 0);
+        am.setRepeating(AlarmManager.RTC, 0, 5000, pending);
+
+
+
 
         System.out.println(Manifest.permission.READ_EXTERNAL_STORAGE.equals(PackageManager.PERMISSION_GRANTED));
 
