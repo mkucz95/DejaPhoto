@@ -120,7 +120,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             alarm.cancelAlarm(context); //cancel the alarm that was set
 
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
-
         }
     }
 
