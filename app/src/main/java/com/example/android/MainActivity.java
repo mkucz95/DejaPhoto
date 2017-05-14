@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
         clickIntent.setAction(Intent.ACTION_SEND);
@@ -51,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
         //startService(clickIntent);
         PendingIntent pending = PendingIntent.getService(this, 0, clickIntent, 0);
         am.setRepeating(AlarmManager.RTC, 0, 5000, pending);
-
-
-
 
         System.out.println(Manifest.permission.READ_EXTERNAL_STORAGE.equals(PackageManager.PERMISSION_GRANTED));
 

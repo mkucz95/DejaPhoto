@@ -38,30 +38,30 @@ public class SetActivity extends AppCompatActivity {
         dayOfWeek = (Switch) findViewById(R.id.s_dow);
         karma = (Switch) findViewById(R.id.s_karma);
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("settings", 0);
 
-        if(sharedPreferences.getBoolean("Location Preference", false) == true) {
+        if(sharedPreferences.getBoolean("location", false)) {
             location.setChecked(true);
         }
         else {
             location.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("Time Preference", false) == true) {
+        if(sharedPreferences.getBoolean("time", false)) {
             time.setChecked(true);
         }
         else {
             time.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("Day of Week Preference", false) == true) {
+        if(sharedPreferences.getBoolean("day", false)) {
             dayOfWeek.setChecked(true);
         }
         else {
             dayOfWeek.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("Karma Preference", false) == true) {
+        if(sharedPreferences.getBoolean("karma", false)) {
             karma.setChecked(true);
         }
         else {
