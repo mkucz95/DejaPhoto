@@ -35,7 +35,7 @@ public class FindLocationName extends WallpaperChanger{
         FindLocationName(String path) {
             this.path = path;
             Log.i("findLocation", this.toString());
-            this.locationName = findLocation();
+            //this.locationName = findLocation();
         }
 
          String findLocation() {

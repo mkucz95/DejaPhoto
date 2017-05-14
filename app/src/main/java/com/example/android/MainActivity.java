@@ -35,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+/*set alarm preferences to default*/
+        SharedPreferences sharedPref = getSharedPreferences("alarm", 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("karma", false);
+        editor.putBoolean("release", false);
+        editor.apply();
+
+
         requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
