@@ -1,21 +1,15 @@
 package com.example.android;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by Justin on 5/3/17.
@@ -27,7 +21,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String KARMA_BUTTON = "Karma Added";
     public static String RELEASE_BUTTON = "Picture Released";
     public static String NEXT_PIC = "Next Picture";
-    Alarm alarm = new Alarm();
+    AlarmReciever alarm = new AlarmReciever();
 
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
@@ -106,7 +100,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     }
 
     public void undoManager(Context context, String action, RemoteViews views){
-        AlarmManager am =null;//= (AlarmManager) getNextAlarm(Context.ALARM_SERVICE);
         if(false){
             alarm.setAlarm(context);
             alarm.sendInfo(action);

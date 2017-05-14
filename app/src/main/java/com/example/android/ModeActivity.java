@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +25,8 @@ import com.example.dejaphoto.R;
 
 public class ModeActivity extends AppCompatActivity {
 
+    private Switch mode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,20 +34,45 @@ public class ModeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mode = (Switch) findViewById(R.id.s_mode);
+
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+
+        if(sharedPreferences.getBoolean("Mode Preference", false) == true) {
+            mode.setChecked(true);
+        }
+        else {
+            mode.setChecked(false);
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final LinearLayout l = (LinearLayout) findViewById(R.id.l_switch);
 
-        Switch mode = (Switch) findViewById(R.id.s_mode);
+
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putBoolean("Mode Preference", true);
+                    editor.commit();
+
                     l.setBackgroundColor(Color.parseColor("#2DC0C5"));
                     Toast.makeText(getApplicationContext(),
                             "Deja vu mode is on", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
+                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putBoolean("Mode Preference", false);
+                    editor.commit();
+
                     l.setBackgroundColor(Color.parseColor("#1BEA44"));
                     Toast.makeText(getApplicationContext(),
                             "Deja vu mode is off", Toast.LENGTH_SHORT).show();

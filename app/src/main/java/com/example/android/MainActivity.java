@@ -15,9 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -34,12 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 99;
-    public static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 100;
-    public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 101;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Button settings = (Button) findViewById(R.id.bt_3);
         Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_5);
+        Button interval = (Button) findViewById(R.id.bt_6);
 
         album.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +86,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        interval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setInterval();
+            }
+        });
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     public void launchActivity() {
@@ -116,15 +125,22 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void setInterval() {
+        Intent intent = new Intent(this, IntervalActivity.class);
+        startActivity(intent);
+    }
+
 
     public void startApp(){
-     /*   SharedPreferences sharedPreferences = getSharedPreferences("user_name", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();  shared preferences won't work
-        since it can only store. another option is local storage*/
+        SharedPreferences sharedPreferences = getSharedPreferences("Deja Photo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-        Log.i("MainActivity", "Calling BuildDisplayCycle...");
+        // displayCycleIntent.putExtra("source", true);
+        Log.i("BuildCycle", "Calling BuildDisplayCycle...");
         displayCycleIntent.setAction(ACTION_RERANK_BUILD);
+       /* displayCycleIntent.setAction(Intent.ACTION_SEND);
+        displayCycleIntent.putExtra("method", "fromMedia");*/
         startService(displayCycleIntent);
 
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -153,35 +169,26 @@ public class MainActivity extends AppCompatActivity {
             displayCycleIntent.putExtra("method", "fromMedia");
             startService(displayCycleIntent);
         }
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            //Request Permissions
-            Log.i("LocationPermission", "Requesting permission");
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-        else{
-            Log.i("LocationPermission", "Permission already granted");
-        }
         Log.i("permission", "done with permissions");
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                             String permissions[],
-                                             int[] grantResults) {
+                                           String permissions[],
+                                           int[] grantResults) {
         Log.i("permission", "Requesting Permission");
         if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
-            Log.i("permission", "checking storage permissions...");
+            Log.i("permission", "checking...");
             if (grantResults.length == 1 &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.i("permission", "Permission Now Granted...");
                 Toast.makeText(this, "Read External Storage permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
                 Intent backgroundIntent = new Intent(this, BackgroundService.class);
                 startService(backgroundIntent);  //starts service that keeps track of time and location
                 Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
+                // displayCycleIntent.putExtra("source", true);
                 Log.i("BuildCycle", "Calling BuildDisplayCycle...");
                 displayCycleIntent.setAction(Intent.ACTION_SEND);
                 displayCycleIntent.putExtra("method", "fromMedia");
@@ -192,17 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 //Permission denied
                 Toast.makeText(this, "Read External Storage permission denied", Toast.LENGTH_SHORT).show();
             }
-        }
-        else if(requestCode == MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION){
-            if (grantResults.length == 1 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else {
+        } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

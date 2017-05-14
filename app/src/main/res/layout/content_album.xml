@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:checked="false"
         android:gravity="start"
-        android:text="@string/deja_a"
+        android:text="@string/d_album"
         android:textColor="#EC7063"
         android:textSize="20sp" />
 
@@ -27,7 +27,7 @@
         android:layout_marginTop="20dp"
         android:checked="false"
         android:gravity="start"
-        android:text="@string/camera_a"
+        android:text="@string/c_album"
         android:textColor="#8E44AD"
         android:textSize="20sp" />
 

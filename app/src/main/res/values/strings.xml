@@ -82,10 +82,10 @@
     <string name="title_activity_main">DejaPhoto</string>
     <string name="title_activity_album">Album</string>
     <string name="title_activity_mode">Mode</string>
-    <string name="title_activity_set">Set</string>
+    <string name="title_activity_set">Settings</string>
 
-    <string name="deja_a">Deja Photo</string>
-    <string name="camera_a">Camera Roll</string>
+    <string name="d_album">Deja Photo</string>
+    <string name="c_album">Camera Roll</string>
     <string name="switch_mode">Mode</string>
     <string name="latitude">Location</string>
     <string name="time">Time</string>
@@ -95,11 +95,18 @@
     <string name="deja">Deja</string>
     <string name="photo">Photo</string>
 
+    <string name="minute">Minutes</string>
+    <string name="save">Save</string>
+    <string name="show">Show</string>
+    <string name="prevInterval">Previous time interval in Minutes</string>
 
     <string name="button1">Choose Album</string>
     <string name="button2">Add Photo</string>
     <string name="button3">Settings</string>
     <string name="button4">Deja Vu Mode</string>
-    <string name="button5">Display</string>
+    <string name="button5">Start App</string>
+    <string name="button6">Display Interval</string>
     <string name="title_activity_display">DisplayActivity</string>
+    <string name="title_activity_interval">IntervalActivity</string>
+    <string name="title_activity_internal">InternalActivity</string>
 </resources>

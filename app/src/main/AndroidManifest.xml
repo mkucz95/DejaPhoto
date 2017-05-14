@@ -58,7 +58,11 @@
             android:name="com.example.android.BackgroundService"
             android:enabled="true"
             android:exported="true" />
-
+        <activity
+            android:name="com.example.android.IntervalActivity"
+            android:label="@string/title_activity_interval"
+            android:parentActivityName="com.example.android.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.example.android.AlbumActivity"
             android:label="@string/title_activity_album"
