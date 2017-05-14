@@ -43,6 +43,7 @@ public class AlarmReceiver extends BroadcastReceiver
         else {
             sendInfo.putExtra("button_pressed", "release");
             setAlarm("release", context, false); //reset alarm
+            setAlarm("karma", context, false); //reset karma alarm
         }
 
         context.startService(sendInfo);

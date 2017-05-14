@@ -39,7 +39,10 @@ public class BuildDisplayCycle extends IntentService {
                 //buildFromFile(sourceFolder);
                 Log.i(TAG, "Building cycle from MEDIA...");
                 buildFromMedia();
-                displayImage();  //once building the cycle is finished, display the first image
+
+               //after build from file, apply rank settings (released/karma)
+               Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
+               startService(rerankIntent);
            }
             else if(ACTION_RERANK_BUILD.equals(action)){
                 Log.i(TAG, "Building Cycle from STRING...");
@@ -49,11 +52,9 @@ public class BuildDisplayCycle extends IntentService {
 
             } else if(ACTION_RERANK_DISPLAY.equals(action)){
                Log.i(TAG, "RERANK INTENT: " + intent.getExtras());
-               //Log.i(TAG, "RERANK INTENT EXTRAS: " + rerankIntent.getExtras());
                Bundle newPaths = intent.getExtras();
                String[] paths = newPaths.getStringArray("new_cycle");
 
-               //String[] paths = rerankIntent.getExtras().getStringArray("new_cycle");
                buildFromString(paths);
                displayImage();  //once building the cycle is finished, display the first image
            }

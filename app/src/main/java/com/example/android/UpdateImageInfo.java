@@ -27,14 +27,21 @@ public class UpdateImageInfo extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.i("UpdateInfo", "UpdateCalled");
+
         if (intent != null) {
-            final String action = intent.getAction();
+            //final String action = intent.getAction();
             final String path = intent.getStringExtra("path");
+            final String type = intent.getExtras().getString("type");
             Log.i(TAG, "path: "+path);
 
-            if (ACTION_KARMA.equals(action)) {
+            if ("karma".equals(type)) {
+                Log.i("UpdateInfo", "KARMA-------");
+
                 modifyImage(path, "karma");
-            } else if (ACTION_RELEASE.equals(action)) {
+            } else if ("release".equals(type)) {
+                Log.i("UpdateInfo", "RELEASE-----------");
+
                 modifyImage(path, "released");
             }
             stopService(intent);
@@ -43,7 +50,7 @@ public class UpdateImageInfo extends IntentService {
 
     private void modifyImage(String path, String infoToAdd){
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DESCRIPTION}; //which columns we will get (all in this case)
+        String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.ImageColumns._ID}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
         /*
         * query(uri,             // The content URI of the images
@@ -63,35 +70,42 @@ public class UpdateImageInfo extends IntentService {
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
+            int idLoc = cr.getColumnIndex(MediaStore.Images.ImageColumns._ID);
 
             Log.i(TAG, "looking for image");
 
 
-            while(cr.moveToNext()) { //go through all the images
+           do { //go through all the images
                 String uripath = cr.getString(pathIndex);  //get the path/date
                 Log.i(TAG, "looking for image: "+ path+"    ----    image in this row: "+ uripath);
 
                 if(uripath.equals(path)){
+                    Long id = cr.getLong(idLoc);
+                    String[] selectionArgs = {""+id};
+
+
+                    Log.i("UpdateInfo", "Selection Args: " + selectionArgs[0]);
+                    String selectionClause = MediaStore.Images.ImageColumns._ID + " = ?";
+
                     ContentValues newUserValue = new ContentValues();
 
                     // Defines a variable to contain the number of updated rows
-                    int rowsUpdated = 1;
+
                     String currString = cr.getString(description);
-                    String newDescription = currString+","+infoToAdd;
+                    String newDescription = currString + "," + infoToAdd;
                     newUserValue.put(MediaStore.Images.ImageColumns.DESCRIPTION, newDescription);
 
-                    //get uri of image we are trying to edit
-                    Uri currUri= ContentUris
-                            .withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                    cr.getInt(cr.getColumnIndex(MediaStore.Images.ImageColumns._ID)));
+                    Uri uri2 = Uri.withAppendedPath(uri, ""+id);
 
                     //update(@thisUri, with values from ContentValues ...)
-                  int numUpdated =  getContentResolver().update(currUri, newUserValue,
-                           MediaStore.Images.Media._ID + "= ?", null);
+                    int numUpdated  = getContentResolver().update(uri2, newUserValue, selectionClause, selectionArgs);
+                    Log.i(TAG, "updated: " + numUpdated + " rows");
+                    break; //found image
 
-                    Log.i(TAG, "updated: "+ numUpdated+" rows");
                 }
-            }
+            } while(cr.moveToNext());
+
+
         }
 
         if (cr != null) {

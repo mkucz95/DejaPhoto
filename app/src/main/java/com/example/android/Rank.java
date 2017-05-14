@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 //import java.util.Collections;
 //import java.util.Comparator;
 //import java.util.Date;
@@ -20,7 +22,8 @@ import static java.lang.StrictMath.abs;
 public class Rank {
     private double localLat;
     private double localLng;
-
+    double distance1;
+    double distance2;
     /*we still not get the two varible value*/
 
     boolean isLocaOn = true;
@@ -38,10 +41,27 @@ public class Rank {
         isTimeOn = b1;
         isLocaOn =b2;
 
+
         sort(); //sort the array list
         Log.d("finish sort","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         for(Photo x : photo){
-            Log.d("photo name",x.getDayOfWeek()+" , "+x.getDateTaken().toString());
+            float [] a = new float[1];
+            if(x.getLatLong()[0] != null && x.getLatLong()[1]!= null){
+                Location.distanceBetween(this.localLat, this.localLng, Double.parseDouble(x.getLatLong()[0]), Double.parseDouble(x.getLatLong()[1]),a);
+                double distance = a[0]/3.28;
+                Log.i("rankClass","Distance from: " + distance);
+            }
+            else
+                Log.i("rankClass","Distance from: null");
+
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(Long.parseLong(x.getDateTaken()));
+            String time = formatter.format(calendar.getTime());
+            Log.d("rankClass",x.getDayOfWeek()+" , "+ time);
+            Log.d("rankClass",x.getLatLong()[0]+" , "+x.getLatLong()[1]);
+
         }
 
     }
@@ -108,12 +128,12 @@ public class Rank {
 
                 float [] dist = new float[1];
                 Location.distanceBetween(localLat,localLng,photo1Lat,photo1Lng,dist);
-                Log.d("test location","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                double distance1 = dist[0]/3.28;   //meter to feet
-                Log.d("test distance 1",distance1+"");
+                //Log.d("rankClass","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                distance1 = dist[0]/3.28;   //meter to feet
+                //Log.d("rankClass",distance1+"");
                 Location.distanceBetween(localLat,localLng,photo2Lat,photo2Lng,dist);
-                double distance2 = dist[0]/3.28;
-                Log.d("test distance2",distance2+"");
+                distance2 = dist[0]/3.28;
+               // Log.d("rankClass",distance2+"");
 
                 /*find the real different on the day of the week*/
                 if (abs(dayPhoto1 - dayInt) > 3)

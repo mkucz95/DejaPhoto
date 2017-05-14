@@ -45,8 +45,9 @@ public class WidgetManager extends IntentService {
                 }
                 else if ("karma".equals(action)) {
                     if(getCounter() != -1) {//only call karma if we have one or more pictures!
-                        updateIntent.setAction(ACTION_KARMA);
+                        updateIntent.setAction(Intent.ACTION_SEND);
                         updateIntent.putExtra("path", getPath());
+                        updateIntent.putExtra("type", karma);
                        // Toast.makeText(this.getApplicationContext(), "Karma Addded", Toast.LENGTH_SHORT).show();
                         Log.i("AlarmReciever", "widget manager recieved karma intent");
                         karma = true;
@@ -56,8 +57,10 @@ public class WidgetManager extends IntentService {
                     }
                 } else if ("release".equals(action)) {
                     if(getCounter() != -1) { //only call release if we have one or more pictures!
-                        updateIntent.setAction(ACTION_RELEASE);
+                        updateIntent.setAction(Intent.ACTION_SEND);
                         updateIntent.putExtra("path", getPath());
+                        updateIntent.putExtra("type", "release");
+
                         //Toast.makeText(this.getApplicationContext(), "Photo Released", Toast.LENGTH_SHORT).show();
                         Log.i("AlarmReciever", "widget manager recieved release intent");
 
@@ -87,8 +90,8 @@ public class WidgetManager extends IntentService {
     }
 
     //find what the current head is, and return the path at that head
-    public String getPath(){
-        SharedPreferences head = getSharedPreferences("head", MODE_PRIVATE);
+    public String getPath(){        SharedPreferences head = getSharedPreferences("head", MODE_PRIVATE);
+
         int num = head.getInt("head", -1);
 
         SharedPreferences displayCycle = getSharedPreferences("display_cycle", MODE_PRIVATE);

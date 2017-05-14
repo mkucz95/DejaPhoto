@@ -41,7 +41,8 @@
             android:text="Karma"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            />
 
         <Button
             android:id="@+id/release_btn"
