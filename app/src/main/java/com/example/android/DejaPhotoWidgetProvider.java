@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -13,6 +14,9 @@ import com.example.dejaphoto.R;
 /**
  * Created by Justin on 5/3/17.
  * This class uses android APIs to create a widget that is responsive to presses on buttons
+ *
+ * NB if current alarm implementation does not work, then we can use context.getSystemService to
+ * instatiate new AlarmManager
  */
 
 public class DejaPhotoWidgetProvider extends AppWidgetProvider {
@@ -21,7 +25,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String RELEASE_BUTTON = "Picture Released";
     public static String NEXT_PIC = "Next Picture";
     AlarmReceiver alarm = new AlarmReceiver();
-
+    //this class is a broadcast reciever and contains alarm manager
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
@@ -110,7 +114,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         }
 
         else { //when the user presses button a second time before the alarm timer runs out
-            //alarm.cancelAlarm(context);
             if(action == "karma") views.setTextViewText(R.id.karma_btn, action);
             else views.setTextViewText(R.id.release_btn, action);
 

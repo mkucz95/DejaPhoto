@@ -34,6 +34,8 @@ public class ModeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        saveSharedPref(false);
+
         mode = (Switch) findViewById(R.id.s_mode);
 
 
@@ -55,11 +57,7 @@ public class ModeActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                    editor.putBoolean("Mode Preference", true);
-                    editor.commit();
+                    saveSharedPref(true);
 
                     l.setBackgroundColor(Color.parseColor("#2DC0C5"));
                     Toast.makeText(getApplicationContext(),
@@ -67,11 +65,7 @@ public class ModeActivity extends AppCompatActivity {
 
                 }
                 else {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                    editor.putBoolean("Mode Preference", false);
-                    editor.commit();
+                    saveSharedPref(false);
 
                     l.setBackgroundColor(Color.parseColor("#1BEA44"));
                     Toast.makeText(getApplicationContext(),
@@ -88,6 +82,14 @@ public class ModeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void saveSharedPref(boolean type){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean("Mode Preference", type);
+        editor.commit();
     }
 
 }
