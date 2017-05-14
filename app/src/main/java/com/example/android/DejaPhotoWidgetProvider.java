@@ -84,7 +84,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             buttonpressed = true;
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
             undoManager(context, "release", views);
-
             Toast.makeText(context, RELEASE_BUTTON, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed, "release");
             buttonpressed = true;
@@ -114,6 +113,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             //alarm.cancelAlarm(context);
             if(action == "karma") views.setTextViewText(R.id.karma_btn, action);
             else views.setTextViewText(R.id.release_btn, action);
+
+            alarm.cancelAlarm(context); //cancel the alarm that was set
 
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
 

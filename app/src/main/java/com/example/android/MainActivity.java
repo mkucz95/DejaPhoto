@@ -44,20 +44,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button album = (Button) findViewById(R.id.bt_1);
+      //  Button album = (Button) findViewById(R.id.bt_1);
         Button dejaMode = (Button) findViewById(R.id.bt_4);
         Button settings = (Button) findViewById(R.id.bt_3);
-        Button addPhoto = (Button) findViewById(R.id.bt_2);
+       // Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_5);
         Button interval = (Button) findViewById(R.id.bt_6);
 
-        album.setOnClickListener(new View.OnClickListener() {
+      /*  album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchActivity();
             }
         });
-
+*/
         dejaMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,12 +72,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        addPhoto.setOnClickListener(new View.OnClickListener() {
+       /* addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 add();
             }
         });
+        */
 
         display.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,16 +91,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setInterval();
-            }
-        });
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }
