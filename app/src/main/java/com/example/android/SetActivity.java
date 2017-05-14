@@ -38,30 +38,31 @@ public class SetActivity extends AppCompatActivity {
         dayOfWeek = (Switch) findViewById(R.id.s_dow);
         karma = (Switch) findViewById(R.id.s_karma);
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("settings", 0);
 
-        if(sharedPreferences.getBoolean("Location Preference", false) == true) {
+
+        if(sharedPreferences.getBoolean("location", false)) {
             location.setChecked(true);
         }
         else {
             location.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("Time Preference", false) == true) {
+        if(sharedPreferences.getBoolean("time", false)) {
             time.setChecked(true);
         }
         else {
             time.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("Day of Week Preference", false) == true) {
+        if(sharedPreferences.getBoolean("day", false)) {
             dayOfWeek.setChecked(true);
         }
         else {
             dayOfWeek.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("Karma Preference", false) == true) {
+        if(sharedPreferences.getBoolean("karma", false)) {
             karma.setChecked(true);
         }
         else {
@@ -69,27 +70,28 @@ public class SetActivity extends AppCompatActivity {
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      final SharedPreferences dejaMode = getApplicationContext().getSharedPreferences("dejaVuMode", 0);
 
         location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            boolean modeOn = dejaMode.getBoolean("modeSetting", true);
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Location Preference", true);
-                    editor.commit();
 
+                if(!modeOn){ //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
-                            "Location setting is on", Toast.LENGTH_SHORT).show();
+                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 }
-                else {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Location Preference", false);
-                    editor.commit();
-
-                    Toast.makeText(getApplicationContext(),
-                            "Location setting is off", Toast.LENGTH_SHORT).show();
+                else { //dejavu mode is on
+                    if (isChecked) {
+                        setPreferences("location", true);
+                        Toast.makeText(getApplicationContext(),
+                                "Location setting is on", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setPreferences("location", false);
+                        Toast.makeText(getApplicationContext(),
+                                "Location setting is off", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -97,23 +99,22 @@ public class SetActivity extends AppCompatActivity {
         time.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Time Preference", true);
-                    editor.commit();
+                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
+                if (!modeOn) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
-                            "Time setting is on", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Time Preference", false);
-                    editor.commit();
+                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
+                } else { //dejavu mode is on
+                    if (isChecked) {
+                        setPreferences("time", true);
+                        Toast.makeText(getApplicationContext(),
+                                "Time setting is on", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setPreferences("time", false);
 
-                    Toast.makeText(getApplicationContext(),
-                            "Time setting is off", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Time setting is off", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -121,23 +122,23 @@ public class SetActivity extends AppCompatActivity {
         dayOfWeek.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Day of Week Preference", true);
-                    editor.commit();
+                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
+                if (!modeOn) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
-                            "Day of Week setting is on", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Day of Week Preference", false);
-                    editor.commit();
+                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
+                } else { //dejavu mode is on
+                    if (isChecked) {
+                        setPreferences("day", true);
 
-                    Toast.makeText(getApplicationContext(),
-                            "Day of Week setting is off", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Day of Week setting is on", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setPreferences("day", false);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Day of Week setting is off", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -145,23 +146,23 @@ public class SetActivity extends AppCompatActivity {
         karma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Karma Preference", true);
-                    editor.commit();
+                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
+                if (!modeOn) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
-                            "Karma setting is on", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Karma Preference", false);
-                    editor.commit();
+                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
+                } else { //dejavu mode is on
+                    if (isChecked) {
+                        setPreferences("karma", true);
 
-                    Toast.makeText(getApplicationContext(),
-                            "Karma setting is off", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Karma setting is on", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setPreferences("karma", false);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Karma setting is off", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -174,5 +175,12 @@ public class SetActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void setPreferences(String type, boolean setting){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("settings", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(type, setting);
+        editor.commit();
     }
 }
