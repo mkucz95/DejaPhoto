@@ -1,6 +1,7 @@
 package com.example.android;
 
 
+import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -84,9 +85,11 @@ public class Rank {
                 int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());       //photo1 's interger for the day of week
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
-
-                double distance1 = sqrt(pow((localLat - photo1Lat), 2) + pow((localLng - photo1Lng), 2));
-                double distance2 = sqrt(pow((localLat - photo1Lat), 2) + pow((localLng - photo1Lng), 2));
+                float [] dist = new float[1];
+                Location.distanceBetween(localLat,localLng,photo1Lat,photo1Lng,dist);
+                double distance1 = dist[0]/3.28;   //meter to feet
+                Location.distanceBetween(localLat,localLng,photo2Lat,photo2Lng,dist);
+                double distance2 = dist[0]/3.28;
 
                 /*find the real different on the day of the week*/
                 if (abs(dayPhoto1 - dayInt) > 3)

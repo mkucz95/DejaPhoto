@@ -89,4 +89,10 @@
         android:textColor="#A569BD"
         android:textSize="20sp" />
 
+    <Button
+        android:id="@+id/bt_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TestRerank" />
+
 </LinearLayout>
