@@ -1,6 +1,5 @@
 package com.example.android;
 
-import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -21,7 +20,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String KARMA_BUTTON = "Karma Added";
     public static String RELEASE_BUTTON = "Picture Released";
     public static String NEXT_PIC = "Next Picture";
-    AlarmReciever alarm = new AlarmReciever();
+    AlarmReceiver alarm = new AlarmReceiver();
 
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
@@ -100,12 +99,12 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     }
 
     public void undoManager(Context context, String action, RemoteViews views){
-        if(false){
-            alarm.setAlarm(context);
-            alarm.sendInfo(action);
+        if(alarm.isSet()!=null){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
+            alarm.setAlarm(context);//new alarm for karma button
+            alarm.sendInfo(action); //
 
-            views.setTextViewText(R.id.karma_btn, "Undo"); //change the current button to undo
-
+            if(action.equals("karma"))views.setTextViewText(R.id.karma_btn, "Undo"); //change the karma button to undo
+            else views.setTextViewText(R.id.release_btn, "Undo");
             //post toast message based on action
             if(action == "karma") Toast.makeText(context, KARMA_BUTTON, Toast.LENGTH_SHORT).show();
             else Toast.makeText(context, RELEASE_BUTTON, Toast.LENGTH_SHORT).show();

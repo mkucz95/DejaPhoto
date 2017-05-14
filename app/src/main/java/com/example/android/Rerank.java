@@ -22,8 +22,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.android.MainActivity.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION;
-
 /**
  * This intent service creates a new rank object which has the correct order of the pictures
  * that are supposed to be displayed. this is then sent to the build display cycle
