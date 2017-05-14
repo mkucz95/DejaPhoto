@@ -188,7 +188,6 @@ public class Rerank extends IntentService {
       for(int i=0; i<settings.length; i++) {
           settings[i] = sharedPreferences.getBoolean(type[i], true);
       }
-
       return settings;
     }
 

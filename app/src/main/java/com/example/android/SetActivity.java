@@ -40,6 +40,7 @@ public class SetActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("settings", 0);
 
+
         if(sharedPreferences.getBoolean("location", false)) {
             location.setChecked(true);
         }
@@ -69,19 +70,28 @@ public class SetActivity extends AppCompatActivity {
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      final SharedPreferences dejaMode = getApplicationContext().getSharedPreferences("dejaVuMode", 0);
 
         location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            boolean modeOn = dejaMode.getBoolean("modeSetting", true);
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    setPreferences("location", true);
+
+                if(!modeOn){ //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
-                            "Location setting is on", Toast.LENGTH_SHORT).show();
+                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 }
-                else {
-                   setPreferences("location", false);
-                    Toast.makeText(getApplicationContext(),
-                            "Location setting is off", Toast.LENGTH_SHORT).show();
+                else { //dejavu mode is on
+                    if (isChecked) {
+                        setPreferences("location", true);
+                        Toast.makeText(getApplicationContext(),
+                                "Location setting is on", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setPreferences("location", false);
+                        Toast.makeText(getApplicationContext(),
+                                "Location setting is off", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -89,16 +99,22 @@ public class SetActivity extends AppCompatActivity {
         time.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    setPreferences("time", true);
-                    Toast.makeText(getApplicationContext(),
-                            "Time setting is on", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    setPreferences("time", false);
+                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
+                if (!modeOn) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
-                            "Time setting is off", Toast.LENGTH_SHORT).show();
+                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
+                } else { //dejavu mode is on
+                    if (isChecked) {
+                        setPreferences("time", true);
+                        Toast.makeText(getApplicationContext(),
+                                "Time setting is on", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setPreferences("time", false);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Time setting is off", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -106,17 +122,23 @@ public class SetActivity extends AppCompatActivity {
         dayOfWeek.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    setPreferences("day", true);
+                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
+                if (!modeOn) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
-                            "Day of Week setting is on", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    setPreferences("day", false);
+                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
+                } else { //dejavu mode is on
+                    if (isChecked) {
+                        setPreferences("day", true);
 
-                    Toast.makeText(getApplicationContext(),
-                            "Day of Week setting is off", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Day of Week setting is on", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setPreferences("day", false);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Day of Week setting is off", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -124,17 +146,23 @@ public class SetActivity extends AppCompatActivity {
         karma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    setPreferences("karma", true);
+                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
+                if (!modeOn) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
-                            "Karma setting is on", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    setPreferences("karma", false);
+                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
+                } else { //dejavu mode is on
+                    if (isChecked) {
+                        setPreferences("karma", true);
 
-                    Toast.makeText(getApplicationContext(),
-                            "Karma setting is off", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Karma setting is on", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setPreferences("karma", false);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Karma setting is off", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
