@@ -92,8 +92,8 @@ public class ChangeImage extends IntentService {
 
         }
         else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead != counterInt) {
-            currHead++;
             Log.i("changeImage", "Next, currHead: " + currHead + "  != counterInt: " + counterInt);
+            currHead++;
         }
 
         int newHead = currHead;

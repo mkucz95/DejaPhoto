@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import java.io.File;
+
 /**
  * A service that is called when karma is increased, picture released or user moves further
  * It goes into the MediaStore sqlite database and then changes the description field of each image
@@ -50,7 +52,7 @@ public class UpdateImageInfo extends IntentService {
 
     private void modifyImage(String path, String infoToAdd){
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.ImageColumns._ID}; //which columns we will get (all in this case)
+        String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.Media._ID}; //which columns we will get (all in this case)
         Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
         /*
         * query(uri,             // The content URI of the images
@@ -70,7 +72,7 @@ public class UpdateImageInfo extends IntentService {
             cr.moveToFirst();
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
             int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
-            int idLoc = cr.getColumnIndex(MediaStore.Images.ImageColumns._ID);
+            int idLoc = cr.getColumnIndex(MediaStore.Images.Media._ID);
 
             Log.i(TAG, "looking for image");
 
@@ -80,16 +82,21 @@ public class UpdateImageInfo extends IntentService {
                 Log.i(TAG, "looking for image: "+ path+"    ----    image in this row: "+ uripath);
 
                 if(uripath.equals(path)){
+                    if(infoToAdd.equals("released")){
+                        //delete here
+                        File newFile = new File(path);
+                        newFile.delete();
+                        Log.i("UpdateInfo", "Deleted: " + path);
+                        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(newFile)));
+
+                    }
                     Long id = cr.getLong(idLoc);
                     String[] selectionArgs = {""+id};
 
-
                     Log.i("UpdateInfo", "Selection Args: " + selectionArgs[0]);
-                    String selectionClause = MediaStore.Images.ImageColumns._ID + " = ?";
+                    String selectionClause =  MediaStore.MediaColumns.DATA + " = ?";
 
                     ContentValues newUserValue = new ContentValues();
-
-                    // Defines a variable to contain the number of updated rows
 
                     String currString = cr.getString(description);
                     String newDescription = currString + "," + infoToAdd;
@@ -100,9 +107,8 @@ public class UpdateImageInfo extends IntentService {
                     //update(@thisUri, with values from ContentValues ...)
                     int numUpdated  = getContentResolver().update(uri2, newUserValue, selectionClause, selectionArgs);
                     Log.i(TAG, "updated: " + numUpdated + " rows");
-                    break; //found image
-
                 }
+               if(uripath.equals(path)) break;
             } while(cr.moveToNext());
 
 

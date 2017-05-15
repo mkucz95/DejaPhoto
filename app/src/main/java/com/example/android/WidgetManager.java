@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -46,7 +47,7 @@ public class WidgetManager extends IntentService {
                 else if ("karma".equals(action)) {
                     if(getCounter() != -1) {//only call karma if we have one or more pictures!
                         updateIntent.setAction(Intent.ACTION_SEND);
-                        updateIntent.putExtra("path", getPath());
+                        updateIntent.putExtra("path", getPath("karma"));
                         updateIntent.putExtra("type", karma);
                        // Toast.makeText(this.getApplicationContext(), "Karma Addded", Toast.LENGTH_SHORT).show();
                         Log.i("AlarmReciever", "widget manager recieved karma intent");
@@ -58,8 +59,10 @@ public class WidgetManager extends IntentService {
                 } else if ("release".equals(action)) {
                     if(getCounter() != -1) { //only call release if we have one or more pictures!
                         updateIntent.setAction(Intent.ACTION_SEND);
-                        updateIntent.putExtra("path", getPath());
+                        updateIntent.putExtra("path", getPath("release"));
                         updateIntent.putExtra("type", "release");
+                        Log.i("AlarmReciever", "releasing :" + getPath("release"));
+
 
                         //Toast.makeText(this.getApplicationContext(), "Photo Released", Toast.LENGTH_SHORT).show();
                         Log.i("AlarmReciever", "widget manager recieved release intent");
@@ -89,13 +92,13 @@ public class WidgetManager extends IntentService {
         return  counter.getInt("counter", -1);
     }
 
-    //find what the current head is, and return the path at that head
-    public String getPath(){        SharedPreferences head = getSharedPreferences("head", MODE_PRIVATE);
+    //find what head the release or karma was pressed and return the path at that head
+    public String getPath(String type){
+        SharedPreferences cycleAction = getSharedPreferences("cycleAction", MODE_PRIVATE);
+        String path = cycleAction.getString(type, "");
+        Log.i("WidgetManager", "save path to release, "+ path);
+        return path;
 
-        int num = head.getInt("head", -1);
-
-        SharedPreferences displayCycle = getSharedPreferences("display_cycle", MODE_PRIVATE);
-        return displayCycle.getString(Integer.toString(num), "DEFAULTVALUE");
     }
 
 }

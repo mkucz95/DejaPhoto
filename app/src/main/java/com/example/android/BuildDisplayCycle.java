@@ -66,8 +66,6 @@ public class BuildDisplayCycle extends IntentService {
 
     private void buildFromString(String[] paths) { //would be used to get sorted information
         clearDisplayCycle();
-        clearSharedPreferences("head");
-        clearSharedPreferences("counter");
 
         int picNum=-1;
 
@@ -146,6 +144,8 @@ public class BuildDisplayCycle extends IntentService {
         //save the counter as a key string (will be searched by this string
         //the value of the pair is the absolute path to the image
         displayCycleEditor.putString(Integer.toString(picNum), path);
+        Log.i(TAG, Integer.toString(picNum) + " : " + path);
+
         displayCycleEditor.apply();
     }
 

@@ -81,6 +81,8 @@ public class WallpaperChanger extends IntentService {
 
         rviews = new RemoteViews(AppWidget.getPackageName(), R.layout.dejaphoto_appwidget_layout);
         Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
+        Log.i("updateLocation", "Getting location...");
+
         PhotoLocation locName = new PhotoLocation(path, gc);
         rviews.setTextViewText(R.id.display_location, locName.locationName);
         if(locName.locationName != " ") {
