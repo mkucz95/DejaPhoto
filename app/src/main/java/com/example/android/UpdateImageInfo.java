@@ -82,19 +82,19 @@ public class UpdateImageInfo extends IntentService {
                 Log.i(TAG, "looking for image: "+ path+"    ----    image in this row: "+ uripath);
 
                 if(uripath.equals(path)){
-                    if(infoToAdd.equals("released")){
+                   /* if(infoToAdd.equals("released")){
                         //delete here
                         File newFile = new File(path);
                         newFile.delete();
                         Log.i("UpdateInfo", "Deleted: " + path);
                         sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(newFile)));
 
-                    }
+                    }*/
                     Long id = cr.getLong(idLoc);
-                    String[] selectionArgs = {""+id};
+                    String[] selectionArgs = {path};
 
                     Log.i("UpdateInfo", "Selection Args: " + selectionArgs[0]);
-                    String selectionClause =  MediaStore.MediaColumns.DATA + " = ?";
+                    String selectionClause =  MediaStore.Images.Media.DATA + " = ?";
 
                     ContentValues newUserValue = new ContentValues();
 
@@ -102,10 +102,9 @@ public class UpdateImageInfo extends IntentService {
                     String newDescription = currString + "," + infoToAdd;
                     newUserValue.put(MediaStore.Images.ImageColumns.DESCRIPTION, newDescription);
 
-                    Uri uri2 = Uri.withAppendedPath(uri, ""+id);
-
                     //update(@thisUri, with values from ContentValues ...)
-                    int numUpdated  = getContentResolver().update(uri2, newUserValue, selectionClause, selectionArgs);
+                    int numUpdated  = getContentResolver().update(uri, newUserValue, selectionClause, selectionArgs);
+                  
                     Log.i(TAG, "updated: " + numUpdated + " rows");
                 }
                if(uripath.equals(path)) break;
