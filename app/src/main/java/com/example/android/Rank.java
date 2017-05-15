@@ -52,8 +52,8 @@ public class Rank {
                 Location.distanceBetween(this.localLat, this.localLng, Double.parseDouble(x.getLatLong()[0]), Double.parseDouble(x.getLatLong()[1]), a);
                 double distance = a[0] / 3.28;
          //       Log.i("rankClass", photo.size() + "");
-                Log.i("rankClass", "Distance from: " + distance);
-                Log.i("time",x.getDayOfWeek());
+                Log.i("rankClass", "Distance is: " + distance);
+                Log.i("time",x.getDateTaken());
             } else
                 Log.i("rankClass", "Distance from: null");
 
@@ -117,9 +117,11 @@ public class Rank {
 
                 Location.distanceBetween(localLat, localLng, photo1Lat, photo1Lng, dist);
                 double distance1 = dist[0] / 3.28;   //meter to feet
-                Log.d("testdistance 1", distance1 + " j is " + j);
-                Location.distanceBetween(localLat, localLng, photo2Lat, photo2Lng, dist);
-                double distance2 = dist[0] / 3.28;
+                Log.d("testdistance 1", distance1 + "" );
+
+                float[]dist1 = new float[1];
+                Location.distanceBetween(localLat, localLng, photo2Lat, photo2Lng, dist1);
+                double distance2 = dist1[0] / 3.28;
                 Log.d("testdistance2", distance2 + "");
 
                 /*find the real different on the day of the week*/
@@ -128,7 +130,7 @@ public class Rank {
                 else dayIntDiff1 = abs(dayPhoto1 - dayInt);
 
                 if (abs(dayPhoto2 - dayInt) > 3)
-                    dayIntDiff1 = 7 - abs(dayPhoto2 - dayInt);
+                    dayIntDiff2 = 7 - abs(dayPhoto2 - dayInt);
                 else dayIntDiff2 = abs(dayPhoto2 - dayInt);
                 int changeInt = 0;
                 if (isKarma) {
