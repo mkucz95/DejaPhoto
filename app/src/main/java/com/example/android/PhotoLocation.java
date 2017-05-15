@@ -71,23 +71,14 @@ public class PhotoLocation{
                 if (addresses.size() > 0) {
                     city = addresses.get(0).getLocality();         //Get city information
                     address = addresses.get(0).getAddressLine(0); //Get street address
-                    state = addresses.get(0).getAdminArea();        //Get state
 
-                    if (city != null || address != null || state != null) {
-                        if (city != null && address != null && state != null) {
-                            locationName = city + ", " + state;
-                        } else if (city != null && state != null) {
-                            locationName = city + ", " + state;
-                        } else if (address != null && state != null) {
-                            locationName = address + ", " + state;
-                        } else if (address != null && city != null) {
+                    if (city != null || address != null ) {
+                        if (city != null && address != null) {
                             locationName = address + ", " + city;
-                        } else if (city != null) {
-                            locationName = city;
-                        } else if (address != null) {
+                        } else if (address != null && city == null) {
                             locationName = address;
                         } else {
-                            locationName = state;
+                            locationName = city;
                         }
                     } else {
                         locationName = " ";

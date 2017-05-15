@@ -27,6 +27,7 @@ import com.example.dejaphoto.R;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
@@ -50,20 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //Amanda code , dont touch
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent receiverIntent = new Intent(getApplicationContext(), myReceiver.class);
-//        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
-//        clickIntent.setAction(Intent.ACTION_SEND);
-//        clickIntent.setType("text/plain");
-//        clickIntent.putExtra("button_pressed", "next");
-//        PendingIntent pending = PendingIntent.getService(this, 0, clickIntent, 0);
-        PendingIntent pending = PendingIntent.getBroadcast(this, 0, receiverIntent, 0);
-        am.setRepeating(AlarmManager.RTC, 0, 5, pending);
-        //Amanda code, dont touch
-
-
+        setAlarm(); //Amanda: call function for autoWallpaper change
 
         System.out.println(Manifest.permission.READ_EXTERNAL_STORAGE.equals(PackageManager.PERMISSION_GRANTED));
 
@@ -160,6 +148,56 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent (this,Rerank.class);
         startService(intent);
     }
+
+
+    //Amanda's code, dont touch
+    public void setAlarm(){
+
+//        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
+//        clickIntent.setAction(Intent.ACTION_SEND);
+//        clickIntent.setType("text/plain");
+//        clickIntent.putExtra("button_pressed", "next");
+//        PendingIntent pending = PendingIntent.getService(this, 0, clickIntent, 0);
+
+        /*Below code is to obtain time it has been since service starts*/
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        long startTime = calendar.getTimeInMillis();
+
+        Intent receiverIntent = new Intent(getApplicationContext(), myReceiver.class);
+        PendingIntent pending = PendingIntent.getBroadcast(this, 0, receiverIntent, 0);
+        //not sure why, but 'this' is faster than  getApplicationContext()
+        //PendingIntent pending = PendingIntent.getBroadcast(getApplicationContext(), 0, receiverIntent, 0);
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC, startTime, 5000, pending);
+        //am.setWindow(AlarmManager.RTC_WAKEUP, 0, 5000, pending);
+
+    }
+
+    //Amanda's code dont touch
+    //Exact same code as SetAlarm() except 'cancel()'
+    public void cancelAlarm(){
+
+        /*Below code is to obtain time it has been since service starts*/
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        long startTime = calendar.getTimeInMillis();
+
+        Intent receiverIntent = new Intent(getApplicationContext(), myReceiver.class);
+        PendingIntent pending = PendingIntent.getBroadcast(this, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT); //UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) getApplication().getSystemService(ALARM_SERVICE);
+        am.cancel(pending);
+        am.setRepeating(AlarmManager.RTC, startTime, 5000, pending);
+    }
+
 
 
     public void startApp(){

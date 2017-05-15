@@ -59,7 +59,7 @@ public class Rerank extends IntentService {
             Rank newRank = new Rank(list, getSettings(), myLat, myLong, isTimeOn,isLocaOn,isWeekOn,isKarma);
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
             String[] newPaths = newRank.getPaths(); //extract paths of relevant pictures
-            Log.i(TAG, "this is path0: " + newPaths[0]); //test to see first path
+            //Log.i(TAG, "this is path0: " + newPaths[0]); //test to see first path
 
             Bundle data = new Bundle();
             data.putStringArray("new_cycle", newPaths);
@@ -78,7 +78,6 @@ public class Rerank extends IntentService {
     public void getMyLocation() {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-            // TODO: REQUEST PERMISSIONS IF NOT SET
             Log.i(TAG, "------------------------Getting Permissions");
 
             //    ActivityCompat#requestPermissions

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -32,9 +33,16 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     PendingIntent karmaPI;
     PendingIntent releasePI;
 
+    Intent intentKarma;
+    Intent intentRelease;
+
+
+
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
+
+
         for(int i=0; i<N; i++){ //
             int appWidgetId = appWidgetIds[i];
 
@@ -74,6 +82,10 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
         String pressed = "button_pressed";
         Intent clickIntent = new Intent(context, WidgetManager.class);
+
+
+        //Intent restartTimer = new Intent(context, AutoChanger.class);
+
         clickIntent.setAction(Intent.ACTION_SEND);
         clickIntent.setType("text/plain");
 
@@ -83,18 +95,17 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
 
         if (intent.getAction().equals(PREVIOUS_PIC)) {
+
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
             clickIntent.putExtra(pressed, "previous");
             changePicture = true;
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
-            undoManager(context, "karma", views);
-
-           // clickIntent.putExtra(pressed, "karma");
+            undoManager(context, "karma");
             actionNeeded = true;
+
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
-            undoManager(context, "release", views);
-            //clickIntent.putExtra(pressed, "release");
+            undoManager(context, "release");
             actionNeeded = true;
 
         } else if (intent.getAction().equals(NEXT_PIC)) {
@@ -104,103 +115,113 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         }
 
         if (changePicture) context.startService(clickIntent); //call widgetmanager
+        //if(changePicture || actionNeeded) context.startService(restartTimer);
     }
 
-    public void undoManager(Context context, String action, RemoteViews views){
-        //TODO Potentially cancel alarm with 2nd alarm
+
+
+    public void undoManager(Context context, String action){
         this.karmaAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         this.releaseAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
 
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.setAction(Intent.ACTION_SEND);
-        intent.setType("text/plain");
+        intentKarma = new Intent(context, AlarmReceiver.class);
+        intentKarma.setAction(Intent.ACTION_SEND);
+        intentKarma.setType("text/plain");
+
+        intentRelease = new Intent(context, AlarmReceiver.class);
+        intentRelease.setAction(Intent.ACTION_SEND);
+        intentRelease.setType("text/plain");
 
 
-        boolean alarmKarma = getAlarm("karma", context);
-        //alarm not set and button karma was pressed
-
-        boolean alarmRelease = getAlarm("release", context);
-        //alarm not set and release button pressed
-
-
-        if(!alarmKarma && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
+        if(!getAlarm("karma", context) && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
             //Log.i("undoManager", (PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE)).toString());
-            intent.putExtra("action", "karma");
-            this.karmaPI = PendingIntent.getBroadcast(context, 0, intent, 0);
-            karmaAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 10000, karmaPI); // Millisec * Second * Minute
+            intentKarma.setAction(ACTION_KARMA);
 
-            Log.i("undoManager", "Karma text set to undo");
-            views.setTextViewText(R.id.karma_btn, "Undo");
+            this.karmaPI = PendingIntent.getBroadcast(context, 0, intentKarma, 0);
+            karmaAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 15000, karmaPI); // Millisec * Second * Minute
+
+            setPath("karma", context);
 
             setAlarm("karma", context, true); //switch alarm on
 
-            Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Click Karma again to undo", Toast.LENGTH_LONG).show();
+
         }
 
-        else if(!alarmRelease  && action.equals("release") ){
-            intent.putExtra("action", "release");
-            releasePI = PendingIntent.getBroadcast(context, 0, intent, 0);
-            releaseAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 10000, releasePI); // Millisec * Second * Minute
+        else if(!getAlarm("release", context)  && action.equals("release") ){
+            intentRelease.setAction(ACTION_RELEASE);
+            releasePI = PendingIntent.getBroadcast(context, 0, intentRelease, 0);
+            releaseAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 15000, releasePI); // Millisec * Second * Minute
 
-            Log.i("undoManager", "Release text set to undo");
-            views.setTextViewText(R.id.release_btn, "Undo");
+            setPath("release", context);
 
             setAlarm("release", context, true);
-            if(alarmKarma){
-                karmaAlarm.cancel(karmaPI);
-                karmaPI.cancel();
+
+            if(getAlarm("karma", context)){
+                if(karmaPI != null) {
+                    karmaAlarm.cancel(karmaPI);
+                    karmaPI.cancel();
+                }
                 setAlarm("karma", context, false);
             }
 
-            Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(context, "Click Release again to undo", Toast.LENGTH_LONG).show();
         }
 
-        else if (alarmKarma && action.equals("karma") ){ //when the user presses button a second time before the alarm timer runs out
+        else if (getAlarm("karma", context) && action.equals("karma") ){ //when the user presses button a second time before the alarm timer runs out
             //alarm.cancelAlarm(context);
-            Log.i("undoManager", "alarmKarma : " + alarmKarma);
-            views.setTextViewText(R.id.karma_btn, action);
+            Log.i("undoManager", "alarmKarma : " + getAlarm("karma", context));
+
 
             if(karmaPI != null) {
                 karmaAlarm.cancel(karmaPI); // Millisec * Second * Minute
                 karmaPI.cancel();
+                intentKarma.setAction("");
             }
 
-            Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
-
             setAlarm("karma", context, false);
-
-
+            Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
         }
 
-        else if(alarmRelease && action.equals("release")){ //release alarm on
-            Log.i("undoManager", "alarmRelease : " + alarmRelease);
-
-
-            views.setTextViewText(R.id.release_btn, action);
-            Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
+        else if(getAlarm("release", context) && action.equals("release")){ //release alarm on
+            Log.i("undoManager", "alarmRelease : " + getAlarm("release", context));
 
             if(releasePI != null) {
                 releaseAlarm.cancel(releasePI); // Millisec * Second * Minute
                 releasePI.cancel();
+                intentRelease.setAction("");
             }
 
             setAlarm("release", context, false);
-
+            Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
         }
     }
 
     public boolean getAlarm(String type, Context context){
-        SharedPreferences sharedPref = context.getSharedPreferences("alarm", 0);
+        SharedPreferences sharedPref = context.getSharedPreferences("alarm", Context.MODE_PRIVATE);
         return sharedPref.getBoolean(type, false);
     }
 
     public void setAlarm(String type, Context context, boolean pref){
-        SharedPreferences sharedPref = context.getSharedPreferences("alarm", 0);
+        SharedPreferences sharedPref = context.getSharedPreferences("alarm", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(type, pref);
         editor.apply();
+    }
+
+    public void setPath(String type, Context context){
+        SharedPreferences headPref =  context.getSharedPreferences("head", Context.MODE_PRIVATE);
+        int head = headPref.getInt("head", 0);
+
+        SharedPreferences dispCycle =  context.getSharedPreferences("display_cycle", Context.MODE_PRIVATE);
+        String currpath = dispCycle.getString(Integer.toString(head), "");
+
+        SharedPreferences cycleAction = context.getSharedPreferences("cycleAction", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = cycleAction.edit();
+        edit.putString(type, currpath);
+
+        edit.apply();
     }
 
 }
