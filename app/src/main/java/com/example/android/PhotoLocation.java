@@ -22,7 +22,6 @@ public class PhotoLocation{
 
     public String locationName;
     String city;
-    String state;
     String address;
     ExifInterface exif;
     Double Longitude, Latitude;
@@ -73,12 +72,11 @@ public class PhotoLocation{
                     address = addresses.get(0).getAddressLine(0); //Get street address
 
                     if (city != null || address != null ) {
-                        if (city != null && address != null) {
-                            locationName = address + ", " + city;
-                        } else if (address != null && city == null) {
+                        if (city != null) {
                             locationName = address;
-                        } else {
-                            locationName = city;
+                        }
+                        else {
+                            locationName = address;
                         }
                     } else {
                         locationName = " ";

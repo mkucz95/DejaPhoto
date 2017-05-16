@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -83,14 +85,20 @@ public class SetActivity extends AppCompatActivity {
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 }
                 else { //dejavu mode is on
+                    Intent trackerIntent = new Intent (getApplicationContext(), TrackerService.class);
                     if (isChecked) {
                         setPreferences("location", true);
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is on", Toast.LENGTH_SHORT).show();
+                        Log.i("trackerService", "Starting trackerService Intent");
+                        startService(trackerIntent);
+
                     } else {
                         setPreferences("location", false);
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is off", Toast.LENGTH_SHORT).show();
+                        Log.i("trackerService", "Stopping trackerService Intent");
+                        stopService(trackerIntent);
                     }
                 }
             }

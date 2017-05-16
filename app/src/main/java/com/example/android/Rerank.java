@@ -20,6 +20,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,8 @@ import java.util.List;
 public class Rerank extends IntentService {
     private static final String ACTION_RERANK_DISPLAY = "com.example.android.RERANK_DISPLAY";
     private static final String TAG = "RerankService";
+    public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 100;
+
 
     private String myLat = "", myLong = "";
 
@@ -41,24 +44,30 @@ public class Rerank extends IntentService {
         Log.i(TAG, "Intent Handled");
         if (intent != null) {
 
-            SharedPreferences sharedPreferences = getSharedPreferences("settings",0);
+            SharedPreferences sharedPreferences = getSharedPreferences("settings", 0);
 
-            boolean isLocaOn = sharedPreferences.getBoolean("time",false);
-            boolean isTimeOn = sharedPreferences.getBoolean("location",false);
-            boolean isWeekOn = sharedPreferences.getBoolean("day",false);
-            boolean isKarma = sharedPreferences.getBoolean("karma",false);
+            boolean isLocaOn = sharedPreferences.getBoolean("location", false);
+            boolean isTimeOn = sharedPreferences.getBoolean("time", false);
+            boolean isWeekOn = sharedPreferences.getBoolean("day", false);
+            boolean isKarma = sharedPreferences.getBoolean("karma", false);
             ArrayList<Photo> list = gatherCycleInfo(); //populate the arraylist from file
 
 
-            Log.d("rerank test1","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Log.d("rerank test1", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             //create new rank from the arraylist we collected, and pass in settings user chose
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ getting location...");
             getMyLocation();
-            Log.d("rerank test2","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Log.d("rerank test2", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ got my location");
-            Rank newRank = new Rank(list, getSettings(), myLat, myLong, isTimeOn,isLocaOn,isWeekOn,isKarma);
+            Rank newRank = new Rank(list, getSettings(), myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma);
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
             String[] newPaths = newRank.getPaths(); //extract paths of relevant pictures
+
+            Log.i("distanceRank", "Location Ranking: ");
+            for(String s : newPaths){
+                Log.i("distanceRank", "Path: " + s);
+            }
+
             //Log.i(TAG, "this is path0: " + newPaths[0]); //test to see first path
 
             Bundle data = new Bundle();
@@ -75,35 +84,43 @@ public class Rerank extends IntentService {
         }
     }
 
+
     public void getMyLocation() {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-            Log.i(TAG, "------------------------Getting Permissions");
+        String provider = "";
+        Log.i(TAG, "------------------------In getMyLocation");
+        List<String> providerList = lm.getProviders(true);
+        for(String s : providerList){
+            Log.i(TAG, "Provider: " + s);
+        }
+        if (providerList.contains(LocationManager.GPS_PROVIDER)) {
+            provider = LocationManager.GPS_PROVIDER;
+            Log.i(TAG, "------------------------Using GPS Provider");
 
+        } else if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
+            provider = LocationManager.NETWORK_PROVIDER;
+            Log.i(TAG, "------------------------Using Network Provider");
+        } else
+            Toast.makeText(this, "no location provider to use", Toast.LENGTH_SHORT).show();
+
+        Boolean permissions = (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED));
+
+        Log.i(TAG, "Permissions: " + permissions);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            //ActivityCompat.requestPermissions(MainActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 
-            return;
         }
 
-        String provider = "";
-        Log.i(TAG, "------------------------In getMyLocation");
-        List <String> providerList = lm.getProviders(true);
-        if(providerList.contains(LocationManager.GPS_PROVIDER)){
-            provider = LocationManager.GPS_PROVIDER;
-        }else if (providerList.contains(LocationManager.NETWORK_PROVIDER))
-            provider = LocationManager.NETWORK_PROVIDER;
-        else
-            Toast.makeText(this,"no location provider to use",Toast.LENGTH_SHORT).show();
         Location location = lm.getLastKnownLocation(provider);
+
         if(location != null){
-
-
             Log.i(TAG, "------------------------Got Location: " + location);
             double longitude = location.getLongitude();
             Log.i(TAG, "------------------------Set Longitude t: " + longitude);
@@ -114,6 +131,25 @@ public class Rerank extends IntentService {
             this.myLong = Double.toString(longitude);
         }
     }
+
+/*
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[],
+                                           int[] grantResults) {
+        Log.i("permission", "Requesting Permission");
+        if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
+            Log.i("permission", "checking...");
+            if (grantResults.length == 1 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                //Permission denied
+                Toast.makeText(this, "Read External Storage permission denied", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }*/
 
     /*
     this method extracts relevant information (karma released, date, time, location, path etc)

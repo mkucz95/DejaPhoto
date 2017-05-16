@@ -82,14 +82,6 @@ public class UpdateImageInfo extends IntentService {
                 Log.i(TAG, "looking for image: "+ path+"    ----    image in this row: "+ uripath);
 
                 if(uripath.equals(path)){
-                   /* if(infoToAdd.equals("released")){
-                        //delete here
-                        File newFile = new File(path);
-                        newFile.delete();
-                        Log.i("UpdateInfo", "Deleted: " + path);
-                        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(newFile)));
-
-                    }*/
                     Long id = cr.getLong(idLoc);
                     String[] selectionArgs = {path};
 
@@ -107,12 +99,14 @@ public class UpdateImageInfo extends IntentService {
                   
                     Log.i(TAG, "updated: " + numUpdated + " rows");
                 }
-               if(uripath.equals(path)) break;
+               if(uripath.equals(path)) {
+                   Log.i("UpdateInfo", "Reranking...");
+                   Intent rerankIntent = new Intent (this,Rerank.class);
+                   startService(rerankIntent);
+                   break;
+               }
             } while(cr.moveToNext());
-
-
         }
-
         if (cr != null) {
             cr.close();
         }

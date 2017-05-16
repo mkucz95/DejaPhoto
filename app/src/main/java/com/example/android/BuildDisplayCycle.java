@@ -72,7 +72,7 @@ public class BuildDisplayCycle extends IntentService {
             if (paths != null) { //DCIM contains photos
                 picNum = 0;
                 for (String currPicture : paths) { //add each photo's path to cycle as a node
-
+                    Log.i(TAG, "Picture: " + currPicture + ", " + picNum);
                     savePicture(currPicture, picNum);
                     picNum++;
                 }

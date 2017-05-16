@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
 
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
-    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 99;
+    public static final int MY_PERMISSIONS_MULTIPLE_REQUEST = 99;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startApp(){
+        Log.i("distanceRank", "RERANKING...");
         SharedPreferences sharedPreferences = getSharedPreferences("Deja Photo", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -223,10 +225,12 @@ public class MainActivity extends AppCompatActivity {
         Log.i("permission", "checking permission...");
         //Check permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             //Request Permissions
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_MULTIPLE_REQUEST);
         }
         else{
             Intent backgroundIntent = new Intent(this, BackgroundService.class);
@@ -247,12 +251,12 @@ public class MainActivity extends AppCompatActivity {
                                            String permissions[],
                                            int[] grantResults) {
         Log.i("permission", "Requesting Permission");
-        if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
+        if (requestCode == MY_PERMISSIONS_MULTIPLE_REQUEST) {
             Log.i("permission", "checking...");
-            if (grantResults.length == 1 &&
+            if (grantResults.length == 3 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.i("permission", "Permission Now Granted...");
-                Toast.makeText(this, "Read External Storage permission granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Read permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
                 Intent backgroundIntent = new Intent(this, BackgroundService.class);
                 startService(backgroundIntent);  //starts service that keeps track of time and location
@@ -264,11 +268,27 @@ public class MainActivity extends AppCompatActivity {
                 startService(displayCycleIntent);
                 //starts service that first builds and calls another service to save display cycle
 
-            } else {
-                //Permission denied
-                Toast.makeText(this, "Read External Storage permission denied", Toast.LENGTH_SHORT).show();
             }
-        } else {
+            else {
+                //Permission denied
+                Toast.makeText(this, "Read Access Denied", Toast.LENGTH_SHORT).show();
+            }
+            if(grantResults.length == 3 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                //Permission denied
+                Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
+            }
+            if(grantResults.length == 3 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                //Permission denied
+                Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

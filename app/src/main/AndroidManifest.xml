@@ -133,6 +133,11 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name="com.example.android.TrackerService"
+            android:exported="false">
+        </service>
+
     </application>
 
 </manifest>

@@ -34,7 +34,7 @@ public class ModeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        saveSharedPref(false);
+        //saveSharedPref(false);
 
         mode = (Switch) findViewById(R.id.s_mode);
 
