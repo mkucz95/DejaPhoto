@@ -29,6 +29,8 @@ import java.util.List;
  */
 public class Rerank extends IntentService {
     private static final String ACTION_RERANK_DISPLAY = "com.example.android.RERANK_DISPLAY";
+    private static final String ACTION_NEW = "com.example.android.NEW";
+
     private static final String TAG = "RerankService";
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 100;
 
@@ -44,46 +46,33 @@ public class Rerank extends IntentService {
         Log.i(TAG, "Intent Handled");
         if (intent != null) {
 
-            SharedPreferences sharedPreferences = getSharedPreferences("settings", 0);
+            boolean[] settings = getSettings();
 
-            boolean isLocaOn = sharedPreferences.getBoolean("location", false);
-            boolean isTimeOn = sharedPreferences.getBoolean("time", false);
-            boolean isWeekOn = sharedPreferences.getBoolean("day", false);
-            boolean isKarma = sharedPreferences.getBoolean("karma", false);
-            ArrayList<Photo> list = gatherCycleInfo(); //populate the arraylist from file
+            boolean isLocaOn = settings[0], isTimeOn = settings[1], isWeekOn = settings[2],
+                    isKarma =  settings[3];
 
 
-            Log.d("rerank test1", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            //create new rank from the arraylist we collected, and pass in settings user chose
-            Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ getting location...");
             getMyLocation();
-            Log.d("rerank test2", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ got my location");
-            Rank newRank = new Rank(list, getSettings(), myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma);
+
+
+            Rank newRank = new Rank(getSettings(), myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma);
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
-            String[] newPaths = newRank.getPaths(); //extract paths of relevant pictures
 
-            Log.i("distanceRank", "Location Ranking: ");
-            for(String s : newPaths){
-                Log.i("distanceRank", "Path: " + s);
-            }
 
-            //Log.i(TAG, "this is path0: " + newPaths[0]); //test to see first path
+            Global.head = 0;
+            Intent imageIntent = new Intent(this, ChangeImage.class);
+            imageIntent.setAction(ACTION_NEW); //display new picture
 
-            Bundle data = new Bundle();
-            data.putStringArray("new_cycle", newPaths);
-
-            Intent cycleIntent = new Intent(this, BuildDisplayCycle.class);
-            cycleIntent.setAction(ACTION_RERANK_DISPLAY); //build new display cycle
-            cycleIntent.putExtras(data);
-            Log.i(TAG, "cycle intent extras: " + cycleIntent.getExtras());
-
-            startService(cycleIntent);
+            startService(imageIntent);
 
             stopService(intent);
         }
     }
 
+    /*
+    returns users current location to be used in ranking
+     */
 
     public void getMyLocation() {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -107,15 +96,10 @@ public class Rerank extends IntentService {
 
         Log.i(TAG, "Permissions: " + permissions);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //nothing in here needed wtf
         }
 
         Location location = lm.getLastKnownLocation(provider);
@@ -132,92 +116,6 @@ public class Rerank extends IntentService {
         }
     }
 
-/*
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[],
-                                           int[] grantResults) {
-        Log.i("permission", "Requesting Permission");
-        if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
-            Log.i("permission", "checking...");
-            if (grantResults.length == 1 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-            } else {
-                //Permission denied
-                Toast.makeText(this, "Read External Storage permission denied", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }*/
-
-    /*
-    this method extracts relevant information (karma released, date, time, location, path etc)
-    and creates an arraylist that is then used to create a new display cycle rank
-     */
-
-    public ArrayList<Photo> gatherCycleInfo(){
-        ArrayList<Photo> pictures = new ArrayList<>();
-
-        Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {MediaStore.Images.Media.DATA,
-                MediaStore.Images.ImageColumns.DESCRIPTION, MediaStore.Images.ImageColumns.DATE_TAKEN,
-                MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE};
-        //which columns we will get (all in this case)
-
-        Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
-
-        /*
-        * query(uri,             // The content URI of the images
-        * projection,            // The columns to return for each row (each diff image is new row)
-        * null,                 //selection criteria
-        * null,                 //selection criteria
-        * null                  // The sort order for the returned rows
-        */
-
-        if(null == cr) {
-            Log.i(TAG, "ERROR null==cr in BuildDisplayCycle");
-        }else if( cr.getCount()<1) {
-            Log.i(TAG, "NO IMAGES PRESENT");
-        } else { //handle returned data
-            Log.i(TAG, "IMAGES PRESENT");
-            Log.i(TAG, "uri to access"+uri.toString());
-            Log.i(TAG, "name "+cr.getColumnName(0)+", cr.count "+ cr.getCount());
-
-            cr.moveToFirst();
-
-
-            int[] columns = {cr.getColumnIndex(MediaStore.MediaColumns.DATA),
-                    cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION),
-                    cr.getColumnIndex(MediaStore.Images.ImageColumns.DATE_TAKEN),
-                    cr.getColumnIndex(MediaStore.Images.ImageColumns.LATITUDE),
-                    cr.getColumnIndex(MediaStore.Images.ImageColumns.LONGITUDE)};
-            //used below to access the columns we want
-
-             do{ //go through all the images
-
-                 for(int i = 0; i<5; i++){
-                     Log.i(TAG, "column"+i+" ----------------------------------- "+cr.getString(columns[i]));
-                 }
-
-                 Photo photo = new Photo(cr.getString(columns[0]), cr.getString(columns[1]),
-                         cr.getString(columns[2]), cr.getString(columns[3]),
-                         cr.getString(columns[4]));
-
-                 pictures.add(photo);
-
-                Log.i(TAG, "added new photo object to list");
-            } while(cr.moveToNext());
-        }
-
-        if (cr != null) {
-            cr.close();
-        }
-
-        return pictures;
-    }
-
-
     /*
     this function accessed shared preferences to see what settings the user has selected for their
     ranking, and returns that in a boolean array, default is true for all settings!
@@ -232,6 +130,5 @@ public class Rerank extends IntentService {
       }
       return settings;
     }
-
 
 }

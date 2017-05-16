@@ -29,37 +29,28 @@ public class AlarmReceiver extends BroadcastReceiver
         Log.i("AlarmReceiver", "AlarmReceiver got PendingIntent");
 
         String action = intent.getAction();
+      String path =intent.getExtras().getString("path");
 
         Log.i("AlarmReciever", "action:  "+ action);
-
-
-        Intent sendInfo = new Intent(context, WidgetManager.class);
-        sendInfo.setAction(Intent.ACTION_SEND);
-        sendInfo.setType("text/plain");
 
 
         if(ACTION_KARMA.equals(action) && getAlarm("karma", context)) {
             Log.i("AlarmReciever", "Karma Intent Received");
 
 
-            sendInfo.putExtra("button_pressed", "karma");
             setAlarm("karma", context, false); //reset alarm
             Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
 
-            context.startService(sendInfo);
+            setData(true, path);
         }
 
         else if(ACTION_RELEASE.equals(action) && getAlarm("release", context)){
             Log.i("AlarmReciever", "Release Intent Received");
-            sendInfo.putExtra("button_pressed", "release");
 
 
             setAlarm("release", context, false); //reset alarm
             setAlarm("karma", context, false); //reset alarm
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
-
-
-            context.startService(sendInfo);
         }
 
 
@@ -78,5 +69,18 @@ public class AlarmReceiver extends BroadcastReceiver
         SharedPreferences sharedPref = context.getSharedPreferences("alarm", Context.MODE_PRIVATE);
         return  sharedPref.getBoolean(type, false);
     }
+
+
+    public void setData(boolean flag, String path){
+
+        for(int i = 0; i<Global.displayCycle.size(); i++){
+            Photo photo = Global.displayCycle.get(i);
+            if(photo.getPath() == path){
+                if(flag) photo.setKarma(true);
+                else photo.setReleased(true);
+            }
+        }
+    }
+
 
 }

@@ -54,9 +54,6 @@
         <service
             android:name="com.example.android.WallpaperChanger"
             android:exported="false" />
-        <service
-            android:name="com.example.android.WidgetManager"
-            android:exported="false" />
 
         <activity
             android:name="com.example.android.MainActivity"
@@ -115,10 +112,6 @@
 
             </intent-filter>
         </service>
-        <service
-            android:name="com.example.android.UpdateImageInfo"
-            android:exported="false"
-            android:grantUriPermissions="true"/>
         <service
             android:name="com.example.android.Rerank"
             android:exported="false">

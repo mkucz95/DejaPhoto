@@ -18,24 +18,19 @@ import java.util.Calendar;
 import static java.lang.StrictMath.abs;
 
 public class Rank {
-    private double localLat;
-    private double localLng;
+    private double localLat, localLng;
 
     /*we still not get the two varible value*/
 
-    boolean isLocaOn = false;
-    boolean isTimeOn = false;
-    boolean isKarma = false;
-    boolean isWeekOn = false;
+    boolean isLocaOn = false, isTimeOn = false, isKarma = false, isWeekOn = false;
 
-    private ArrayList<Photo> photo = new ArrayList<>();
+    private ArrayList<Photo> photo = Global.displayCycle;
     //each photo is populated with all the information we need
+
     private boolean[] settings; //location, time, day, karma
 
-
-    public Rank(ArrayList<Photo> list, boolean[] settings, String localLat, String localLong, boolean b1, boolean b2, boolean
+    public Rank(boolean[] settings, String localLat, String localLong, boolean b1, boolean b2, boolean
             b3, boolean b4) {
-        this.photo = list;
         this.settings = settings;
         setMyLocation(localLat, localLong);
         Log.i("rankClass", "My Location : " + localLat + ", " + localLong );
@@ -44,9 +39,8 @@ public class Rank {
         isWeekOn = b3;
         isKarma = b4;
 
-
         sort(); //sort the array list
-        Log.i("distanceRank", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         for (Photo x : photo) {
             float[] a = new float[1];
             if (x.getLatLong()[0] != null && x.getLatLong()[1] != null) {
@@ -58,25 +52,16 @@ public class Rank {
             } else
                 Log.i("distanceRank", "Distance from: null");
 
-
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(Long.parseLong(x.getDateTaken()));
-            String time = formatter.format(calendar.getTime());
-        //    Log.d("rankClass", x.getDayOfWeek() + " , " + time);
-          //  Log.d("rankClass", x.getLatLong()[0] + " , " + x.getLatLong()[1]);
-
         }
 
     }
 
 
     public void sort() {
-
-        Photo temp = new Photo();
+        Photo temp;
         long curMiliSecond = System.currentTimeMillis();
-        long hour = Long.parseLong(getHour(curMiliSecond));
-        SimpleDateFormat sdf1 = new SimpleDateFormat();
+     //   long hour = Long.parseLong(getHour(curMiliSecond));
+       // SimpleDateFormat sdf1 = new SimpleDateFormat();
 
         Log.i("rankClass","Sorting...");
 
@@ -84,13 +69,9 @@ public class Rank {
         String dayOfWeek = getWeekOfDate(date);              // Date type to  day of week
         int dayInt = week(dayOfWeek);                       //the integer for the day of week
 
-        int dayIntDiff1 = 0;      //dayPhoto1 compare to dayInt
-        int dayIntDiff2 = 0;
+        int dayIntDiff1, dayIntDiff2; //to compare difference between days
 
-        double photo1Lat = 0;
-        double photo1Lng = 0;
-        double photo2Lat = 0;
-        double photo2Lng = 0;
+        double photo1Lat = 0, photo1Lng = 0, photo2Lat = 0, photo2Lng = 0;
         Log.i("distanceRank","Number of photos: " + photo.size());
         for (int i = 0; i < photo.size(); i++) {
             Log.i("distanceRank", "iteration " + i + "----------------------------------");
@@ -110,7 +91,6 @@ public class Rank {
                 } catch (Exception e) {
                     //no location information in the pictures
 //                    return;
-                    Log.d("catch", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 }
 
 
@@ -119,7 +99,7 @@ public class Rank {
 
                 float[] dist = new float[1];
 
-                Log.i("test location", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Log.i("test location", "wtf");
 
                 Location.distanceBetween(localLat, localLng, photo1Lat, photo1Lng, dist);
                 double distance1 = dist[0] / 3.28;   //meter to feet -- Distance between photo1 and current location
@@ -202,20 +182,10 @@ public class Rank {
                 }
             }
         }
+
+        Global.displayCycle = this.photo; //update the global variable for display cycle
     }
 
-
-    public String[] getPaths() { //ONLY CALL AFTER FULLY RERANKED!!!
-        ArrayList<String> paths = new ArrayList<>();
-        for (int i = 0; i < this.photo.size(); i++) {
-            if (!this.photo.get(i).isReleased()) paths.add(this.photo.get(i).getPath());
-            Log.i("RankClass", "~~~~~~~~~~~~~~~~~~~~~~~this is path: " + this.photo.get(i).getPath() + "=================released?--- " + this.photo.get(i).isReleased());
-        } //add only images without released in their fields
-
-        String[] pathArray = paths.toArray(new String[paths.size()]);
-
-        return pathArray;
-    }
 
     public void setMyLocation(String localLat, String localLong) {
         if (localLat == "") this.localLat = 0;

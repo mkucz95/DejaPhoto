@@ -27,6 +27,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String NEXT_PIC = "Next Picture";
     private static final String ACTION_KARMA = "com.example.android.KARMA";
     private static final String ACTION_RELEASE = "com.example.android.RELEASE";
+    private static final String ACTION_PREVIOUS = "com.example.android.PREVIOUS";
+    private static final String ACTION_NEXT = "com.example.android.NEXT";
 
     AlarmManager karmaAlarm;
     AlarmManager releaseAlarm;
@@ -81,23 +83,20 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         String pressed = "button_pressed";
-        Intent clickIntent = new Intent(context, WidgetManager.class);
-
 
         //Intent restartTimer = new Intent(context, AutoChanger.class);
 
-        clickIntent.setAction(Intent.ACTION_SEND);
-        clickIntent.setType("text/plain");
+        Intent changeIntent = new Intent(context, ChangeImage.class);
 
-        boolean changePicture = false; //needed to prevent crash
-        boolean actionNeeded = false;
+
+        boolean changePicture = false, actionNeeded = false; //needed to prevent crash
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
 
         if (intent.getAction().equals(PREVIOUS_PIC)) {
 
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
-            clickIntent.putExtra(pressed, "previous");
+            changeIntent.setAction(ACTION_PREVIOUS);
             changePicture = true;
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
@@ -110,12 +109,11 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
         } else if (intent.getAction().equals(NEXT_PIC)) {
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
-            clickIntent.putExtra(pressed, "next");
+            changeIntent.setAction(ACTION_NEXT);
             changePicture = true;
         }
 
-        if (changePicture) context.startService(clickIntent); //call widgetmanager
-        //if(changePicture || actionNeeded) context.startService(restartTimer);
+        if (changePicture) context.startService(changeIntent); //call widgetmanager
     }
 
 
@@ -124,24 +122,16 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         this.karmaAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         this.releaseAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-
         intentKarma = new Intent(context, AlarmReceiver.class);
-        intentKarma.setAction(Intent.ACTION_SEND);
-        intentKarma.setType("text/plain");
-
         intentRelease = new Intent(context, AlarmReceiver.class);
-        intentRelease.setAction(Intent.ACTION_SEND);
-        intentRelease.setType("text/plain");
 
 
         if(!getAlarm("karma", context) && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
-            //Log.i("undoManager", (PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE)).toString());
             intentKarma.setAction(ACTION_KARMA);
+            intentRelease.putExtra("path", getPath());
 
             this.karmaPI = PendingIntent.getBroadcast(context, 0, intentKarma, 0);
             karmaAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 15000, karmaPI); // Millisec * Second * Minute
-
-            setPath("karma", context);
 
             setAlarm("karma", context, true); //switch alarm on
 
@@ -151,10 +141,9 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
         else if(!getAlarm("release", context)  && action.equals("release") ){
             intentRelease.setAction(ACTION_RELEASE);
+            intentRelease.putExtra("path", getPath());
             releasePI = PendingIntent.getBroadcast(context, 0, intentRelease, 0);
             releaseAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 15000, releasePI); // Millisec * Second * Minute
-
-            setPath("release", context);
 
             setAlarm("release", context, true);
 
@@ -170,9 +159,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         }
 
         else if (getAlarm("karma", context) && action.equals("karma") ){ //when the user presses button a second time before the alarm timer runs out
-            //alarm.cancelAlarm(context);
             Log.i("undoManager", "alarmKarma : " + getAlarm("karma", context));
-
 
             if(karmaPI != null) {
                 karmaAlarm.cancel(karmaPI); // Millisec * Second * Minute
@@ -210,18 +197,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         editor.apply();
     }
 
-    public void setPath(String type, Context context){
-        SharedPreferences headPref =  context.getSharedPreferences("head", Context.MODE_PRIVATE);
-        int head = headPref.getInt("head", 0);
-
-        SharedPreferences dispCycle =  context.getSharedPreferences("display_cycle", Context.MODE_PRIVATE);
-        String currpath = dispCycle.getString(Integer.toString(head), "");
-
-        SharedPreferences cycleAction = context.getSharedPreferences("cycleAction", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = cycleAction.edit();
-        edit.putString(type, currpath);
-
-        edit.apply();
+    public String getPath(){
+        Photo photo = Global.displayCycle.get(Global.head);
+        return photo.getPath();
     }
-
 }

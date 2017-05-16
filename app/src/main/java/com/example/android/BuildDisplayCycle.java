@@ -38,7 +38,12 @@ public class BuildDisplayCycle extends IntentService {
            if (ACTION_BUILD_CYCLE.equals(action)) {
                 //buildFromFile(sourceFolder);
                 Log.i(TAG, "Building cycle from MEDIA...");
-                buildFromMedia();
+
+
+               //call sqlite traverser
+               SQLiteHelper helper = new SQLiteHelper();
+               helper.iterateAllMedia(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Global.wholeTableProjection, this);
+
 
                //after build from file, apply rank settings (released/karma)
                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
@@ -81,57 +86,6 @@ public class BuildDisplayCycle extends IntentService {
             }
 
             saveHeadCount(picNum);
-    }
-
-    private void buildFromMedia() {
-        clearDisplayCycle(); //just in case
-        clearSharedPreferences("head");
-        clearSharedPreferences("counter");
-
-        Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {MediaStore.Images.Media.DATA}; //which columns we will get (all in this case)
-        Cursor cr = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
-
-        Log.i(TAG, "uri to access"+uri.toString());
-        Log.i(TAG, "name, "+cr.getColumnName(0)+"cr.count "+ cr.getCount());
-
-        /*
-        * query(uri,             // The content URI of the images
-        * projection,            // The columns to return for each row (each diff image is new row)
-        * null,                 //selection criteria
-        * null,                 //selection criteria
-        * null                  // The sort order for the returned rows
-        */
-
-        int picNum=-1;
-
-        if(null == cr) {
-            Log.i(TAG, "ERROR null==cr in BuildDisplayCycle");
-        }else if( cr.getCount()<1) {
-            Log.i(TAG, "NO IMAGES PRESENT");
-            savePicture("DEFAULTPICTURE", picNum);
-        } else { //handle returned data
-            Log.i(TAG, "IMAGES PRESENT");
-            cr.moveToFirst();
-            int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
-            int description = cr.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION);
-            picNum = 0;
-           do{ //go through all the images
-               String uripath = cr.getString(pathIndex);  //get the path and other info that is specified
-
-               Log.i(TAG+" fromMedia", uripath);
-               Log.i(TAG+" fromMedia", "INDEX OF PICTURE: "+picNum);
-
-               savePicture(uripath, picNum);
-               picNum++;
-           } while(cr.moveToNext());
-        }
-
-        saveHeadCount(picNum); //save information to shared preferences
-
-            if (cr != null) {
-                cr.close();
-            }
     }
 
     public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path

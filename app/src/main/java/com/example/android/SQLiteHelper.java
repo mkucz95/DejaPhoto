@@ -1,0 +1,121 @@
+package com.example.android;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.Log;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Justin on 5/15/17.
+ */
+
+public class SQLiteHelper {
+    /*
+    This class helps us use and/or manipulate SQLite data
+     */
+
+    Cursor cr;
+    private final String TAG = "SQLiteHelper";
+    Global cycle = new Global();
+
+    ArrayList<Photo> dataPath = new ArrayList<>();
+
+    /*
+    This method iterates through a specific column given from Uri in Android SQLite and saves each
+    data field to an array list in the order that it reads it.
+     */
+
+    public void iterateAllMedia(Uri uri, String[] projection, Context context) {
+        this.cr = context.getContentResolver().query(uri, projection, null, null, null);
+
+
+        int[] colIndex = new int[projection.length];
+        for(int i = 0; i < projection.length; i++){
+                 colIndex[i] = cr.getColumnIndex(projection[i]);
+        }
+
+        /*
+        * query(uri,             // The content URI of the images
+        * projection,            // The columns to return for each row (each diff image is new row)
+        * null,                 //selection criteria
+        * null,                 //selection criteria
+        * null                  // The sort order for the returned rows
+        */
+
+        ArrayList<Photo> paths = new ArrayList<>();
+
+        if(projection.length != 5) {
+            Log.e(TAG, "wrong projection passed to sqlite helper");
+            return;
+        }
+
+        if(null == cr) {
+            Log.i(TAG, "ERROR null==cr");
+        }else if( cr.getCount()<1) {
+            Log.i(TAG, "NO MEDIA FOUND");
+        } else { //handle returned data
+            Log.i(TAG, "MEDIA PRESENT");
+            cr.moveToFirst();
+
+            do{ //go through all the images
+
+                Photo photo = new Photo(cr.getString(colIndex[0]), cr.getString(colIndex[1]),
+                        cr.getString(colIndex[2]), cr.getString(colIndex[3]));
+
+                paths.add(photo);
+
+                Log.i(TAG, ""+photo);
+            } while(cr.moveToNext());
+        }
+
+        if (cr != null) {
+            cr.close();
+        }
+
+        this.dataPath = paths;
+    }
+
+
+    /*
+    This method puts data in a certain field in sqlite database
+     */
+
+    public int storeSQLData(String data, String colToAdd, String path, Context context){
+
+        if(null==cr) {
+            Log.e(TAG, "ERROR null=cr in write");
+        }else if( cr.getCount()<1) {
+            Log.e(TAG, "ERROR no elements in table");
+        } else { //handle returned data
+            cr.moveToFirst();
+            int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
+
+            Log.i(TAG, "looking for image");
+
+
+                    String[] selectionArgs = {path};
+                    String selectionClause =  MediaStore.Images.Media.DATA + " = ?";
+
+                    ContentValues newUserValue = new ContentValues();
+                    newUserValue.put(colToAdd, data);
+
+                    //update(@thisUri, with values from ContentValues ...)
+                    int numUpdated  = context.getContentResolver().update(
+                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, newUserValue,
+                            selectionClause, selectionArgs);
+
+                    Log.i(TAG, "updated: " + numUpdated + " rows");
+            return numUpdated;
+                }
+        if (cr != null) {
+            cr.close();
+        }
+        return -1;
+    }
+
+
+}

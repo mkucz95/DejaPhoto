@@ -19,7 +19,6 @@ public class Photo {
     private String date_taken;
     private long hour;
     private String dayOfWeek;
-    private String description;
     private boolean karma = false;
     private boolean released = false;
 
@@ -28,15 +27,10 @@ public class Photo {
     }
 
     //constructor gets information from the rerank method
-    public Photo(String imagePath, String description, String date_taken, String latitude, String longitude)
+    public Photo(String imagePath, String date_taken, String latitude, String longitude)
     {
 
         this.imagePath = imagePath;
-
-
-        if(description==null) this.description = "none";
-        else this.description = description;
-
 
         this.date_taken = date_taken;
 
@@ -49,8 +43,6 @@ public class Photo {
 
         this.latitude = latitude;
         this.longitude = longitude;
-        this.karma = decodeDescription(description, true);
-        this.released = decodeDescription(description, false);
     }
 
 
@@ -72,9 +64,7 @@ public class Photo {
     }
 
     public String[] getLatLong() {
-      /*  FindLocationName findLocationName = new FindLocationName(imagePath);
-        return findLocationName.findLocation();*/
-     Log.d("test latlng","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
       String[] latLong = {this.latitude, this.longitude};
         Log.d("lattitud",latitude+"");
         Log.d("logtitude",longitude+"");
@@ -92,22 +82,14 @@ public class Photo {
         return karma;
     }
 
-    public boolean isReleased() {return released;}
-
-    public String getDescription() {
-        return description;
+    public void setKarma(boolean karma){
+        this.karma = karma;
     }
 
-    public boolean decodeDescription(String description, boolean action) {
-        if(description==null) return false;
+    public boolean isReleased() {return released;}
 
-        if (action) { //trying to decode karma
-            if (description.toLowerCase().contains("karma")) return true;
-        } else { //decoding release
-            if (description.toLowerCase().contains("released")) return true;
-        }
-
-        return false; //neither karma nor released
+    public void setReleased(boolean flag){
+        this.released = flag;
     }
 
 }

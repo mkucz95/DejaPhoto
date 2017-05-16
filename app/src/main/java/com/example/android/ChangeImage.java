@@ -108,15 +108,11 @@ public class ChangeImage extends IntentService {
     private void changeImgToDisplay(int newHead){//changes the image by calling wallpaper service
         //send new intent to the wallpaper changer intent service
         //includes file path
-        String accessPoint = Integer.toString(newHead);
-        String newPath = "";
+         String newPath;
 
         if(newHead>=0) {
-            SharedPreferences sharedPreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
-            newPath = sharedPreferences.getString(accessPoint, "defaultValue"); //get path from display cycle
-
-            System.out.println("Access point: " + accessPoint);
-            Log.d("ChangeImage", "Path Recieved" + newPath);
+          Photo photo = Global.displayCycle.get(newHead);
+            newPath = photo.getPath();
         } else{
             newPath = "DEFAULTPICTURE";
         }
