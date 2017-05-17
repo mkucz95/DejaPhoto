@@ -23,6 +23,8 @@ public class PhotoLocation{
     public String locationName;
     String city;
     String address;
+    String country;
+    String state;
     ExifInterface exif;
     Double Longitude, Latitude;
 
@@ -70,13 +72,57 @@ public class PhotoLocation{
                 if (addresses.size() > 0) {
                     city = addresses.get(0).getLocality();         //Get city information
                     address = addresses.get(0).getAddressLine(0); //Get street address
+                    country = addresses.get(0).getCountryName();
+                    state = addresses.get(0).getAdminArea();
 
-                    if (city != null || address != null ) {
-                        if (city != null) {
+                    if(country != null) {
+                        if (country.equals("United States")) {
+                            country = "USA";
+                        }
+                    }
+
+                    if (address!= null && state != null){
+                        if(address.equals(state)){
+                            address = null;
+                        }
+                    }
+
+                    if (city != null || address != null || country != null || state != null) {
+                        Log.i("photoLocation", address + ", " + city + ", " + state + ", " + country);
+                        if (city != null && state != null && country != null) {
+                            locationName = city + ", " + state + ", " + country;
+                        }
+
+                        else if(city != null && state != null ) {
+                            locationName = city + ", " + state;
+                        }
+
+                        else if(city != null && country != null){
+                            locationName = city + ", " + country;
+                        }
+
+                        else if (address != null && city != null && country != null){
+                            locationName = address + ", " + city + ", " + country;
+                        }
+
+                        else if (address!= null && state != null && country != null){
+                            locationName = address + ", "  + state + ", " + country;
+                        }
+
+                        else if (city != null && address != null){
+                            locationName = address + ", " + city;
+                        }
+
+                        else if (state != null && country != null){
+                            locationName = state + ", " + country;
+                        }
+
+                        else if(address != null){
                             locationName = address;
                         }
+
                         else {
-                            locationName = address;
+                            locationName = " ";
                         }
                     } else {
                         locationName = " ";
