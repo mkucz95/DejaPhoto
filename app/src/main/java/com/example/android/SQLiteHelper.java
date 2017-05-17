@@ -31,6 +31,7 @@ public class SQLiteHelper {
 
     public void iterateAllMedia(Uri uri, String[] projection, Context context) {
         this.cr = context.getContentResolver().query(uri, projection, null, null, null);
+        Log.i(TAG, "In iterateMedia");
 
 
         int[] colIndex = new int[projection.length];
@@ -47,9 +48,10 @@ public class SQLiteHelper {
         */
 
         ArrayList<Photo> paths = new ArrayList<>();
+        Log.i(TAG, "Paths arrayList created");
 
-        if(projection.length != 5) {
-            Log.e(TAG, "wrong projection passed to sqlite helper");
+        if(projection.length != 4) {
+            Log.i(TAG, "wrong projection passed to sqlite helper : Projection Length: " + projection.length);
             return;
         }
 
@@ -77,6 +79,7 @@ public class SQLiteHelper {
         }
 
         this.dataPath = paths;
+        Global.displayCycle = paths;
     }
 
 

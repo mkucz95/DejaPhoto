@@ -23,7 +23,7 @@ public class myReceiver extends BroadcastReceiver{
 
 
 
-        Intent i = new Intent(context, WidgetManager.class);
+        Intent i = new Intent(context, DejaPhotoWidgetProvider.class);
 
         //Bundle(key, value): a map from string values to various Parcelable types
         //Use Bundle to store Data

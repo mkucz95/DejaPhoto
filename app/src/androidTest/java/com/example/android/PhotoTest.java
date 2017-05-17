@@ -20,8 +20,8 @@ public class PhotoTest{
     String lat = "34.44296666666666";
     String longitude = "-118.5743111111111";
     String time = Long.toString(System.currentTimeMillis());
-    Photo newPhoto = new Photo(path, "asidnsandasdnaskarmajnsdjanreleased", time , lat, longitude);
-    Photo photo2 = new Photo(path, "WRONGWRONGWRONGWRONG", time , lat, longitude);
+    Photo newPhoto = new Photo(path, time , lat, longitude);
+    Photo photo2 = new Photo(path,  time , lat, longitude);
 
 
     @Test
@@ -32,7 +32,7 @@ public class PhotoTest{
         SimpleDateFormat today = new SimpleDateFormat("EEEE");
         assertEquals(today.format(date), newPhoto.getWeekOfDate(dateSql));
     }
-
+/*
     @Test
     public void testKarmaTrue(){
         assertEquals(true, newPhoto.decodeDescription(newPhoto.getDescription(), true));
@@ -50,5 +50,5 @@ public class PhotoTest{
     @Test
     public void testReleasedFalse(){
         assertEquals(false, photo2.decodeDescription(photo2.getDescription(), false));
-    }
+    }*/
 }

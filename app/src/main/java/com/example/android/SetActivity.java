@@ -23,10 +23,11 @@ import com.example.dejaphoto.R;
 
 public class SetActivity extends AppCompatActivity {
 
-    private Switch location;
-    private Switch time;
-    private Switch dayOfWeek;
-    private Switch karma;
+    public Switch location;
+    public Switch time;
+    public Switch dayOfWeek;
+    public Switch karma;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

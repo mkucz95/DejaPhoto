@@ -16,7 +16,7 @@ public class RankTest extends TestCase{
     String lat = "34.44296666666666";
     String longitude = "-118.5743111111111";
     String time = Long.toString(System.currentTimeMillis());
-    Photo testPhoto = new Photo(path, "asidnsandasdnaskarmajnsdjanreleased", time , lat, longitude);
+    Photo testPhoto = new Photo(path, time , lat, longitude);
 
 
     boolean[] testArr = {true, false};

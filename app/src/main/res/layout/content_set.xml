@@ -14,8 +14,8 @@
         android:id="@+id/s_location"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:checked="false"
         android:gravity="start"
+        android:checked="false"
         android:text="@string/latitude"
         android:textColor="#58D68D"
         android:textSize="20sp" />

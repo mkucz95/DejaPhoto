@@ -51,8 +51,7 @@ public class ChangeImage extends IntentService {
     }
 
     private void displayFirstImage(){
-        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
-        int counter = counterPref.getInt("counter", -1);
+        int counter = Global.displayCycle.size()-1;
 
         if(counter!=-1){
             changeImgToDisplay(0);
@@ -61,13 +60,9 @@ public class ChangeImage extends IntentService {
 
     private int moveHead(String direction){
 
-        SharedPreferences headPref = getSharedPreferences("head", MODE_PRIVATE);
-        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
 
-        int counterInt = 0;
-        int currHead;
-        currHead= headPref.getInt("head", 0);
-        counterInt = counterPref.getInt("counter", counterInt)-1;
+        int counterInt = Global.displayCycle.size()-1; //last element index
+        int currHead = Global.head; //current index
 
 
         Log.d("ChangeImage", "currHead: "+ currHead);
@@ -96,19 +91,17 @@ public class ChangeImage extends IntentService {
             currHead++;
         }
 
-        int newHead = currHead;
-        SharedPreferences.Editor editor = headPref.edit();
-        editor.clear();
-        editor.putInt("head", newHead); //add the new head as a number to the shared pref
-        editor.apply();
-
-        return newHead;
+        Global.head = currHead;  //set the head for the next image
+        return currHead;
     }
 
     private void changeImgToDisplay(int newHead){//changes the image by calling wallpaper service
         //send new intent to the wallpaper changer intent service
         //includes file path
          String newPath;
+
+        Log.i("ChangeImage", "newHead: " + newHead);
+        Log.i("ChangeImage", "arrayList size: " + Global.displayCycle.size());
 
         if(newHead>=0) {
           Photo photo = Global.displayCycle.get(newHead);

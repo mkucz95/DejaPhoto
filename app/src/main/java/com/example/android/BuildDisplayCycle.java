@@ -39,105 +39,28 @@ public class BuildDisplayCycle extends IntentService {
                 //buildFromFile(sourceFolder);
                 Log.i(TAG, "Building cycle from MEDIA...");
 
-
                //call sqlite traverser
                SQLiteHelper helper = new SQLiteHelper();
-               helper.iterateAllMedia(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Global.wholeTableProjection, this);
-
+               helper.iterateAllMedia(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Global.wholeTableProjection, this);
+               Log.i(TAG, "Reranking... 1st time");
 
                //after build from file, apply rank settings (released/karma)
                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
                startService(rerankIntent);
            }
             else if(ACTION_RERANK_BUILD.equals(action)){
-                Log.i(TAG, "Building Cycle from STRING...");
+                Log.i(TAG, "Building Cycle RERANK...");
 
                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
                startService(rerankIntent);
 
-            } else if(ACTION_RERANK_DISPLAY.equals(action)){
-               Log.i(TAG, "RERANK INTENT: " + intent.getExtras());
-               Bundle newPaths = intent.getExtras();
-               String[] paths = newPaths.getStringArray("new_cycle");
-
-               buildFromString(paths);
-               displayImage();  //once building the cycle is finished, display the first image
-           }
+            }
 
             Log.i(TAG, "Stopping service");
             stopService(intent);
         }
     }
 
-    private void buildFromString(String[] paths) { //would be used to get sorted information
-        clearDisplayCycle();
-
-        int picNum=-1;
-
-            if (paths != null) { //DCIM contains photos
-                picNum = 0;
-                for (String currPicture : paths) { //add each photo's path to cycle as a node
-                    Log.i(TAG, "Picture: " + currPicture + ", " + picNum);
-                    savePicture(currPicture, picNum);
-                    picNum++;
-                }
-            } else {
-                savePicture("DEFAULTPICTURE", picNum);
-            }
-
-            saveHeadCount(picNum);
-    }
-
-    public void savePicture(String path, int picNum){ //puts picture to shared preferences using string path
-        Log.i(TAG, "# of pics: " + (picNum + 1));
-
-        //add the key-value pair of picPath/counter to shared preferences
-        SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
-        //name of the preference is display cycle
-        SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
-        //save the counter as a key string (will be searched by this string
-        //the value of the pair is the absolute path to the image
-        displayCycleEditor.putString(Integer.toString(picNum), path);
-        Log.i(TAG, Integer.toString(picNum) + " : " + path);
-
-        displayCycleEditor.apply();
-    }
-
-    public void clearSharedPreferences(String type){
-        SharedPreferences sharedPreferences = getSharedPreferences(type, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-        //display cycle cleared
-    }
-
-    public void clearDisplayCycle(){
-        SharedPreferences displayCyclePreferences = getSharedPreferences("display_cycle", MODE_PRIVATE);
-        SharedPreferences.Editor displayCycleEditor = displayCyclePreferences.edit();
-        displayCycleEditor.clear(); //remove all images from display cycle
-        displayCycleEditor.apply();
-
-        clearSharedPreferences("head");
-        clearSharedPreferences("counter");
-    }
-
-    public void saveHeadCount(int numImages){
-        //save the number of pictures we have in get count
-        SharedPreferences counterPref = getSharedPreferences("counter", MODE_PRIVATE);
-        SharedPreferences headPref = getSharedPreferences("head", MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = counterPref.edit();
-        SharedPreferences.Editor headEdit = headPref.edit();
-
-        editor.clear();
-        editor.putInt("counter", numImages); //initialize the counter to the number we have
-
-        headEdit.clear();
-        headEdit.putInt("head", 0); //start head at 0
-
-        headEdit.apply();
-        editor.apply();
-    }
 
     private void displayImage(){
         Intent intent = new Intent(this, ChangeImage.class);

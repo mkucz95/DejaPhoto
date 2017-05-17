@@ -5,6 +5,7 @@ import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -35,7 +36,11 @@ public class WallpaperChanger extends IntentService {
     //getWindowManager().getDefaultDisplay().getMetrics(metrics);
     int height = metrics.heightPixels;
     int width = metrics.widthPixels;
+
+    int screenWidth = getScreenWidth();
+    int screenHeight = getScreenHeight();
     public RemoteViews rviews;
+
 
 
 
@@ -56,12 +61,12 @@ public class WallpaperChanger extends IntentService {
 
                 else {
                     try {//convert image path into something code can use
-                        Log.d("WallpaperChanger", "USING IMAGEPATH: " + imagePath);
+                        Log.i("PhotoLocation", "USING IMAGEPATH: " + imagePath);
                         FileInputStream imgIS = new FileInputStream(new File(imagePath));
                         BufferedInputStream bufIS = new BufferedInputStream(imgIS);
                         bitmap = BitmapFactory.decodeStream(bufIS); //
                         bitmap = checkOrientation(imagePath, bitmap);
-                        Log.i("WallpaperChanger", "Setting background...");
+                        Log.i("PhotoLocation", "Setting background...");
                         setBackground(bitmap);
                         updateWidget(imagePath);
 
@@ -81,7 +86,7 @@ public class WallpaperChanger extends IntentService {
 
         rviews = new RemoteViews(AppWidget.getPackageName(), R.layout.dejaphoto_appwidget_layout);
         Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
-        Log.i("updateLocation", "Getting location...");
+        Log.i("PhotoLocation", "Getting location...");
 
         PhotoLocation locName = new PhotoLocation(path, gc);
         rviews.setTextViewText(R.id.display_location, locName.locationName);
@@ -91,16 +96,30 @@ public class WallpaperChanger extends IntentService {
         else{
             rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_transp);
         }
-        Log.i("updateLocation", "Updating location...");
+        Log.i("PhotoLocation", "Updating widget...");
         appWidgetManager.updateAppWidget(appWidgetIds, rviews);
     }
 
     public void setBackground(Bitmap bitmap){ //set wallpaper based on inputted bitmap
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
         //call java wallpapermanager api
+        Log.i("PhotoLocation", "In setBackground");
+
 
         try {
+            Log.i("PhotoLocation", "Setting Bitmap...");
+            Log.i("PhotoLocation", "Bitmap Size: " + bitmap.getAllocationByteCount());
+
+            if(bitmap.getAllocationByteCount() > 3000000) {
+                Log.i("PhotoLocation", "Scaling Bitmap to (" + screenWidth + ", " + screenHeight + ")");
+                bitmap = Bitmap.createScaledBitmap(bitmap, screenWidth, screenHeight, false);
+            }
+            else{
+                Log.i("PhotoLocation", "Bitmap size < 1mb, not scaling");
+            }
             wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
+            Log.i("PhotoLocation", "Done setting bitmap");
+
             //wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions
         } catch (IOException e) {
             e.printStackTrace();
@@ -149,6 +168,14 @@ public class WallpaperChanger extends IntentService {
                 matrix, true);
     }
 
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         return super.onStartCommand(intent, flags, startId);
@@ -158,5 +185,6 @@ public class WallpaperChanger extends IntentService {
     public void onDestroy(){
         super.onDestroy();
     }
+
 
 }

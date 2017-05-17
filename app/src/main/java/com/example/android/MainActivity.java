@@ -3,6 +3,8 @@ package com.example.android;
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RemoteViews;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
@@ -28,6 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
@@ -35,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
     public static final int MY_PERMISSIONS_MULTIPLE_REQUEST = 99;
-
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setAlarm(); //Amanda: call function for autoWallpaper change
+        //setAlarm(); //Amanda: call function for autoWallpaper change
 
         System.out.println(Manifest.permission.READ_EXTERNAL_STORAGE.equals(PackageManager.PERMISSION_GRANTED));
 
@@ -148,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
     public void startRerank(){
         Intent intent = new Intent (this,Rerank.class);
         startService(intent);
+
     }
 
 
@@ -233,8 +239,6 @@ public class MainActivity extends AppCompatActivity {
                     MY_PERMISSIONS_MULTIPLE_REQUEST);
         }
         else{
-            Intent backgroundIntent = new Intent(this, BackgroundService.class);
-            startService(backgroundIntent);  //starts service that keeps track of time and location
             Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
             // displayCycleIntent.putExtra("source", true);
             Log.i("permission", "Permission already granted...");
@@ -258,8 +262,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("permission", "Permission Now Granted...");
                 Toast.makeText(this, "Read permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
-                Intent backgroundIntent = new Intent(this, BackgroundService.class);
-                startService(backgroundIntent);  //starts service that keeps track of time and location
+
                 Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
                 // displayCycleIntent.putExtra("source", true);
                 Log.i("BuildCycle", "Calling BuildDisplayCycle...");

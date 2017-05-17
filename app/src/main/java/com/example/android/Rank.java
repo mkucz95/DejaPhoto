@@ -41,17 +41,19 @@ public class Rank {
 
         sort(); //sort the array list
 
-        for (Photo x : photo) {
+        for (Photo x : Global.displayCycle) {
             float[] a = new float[1];
             if (x.getLatLong()[0] != null && x.getLatLong()[1] != null) {
                 Location.distanceBetween(this.localLat, this.localLng, Double.parseDouble(x.getLatLong()[0]), Double.parseDouble(x.getLatLong()[1]), a);
                 double distance = a[0] / 3.28;
          //       Log.i("rankClass", photo.size() + "");
                 Log.i("distanceRank", x.getPath() + " is " + distance + " feet away from your location");
-                Log.i("distanceRank",x.getDateTaken());
+                //Log.i("distanceRank",x.getDateTaken());
             } else
                 Log.i("distanceRank", "Distance from: null");
-
+        }
+        for (Photo y : Global.displayCycle){
+            Log.i("Global Photos: ", y.getPath());
         }
 
     }
@@ -184,6 +186,9 @@ public class Rank {
         }
 
         Global.displayCycle = this.photo; //update the global variable for display cycle
+        for (Photo y : Global.displayCycle){
+            Log.i("distanceRank: ", y.getPath());
+        }
     }
 
 

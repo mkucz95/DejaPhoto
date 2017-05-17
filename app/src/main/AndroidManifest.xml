@@ -66,10 +66,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name="com.example.android.BackgroundService"
-            android:enabled="true"
-            android:exported="true" />
         <activity
             android:name="com.example.android.IntervalActivity"
             android:label="@string/title_activity_interval"

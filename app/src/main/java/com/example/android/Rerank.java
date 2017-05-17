@@ -64,8 +64,9 @@ public class Rerank extends IntentService {
             Intent imageIntent = new Intent(this, ChangeImage.class);
             imageIntent.setAction(ACTION_NEW); //display new picture
 
-            startService(imageIntent);
 
+
+            startService(imageIntent);
             stopService(intent);
         }
     }
