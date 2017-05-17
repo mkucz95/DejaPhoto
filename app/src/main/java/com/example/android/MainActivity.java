@@ -36,7 +36,6 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
-    private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
 
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
     public static final int MY_PERMISSIONS_MULTIPLE_REQUEST = 99;
@@ -51,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         editor.putBoolean("karma", false);
         editor.putBoolean("release", false);
         editor.apply();
-
 
         requestPermission();
         super.onCreate(savedInstanceState);
@@ -100,14 +98,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       /* addPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                add();
-            }
-        });
-        */
-
         display.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,11 +141,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startRerank(){
-        Intent intent = new Intent (this,Rerank.class);
+        Intent intent = new Intent (this, Rerank.class);
         startService(intent);
 
     }
-
 
     //Amanda's code, dont touch
     public void setAlarm(){
@@ -205,19 +194,11 @@ public class MainActivity extends AppCompatActivity {
         am.setRepeating(AlarmManager.RTC, startTime, 5000, pending);
     }
 
-
-
     public void startApp(){
-        Log.i("distanceRank", "RERANKING...");
-        SharedPreferences sharedPreferences = getSharedPreferences("Deja Photo", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-        // displayCycleIntent.putExtra("source", true);
+
         Log.i("BuildCycle", "Calling BuildDisplayCycle...");
-        displayCycleIntent.setAction(ACTION_RERANK_BUILD);
-       /* displayCycleIntent.setAction(Intent.ACTION_SEND);
-        displayCycleIntent.putExtra("method", "fromMedia");*/
+        displayCycleIntent.setAction(ACTION_BUILD_CYCLE);
         startService(displayCycleIntent);
 
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -252,8 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[],
-                                           int[] grantResults) {
+                                           String permissions[], int[] grantResults) {
         Log.i("permission", "Requesting Permission");
         if (requestCode == MY_PERMISSIONS_MULTIPLE_REQUEST) {
             Log.i("permission", "checking...");

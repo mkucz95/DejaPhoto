@@ -38,9 +38,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     Intent intentKarma;
     Intent intentRelease;
 
-
-
-
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
 

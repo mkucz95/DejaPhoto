@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DejaPhoto</string>
 
-    <!-- Strings related to Settings -->
+    <!-- Strings related to ViewSettings -->
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
