@@ -7,9 +7,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -25,6 +23,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String KARMA_BUTTON = "Karma Added";
     public static String RELEASE_BUTTON = "Picture Released";
     public static String NEXT_PIC = "Next Picture";
+
+    //ACTIONS
     private static final String ACTION_KARMA = "com.example.android.KARMA";
     private static final String ACTION_RELEASE = "com.example.android.RELEASE";
     private static final String ACTION_PREVIOUS = "com.example.android.PREVIOUS";
@@ -123,40 +123,40 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         intentRelease = new Intent(context, AlarmReceiver.class);
 
 
-        if(!getAlarm("karma", context) && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
+        if(!Global.undoKarmaOn && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
             intentKarma.setAction(ACTION_KARMA);
             intentRelease.putExtra("path", getPath());
 
             this.karmaPI = PendingIntent.getBroadcast(context, 0, intentKarma, 0);
             karmaAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 15000, karmaPI); // Millisec * Second * Minute
 
-            setAlarm("karma", context, true); //switch alarm on
+            Global.undoKarmaOn = true; //set the alarm
 
             Toast.makeText(context, "Click Karma again to undo", Toast.LENGTH_LONG).show();
 
         }
 
-        else if(!getAlarm("release", context)  && action.equals("release") ){
+        else if(!Global.undoReleaseOn && action.equals("release") ){
             intentRelease.setAction(ACTION_RELEASE);
             intentRelease.putExtra("path", getPath());
             releasePI = PendingIntent.getBroadcast(context, 0, intentRelease, 0);
             releaseAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 15000, releasePI); // Millisec * Second * Minute
 
-            setAlarm("release", context, true);
+            Global.undoReleaseOn = true;
 
-            if(getAlarm("karma", context)){
+            if(Global.undoKarmaOn){
                 if(karmaPI != null) {
                     karmaAlarm.cancel(karmaPI);
                     karmaPI.cancel();
                 }
-                setAlarm("karma", context, false);
+                Global.undoKarmaOn = false; //switch karma alarm off
             }
 
             Toast.makeText(context, "Click Release again to undo", Toast.LENGTH_LONG).show();
         }
 
-        else if (getAlarm("karma", context) && action.equals("karma") ){ //when the user presses button a second time before the alarm timer runs out
-            Log.i("undoManager", "alarmKarma : " + getAlarm("karma", context));
+        else if (Global.undoKarmaOn && action.equals("karma") ){ //when the user presses button a second time before the alarm timer runs out
+            Log.i("undoManager", "alarmKarma : " +Global.undoKarmaOn);
 
             if(karmaPI != null) {
                 karmaAlarm.cancel(karmaPI); // Millisec * Second * Minute
@@ -164,12 +164,12 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
                 intentKarma.setAction("");
             }
 
-            setAlarm("karma", context, false);
+            Global.undoKarmaOn = false; //switch karma alarm off
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
         }
 
-        else if(getAlarm("release", context) && action.equals("release")){ //release alarm on
-            Log.i("undoManager", "alarmRelease : " + getAlarm("release", context));
+        else if(Global.undoReleaseOn && action.equals("release")){ //release alarm on
+            Log.i("undoManager", "alarmRelease : " + Global.undoReleaseOn);
 
             if(releasePI != null) {
                 releaseAlarm.cancel(releasePI); // Millisec * Second * Minute
@@ -177,7 +177,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
                 intentRelease.setAction("");
             }
 
-            setAlarm("release", context, false);
+            Global.undoReleaseOn = false; //switch release alarm off
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
         }
     }

@@ -16,6 +16,8 @@ public class Global {
     public static String[] wholeTableProjection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DATE_TAKEN,
             MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE};
 
+    public static boolean undoReleaseOn = false; //whether these alarms are on
+    public static boolean undoKarmaOn = false;
 
     public int cycleLength(){
         return displayCycle.size();

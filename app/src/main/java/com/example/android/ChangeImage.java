@@ -6,23 +6,17 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 /**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * <p>
- *
  *     This intent service changes the image when called according to the passed parameter
  *     it also moves the head of the display cycle to hold the number/position of the picture that
  *     is displayed.
  *     It calls the wallpaper service manager to actually change the wallpaper
  */
 public class ChangeImage extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_PREVIOUS = "com.example.android.PREVIOUS";
     private static final String ACTION_NEXT = "com.example.android.NEXT";
     private static final String ACTION_NEW = "com.example.android.NEW";
 
-//parameters
+    //parameters
     private static final String NEXT_PIC = "next";
     private static final String PREV_PIC = "previous";
 
@@ -59,11 +53,8 @@ public class ChangeImage extends IntentService {
     }
 
     private int moveHead(String direction){
-
-
         int counterInt = Global.displayCycle.size()-1; //last element index
         int currHead = Global.head; //current index
-
 
         Log.d("ChangeImage", "currHead: "+ currHead);
         Log.d("ChangeImage","counterInt"+ counterInt);
@@ -74,23 +65,24 @@ public class ChangeImage extends IntentService {
 
         //change the head based on which button was pressed
         if(direction.equalsIgnoreCase(PREV_PIC) && currHead == 0) {
+            Log.i("changeImage", "prev clicked, currHead: 0, newHead: "+counterInt);
+
             currHead = counterInt;
-            Log.i("changeImage", "Prev, currHead == 0");
         }
         else if(direction.equalsIgnoreCase(PREV_PIC) && currHead != 0) {
+            Log.i("changeImage", "prev clicked, currHead: "+ currHead +", newHead: "+(currHead-1));
+
             currHead--;
-            Log.i("changeImage", "Prev, currHead != 0");
         }
         else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead == counterInt) {
-            currHead = 0;
-            Log.i("changeImage", "Next, currHead: " + currHead + "  == counterInt: " + counterInt);
+            Log.i("changeImage", "next clicked, currHead: "+ currHead + ", newHead: "+0);
 
+            currHead = 0;
         }
         else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead != counterInt) {
-            Log.i("changeImage", "Next, currHead: " + currHead + "  != counterInt: " + counterInt);
+            Log.i("changeImage", "prev clicked, currHead: "+ currHead +", newHead: "+(currHead+1));
             currHead++;
         }
-
         Global.head = currHead;  //set the head for the next image
         return currHead;
     }
@@ -110,9 +102,9 @@ public class ChangeImage extends IntentService {
             newPath = "DEFAULTPICTURE";
         }
 
-        Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
-
         Log.d("ChangeImage", "NEW PATH: " + newPath);
+
+        Intent wallpaperIntent = new Intent(this, WallpaperChanger.class);
         wallpaperIntent.setAction(Intent.ACTION_SEND);
         wallpaperIntent.putExtra("image_path", newPath); //send path as extra on the intent
         wallpaperIntent.setType("text/plain");

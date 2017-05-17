@@ -28,7 +28,6 @@ import java.util.List;
  * that are supposed to be displayed. this is then sent to the build display cycle
  */
 public class Rerank extends IntentService {
-    private static final String ACTION_RERANK_DISPLAY = "com.example.android.RERANK_DISPLAY";
     private static final String ACTION_NEW = "com.example.android.NEW";
 
     private static final String TAG = "RerankService";
@@ -59,12 +58,9 @@ public class Rerank extends IntentService {
             Rank newRank = new Rank(getSettings(), myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma);
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
 
-
             Global.head = 0;
             Intent imageIntent = new Intent(this, ChangeImage.class);
             imageIntent.setAction(ACTION_NEW); //display new picture
-
-
 
             startService(imageIntent);
             stopService(intent);
