@@ -1,10 +1,7 @@
 package com.example.android;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,55 +26,36 @@ public class AlarmReceiver extends BroadcastReceiver
         Log.i("AlarmReceiver", "AlarmReceiver got PendingIntent");
 
         String action = intent.getAction();
-      String path =intent.getExtras().getString("path");
+        String path =intent.getExtras().getString("path");
 
         Log.i("AlarmReciever", "action:  "+ action);
 
 
-        if(ACTION_KARMA.equals(action) && getAlarm("karma", context)) {
+        if(ACTION_KARMA.equals(action) && Global.undoKarmaOn) {
             Log.i("AlarmReciever", "Karma Intent Received");
 
-
-            setAlarm("karma", context, false); //reset alarm
+           Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
 
             setData(true, path);
         }
 
-        else if(ACTION_RELEASE.equals(action) && getAlarm("release", context)){
+        else if(ACTION_RELEASE.equals(action) && Global.undoReleaseOn){
             Log.i("AlarmReciever", "Release Intent Received");
 
+            Global.undoKarmaOn = false; //alarm was fired so now it got turned off
+            Global.undoReleaseOn = false; //alarm was fired so now it got turned off
 
-            setAlarm("release", context, false); //reset alarm
-            setAlarm("karma", context, false); //reset alarm
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
         }
-
-
     }
-
-    public void setAlarm(String type, Context context, boolean pref){
-        Log.i("AlarmReceiver", "called setAlarm: "+ type + pref);
-
-        SharedPreferences sharedPref = context.getSharedPreferences("alarm", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(type, pref);
-        editor.apply();
-    }
-
-    public boolean getAlarm(String type, Context context){ //returns if alarm set or not
-        SharedPreferences sharedPref = context.getSharedPreferences("alarm", Context.MODE_PRIVATE);
-        return  sharedPref.getBoolean(type, false);
-    }
-
 
     public void setData(boolean flag, String path){
-
         for(int i = 0; i<Global.displayCycle.size(); i++){
             Photo photo = Global.displayCycle.get(i);
             if(photo.getPath() == path){
                 if(flag) photo.setKarma(true);
-                else photo.setReleased(true);
+                else photo.setReleased(true);  //TODO just delete from array list?
             }
         }
     }

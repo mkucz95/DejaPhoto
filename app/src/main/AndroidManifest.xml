@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dejaphoto">
-
-    //for updateLocation.java's tracker method
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -24,30 +21,27 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="false"
-        android:largeHeap="true">
-
+        android:theme="@style/AppTheme">
         <receiver android:name="com.example.android.DejaPhotoWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.intent.action.KARMA"/>
+                <action android:name="android.intent.action.KARMA" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/deja_photo_widget" />
         </receiver>
 
-
-
-        //for myReceiver.java , register broadcast receiver
-        <receiver android:name="com.example.android.myReceiver">  //omgggg
+        <receiver android:name="com.example.android.myReceiver">
             <intent-filter>
-                <action android:name="com.example.android"/>
+                <action android:name="com.example.android" />
             </intent-filter>
         </receiver>
 
@@ -65,7 +59,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.example.android.IntervalActivity"
             android:label="@string/title_activity_interval"
@@ -103,30 +96,36 @@
             <intent-filter>
                 <action android:name="android.intent.action.BUILD_CYCLE" />
                 <action android:name="android.intent.action.RERANK_BUILD" />
-                <action android:name= "android.intent.action.NEW" />
-                <action android:name= "android.intent.action.RERANK_DISPLAY" />
-
             </intent-filter>
         </service>
         <service
             android:name="com.example.android.Rerank"
             android:exported="false">
             <intent-filter>
-                <action android:name= "android.intent.action.RERANK_DISPLAY" />
+                <action android:name="android.intent.action.NEW" />
             </intent-filter>
         </service>
-        <receiver android:name="com.example.android.AlarmReceiver" android:exported="true">
+
+        <receiver
+            android:name="com.example.android.AlarmReceiver"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.KARMA"/>
-                <action android:name="android.intent.action.RELEASE"/>
+                <action android:name="android.intent.action.KARMA" />
+                <action android:name="android.intent.action.RELEASE" />
             </intent-filter>
         </receiver>
 
         <service
             android:name="com.example.android.TrackerService"
-            android:exported="false">
-        </service>
-
+            android:exported="false" />
+        <service
+            android:name="com.example.android.SettingsObserver"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="com.example.android.ChangeMediator"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

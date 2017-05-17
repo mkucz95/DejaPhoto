@@ -19,8 +19,6 @@ import android.util.Log;
 public class BuildDisplayCycle extends IntentService {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String ACTION_RERANK_BUILD = "com.example.android.RERANK_BUILD";
-    private static final String ACTION_NEW = "com.example.android.NEW";
-    private static final String ACTION_RERANK_DISPLAY = "com.example.android.RERANK_DISPLAY";
     private static final String TAG = "BuildCycle";
 
     public BuildDisplayCycle() {
@@ -42,7 +40,7 @@ public class BuildDisplayCycle extends IntentService {
                //call sqlite traverser
                SQLiteHelper helper = new SQLiteHelper();
                helper.iterateAllMedia(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Global.wholeTableProjection, this);
-               Log.i(TAG, "Reranking... 1st time");
+               Log.i(TAG, "Reranking... 1st Build");
 
                //after build from file, apply rank settings (released/karma)
                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
@@ -53,44 +51,10 @@ public class BuildDisplayCycle extends IntentService {
 
                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
                startService(rerankIntent);
-
             }
 
             Log.i(TAG, "Stopping service");
             stopService(intent);
         }
     }
-
-
-    private void displayImage(){
-        Intent intent = new Intent(this, ChangeImage.class);
-        intent.setAction(ACTION_NEW);
-
-        startService(intent);
-    }
 }
-
-/*
-    private void buildFromFile(boolean sourceFolder) {
-        clearSharedPreferences("display_cycle");
-        int picNum=-1;
-
-        if (sourceFolder) {
-            File dcimDirectory = new File(Environment.getExternalStorageDirectory(), "DCIM"); //get path to DCIM folder
-            File cameraDirectory = new File(dcimDirectory.getAbsolutePath() + "/Camera");
-
-            File[] dcimPhotos = cameraDirectory.listFiles();
-            if (dcimPhotos != null) { //DCIM contains photos
-                picNum = 0;
-                for (File currPicture : dcimPhotos) { //add each photo's path to cycle as a node
-                    savePicture(currPicture.getAbsolutePath(), ++picNum);
-                }
-            } else {
-                savePicture("DEFAULTPICTURE", picNum);
-            }
-        } else {
-        }
-
-        saveHeadCount(picNum);
-
-    }*/
