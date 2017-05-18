@@ -16,7 +16,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -26,6 +25,7 @@ public class TrackerService extends Service {
     private ServiceHandler mServiceHandler;
     double initLatitude;
     double initLongitude;
+    int initTime;
     Location initLocation;
     int THREAD_PRIORITY_BACKGROUND = 10;
 
@@ -39,6 +39,7 @@ public class TrackerService extends Service {
         public ServiceHandler(Looper looper) {
             super(looper);
         }
+
         @Override
         public void handleMessage(Message msg) {
             // Normally we would do some work here, like download a file.
@@ -61,6 +62,22 @@ public class TrackerService extends Service {
         // separate thread because the service normally runs in the process's
         // main thread, which we don't want to block.  We also make it
         // background priority so CPU-intensive work will not disrupt our UI.
+        LocationManager locationManager =
+                (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+
+        String provider = locationManager.getBestProvider(criteria, true);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        initLocation = locationManager.getLastKnownLocation(provider);
+
+
+        this.initTime = (int) ((initLocation.getTime() / (1000*60*60)) % 24);
+
         HandlerThread thread = new HandlerThread("ServiceStartArguments", THREAD_PRIORITY_BACKGROUND);
         thread.start();
         Log.i("TrackerService", "onCreate");
@@ -82,6 +99,7 @@ public class TrackerService extends Service {
         mServiceHandler.sendMessage(msg);
         LocationManager locationManager =
                 (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
 
         initLocation(locationManager);
 
@@ -167,11 +185,11 @@ public class TrackerService extends Service {
     public void updateLocation(Location location) {
         double currLatitude;
         double currLongitute;
-        //int currTime;
+        int currTime;
         Log.i("TrackerService", "in updateLocation");
 
 
-        //currTime = (int) ((location.getTime() / (1000*60*60)) % 24);
+        currTime = (int) ((location.getTime() / (1000*60*60)) % 24);
 
         if(location != null) {
             currLatitude = location.getLatitude();
@@ -184,16 +202,19 @@ public class TrackerService extends Service {
             initLocation = location;
             // call rerank
             Log.i("TrackerService", "calling Rerank");
+            this.initTime = currTime;
             Intent intent = new Intent(this.getApplicationContext(), Rerank.class);
             startService(intent);
         }
 
         // Check if out of time boundary for every update
-       /* if((currTime - initTime) > TIME_RERANK) {
+       if((currTime - initTime) > TIME_RERANK) {
             initLocation = location;
+            this.initTime = currTime;
             // call rerank
+            Intent intent = new Intent(this.getApplicationContext(), Rerank.class);
             startService(intent);
-        }*/
+        }
     }
 
 }

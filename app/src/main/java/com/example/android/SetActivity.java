@@ -14,7 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
-
+import java.util.Observer;
 import com.example.dejaphoto.R;
 
 import com.example.dejaphoto.R;
@@ -36,36 +36,35 @@ public class SetActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         location = (Switch) findViewById(R.id.s_location);
         time = (Switch) findViewById(R.id.s_time);
         dayOfWeek = (Switch) findViewById(R.id.s_dow);
         karma = (Switch) findViewById(R.id.s_karma);
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("settings", 0);
 
-
-        if(sharedPreferences.getBoolean("location", false)) {
+        if(Global.locationSetting) {
             location.setChecked(true);
         }
         else {
             location.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("time", false)) {
+        if(Global.timeSetting) {
             time.setChecked(true);
         }
         else {
             time.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("day", false)) {
+        if(Global.daySetting) {
             dayOfWeek.setChecked(true);
         }
         else {
             dayOfWeek.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("karma", false)) {
+        if(Global.karmaSetting) {
             karma.setChecked(true);
         }
         else {
@@ -73,29 +72,26 @@ public class SetActivity extends AppCompatActivity {
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-      final SharedPreferences dejaMode = getApplicationContext().getSharedPreferences("dejaVuMode", 0);
 
         location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            boolean modeOn = dejaMode.getBoolean("modeSetting", true);
-
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if(!modeOn){ //if dejavu mode is off, we cannot change settings
+                if(!Global.dejaVuSetting){ //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 }
                 else { //dejavu mode is on
                     Intent trackerIntent = new Intent (getApplicationContext(), TrackerService.class);
                     if (isChecked) {
-                        setPreferences("location", true);
+
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is on", Toast.LENGTH_SHORT).show();
                         Log.i("trackerService", "Starting trackerService Intent");
                         startService(trackerIntent);
 
                     } else {
-                        setPreferences("location", false);
+                        Global.locationSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is off", Toast.LENGTH_SHORT).show();
                         Log.i("trackerService", "Stopping trackerService Intent");
@@ -108,19 +104,17 @@ public class SetActivity extends AppCompatActivity {
         time.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
-                if (!modeOn) { //if dejavu mode is off, we cannot change settings
+                if (!Global.dejaVuSetting) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
-                        setPreferences("time", true);
+                        Global.timeSetting=true;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is on", Toast.LENGTH_SHORT).show();
                     } else {
-                        setPreferences("time", false);
-
+                        Global.timeSetting=false;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -131,19 +125,17 @@ public class SetActivity extends AppCompatActivity {
         dayOfWeek.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
-                if (!modeOn) { //if dejavu mode is off, we cannot change settings
+                if (!Global.dejaVuSetting) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
-                        setPreferences("day", true);
-
+                        Global.daySetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Day of Week setting is on", Toast.LENGTH_SHORT).show();
                     } else {
-                        setPreferences("day", false);
+                        Global.daySetting = false;
 
                         Toast.makeText(getApplicationContext(),
                                 "Day of Week setting is off", Toast.LENGTH_SHORT).show();
@@ -155,19 +147,18 @@ public class SetActivity extends AppCompatActivity {
         karma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                boolean modeOn = dejaMode.getBoolean("modeSetting", true);
 
-                if (!modeOn) { //if dejavu mode is off, we cannot change settings
+                if (!Global.dejaVuSetting) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
-                        setPreferences("karma", true);
+                        Global.karmaSetting = true;
 
                         Toast.makeText(getApplicationContext(),
                                 "Karma setting is on", Toast.LENGTH_SHORT).show();
                     } else {
-                        setPreferences("karma", false);
+                        Global.karmaSetting = false;
 
                         Toast.makeText(getApplicationContext(),
                                 "Karma setting is off", Toast.LENGTH_SHORT).show();
@@ -186,10 +177,4 @@ public class SetActivity extends AppCompatActivity {
         });
     }
 
-    public void setPreferences(String type, boolean setting){
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("settings", 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(type, setting);
-        editor.commit();
-    }
 }

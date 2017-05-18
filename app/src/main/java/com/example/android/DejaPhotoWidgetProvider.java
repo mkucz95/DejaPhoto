@@ -85,8 +85,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
         Intent changeIntent = new Intent(context, ChangeImage.class);
 
-
-        boolean changePicture = false, actionNeeded = false; //needed to prevent crash
+        boolean changePicture = false; //needed to prevent crash
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
 
@@ -98,11 +97,9 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
             undoManager(context, "karma");
-            actionNeeded = true;
 
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
             undoManager(context, "release");
-            actionNeeded = true;
 
         } else if (intent.getAction().equals(NEXT_PIC)) {
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
@@ -133,7 +130,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Global.undoKarmaOn = true; //set the alarm
 
             Toast.makeText(context, "Click Karma again to undo", Toast.LENGTH_LONG).show();
-
         }
 
         else if(!Global.undoReleaseOn && action.equals("release") ){
@@ -180,18 +176,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Global.undoReleaseOn = false; //switch release alarm off
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public boolean getAlarm(String type, Context context){
-        SharedPreferences sharedPref = context.getSharedPreferences("alarm", Context.MODE_PRIVATE);
-        return sharedPref.getBoolean(type, false);
-    }
-
-    public void setAlarm(String type, Context context, boolean pref){
-        SharedPreferences sharedPref = context.getSharedPreferences("alarm", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(type, pref);
-        editor.apply();
     }
 
     public String getPath(){

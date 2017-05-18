@@ -118,14 +118,7 @@ public class Rerank extends IntentService {
     ranking, and returns that in a boolean array, default is true for all settings!
      */
     public boolean[] getSettings(){
-        boolean[] settings = {true, true, true, true};
-        String[] type = {"location", "time", "day", "karma"};
-
-        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-      for(int i=0; i<settings.length; i++) {
-          settings[i] = sharedPreferences.getBoolean(type[i], true);
-      }
-      return settings;
+      return Global.getSettings();
     }
 
 }

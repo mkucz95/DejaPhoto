@@ -122,10 +122,6 @@
             android:name="com.example.android.SettingsObserver"
             android:enabled="true"
             android:exported="true" />
-        <service
-            android:name="com.example.android.ChangeMediator"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>
