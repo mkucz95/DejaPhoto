@@ -44,13 +44,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-/*set alarm preferences to default*/
-        SharedPreferences sharedPref = getSharedPreferences("alarm", 0);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean("karma", false);
-        editor.putBoolean("release", false);
-        editor.apply();
-
         requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -220,12 +213,7 @@ public class MainActivity extends AppCompatActivity {
                     MY_PERMISSIONS_MULTIPLE_REQUEST);
         }
         else{
-            Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-            // displayCycleIntent.putExtra("source", true);
-            Log.i("permission", "Permission already granted...");
-            displayCycleIntent.setAction(ACTION_BUILD_CYCLE);
-            displayCycleIntent.putExtra("method", "fromMedia");
-            startService(displayCycleIntent);
+            startApp();
         }
         Log.i("permission", "done with permissions");
 
@@ -242,15 +230,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("permission", "Permission Now Granted...");
                 Toast.makeText(this, "Read permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
-
-                Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-                // displayCycleIntent.putExtra("source", true);
-                Log.i("BuildCycle", "Calling BuildDisplayCycle...");
-                displayCycleIntent.setAction(Intent.ACTION_SEND);
-                displayCycleIntent.putExtra("method", "fromMedia");
-                startService(displayCycleIntent);
-                //starts service that first builds and calls another service to save display cycle
-
             }
             else {
                 //Permission denied

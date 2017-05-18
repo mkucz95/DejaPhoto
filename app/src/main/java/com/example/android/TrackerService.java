@@ -62,21 +62,21 @@ public class TrackerService extends Service {
         // separate thread because the service normally runs in the process's
         // main thread, which we don't want to block.  We also make it
         // background priority so CPU-intensive work will not disrupt our UI.
-        LocationManager locationManager =
-                (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //LocationManager locationManager =
+                //(LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        //Criteria criteria = new Criteria();
+        //criteria.setAccuracy(Criteria.ACCURACY_FINE);
 
-        String provider = locationManager.getBestProvider(criteria, true);
+        //String provider = locationManager.getBestProvider(criteria, true);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        initLocation = locationManager.getLastKnownLocation(provider);
+        //initLocation = locationManager.getLastKnownLocation(provider);
 
 
-        this.initTime = (int) ((initLocation.getTime() / (1000*60*60)) % 24);
+        //this.initTime = (int) ((initLocation.getTime() / (1000*60*60)) % 24);
 
         HandlerThread thread = new HandlerThread("ServiceStartArguments", THREAD_PRIORITY_BACKGROUND);
         thread.start();

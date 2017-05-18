@@ -46,13 +46,6 @@ public class BuildDisplayCycle extends IntentService {
                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
                startService(rerankIntent);
            }
-            else if(ACTION_RERANK_BUILD.equals(action)){
-                Log.i(TAG, "Building Cycle RERANK...");
-
-               Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
-               startService(rerankIntent);
-            }
-
             Log.i(TAG, "Stopping service");
             stopService(intent);
         }

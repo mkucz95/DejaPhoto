@@ -111,7 +111,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     }
 
 
-
     public void undoManager(Context context, String action){
         this.karmaAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         this.releaseAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

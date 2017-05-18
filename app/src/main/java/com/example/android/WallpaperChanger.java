@@ -108,14 +108,21 @@ public class WallpaperChanger extends IntentService {
 
         try {
             Log.i("PhotoLocation", "Setting Bitmap...");
-            Log.i("PhotoLocation", "Bitmap Size: " + bitmap.getAllocationByteCount());
+            Log.i("PhotoLocation", "Bitmap Size: " + "(" + bitmap.getWidth() + ", " + bitmap.getHeight() + ")");
 
             if(bitmap.getAllocationByteCount() > 3000000) {
                 Log.i("PhotoLocation", "Scaling Bitmap to (" + screenWidth + ", " + screenHeight + ")");
-                bitmap = Bitmap.createScaledBitmap(bitmap, screenWidth, screenHeight, false);
+                if(screenHeight < bitmap.getHeight()){
+                    Log.i("PhotoLocation", "Scaling to width/height");
+                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, screenWidth, screenHeight);
+                }
+                else {
+                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, screenWidth, bitmap.getHeight());
+                    Log.i("PhotoLocation", "Scaling to width/bitmapHeight");
+                }
             }
             else{
-                Log.i("PhotoLocation", "Bitmap size < 1mb, not scaling");
+                Log.i("PhotoLocation", "Bitmap size < 3mb, not scaling");
             }
             wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
             Log.i("PhotoLocation", "Done setting bitmap");
