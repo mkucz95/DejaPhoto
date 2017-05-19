@@ -102,8 +102,8 @@ public class Rank {
                 int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());       //photo1 's interger for the day of week
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
-                boolean karma1 = Global.displayCycle.get(j - 1).isKarma();
-                boolean karma2 = Global.displayCycle.get(j).isKarma();
+                boolean karma1 = photo.get(j - 1).isKarma();
+                boolean karma2 = photo.get(j).isKarma();
 
                 float[] dist = new float[1];
 
@@ -133,7 +133,7 @@ public class Rank {
                     Log.d("distanceRank", "Karma setting on &&&&&&&&&&&&&&&&&&");
                     if (!karma1 && karma2)
                         changeInt = changeInt + 10;
-                    else if (karma2 && !karma1)
+                    else if (karma2 && karma1)
                         changeInt = changeInt - 10;
                     else
                         Log.d("distanceRank", "no karma %%%%%%%%%%%%%%%%%%%%%");

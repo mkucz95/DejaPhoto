@@ -31,9 +31,11 @@
     <string name="show">Show</string>
     <string name="prevInterval">Current Refresh Interval</string>
 
+    <string name="button1">Choose Album</string>
+    <string name="button2">Add Photo</string>
     <string name="button3">Settings</string>
-    <string name="button4">Deja Vu Mode</string>
+    <string name="button4">Share</string>
     <string name="button5">Start App</string>
-    <string name="button6">Display Interval</string>
+    <string name="button6">Download</string>
     <string name="title_activity_interval">IntervalActivity</string>
 </resources>
