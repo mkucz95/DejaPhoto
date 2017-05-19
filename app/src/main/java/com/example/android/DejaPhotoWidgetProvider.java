@@ -88,6 +88,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             changePicture = true;
             manageTimer(context); //reset timer
 
+
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
             manageTimer(context);
             undoManager(context, "karma");
