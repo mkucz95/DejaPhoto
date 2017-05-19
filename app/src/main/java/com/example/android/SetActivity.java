@@ -1,8 +1,6 @@
 package com.example.android;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,14 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Observer;
-import com.example.dejaphoto.R;
-
-import com.example.dejaphoto.R;
 
 import com.example.dejaphoto.R;
 
@@ -27,7 +23,9 @@ public class SetActivity extends AppCompatActivity {
     public Switch time;
     public Switch dayOfWeek;
     public Switch karma;
-
+    EditText input;
+    private EditText timeSpecify;
+    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +173,24 @@ public class SetActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        timeSpecify = (EditText) findViewById(R.id.user_specify);
+        saveButton = (Button) findViewById(R.id.bt_7);
+
+
+    }
+
+    public void save(View view) {
+        input = (EditText) findViewById(R.id.user_specify);
+
+        Global.changeInterval = Integer.parseInt(input.getText().toString()) * 1000;
+        //set the interval specified by user
+
+        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+
+        TextView interval = (TextView) findViewById(R.id.prevMin);
+        interval.setText(Long.toString(Global.changeInterval)); //show settings on settings page
     }
 
 }

@@ -30,7 +30,6 @@ public class AlarmReceiver extends BroadcastReceiver
 
         Log.i("AlarmReciever", "action:  "+ action);
 
-
         if(ACTION_KARMA.equals(action) && Global.undoKarmaOn) {
             Log.i("AlarmReciever", "Karma Intent Received");
 
@@ -47,6 +46,8 @@ public class AlarmReceiver extends BroadcastReceiver
             Global.undoReleaseOn = false; //alarm was fired so now it got turned off
 
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
+
+            setData(false, path);
         }
     }
 
@@ -55,10 +56,10 @@ public class AlarmReceiver extends BroadcastReceiver
             Photo photo = Global.displayCycle.get(i);
             if(photo.getPath() == path){
                 if(flag) photo.setKarma(true);
-                else photo.setReleased(true);  //TODO just delete from array list?
+                else Global.displayCycle.remove(i);  //TODO just delete from array list?
+                break;
             }
         }
     }
-
 
 }

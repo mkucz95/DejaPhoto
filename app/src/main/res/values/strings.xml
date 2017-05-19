@@ -17,7 +17,7 @@
 
     <string name="d_album">Deja Photo</string>
     <string name="c_album">Camera Roll</string>
-    <string name="switch_mode">Mode</string>
+    <string name="switch_mode">DejaVu Mode</string>
     <string name="latitude">Location</string>
     <string name="time">Time</string>
     <string name="dow">Day Of The Week</string>
@@ -26,10 +26,10 @@
     <string name="deja">Deja</string>
     <string name="photo">Photo</string>
 
-    <string name="minute">Minutes</string>
+    <string name="minute">Seconds</string>
     <string name="save">Save</string>
     <string name="show">Show</string>
-    <string name="prevInterval">Previous time interval in Minutes</string>
+    <string name="prevInterval">Current Refresh Interval</string>
 
     <string name="button3">Settings</string>
     <string name="button4">Deja Vu Mode</string>

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.SetActivity"
     tools:showIn="@layout/activity_set">
@@ -14,8 +15,8 @@
         android:id="@+id/s_location"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
         android:checked="false"
+        android:gravity="start"
         android:text="@string/latitude"
         android:textColor="#58D68D"
         android:textSize="20sp" />
@@ -52,4 +53,63 @@
         android:text="@string/karma"
         android:textSize="20sp" />
 
+
+    <Switch
+        android:id="@+id/s_mode"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:checked="true"
+        android:gravity="start"
+        android:text="@string/switch_mode"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.18">
+
+        <EditText
+            android:id="@+id/user_specify"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/time_interval"
+            android:inputType="number"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="@string/minute"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/bt_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:onClick="save"
+            android:text="@string/save"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/prevMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/prevInterval"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp" />
+
+    </LinearLayout>
 </LinearLayout>
