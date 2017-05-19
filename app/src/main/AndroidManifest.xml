@@ -109,10 +109,6 @@
             android:name="com.example.android.TrackerService"
             android:exported="false" />
 
-        <activity
-            android:name="com.example.android.IntervalActivity"
-            android:label="@string/title_activity_interval"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
