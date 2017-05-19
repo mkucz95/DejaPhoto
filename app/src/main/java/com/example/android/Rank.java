@@ -132,9 +132,9 @@ public class Rank {
                 if (isKarma) {
                     Log.d("distanceRank", "Karma setting on &&&&&&&&&&&&&&&&&&");
                     if (!karma1 && karma2)
-                        changeInt = changeInt + 10;
+                        changeInt = changeInt + 1;
                     else if (karma2 && karma1)
-                        changeInt = changeInt - 10;
+                        changeInt = changeInt - 1;
                     else
                         Log.d("distanceRank", "no karma %%%%%%%%%%%%%%%%%%%%%");
                 }
