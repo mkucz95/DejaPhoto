@@ -27,6 +27,8 @@ public class SetActivity extends AppCompatActivity {
     private EditText timeSpecify;
     private Button saveButton;
 
+    private boolean [] settings; // save button to store all settings
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,11 +176,23 @@ public class SetActivity extends AppCompatActivity {
         timeSpecify = (EditText) findViewById(R.id.user_specify);
         saveButton = (Button) findViewById(R.id.bt_7);
 
-        saveButton.setOnClickListener();
-        //TODO by michael
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // Michael
+                settings = Global.getSettings();
+                // call rerank
+                startRerank(settings);
+            }
+        });
     }
 
-    public void save(View view) {
+    public void startRerank(boolean[] settings) {
+        Intent intent = new Intent(this, Rerank.class);
+        startService(intent);
+    }
+
+    public void saveTimeInterval(View view) {
         input = (EditText) findViewById(R.id.user_specify);
 
         Global.changeInterval = Integer.parseInt(input.getText().toString()) * 1000;

@@ -63,52 +63,21 @@
         android:text="@string/switch_mode"
         android:textSize="20sp" />
 
-    <LinearLayout
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.18"
-        android:onClick="@string/save">
+        android:layout_marginTop="120dp"
+        android:layout_gravity="center"
+        android:text="@string/button7"
+        android:textSize="15sp"
+        android:textColor="#3ED0B3"/>
 
-        <EditText
-            android:id="@+id/user_specify"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/time_interval"
-            android:inputType="number"
-            tools:ignore="LabelFor" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/save"
+        android:textColor="#D03E80" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:text="@string/minute"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/bt_7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:onClick="save"
-            android:text="@string/save"
-            android:textColor="@color/colorPrimary"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/prevMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="@string/prevInterval"
-            android:textColor="@color/colorPrimary"
-            android:textSize="10sp" />
-
-    </LinearLayout>
 </LinearLayout>
