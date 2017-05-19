@@ -31,6 +31,7 @@
 
     <string name="show">Show</string>
     <string name="prevInterval">Current Refresh Interval</string>
+    <string name="defaultInterval">5 seconds</string>
 
     <string name="button1">Choose Album</string>
     <string name="button2">Add Photo</string>

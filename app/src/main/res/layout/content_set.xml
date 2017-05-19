@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="@string/second"
         android:textSize="15sp" />
 
@@ -93,12 +93,21 @@
         android:textColor="@color/colorPrimary"
         android:textSize="15sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="#D03E80"
+        android:text="@string/defaultInterval"
+        android:textSize="15sp"/>
+
     <Button
         android:id="@+id/bt_7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:onClick="save"
         android:text="@string/save"
         android:textColor="@color/colorPrimary"
