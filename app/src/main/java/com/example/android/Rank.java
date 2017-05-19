@@ -34,10 +34,10 @@ public class Rank {
         settings = Global.getSettings();
         setMyLocation(localLat, localLong);
         Log.i("rankClass", "My Location : " + localLat + ", " + localLong );
-        isLocaOn = settings[1];
-        isWeekOn = settings[2];
-        isTimeOn = settings[3];
-        isKarma = settings[4];
+        isLocaOn = b2;
+        isWeekOn = b3;
+        isTimeOn = b1;
+        isKarma = b4;
 
         sort(); //sort the array list
 
@@ -102,6 +102,9 @@ public class Rank {
                 int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());       //photo1 's interger for the day of week
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
+                boolean karma1 = Global.displayCycle.get(j - 1).isKarma();
+                boolean karma2 = Global.displayCycle.get(j).isKarma();
+
                 float[] dist = new float[1];
 
                 Log.i("test location", "wtf");
@@ -127,11 +130,13 @@ public class Rank {
 
 
                 if (isKarma) {
-                    Log.i("distanceRank", "Karma setting on");
-                    if (!photo.get(j - 1).isKarma() && photo.get(j).isKarma())
-                        changeInt = changeInt + 1;
-                    else if (photo.get(j - 1).isKarma() && !photo.get(j).isKarma())
-                        changeInt = changeInt - 1;
+                    Log.d("distanceRank", "Karma setting on &&&&&&&&&&&&&&&&&&");
+                    if (!karma1 && karma2)
+                        changeInt = changeInt + 10;
+                    else if (karma2 && !karma1)
+                        changeInt = changeInt - 10;
+                    else
+                        Log.d("distanceRank", "no karma %%%%%%%%%%%%%%%%%%%%%");
                 }
                 if (isLocaOn) {
                     Log.i("distanceRank", "sorting by location...");

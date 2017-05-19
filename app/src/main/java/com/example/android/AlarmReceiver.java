@@ -33,9 +33,10 @@ public class AlarmReceiver extends BroadcastReceiver
         if(ACTION_KARMA.equals(action) && Global.undoKarmaOn) {
             Log.i("AlarmReciever", "Karma Intent Received");
 
-           Global.undoKarmaOn = false; //alarm was fired so now it got turned off
+            Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
 
+            //Global.displayCycle.get(DejaPhotoWidgetProvider.currIndex).setKarma(true);
             setData(true, path);
         }
 
@@ -52,6 +53,7 @@ public class AlarmReceiver extends BroadcastReceiver
     }
 
     public void setData(boolean flag, String path){
+
         for(int i = 0; i<Global.displayCycle.size(); i++){
             Photo photo = Global.displayCycle.get(i);
             if(photo.getPath() == path){

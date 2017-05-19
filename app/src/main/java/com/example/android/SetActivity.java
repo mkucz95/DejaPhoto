@@ -82,7 +82,7 @@ public class SetActivity extends AppCompatActivity {
                 else { //dejavu mode is on
                     Intent trackerIntent = new Intent (getApplicationContext(), TrackerService.class);
                     if (isChecked) {
-
+                        Global.locationSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is on", Toast.LENGTH_SHORT).show();
                         Log.i("trackerService", "Starting trackerService Intent");

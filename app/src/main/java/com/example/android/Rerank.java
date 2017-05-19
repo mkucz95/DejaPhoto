@@ -47,8 +47,8 @@ public class Rerank extends IntentService {
 
             boolean[] settings = getSettings();
 
-            boolean isLocaOn = settings[0], isTimeOn = settings[1], isWeekOn = settings[2],
-                    isKarma =  settings[3];
+            boolean isLocaOn = settings[1], isTimeOn = settings[2], isWeekOn = settings[3],
+                    isKarma =  settings[4];
 
 
             getMyLocation();
