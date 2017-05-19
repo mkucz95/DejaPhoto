@@ -30,6 +30,9 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     private static final String ACTION_PREVIOUS = "com.example.android.PREVIOUS";
     private static final String ACTION_NEXT = "com.example.android.NEXT";
 
+    public static int size;
+    public static int currIndex = 0;
+
     AlarmManager karmaAlarm;
     AlarmManager releaseAlarm;
     PendingIntent karmaPI;
@@ -95,6 +98,13 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             changeIntent.setAction(ACTION_PREVIOUS);
             changePicture = true;
 
+            if(currIndex - 1 < 0) {
+                currIndex = size - 1;
+            }
+            else {
+                currIndex--;
+            }
+
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
             undoManager(context, "karma");
 
@@ -105,6 +115,13 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_NEXT);
             changePicture = true;
+
+            if(currIndex + 1 > size) {
+                currIndex = 0;
+            }
+            else {
+                currIndex++;
+            }
         }
 
         if (changePicture) context.startService(changeIntent); //call widgetmanager
