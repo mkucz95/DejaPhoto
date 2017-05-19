@@ -19,11 +19,12 @@ import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
+import java.util.Timer;
+
 public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_MULTIPLE_REQUEST = 99;
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
-    private Switch mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +44,11 @@ public class MainActivity extends AppCompatActivity {
         Button display = (Button) findViewById(R.id.bt_5);
         Button playApp = (Button) findViewById(R.id.bt_7);
 
-        mode = (Switch) findViewById(R.id.s_mode);
         final LinearLayout l = (LinearLayout) findViewById(R.id.l_settings);
+        setContentView(R.layout.content_set);
+        Switch mode = (Switch) findViewById(R.id.s_mode);
 
+        Log.d("MainActivity", "MODE: " +mode);
 
         if (Global.dejaVuSetting) {
             mode.setChecked(true);
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startApp(){
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
+
 
         Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
         Global.timer.schedule(Global.autoWallpaperChange,

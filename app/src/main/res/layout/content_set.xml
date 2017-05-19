@@ -53,7 +53,6 @@
         android:text="@string/karma"
         android:textSize="20sp" />
 
-
     <Switch
         android:id="@+id/s_mode"
         android:layout_width="fill_parent"
@@ -67,7 +66,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.18">
+        android:layout_weight="0.18"
+        android:onClick="@string/save">
 
         <EditText
             android:id="@+id/user_specify"
@@ -99,7 +99,6 @@
             android:text="@string/save"
             android:textColor="@color/colorPrimary"
             android:textSize="10sp" />
-
 
         <TextView
             android:id="@+id/prevMin"

@@ -34,12 +34,10 @@ public class SetActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         location = (Switch) findViewById(R.id.s_location);
         time = (Switch) findViewById(R.id.s_time);
         dayOfWeek = (Switch) findViewById(R.id.s_dow);
         karma = (Switch) findViewById(R.id.s_karma);
-
 
         if(Global.locationSetting) {
             location.setChecked(true);
@@ -68,7 +66,6 @@ public class SetActivity extends AppCompatActivity {
         else {
             karma.setChecked(false);
         }
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -174,11 +171,11 @@ public class SetActivity extends AppCompatActivity {
             }
         });
 
-
         timeSpecify = (EditText) findViewById(R.id.user_specify);
         saveButton = (Button) findViewById(R.id.bt_7);
 
-
+        saveButton.setOnClickListener();
+        //TODO by michael
     }
 
     public void save(View view) {
