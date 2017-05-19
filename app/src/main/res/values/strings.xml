@@ -26,9 +26,9 @@
     <string name="deja">Deja</string>
     <string name="photo">Photo</string>
 
-    <string name="minute">Minutes</string>
+    <string name="second">Seconds</string>
     <string name="save">Save</string>
-    <string name="saveInterval">Save</string>
+
     <string name="show">Show</string>
     <string name="prevInterval">Current Refresh Interval</string>
 
@@ -38,6 +38,6 @@
     <string name="button4">Share</string>
     <string name="button5">Start App</string>
     <string name="button6">Download</string>
-    <string name="button7">Set Interval</string>
+
     <string name="title_activity_interval">IntervalActivity</string>
 </resources>
