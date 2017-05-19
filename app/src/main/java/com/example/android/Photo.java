@@ -79,14 +79,12 @@ public class Photo {
     }
 
     public boolean isKarma() {
-        return karma;
+        return this.karma;
     }
 
-    public void setKarma(boolean karma){
-        this.karma = karma;
+    public void setKarma(boolean boolKarma){
+        this.karma = boolKarma;
     }
-
-    public boolean isReleased() {return released;}
 
     public void setReleased(boolean flag){
         this.released = flag;

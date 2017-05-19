@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         Button interval = (Button) findViewById(R.id.bt_6);
         Button playApp = (Button) findViewById(R.id.bt_7);
 
+        startApp();
+
         playApp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

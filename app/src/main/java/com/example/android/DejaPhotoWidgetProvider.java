@@ -93,17 +93,22 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_PREVIOUS);
+            if(Global.currIndex == 0) Global.currIndex = Global.displayCycle.size() - 1;
+            else Global.currIndex = Global.currIndex - 1;
             changePicture = true;
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
             undoManager(context, "karma");
-
+            /*for(Photo p : Global.displayCycle){
+            }*/
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
             undoManager(context, "release");
 
         } else if (intent.getAction().equals(NEXT_PIC)) {
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_NEXT);
+            if(Global.currIndex == Global.displayCycle.size()) Global.currIndex = 0;
+            else Global.currIndex = Global.currIndex + 1;
             changePicture = true;
         }
 
@@ -121,7 +126,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
         if(!Global.undoKarmaOn && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
             intentKarma.setAction(ACTION_KARMA);
-            intentRelease.putExtra("path", getPath());
+            Global.karmaPath = getPath();
 
             this.karmaPI = PendingIntent.getBroadcast(context, 0, intentKarma, 0);
             karmaAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 15000, karmaPI); // Millisec * Second * Minute
@@ -133,7 +138,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
         else if(!Global.undoReleaseOn && action.equals("release") ){
             intentRelease.setAction(ACTION_RELEASE);
-            intentRelease.putExtra("path", getPath());
+            Global.releasePath = getPath();
+
             releasePI = PendingIntent.getBroadcast(context, 0, intentRelease, 0);
             releaseAlarm.setExact(AlarmManager.ELAPSED_REALTIME, 15000, releasePI); // Millisec * Second * Minute
 

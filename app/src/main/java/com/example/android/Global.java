@@ -29,4 +29,9 @@ public class Global {
         boolean[] settings = {dejaVuSetting, locationSetting, daySetting, timeSetting, karmaSetting};
         return settings;
     }
+
+    public static int currIndex = 0;
+
+    public static String karmaPath;
+    public static String releasePath;
 }
