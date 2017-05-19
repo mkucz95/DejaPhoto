@@ -27,7 +27,11 @@ public class SetActivity extends AppCompatActivity {
     private EditText timeSpecify;
     private Button saveButton;
 
-    private boolean [] settings; // save button to store all settings
+    private boolean locationSetting;
+    private boolean timeSetting;
+    private boolean dofSetting;
+    private boolean karmaSetting;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +85,14 @@ public class SetActivity extends AppCompatActivity {
                 else { //dejavu mode is on
                     Intent trackerIntent = new Intent (getApplicationContext(), TrackerService.class);
                     if (isChecked) {
-                        Global.locationSetting = true;
+                        locationSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is on", Toast.LENGTH_SHORT).show();
                         Log.i("trackerService", "Starting trackerService Intent");
                         startService(trackerIntent);
 
                     } else {
-                        Global.locationSetting = false;
+                        locationSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is off", Toast.LENGTH_SHORT).show();
                         Log.i("trackerService", "Stopping trackerService Intent");
@@ -107,11 +111,11 @@ public class SetActivity extends AppCompatActivity {
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
-                        Global.timeSetting=true;
+                        timeSetting=true;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is on", Toast.LENGTH_SHORT).show();
                     } else {
-                        Global.timeSetting=false;
+                        timeSetting=false;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -128,12 +132,11 @@ public class SetActivity extends AppCompatActivity {
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
-                        Global.daySetting = true;
+                        dofSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Day of Week setting is on", Toast.LENGTH_SHORT).show();
                     } else {
-                        Global.daySetting = false;
-
+                        dofSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Day of Week setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -150,13 +153,11 @@ public class SetActivity extends AppCompatActivity {
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
-                        Global.karmaSetting = true;
-
+                        karmaSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Karma setting is on", Toast.LENGTH_SHORT).show();
                     } else {
-                        Global.karmaSetting = false;
-
+                        karmaSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Karma setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -179,15 +180,16 @@ public class SetActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Michael
-                settings = Global.getSettings();
-                // call rerank
-                startRerank(settings);
+                Global.locationSetting = locationSetting;
+                Global.daySetting = dofSetting;
+                Global.karmaSetting = karmaSetting;
+                Global.timeSetting = timeSetting;
+                startRerank();
             }
         });
     }
 
-    public void startRerank(boolean[] settings) {
+    public void startRerank() {
         Intent intent = new Intent(this, Rerank.class);
         startService(intent);
     }
