@@ -2,7 +2,6 @@ package com.example.android;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 /**
@@ -36,8 +35,7 @@ public class ChangeImage extends IntentService {
             } else if (ACTION_NEXT.equals(action)) { //move to next pic
                 newHead = moveHead(NEXT_PIC);
                 changeImgToDisplay(newHead);
-            }
-            else if (ACTION_NEW.equals(action)) { //move to next pic
+            } else if (ACTION_NEW.equals(action)) { //move to next pic
                 displayFirstImage();
             }
             stopService(intent); //stop this intent service

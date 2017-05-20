@@ -22,7 +22,7 @@ public class Rank {
 
     /*we still not get the two varible value*/
 
-    boolean isLocaOn = false, isTimeOn = false, isKarmaOn = false, isWeekOn = false;
+    boolean isLocaOn = false, isTimeOn = false, isKarma = false, isWeekOn = false;
 
     private ArrayList<Photo> photo;
     //each photo is populated with all the information we need
@@ -35,15 +35,20 @@ public class Rank {
         settings = Global.getSettings();
         setMyLocation(localLat, localLong);
         Log.i("rankClass", "My Location : " + localLat + ", " + localLong );
+
         isLocaOn = settings[1];
         isWeekOn = settings[2];
         isTimeOn = settings[3];
-        isKarmaOn = settings[4];
+        isKarma = settings[4];
         Log.i("setKarma", "KarmaSetting: " + Global.getSettings()[4]);
 
         for(Photo p : Global.displayCycle){
             Log.i("setKarma", p.getPath() + " == karma == " + p.isKarma());
         }
+        isLocaOn = b2;
+        isWeekOn = b3;
+        isTimeOn = b1;
+        isKarma = b4;
 
         sort(); //sort the array list
 
@@ -87,11 +92,11 @@ public class Rank {
         Log.i("distanceRank","Number of photos: " + photo.size());
         for (int i = 0; i < photo.size(); i++) {
             Log.i("distanceRank", "iteration " + i + "----------------------------------");
-            for(Photo p : photo){
+            for (Photo p : photo) {
                 Log.i("distanceRank", p.getPath());
             }
             for (int j = 1; j < photo.size(); j++) {
-                Log.i("jis ",j+" i is "+i);
+                Log.i("jis ", j + " i is " + i);
                 String[] photo1GPS = photo.get(j - 1).getLatLong();
                 String[] photo2GPS = photo.get(j).getLatLong();
 
@@ -109,13 +114,16 @@ public class Rank {
                 int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());       //photo1 's interger for the day of week
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
+                boolean karma1 = photo.get(j - 1).isKarma();
+                boolean karma2 = photo.get(j).isKarma();
+
                 float[] dist = new float[1];
 
                 Location.distanceBetween(localLat, localLng, photo1Lat, photo1Lng, dist);
                 double distance1 = dist[0] / 3.28;   //meter to feet -- Distance between photo1 and current location
                 //Log.i("distanceRank ", "Distance from " + photo.get(j-1).getPath() + " : " + distance1 + "ft" );
 
-                float[]dist1 = new float[1];
+                float[] dist1 = new float[1];
                 Location.distanceBetween(localLat, localLng, photo2Lat, photo2Lng, dist1);
                 double distance2 = dist1[0] / 3.28; // Distance in ft between photo2 and current location
                 //Log.i("distanceRank", "Distance from " + photo.get(j).getPath() + " : " + distance2 + "ft");
@@ -130,23 +138,21 @@ public class Rank {
                 else dayIntDiff2 = abs(dayPhoto2 - dayInt);
                 int changeInt = 0;
 
-                Log.i("distanceRank", "Karma is on: " + isKarmaOn);
-                if (isKarmaOn) {
+                Log.i("distanceRank", "Karma is on: " + isKarma);
+                if (isKarma) {
 
-                    Log.i("setKarma", "Karma setting on");
-                    Log.i("setKarma", Global.displayCycle.get(j-1).getPath() + "karma: " + Global.displayCycle.get(j - 1).isKarma());
-                    Log.i("setKarma", Global.displayCycle.get(j).getPath() + "karma: " + Global.displayCycle.get(j).isKarma());
-
-                    if (!photo.get(j - 1).isKarma() && photo.get(j).isKarma()) {
-                        changeInt = changeInt + 10;
+                    if (isKarma) {
+                        Log.d("distanceRank", "Karma setting on &&&&&&&&&&&&&&&&&&");
+                        if (!karma1 && karma2)
+                            changeInt = changeInt + 10;
+                        else if (karma2 && karma1)
+                            changeInt = changeInt - 10;
+                        else
+                            Log.d("distanceRank", "no karma %%%%%%%%%%%%%%%%%%%%%");
                     }
-                    else if (photo.get(j - 1).isKarma() && !photo.get(j).isKarma()) {
-                        changeInt = changeInt - 10;
-                    }
-                }
-                Log.i("distanceRank", "location: " + isLocaOn);
-                if (isLocaOn) {
-                    Log.i("distanceRank", "sorting by location...");
+                    Log.i("distanceRank", "location: " + isLocaOn);
+                    if (isLocaOn) {
+                        Log.i("distanceRank", "sorting by location...");
                     /*if (distance1 > 1000 && distance2 <= 1000)
                         changeInt = changeInt + 2;
                     else if (distance1 <= 1000 && distance2 > 1000)
@@ -156,32 +162,31 @@ public class Rank {
                     else if (distance1 > 1000 && distance2 > 1000 && distance1 < distance2)
                         changeInt = changeInt - 2;*/
 
-                    if(distance1 < distance2){
-                        changeInt = changeInt - 2;
+                        if (distance1 < distance2) {
+                            changeInt = changeInt - 2;
+                        } else if (distance1 > distance2) {
+                            changeInt = changeInt + 2;
+                        }
+
+                        Log.i("distanceRank", "ChangeInt after location: " + changeInt);
+
+
                     }
-                    else if(distance1 > distance2){
-                        changeInt = changeInt + 2;
+                    if (isWeekOn) {
+                        Log.i("distanceRank", "Day of week setting on");
+                        Log.i("distanceRank", "Photo 1 day: " + dayIntDiff1 + ", Photo 2 day: " + dayIntDiff2);
+                        if (dayIntDiff1 < dayIntDiff2)
+                            changeInt = changeInt - 2;
+                        else if (dayIntDiff1 > dayIntDiff2)
+                            changeInt = changeInt + 2;
+
+                        Log.i("distanceRank", "ChangeInt after week : " + changeInt);
+
+
                     }
-
-                    Log.i("distanceRank", "ChangeInt after location: " + changeInt);
-
-
-                }
-                if (isWeekOn) {
-                    Log.i("distanceRank", "Day of week setting on");
-                    Log.i("distanceRank", "Photo 1 day: " + dayIntDiff1 + ", Photo 2 day: " + dayIntDiff2);
-                    if (dayIntDiff1 < dayIntDiff2)
-                        changeInt = changeInt - 2;
-                    else if (dayIntDiff1 > dayIntDiff2)
-                        changeInt = changeInt + 2;
-
-                    Log.i("distanceRank", "ChangeInt after week : " + changeInt);
-
-
-                }
-                if (isTimeOn) {
-                    Log.i("distanceRank", "Time setting on");
-                    Log.i("distanceRank", photo.get(j-1).getPath() + " time: " + photo.get(j-1).getDateTaken() + ", " + photo.get(j).getPath() + " time: " + photo.get(j).getDateTaken());
+                    if (isTimeOn) {
+                        Log.i("distanceRank", "Time setting on");
+                        Log.i("distanceRank", photo.get(j - 1).getPath() + " time: " + photo.get(j - 1).getDateTaken() + ", " + photo.get(j).getPath() + " time: " + photo.get(j).getDateTaken());
 
                     /*
                     if (abs(photo.get(j - 1).getHour() - hour) <= 2 && abs(photo.get(j).getHour() - hour) > 2)
@@ -197,29 +202,29 @@ public class Rank {
                     */
 
 
-                    if(Long.parseLong(photo.get(j-1).getDateTaken()) > Long.parseLong(photo.get(j).getDateTaken())){
-                        changeInt = changeInt - 2;
-                    }
-                    else if(Long.parseLong(photo.get(j-1).getDateTaken()) < Long.parseLong(photo.get(j).getDateTaken())){
-                        changeInt = changeInt + 2;
-                    }
+                        if (Long.parseLong(photo.get(j - 1).getDateTaken()) > Long.parseLong(photo.get(j).getDateTaken())) {
+                            changeInt = changeInt - 2;
+                        } else if (Long.parseLong(photo.get(j - 1).getDateTaken()) < Long.parseLong(photo.get(j).getDateTaken())) {
+                            changeInt = changeInt + 2;
+                        }
 
-                    Log.i("distanceRank", "ChangeInt after time : " + changeInt);
+                        Log.i("distanceRank", "ChangeInt after time : " + changeInt);
 
-                }
-                Log.i("distanceRank", "ChangeInt : " + changeInt);
-                if (changeInt > 0) {
-                    Log.i("distanceRank", "Swapping " + photo.get(j-1).getPath() + "[" + (j-1) + "] and " + photo.get(j).getPath()+ "[" + (j) + "]");
-                    temp = photo.get(j - 1);
-                    photo.set((j - 1), photo.get(j));
-                    photo.set(j, temp);
+                    }
+                    Log.i("distanceRank", "ChangeInt : " + changeInt);
+                    if (changeInt > 0) {
+                        Log.i("distanceRank", "Swapping " + photo.get(j - 1).getPath() + "[" + (j - 1) + "] and " + photo.get(j).getPath() + "[" + (j) + "]");
+                        temp = photo.get(j - 1);
+                        photo.set((j - 1), photo.get(j));
+                        photo.set(j, temp);
+                    }
                 }
             }
-        }
 
-        Global.displayCycle = this.photo; //update the global variable for display cycle
-        for (Photo y : Global.displayCycle){
-            Log.i("distanceRank: ", y.getPath());
+            Global.displayCycle = this.photo; //update the global variable for display cycle
+            for (Photo y : Global.displayCycle) {
+                Log.i("distanceRank: ", y.getPath());
+            }
         }
     }
 

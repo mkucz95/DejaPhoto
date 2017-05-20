@@ -20,7 +20,9 @@ android {
     }
     productFlavors {
     }
-    sourceSets { main { java.srcDirs = ['src/main/java', 'src/androidTest/java/com.example.android'] } }
+    sourceSets {
+        main { java.srcDirs = ['src/main/java', 'src/androidTest/java/com.example.android'] }
+    }
 }
 
 dependencies {

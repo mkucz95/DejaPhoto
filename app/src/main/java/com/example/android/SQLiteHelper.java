@@ -80,6 +80,7 @@ public class SQLiteHelper {
 
         this.dataPath = paths;
         Global.displayCycle = paths;
+        //DejaPhotoWidgetProvider.size = Global.displayCycle.size();
     }
 
 

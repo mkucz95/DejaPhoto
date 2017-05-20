@@ -28,7 +28,7 @@
         android:textColor="#58D68D"
         android:textSize="30sp"/>
 
-   <!-- <Button
+   <Button
         android:id="@+id/bt_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,7 +78,6 @@
         android:textColor="#A569BD"
         android:textSize="20sp" />
 
-
     <Button
         android:id="@+id/bt_5"
         android:layout_width="wrap_content"
@@ -88,11 +87,5 @@
         android:text="@string/button5"
         android:textColor="#A569BD"
         android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/bt_7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TestRerank" />
 
 </LinearLayout>

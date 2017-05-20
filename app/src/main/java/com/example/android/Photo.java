@@ -3,7 +3,6 @@ package com.example.android;
 import android.util.Log;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -23,7 +22,6 @@ public class Photo {
     private boolean released = false;
 
     public Photo(){
-
     }
 
     //constructor gets information from the rerank method

@@ -1,45 +1,30 @@
 package com.example.android;
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RemoteViews;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Set;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
-
-    private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
     public static final int MY_PERMISSIONS_MULTIPLE_REQUEST = 99;
-    Context context;
+    private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
+    private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,29 +33,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //setAlarm(); //Amanda: call function for autoWallpaper change
-
         System.out.println(Manifest.permission.READ_EXTERNAL_STORAGE.equals(PackageManager.PERMISSION_GRANTED));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
       //  Button album = (Button) findViewById(R.id.bt_1);
-        Button dejaMode = (Button) findViewById(R.id.bt_4);
         Button settings = (Button) findViewById(R.id.bt_3);
        // Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_5);
-        Button interval = (Button) findViewById(R.id.bt_6);
-        Button playApp = (Button) findViewById(R.id.bt_7);
+        //Button playApp = (Button) findViewById(R.id.bt_7);
 
         startApp();
+        final LinearLayout l = (LinearLayout) findViewById(R.id.l_settings);
+        setContentView(R.layout.content_set);
+        Switch mode = (Switch) findViewById(R.id.s_mode);
 
-        playApp.setOnClickListener(new View.OnClickListener(){
+        Log.d("MainActivity", "MODE: " +mode);
+
+        if (Global.dejaVuSetting) {
+            mode.setChecked(true);
+        } else {
+            mode.setChecked(false);
+        }
+
+        /*playApp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 startRerank();
             }
-        } );
+        } );*/
 
       /*  album.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,13 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
-        dejaMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setMode();
-            }
-        });
-
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,10 +85,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        interval.setOnClickListener(new View.OnClickListener() {
+        mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                setInterval();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Global.dejaVuSetting = true;
+
+                    l.setBackgroundColor(Color.parseColor("#2DC0C5"));
+                    Toast.makeText(getApplicationContext(),
+                            "DejaVu - On", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Global.dejaVuSetting = false;
+
+                    l.setBackgroundColor(Color.parseColor("#1BEA44"));
+                    Toast.makeText(getApplicationContext(),
+                            "DejaVu - Off", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -111,11 +109,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchActivity() {
         Intent intent = new Intent(this, AlbumActivity.class);
-        startActivity(intent);
-    }
-
-    public void setMode() {
-        Intent intent = new Intent(this, ModeActivity.class);
         startActivity(intent);
     }
 
@@ -130,67 +123,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void setInterval() {
-        Intent intent = new Intent(this, IntervalActivity.class);
-        startActivity(intent);
-    }
-
     public void startRerank(){
         Intent intent = new Intent (this, Rerank.class);
         startService(intent);
-
-    }
-
-    //Amanda's code, dont touch
-    public void setAlarm(){
-
-//        Intent clickIntent = new Intent(getApplicationContext(), WidgetManager.class);
-//        clickIntent.setAction(Intent.ACTION_SEND);
-//        clickIntent.setType("text/plain");
-//        clickIntent.putExtra("button_pressed", "next");
-//        PendingIntent pending = PendingIntent.getService(this, 0, clickIntent, 0);
-
-        /*Below code is to obtain time it has been since service starts*/
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 0);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        long startTime = calendar.getTimeInMillis();
-
-        Intent receiverIntent = new Intent(getApplicationContext(), myReceiver.class);
-        PendingIntent pending = PendingIntent.getBroadcast(this, 0, receiverIntent, 0);
-        //not sure why, but 'this' is faster than  getApplicationContext()
-        //PendingIntent pending = PendingIntent.getBroadcast(getApplicationContext(), 0, receiverIntent, 0);
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC, startTime, 5000, pending);
-        //am.setWindow(AlarmManager.RTC_WAKEUP, 0, 5000, pending);
-
-    }
-
-    //Amanda's code dont touch
-    //Exact same code as SetAlarm() except 'cancel()'
-    public void cancelAlarm(){
-
-        /*Below code is to obtain time it has been since service starts*/
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 0);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        long startTime = calendar.getTimeInMillis();
-
-        Intent receiverIntent = new Intent(getApplicationContext(), myReceiver.class);
-        PendingIntent pending = PendingIntent.getBroadcast(this, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT); //UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) getApplication().getSystemService(ALARM_SERVICE);
-        am.cancel(pending);
-        am.setRepeating(AlarmManager.RTC, startTime, 5000, pending);
     }
 
     public void startApp(){
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
+
+
+        Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
+        Global.timer.schedule(Global.autoWallpaperChange,
+                Global.changeInterval, Global.changeInterval);
 
         Log.i("BuildCycle", "Calling BuildDisplayCycle...");
         displayCycleIntent.setAction(ACTION_BUILD_CYCLE);

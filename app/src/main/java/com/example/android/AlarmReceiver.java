@@ -31,7 +31,6 @@ public class AlarmReceiver extends BroadcastReceiver
 
         Log.i("AlarmReciever", "action:  "+ action);
 
-
         if(ACTION_KARMA.equals(action) && Global.undoKarmaOn) {
             Log.i("AlarmReciever", "Karma Intent Received");
 
@@ -54,7 +53,6 @@ public class AlarmReceiver extends BroadcastReceiver
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
 
             setData(false, Global.releasePath);
-
         }
     }
 
@@ -79,6 +77,5 @@ public class AlarmReceiver extends BroadcastReceiver
             Log.i("setKarma", p.getPath() + ": karma:  "+ p.isKarma());
         }
     }
-
 
 }

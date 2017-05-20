@@ -6,12 +6,13 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
+
+import java.util.Timer;
 
 /**
  * Created by Justin on 5/3/17.
@@ -19,17 +20,15 @@ import com.example.dejaphoto.R;
  */
 
 public class DejaPhotoWidgetProvider extends AppWidgetProvider {
-    public static String PREVIOUS_PIC = "Previous Picture";
-    public static String KARMA_BUTTON = "Karma Added";
-    public static String RELEASE_BUTTON = "Picture Released";
-    public static String NEXT_PIC = "Next Picture";
-
     //ACTIONS
     private static final String ACTION_KARMA = "com.example.android.KARMA";
     private static final String ACTION_RELEASE = "com.example.android.RELEASE";
     private static final String ACTION_PREVIOUS = "com.example.android.PREVIOUS";
     private static final String ACTION_NEXT = "com.example.android.NEXT";
-
+    public static String PREVIOUS_PIC = "Previous Picture";
+    public static String KARMA_BUTTON = "Karma Added";
+    public static String RELEASE_BUTTON = "Picture Released";
+    public static String NEXT_PIC = "Next Picture";
     AlarmManager karmaAlarm;
     AlarmManager releaseAlarm;
     PendingIntent karmaPI;
@@ -40,7 +39,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         final int N = appWidgetIds.length;
-
 
         for(int i=0; i<N; i++){ //
             int appWidgetId = appWidgetIds[i];
@@ -75,41 +73,40 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         }
     }
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        String pressed = "button_pressed";
-
-        //Intent restartTimer = new Intent(context, AutoChanger.class);
 
         Intent changeIntent = new Intent(context, ChangeImage.class);
 
-        boolean changePicture = false; //needed to prevent crash
-
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
+        boolean changePicture = false, buttonPressed = false;
+        //needed to prevent crash, auto changer override
 
         if (intent.getAction().equals(PREVIOUS_PIC)) {
-
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_PREVIOUS);
             if(Global.currIndex == 0) Global.currIndex = Global.displayCycle.size() - 1;
             else Global.currIndex = Global.currIndex - 1;
             changePicture = true;
+            manageTimer(context); //reset timer
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
+            manageTimer(context);
             undoManager(context, "karma");
             /*for(Photo p : Global.displayCycle){
             }*/
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
+            manageTimer(context);
             undoManager(context, "release");
 
         } else if (intent.getAction().equals(NEXT_PIC)) {
+            manageTimer(context);
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_NEXT);
             if(Global.currIndex == Global.displayCycle.size()) Global.currIndex = 0;
             else Global.currIndex = Global.currIndex + 1;
             changePicture = true;
+
         }
 
         if (changePicture) context.startService(changeIntent); //call widgetmanager
@@ -186,5 +183,14 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public String getPath(){
         Photo photo = Global.displayCycle.get(Global.head);
         return photo.getPath();
+    }
+
+    public void manageTimer(Context context) { //called when button is clicked
+        if(Global.timer != null) {
+            Global.autoWallpaperChange.cancel();
+            Global.autoWallpaperChange = new AutoWallpaperChange(context);
+            Global.timer.schedule(Global.autoWallpaperChange,
+                    Global.changeInterval, Global.changeInterval);
+        }
     }
 }

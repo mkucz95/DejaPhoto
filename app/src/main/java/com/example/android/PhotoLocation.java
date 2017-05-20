@@ -1,14 +1,11 @@
 package com.example.android;
+
 import android.location.Address;
 import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.util.Log;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
-
-import static android.content.ContentValues.TAG;
 
 
 /**
@@ -16,8 +13,6 @@ import static android.content.ContentValues.TAG;
  * This class gets longitude and latitude values from the EXIF data in each photo
  * The long/lat values are then converted to a city value or street address with geocode
  */
-
-
 public class PhotoLocation{
 
     public String locationName;
