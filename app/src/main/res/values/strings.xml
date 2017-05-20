@@ -33,7 +33,7 @@
     <string name="prevInterval">Current Refresh Interval</string>
     <string name="defaultInterval">5 seconds</string>
 
-    <string name="button1">Choose Album</string>
+    <string name="button1">Camera</string>
     <string name="button2">Add Photo</string>
     <string name="button3">Settings</string>
     <string name="button4">Share</string>
