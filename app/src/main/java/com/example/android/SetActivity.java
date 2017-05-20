@@ -24,7 +24,6 @@ public class SetActivity extends AppCompatActivity {
     public Switch dayOfWeek;
     public Switch karma;
     EditText input;
-    private EditText timeSpecify;
     private Button saveButton;
 
     private boolean locationSetting;
@@ -175,7 +174,6 @@ public class SetActivity extends AppCompatActivity {
             }
         });
 
-        timeSpecify = (EditText) findViewById(R.id.user_specify);
         saveButton = (Button) findViewById(R.id.bt_7);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -195,7 +193,7 @@ public class SetActivity extends AppCompatActivity {
         startService(intent);
     }
 
-    public void saveTimeInterval(View view) {
+    public void save(View view) {
         input = (EditText) findViewById(R.id.user_specify);
 
         Global.changeInterval = Integer.parseInt(input.getText().toString()) * 1000;
@@ -204,7 +202,8 @@ public class SetActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
 
         TextView interval = (TextView) findViewById(R.id.prevMin);
-        interval.setText(Long.toString(Global.changeInterval)); //show settings on settings page
+        TextView intervalNext = (TextView) findViewById(R.id.change_interval);
+        intervalNext.setText(Long.toString(Global.changeInterval)); //show settings on settings page
     }
 
 }

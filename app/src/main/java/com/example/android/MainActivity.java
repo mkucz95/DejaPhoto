@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
        // Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_5);
         //Button playApp = (Button) findViewById(R.id.bt_7);
+       // Button playApp = (Button) findViewById(R.id.bt_7);
 
         startApp();
         final LinearLayout l = (LinearLayout) findViewById(R.id.l_settings);
@@ -63,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
                 startRerank();
             }
         } );*/
+//        playApp.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                startRerank();
+//            }
+//        } );
 
       /*  album.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         display.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startApp();
+                startRerank();
             }
         });
 

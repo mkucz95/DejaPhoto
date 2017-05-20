@@ -94,13 +94,14 @@
         android:textSize="15sp" />
 
     <TextView
+        android:id="@+id/change_interval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:textColor="#D03E80"
+        android:layout_marginTop="20dp"
         android:text="@string/defaultInterval"
-        android:textSize="15sp"/>
+        android:textColor="#D03E80"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/bt_7"
