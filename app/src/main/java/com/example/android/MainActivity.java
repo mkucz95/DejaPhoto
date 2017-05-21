@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,12 +20,16 @@ import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
+import java.io.File;
 import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_MULTIPLE_REQUEST = 99;
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
+
+    static final String dejaAlbum = "Deja Photo Album";
+    static final File imageRoot = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), dejaAlbum);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-      //  Button album = (Button) findViewById(R.id.bt_1);
+        Button camera = (Button) findViewById(R.id.bt_1);
         Button settings = (Button) findViewById(R.id.bt_3);
        // Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_5);
@@ -70,6 +75,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCamera();
+            }
+        });
+
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +117,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // MS2 click the camera button to open default camera
+    public void openCamera() {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivity(intent);
+
+        imageRoot.mkdirs();
+        final File image = new File(imageRoot, "");
+    }
 
     public void launchActivity() {
         Intent intent = new Intent(this, AlbumActivity.class);
