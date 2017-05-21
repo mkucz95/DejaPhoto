@@ -109,6 +109,17 @@
             android:name="com.example.android.TrackerService"
             android:exported="false" />
 
+        <activity
+            android:name="com.example.android.ShareActivity"
+            android:label="@string/title_activity_share"
+            android:parentActivityName="com.example.android.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.example.android.DisplayActivity"
+            android:label="@string/title_activity_display"
+            android:parentActivityName="com.example.android.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

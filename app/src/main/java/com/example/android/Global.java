@@ -20,7 +20,8 @@ public class Global {
             MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE};
 
     public static boolean dejaVuSetting = true, locationSetting = false,
-            daySetting = false, timeSetting = false, karmaSetting = false;
+            daySetting = false, timeSetting = false, karmaSetting = false,
+            shareSetting = false, displayUser = false, displayFriend = false;
 
    //keeps track of alarms for the widget button when karma/release pressed
     public static boolean undoReleaseOn = false; //whether these alarms are on

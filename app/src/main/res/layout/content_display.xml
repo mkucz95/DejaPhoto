@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.DisplayActivity"
+    tools:showIn="@layout/activity_display">
+
+    <Switch
+        android:id="@+id/s_displayUser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:gravity="start"
+        android:text="@string/user"
+        android:textColor="#58D68D"
+        android:textSize="20sp" />
+
+    <Switch
+        android:id="@+id/s_displayFriend"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:checked="false"
+        android:gravity="start"
+        android:text="@string/friend"
+        android:textColor="#EC7063"
+        android:textSize="20sp" />
+
+</LinearLayout>
