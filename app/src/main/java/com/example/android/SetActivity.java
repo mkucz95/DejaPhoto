@@ -71,6 +71,7 @@ public class SetActivity extends AppCompatActivity {
         else {
             karma.setChecked(false);
         }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -22,6 +22,9 @@
     <string name="time">Time</string>
     <string name="dow">Day Of The Week</string>
     <string name="karma">Karma</string>
+    <string name="share">Share with friends</string>
+    <string name="user">Display My Photo</string>
+    <string name="friend">Display Friend Photo</string>
 
     <string name="deja">Deja</string>
     <string name="photo">Photo</string>
@@ -33,12 +36,15 @@
     <string name="prevInterval">Current Refresh Interval</string>
     <string name="defaultInterval">5 seconds</string>
 
-    <string name="button1">Choose Album</string>
+    <string name="button1">Camera</string>
     <string name="button2">Add Photo</string>
     <string name="button3">Settings</string>
     <string name="button4">Share</string>
-    <string name="button5">Start App</string>
-    <string name="button6">Download</string>
+    <string name="button5">Download</string>
+    <string name="button6">Add Friends</string>
+    <string name="button7">Display</string>
 
     <string name="title_activity_interval">IntervalActivity</string>
+    <string name="title_activity_share">ShareActivity</string>
+    <string name="title_activity_display">DisplayActivity</string>
 </resources>

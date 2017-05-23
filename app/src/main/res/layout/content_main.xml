@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -26,14 +27,14 @@
         android:layout_marginTop="10dp"
         android:text="@string/photo"
         android:textColor="#58D68D"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
-   <Button
+    <Button
         android:id="@+id/bt_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="@string/button1"
         android:textColor="#A569BD"
         android:textSize="20sp" />
@@ -43,17 +44,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="@string/button2"
         android:textColor="#A569BD"
-        android:textSize="20sp" /> -->
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/bt_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="@string/button3"
         android:textColor="#A569BD"
         android:textSize="20sp" />
@@ -63,18 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="@string/button4"
-        android:textColor="#A569BD"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/bt_6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/button6"
         android:textColor="#A569BD"
         android:textSize="20sp" />
 
@@ -83,8 +74,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="@string/button5"
+        android:textColor="#A569BD"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/bt_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/button6"
+        android:textColor="#A569BD"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/bt_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/button7"
         android:textColor="#A569BD"
         android:textSize="20sp" />
 

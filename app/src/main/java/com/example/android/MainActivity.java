@@ -3,9 +3,13 @@ package com.example.android;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,12 +23,24 @@ import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_MULTIPLE_REQUEST = 99;
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
+
+    static final String dejaAlbum = "Deja Photo Album";
+    static final File imageRoot = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), dejaAlbum);
+
+    private static final String deja = "/Deja Photo Album";
+
+    static final int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-      //  Button album = (Button) findViewById(R.id.bt_1);
+        Button camera = (Button) findViewById(R.id.bt_1);
         Button settings = (Button) findViewById(R.id.bt_3);
        // Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_5);
@@ -78,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCamera();
+            }
+        });
+
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +136,44 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // MS2 click the camera button to open default camera
+    public void openCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            saveImage(thumbnail);
+            Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public String saveImage(Bitmap myMap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        myMap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        File file = new File(Environment.getExternalStorageDirectory() + deja);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+
+        try {
+            File f = new File(file, Calendar.getInstance().getTimeInMillis() + ".jpg");
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+            MediaScannerConnection.scanFile(this, new String[]{f.getPath()}, new String[]{"image/jpeg"}, null);
+            fo.close();
+            Log.d("TAG", "File Saved:: --->" + f.getAbsolutePath());
+            return f.getAbsolutePath();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     public void launchActivity() {
         Intent intent = new Intent(this, AlbumActivity.class);
