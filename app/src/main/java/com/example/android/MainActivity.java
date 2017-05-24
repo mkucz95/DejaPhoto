@@ -3,6 +3,7 @@ package com.example.android;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaScannerConnection;
@@ -28,9 +29,11 @@ import com.example.dejaphoto.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.Calendar;
 import java.util.Timer;
 
@@ -40,11 +43,20 @@ public class MainActivity extends AppCompatActivity {
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
 
     static final String dejaAlbum = "Deja Photo Album";
+    static final String copyDeja = "/Deja Photo Album Copy/";
+   
     static final File imageRoot = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), dejaAlbum);
 
-    private static final String deja = "/Deja Photo Album";
+    String galleryPath = Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_PICTURES + "/";
+
+    //File deja = new File(Environment.getExternalStorageDirectory(), copyDeja);
+    File deja;
 
     static final int REQUEST_CODE = 1;
+
+    static final int SELECT_IMAGE = 1;
+
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +72,17 @@ public class MainActivity extends AppCompatActivity {
 
         Button camera = (Button) findViewById(R.id.bt_1);
         Button settings = (Button) findViewById(R.id.bt_3);
-        //Button addPhoto = (Button) findViewById(R.id.bt_2);
+        Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_7);
         Button share = (Button) findViewById(R.id.bt_4);
         Button addFriends = (Button) findViewById(R.id.bt_6);
 
-        startApp();
 
-      /*  album.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchActivity();
-            }
-        }); */
+        deja = new File(Environment.getExternalStorageDirectory(), copyDeja);
+
+        deja.mkdirs();
+
+        startApp();
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +125,13 @@ public class MainActivity extends AppCompatActivity {
                 addFriend();
             }
         });
+
+        addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addPhoto();
+            }
+        });
     }
 
     // MS2 click the camera button to open default camera
@@ -123,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE);
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
@@ -131,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             saveImage(thumbnail);
             Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
     public void saveImage(Bitmap myMap) {
         /*ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -154,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return "";*/
-        File outputFile = new File(Environment.getExternalStorageDirectory(), deja);
+        /*File outputFile = new File(Environment.getExternalStorageDirectory(), deja);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
             myMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
@@ -165,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void launchActivity() {
@@ -193,10 +210,68 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void add () {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
-                "content://media/internal/images/media"));
-        startActivity(intent);
+    public void addPhoto () {
+        Intent pickImage = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(pickImage, SELECT_IMAGE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            /*switch (requestCode) {
+                case SELECT_IMAGE:
+                    path = getPath(data.getData());
+                    try {
+                        copyFile(new File(path), deja);
+                        Toast.makeText(getApplicationContext(), "Picture picked", Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+            }*/
+            path = getPath(data.getData());
+            try {
+                copyFile(new File(path), deja);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void copyFile(File sourceFile, File destFile) throws IOException {
+
+        Log.d("Check", "********");
+        if(!sourceFile.exists()) {
+            return;
+        }
+
+        if(!destFile.exists()) {
+            destFile.mkdirs();
+        }
+
+        FileChannel source = null;
+        FileChannel dest = null;
+        source = new FileInputStream(sourceFile).getChannel();
+        dest = new FileOutputStream(destFile).getChannel();
+        if(dest != null && source != null) {
+            dest.transferFrom(source, 0, source.size());
+        }
+        if(source != null) {
+            source.close();
+        }
+        if(dest != null) {
+            dest.close();
+        }
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        startManagingCursor(cursor);
+
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        Toast.makeText(getApplicationContext(), "Picture picked", Toast.LENGTH_LONG).show();
+        return cursor.getString(column_index);
     }
 
     public void startRerank(){
