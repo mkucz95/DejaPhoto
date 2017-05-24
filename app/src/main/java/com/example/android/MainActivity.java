@@ -78,9 +78,13 @@ public class MainActivity extends AppCompatActivity {
         Button addFriends = (Button) findViewById(R.id.bt_6);
 
 
-        deja = new File("/sdcard/DejaAlbum");
+        //deja = new File("/sdcard/DejaAlbum");
 
-        deja.mkdirs();
+        //deja.mkdirs();
+        String rootDirectory = Environment.getExternalStorageDirectory().toString();
+        deja = new File(rootDirectory + "/DejaCopy");
+        deja.mkdir();
+
 
         startApp();
 
@@ -122,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         addFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addFriend();
+               addFriend();
             }
         });
 
@@ -211,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPhoto () {
-        Intent pickImage = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Intent pickImage = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(pickImage, SELECT_IMAGE);
     }
 
@@ -229,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                     }
             }*/
             path = getPath(data.getData());
+            Log.i("pictureSelect", "path: " + path);
             try {
                 copyFile(new File(path), deja);
             } catch (IOException e) {
@@ -237,23 +242,45 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void copyFile(File sourceFile, File destFile) throws IOException {
+    public void copyFile(File sourceFile, File destFolder) throws IOException {
+
+        Boolean bool = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED;
+        Log.i("pictureSelect", "Write Permission: " + bool);
+
+        Boolean bool2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED;
+        Log.i("pictureSelect", "Read Permission: " + bool2);
+
+
 
         Log.d("Check", "********");
         if(!sourceFile.exists()) {
             return;
         }
+        Log.i("pictureSelect", destFolder.getPath() + ": " + destFolder.exists());
 
-        if(!destFile.exists()) {
-            destFile.mkdirs();
+        if(!destFolder.exists()) {
+            destFolder.mkdirs();
+            Log.i("pictureSelect", "Dest path created: " + destFolder.getPath());
         }
+        Log.i("pictureSelect", "Source path: " + sourceFile);
+        Log.i("pictureSelect", "Dest path: " + destFolder);
 
         FileChannel source = null;
         FileChannel dest = null;
+        Log.i("pictureSelect", "Creating FileChannels...");
         source = new FileInputStream(sourceFile).getChannel();
+        Log.i("pictureSelect", "Source Channel created");
+        File destFile = new File(destFolder.getPath());
         dest = new FileOutputStream(destFile).getChannel();
+        Log.i("pictureSelect", "Dest Channel Created");
+        Log.i("pictureSelect", "Source stream: " + source);
+        Log.i("pictureSelect", "Dest stream: " + dest);
+
         if(dest != null && source != null) {
             dest.transferFrom(source, 0, source.size());
+            Log.i("pictureSelect", "Transferred: " + dest);
         }
         if(source != null) {
             source.close();
@@ -265,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
 
     public String getPath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
         startManagingCursor(cursor);
 
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -305,12 +332,13 @@ public class MainActivity extends AppCompatActivity {
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             //Request Permissions
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.CAMERA},
+                            Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                             MY_PERMISSIONS_MULTIPLE_REQUEST);
         }
         else{
@@ -326,8 +354,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i("permission", "Requesting Permission");
         if (requestCode == MY_PERMISSIONS_MULTIPLE_REQUEST) {
             Log.i("permission", "checking...");
-            if (grantResults.length == 4 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.i("permission", "Permission Now Granted...");
+            if (grantResults.length == 5 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.i("permission", "Read Permission Now Granted...");
                 Toast.makeText(this, "Read permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
             }
@@ -335,26 +363,37 @@ public class MainActivity extends AppCompatActivity {
                 //Permission denied
                 Toast.makeText(this, "Read Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 4 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            if(grantResults.length == 5 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
+                Log.i("permission", "Location Permission Now Granted...");
             }
             else {
                 //Permission denied
                 Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 4 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+            if(grantResults.length == 5 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
+                Log.i("permission", " Location Permission Now Granted...");
             }
             else {
                 //Permission denied
                 Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 4 && grantResults[3] == PackageManager.PERMISSION_GRANTED) {
+            if(grantResults.length == 5 && grantResults[3] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show();
+                Log.i("permission", "Camera Permission Now Granted...");
             }
             else {
                 //Permission denied
                 Toast.makeText(this, "Camera Access Denied", Toast.LENGTH_SHORT).show();
+            }
+            if(grantResults.length == 5 && grantResults[4] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Write permission granted", Toast.LENGTH_SHORT).show();
+                Log.i("permission", "Write Permission Now Granted...");
+            }
+            else {
+                //Permission denied
+                Toast.makeText(this, "Write Access Denied", Toast.LENGTH_SHORT).show();
             }
 
         }
