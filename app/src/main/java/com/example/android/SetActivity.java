@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class SetActivity extends AppCompatActivity {
     public Switch time;
     public Switch dayOfWeek;
     public Switch karma;
+    public Switch mode;
     EditText input;
     private Button saveButton;
 
@@ -43,6 +46,20 @@ public class SetActivity extends AppCompatActivity {
         time = (Switch) findViewById(R.id.s_time);
         dayOfWeek = (Switch) findViewById(R.id.s_dow);
         karma = (Switch) findViewById(R.id.s_karma);
+
+        final LinearLayout l = (LinearLayout) findViewById(R.id.l_settings);
+        setContentView(R.layout.content_set);
+        Switch mode = (Switch) findViewById(R.id.s_mode);
+
+        Log.d("SetActivity", "MODE: " +mode);
+
+        if (Global.dejaVuSetting) {
+            mode.setChecked(true);
+        } else {
+            mode.setChecked(false);
+        }
+
+
 
         if(Global.locationSetting) {
             location.setChecked(true);
@@ -72,7 +89,30 @@ public class SetActivity extends AppCompatActivity {
             karma.setChecked(false);
         }
 
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Global.dejaVuSetting = true;
+
+                    //l.setBackgroundColor(Color.parseColor("#2DC0C5"));
+                    Toast.makeText(getApplicationContext(),
+                            "DejaVu - On", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Log.i("dejaVu", "Turning off");
+                    Global.dejaVuSetting = false;
+
+                    //l.setBackgroundColor(Color.parseColor("#1BEA44"));
+                    Toast.makeText(getApplicationContext(),
+                            "DejaVu - Off", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -85,6 +125,7 @@ public class SetActivity extends AppCompatActivity {
                 else { //dejavu mode is on
                     Intent trackerIntent = new Intent (getApplicationContext(), TrackerService.class);
                     if (isChecked) {
+                        Log.i("saveMsg", "Location ON");
                         locationSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is on", Toast.LENGTH_SHORT).show();
@@ -92,7 +133,10 @@ public class SetActivity extends AppCompatActivity {
                         startService(trackerIntent);
 
                     } else {
+                        Log.i("saveMsg", "Location OFF");
+
                         locationSetting = false;
+
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is off", Toast.LENGTH_SHORT).show();
                         Log.i("trackerService", "Stopping trackerService Intent");
@@ -111,10 +155,14 @@ public class SetActivity extends AppCompatActivity {
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
+                        Log.i("saveMsg", "Time ON");
+
                         timeSetting=true;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is on", Toast.LENGTH_SHORT).show();
                     } else {
+                        Log.i("saveMsg", "Time OFF");
+
                         timeSetting=false;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is off", Toast.LENGTH_SHORT).show();
@@ -132,10 +180,14 @@ public class SetActivity extends AppCompatActivity {
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
+                        Log.i("saveMsg", "Day ON");
+
                         dofSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Day of Week setting is on", Toast.LENGTH_SHORT).show();
                     } else {
+                        Log.i("saveMsg", "Day OFF");
+
                         dofSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Day of Week setting is off", Toast.LENGTH_SHORT).show();
@@ -153,11 +205,14 @@ public class SetActivity extends AppCompatActivity {
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
                 } else { //dejavu mode is on
                     if (isChecked) {
+                        Log.i("saveMsg", "Karma ON");
                         karmaSetting = true;
                         Log.i("setKarma", "KarmaSetting: " + Global.getSettings()[4]);
                         Toast.makeText(getApplicationContext(),
                                 "Karma setting is on", Toast.LENGTH_SHORT).show();
                     } else {
+                        Log.i("saveMsg", "Karma OFF");
+
                         karmaSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Karma setting is off", Toast.LENGTH_SHORT).show();
@@ -166,20 +221,14 @@ public class SetActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         saveButton = (Button) findViewById(R.id.bt_7);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Log.i("saveMsg", "HIT");
                 Global.locationSetting = locationSetting;
                 Global.daySetting = dofSetting;
                 Global.karmaSetting = karmaSetting;
@@ -194,17 +243,6 @@ public class SetActivity extends AppCompatActivity {
         startService(intent);
     }
 
-    public void save(View view) {
-        input = (EditText) findViewById(R.id.user_specify);
 
-        Global.changeInterval = Integer.parseInt(input.getText().toString()) * 1000;
-        //set the interval specified by user
-
-        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
-
-        TextView interval = (TextView) findViewById(R.id.prevMin);
-        TextView intervalNext = (TextView) findViewById(R.id.change_interval);
-        intervalNext.setText(Long.toString(Global.changeInterval)); //show settings on settings page
-    }
 
 }

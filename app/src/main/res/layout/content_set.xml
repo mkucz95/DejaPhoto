@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:onClick="save"
+        android:onClick="saveInterval"
         android:text="@string/save"
         android:textColor="@color/colorPrimary"
         android:textSize="15sp" />

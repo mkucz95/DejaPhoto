@@ -17,14 +17,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
@@ -61,18 +64,10 @@ public class MainActivity extends AppCompatActivity {
         //Button playApp = (Button) findViewById(R.id.bt_7);
        // Button playApp = (Button) findViewById(R.id.bt_7);
 
+
+
         startApp();
-        final LinearLayout l = (LinearLayout) findViewById(R.id.l_settings);
-        setContentView(R.layout.content_set);
-        Switch mode = (Switch) findViewById(R.id.s_mode);
 
-        Log.d("MainActivity", "MODE: " +mode);
-
-        if (Global.dejaVuSetting) {
-            mode.setChecked(true);
-        } else {
-            mode.setChecked(false);
-        }
 
         /*playApp.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -93,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 launchActivity();
             }
         });
+
 */
+
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,25 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Global.dejaVuSetting = true;
 
-                    l.setBackgroundColor(Color.parseColor("#2DC0C5"));
-                    Toast.makeText(getApplicationContext(),
-                            "DejaVu - On", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Global.dejaVuSetting = false;
-
-                    l.setBackgroundColor(Color.parseColor("#1BEA44"));
-                    Toast.makeText(getApplicationContext(),
-                            "DejaVu - Off", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     // MS2 click the camera button to open default camera
@@ -152,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public String saveImage(Bitmap myMap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    public void saveImage(Bitmap myMap) {
+        /*ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myMap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File file = new File(Environment.getExternalStorageDirectory() + deja);
         if(!file.exists()) {
@@ -172,7 +151,19 @@ public class MainActivity extends AppCompatActivity {
         }catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
+        return "";*/
+        File outputFile = new File(Environment.getExternalStorageDirectory(), deja);
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
+            myMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            Log.d("TAG", "File Saved:: --->" + outputFile.getAbsolutePath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void launchActivity() {
@@ -221,10 +212,14 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             //Request Permissions
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSIONS_MULTIPLE_REQUEST);
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.CAMERA},
+                            MY_PERMISSIONS_MULTIPLE_REQUEST);
         }
         else{
             startApp();
@@ -239,8 +234,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("permission", "Requesting Permission");
         if (requestCode == MY_PERMISSIONS_MULTIPLE_REQUEST) {
             Log.i("permission", "checking...");
-            if (grantResults.length == 3 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 4 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.i("permission", "Permission Now Granted...");
                 Toast.makeText(this, "Read permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
@@ -249,23 +243,64 @@ public class MainActivity extends AppCompatActivity {
                 //Permission denied
                 Toast.makeText(this, "Read Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 3 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            if(grantResults.length == 4 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
             }
             else {
                 //Permission denied
                 Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 3 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+            if(grantResults.length == 4 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
             }
             else {
                 //Permission denied
                 Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
             }
+            if(grantResults.length == 4 && grantResults[3] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                //Permission denied
+                Toast.makeText(this, "Camera Access Denied", Toast.LENGTH_SHORT).show();
+            }
+
         }
         else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    public void saveInterval(View v) {
+        EditText input = (EditText) findViewById(R.id.user_specify);
+
+        Log.i("saveMsg", "input:" + input);
+
+        if(input == null || input.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(), "Please enter a valid time Interval", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        long newInterval = Integer.parseInt(input.getText().toString());
+
+
+        //set the interval specified by user
+        Global.changeInterval = newInterval * 1000;
+        Global.timer.cancel();
+        Global.timer = new Timer();
+        Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
+        Global.timer.schedule(Global.autoWallpaperChange,
+                Global.changeInterval, Global.changeInterval);
+
+        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+
+        Log.i("saveMsg", "Location: " + Global.locationSetting);
+        Log.i("saveMsg", "Time: " + Global.timeSetting);
+        Log.i("saveMsg", "Day: " + Global.daySetting);
+        Log.i("saveMsg", "Karma: " + Global.karmaSetting);
+
+        TextView interval = (TextView) findViewById(R.id.prevMin);
+        TextView intervalNext = (TextView) findViewById(R.id.change_interval);
+        intervalNext.setText(Long.toString(newInterval) + " seconds"); //show settings on settings page
     }
 }
