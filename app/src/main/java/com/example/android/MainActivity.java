@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         Button addFriends = (Button) findViewById(R.id.bt_6);
 
 
-        deja = new File(Environment.getExternalStorageDirectory(), copyDeja);
+        deja = new File("/sdcard/DejaAlbum");
 
         deja.mkdirs();
 
