@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         Button camera = (Button) findViewById(R.id.bt_1);
         Button settings = (Button) findViewById(R.id.bt_3);
        // Button addPhoto = (Button) findViewById(R.id.bt_2);
-        Button display = (Button) findViewById(R.id.bt_5);
+        Button display = (Button) findViewById(R.id.bt_7);
+        Button share = (Button) findViewById(R.id.bt_4);
         //Button playApp = (Button) findViewById(R.id.bt_7);
        // Button playApp = (Button) findViewById(R.id.bt_7);
 
@@ -95,6 +97,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openCamera();
+            }
+        });
+
+        display.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDisplay();
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openShare();
             }
         });
 
@@ -173,6 +189,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeSettings() {
         Intent intent = new Intent(this, SetActivity.class);
+        startActivity(intent);
+    }
+
+    public void openDisplay() {
+        Intent intent = new Intent(this, DisplayActivity.class);
+        startActivity(intent);
+    }
+
+    public void openShare() {
+        Intent intent = new Intent(this, ShareActivity.class);
         startActivity(intent);
     }
 
