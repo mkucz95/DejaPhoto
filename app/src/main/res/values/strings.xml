@@ -25,12 +25,14 @@
     <string name="share">Share with friends</string>
     <string name="user">Display My Photo</string>
     <string name="friend">Display Friend Photo</string>
+    <string name="email">user@gmail.com</string>
 
     <string name="deja">Deja</string>
     <string name="photo">Photo</string>
 
     <string name="second">Seconds</string>
     <string name="save">Save</string>
+    <string name="send">Send Request</string>
 
     <string name="show">Show</string>
     <string name="prevInterval">Current Refresh Interval</string>
@@ -47,4 +49,5 @@
     <string name="title_activity_interval">IntervalActivity</string>
     <string name="title_activity_share">ShareActivity</string>
     <string name="title_activity_display">DisplayActivity</string>
+    <string name="title_activity_add_friends">AddFriendsActivity</string>
 </resources>

@@ -60,38 +60,19 @@ public class MainActivity extends AppCompatActivity {
 
         Button camera = (Button) findViewById(R.id.bt_1);
         Button settings = (Button) findViewById(R.id.bt_3);
-       // Button addPhoto = (Button) findViewById(R.id.bt_2);
+        //Button addPhoto = (Button) findViewById(R.id.bt_2);
         Button display = (Button) findViewById(R.id.bt_7);
         Button share = (Button) findViewById(R.id.bt_4);
-        //Button playApp = (Button) findViewById(R.id.bt_7);
-       // Button playApp = (Button) findViewById(R.id.bt_7);
-
-
+        Button addFriends = (Button) findViewById(R.id.bt_6);
 
         startApp();
-
-
-        /*playApp.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                startRerank();
-            }
-        } );*/
-//        playApp.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                startRerank();
-//            }
-//        } );
 
       /*  album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchActivity();
             }
-        });
-
-*/
+        }); */
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +109,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        addFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addFriend();
+            }
+        });
     }
 
     // MS2 click the camera button to open default camera
@@ -189,6 +175,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeSettings() {
         Intent intent = new Intent(this, SetActivity.class);
+        startActivity(intent);
+    }
+
+    public void addFriend() {
+        Intent intent = new Intent(this, AddFriendsActivity.class);
         startActivity(intent);
     }
 

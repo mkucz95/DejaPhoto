@@ -115,11 +115,14 @@
             android:label="@string/title_activity_share"
             android:parentActivityName="com.example.android.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name="com.example.android.DisplayActivity"
             android:label="@string/title_activity_display"
             android:parentActivityName="com.example.android.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.android.AddFriendsActivity"
+            android:label="@string/title_activity_add_friends"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
