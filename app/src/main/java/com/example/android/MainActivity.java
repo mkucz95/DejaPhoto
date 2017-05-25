@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +35,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.util.Calendar;
 import java.util.Timer;
@@ -242,52 +246,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void copyFile(File sourceFile, File destFolder) throws IOException {
-
-        Boolean bool = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED;
-        Log.i("pictureSelect", "Write Permission: " + bool);
-
-        Boolean bool2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED;
-        Log.i("pictureSelect", "Read Permission: " + bool2);
+    public void copyFile(File src, File dst) throws IOException {
+        Log.i("pictureSelect", "source file: " + src.getPath());
+        Log.i("pictureSelect", "Dest Folder: " + dst.getPath());
+        File file = new File(dst + File.separator + src.getName());
+        file.createNewFile();
+        Log.i("pictureSelect", "Dest file: " + file.getAbsolutePath());
 
 
+        InputStream in = new FileInputStream(src);
+        OutputStream out = new FileOutputStream(file);
 
-        Log.d("Check", "********");
-        if(!sourceFile.exists()) {
-            return;
+        // Transfer bytes from in to out
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
         }
-        Log.i("pictureSelect", destFolder.getPath() + ": " + destFolder.exists());
+        in.close();
+        out.close();
 
-        if(!destFolder.exists()) {
-            destFolder.mkdirs();
-            Log.i("pictureSelect", "Dest path created: " + destFolder.getPath());
-        }
-        Log.i("pictureSelect", "Source path: " + sourceFile);
-        Log.i("pictureSelect", "Dest path: " + destFolder);
-
-        FileChannel source = null;
-        FileChannel dest = null;
-        Log.i("pictureSelect", "Creating FileChannels...");
-        source = new FileInputStream(sourceFile).getChannel();
-        Log.i("pictureSelect", "Source Channel created");
-        File destFile = new File(destFolder.getPath());
-        dest = new FileOutputStream(destFile).getChannel();
-        Log.i("pictureSelect", "Dest Channel Created");
-        Log.i("pictureSelect", "Source stream: " + source);
-        Log.i("pictureSelect", "Dest stream: " + dest);
-
-        if(dest != null && source != null) {
-            dest.transferFrom(source, 0, source.size());
-            Log.i("pictureSelect", "Transferred: " + dest);
-        }
-        if(source != null) {
-            source.close();
-        }
-        if(dest != null) {
-            dest.close();
-        }
     }
 
     public String getPath(Uri uri) {
