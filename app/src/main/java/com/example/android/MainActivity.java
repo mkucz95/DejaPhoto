@@ -219,23 +219,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPhoto () {
-        Intent pickImage = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(pickImage, SELECT_IMAGE);
+        /*Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(intent, SELECT_IMAGE);*/
+        //..startActivityForResult(intent, SELECT_IMAGE);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
-            /*switch (requestCode) {
-                case SELECT_IMAGE:
-                    path = getPath(data.getData());
-                    try {
-                        copyFile(new File(path), deja);
-                        Toast.makeText(getApplicationContext(), "Picture picked", Toast.LENGTH_LONG).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-            }*/
             path = getPath(data.getData());
             Log.i("pictureSelect", "path: " + path);
             try {
