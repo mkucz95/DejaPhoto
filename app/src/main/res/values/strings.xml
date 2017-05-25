@@ -15,6 +15,16 @@
 
     <string name="google_status_fmt">Google User: %s</string>
 
+    <string name="invitation_title">Deja Photo Friend Request</string>
+
+    <string name="invitation_message">Please accept my friend request</string>
+
+    <string name="invitation_custome_image">Photo</string>
+
+    <string name="invitation_cta">Install App</string>
+
+    <string name="invitation_deep_link">Link</string>
+
     <string name="title_activity_main">DejaPhoto</string>
     <string name="title_activity_album">Album</string>
     <string name="title_activity_mode">Mode</string>

@@ -1,18 +1,25 @@
 package com.example.android;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
+import com.google.android.gms.appinvite.AppInvite;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.appinvite.AppInviteInvitationResult;
+import com.google.android.gms.appinvite.AppInviteReferral;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -20,7 +27,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.auth.api.signin.SignInAccount;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -29,20 +40,29 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
+
 
 public class AddFriendsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
+    private GoogleApiClient inviteApi;
     private SignInButton signInButton;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
+    private Button sendButton;
     private static final int RC_SIGN_IN = 9001;
+    private static final int REQUEST_INVITE = 1;
     private static final String TAG = "SignInActivity";
 
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        boolean autoLaunchDeepLink = true;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -60,14 +80,31 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
+        /*inviteApi = new GoogleApiClient.Builder(this)
+                .addApi(AppInvite.API)
+                .enableAutoManage(this, this)
+                .build();
 
+        AppInvite.AppInviteApi.getInvitation(inviteApi, this, autoLaunchDeepLink)
+                .setResultCallback(new ResultCallback<AppInviteInvitationResult>() {
+                    @Override
+                        public void onResult(AppInviteInvitationResult result) {
+                            Log.d(TAG, "getInvitation:onResult:" + result.getStatus());
+                            if(result.getStatus().isSuccess()) {
+                                Intent intent = result.getInvitationIntent();
+                                String deepLink = AppInviteReferral.getDeepLink(intent);
+                                String invitaionId = AppInviteReferral.getInvitationId(intent);
+                            }
+                        }
+                });*/
 
-        // Set the dimensions of the sign-in button.
+    // Set the dimensions of the sign-in button.
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
+        sendButton = (Button) findViewById(R.id.bt_8);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +114,13 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                         signIn();
                         break;
                 }
+            }
+        });
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                send();
             }
         });
 
@@ -90,6 +134,18 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    // send friend request
+    public void send() {
+        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                .setMessage(getString(R.string.invitation_message))
+                //.setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
+                //.setCustomImage(Uri.parse(getString(R.string.invitation_custome_image)))
+                .setCallToActionText(getString(R.string.invitation_cta))
+                .build();
+
+        startActivityForResult(intent, REQUEST_INVITE);
     }
 
     @Override
@@ -120,6 +176,19 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 updateUI(null);
             }
             handleSignInResult(result);
+        }
+
+        Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+        if(requestCode == REQUEST_INVITE) {
+            if(resultCode == RESULT_OK) {
+                // Get the invitation IDs of all sent messages
+                String[] ids = AppInviteInvitation.getInvitationIds(requestCode, data);
+                /*for (String id: ids) {
+                    Log.d(TAG, "onActivityResult: sent invitation " + id);
+                }*/
+            } else {
+                // Sending failed or it was cancelled
+            }
         }
     }
 
