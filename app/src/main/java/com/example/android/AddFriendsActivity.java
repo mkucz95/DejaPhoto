@@ -6,43 +6,33 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dejaphoto.R;
-import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteInvitation;
-import com.google.android.gms.appinvite.AppInviteInvitationResult;
-import com.google.android.gms.appinvite.AppInviteReferral;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.auth.api.signin.SignInAccount;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.concurrent.TimeUnit;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class AddFriendsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -59,9 +49,12 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     private FirebaseAuth mAuth;
 
+    FirebaseOptions options;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        boolean autoLaunchDeepLink = true;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
@@ -79,24 +72,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-
-        /*inviteApi = new GoogleApiClient.Builder(this)
-                .addApi(AppInvite.API)
-                .enableAutoManage(this, this)
-                .build();
-
-        AppInvite.AppInviteApi.getInvitation(inviteApi, this, autoLaunchDeepLink)
-                .setResultCallback(new ResultCallback<AppInviteInvitationResult>() {
-                    @Override
-                        public void onResult(AppInviteInvitationResult result) {
-                            Log.d(TAG, "getInvitation:onResult:" + result.getStatus());
-                            if(result.getStatus().isSuccess()) {
-                                Intent intent = result.getInvitationIntent();
-                                String deepLink = AppInviteReferral.getDeepLink(intent);
-                                String invitaionId = AppInviteReferral.getInvitationId(intent);
-                            }
-                        }
-                });*/
 
     // Set the dimensions of the sign-in button.
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
@@ -126,6 +101,17 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         mAuth = FirebaseAuth.getInstance();
 
+        options = new FirebaseOptions.Builder()
+                .setApplicationId("1:1092866304173:android:4b7ec0d493ab8bad")
+                .setDatabaseUrl("https://dejaphoto-33.firebaseio.com/")
+                .build();
+
+        FirebaseDatabase.getInstance(FirebaseApp.initializeApp(this, options, "secondary"));
+
+        database.getReferenceFromUrl("https://dejaphoto-33.firebaseio.com/");
+
+        myRef = database.getReferenceFromUrl("https://dejaphoto-33.firebaseio.com/");
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +126,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     public void send() {
         Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
                 .setMessage(getString(R.string.invitation_message))
-                //.setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
+                .setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
                 //.setCustomImage(Uri.parse(getString(R.string.invitation_custome_image)))
                 .setCallToActionText(getString(R.string.invitation_cta))
                 .build();
@@ -158,6 +144,11 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+
+        FirebaseUser currUser = mAuth.getCurrentUser();
+        if(currUser != null){
+            customSignIn(currUser.getDisplayName(), currUser.getEmail());
+        }
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -273,6 +264,10 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    public void customSignIn(String name, String email){
 
     }
 }
