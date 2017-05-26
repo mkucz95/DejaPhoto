@@ -34,11 +34,12 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 
 public class AddFriendsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
-    private GoogleApiClient inviteApi;
     private SignInButton signInButton;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
@@ -147,7 +148,8 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         FirebaseUser currUser = mAuth.getCurrentUser();
         if(currUser != null){
-            customSignIn(currUser.getDisplayName(), currUser.getEmail());
+            boolean exists = User.checkUser(currUser.getEmail(), myRef); //check to see if user exists
+            if(!exists) User.createNewUser(currUser.getDisplayName(), currUser.getEmail(), myRef);
         }
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -267,7 +269,4 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     }
 
-    public void customSignIn(String name, String email){
-
-    }
 }
