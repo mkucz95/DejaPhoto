@@ -47,7 +47,9 @@
 
     <string name="second">Seconds</string>
     <string name="save">Save</string>
-    <string name="send">Send Request</string>
+    <string name="request">Send Request</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
 
     <string name="show">Show</string>
     <string name="prevInterval">Current Refresh Interval</string>
@@ -58,7 +60,7 @@
     <string name="button3">Settings</string>
     <string name="button4">Share</string>
     <string name="button5">Download</string>
-    <string name="button6">Add Friends</string>
+    <string name="button6">Friends</string>
     <string name="button7">Display</string>
 
     <string name="title_activity_interval">IntervalActivity</string>

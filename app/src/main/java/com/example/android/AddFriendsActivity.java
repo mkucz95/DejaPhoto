@@ -1,7 +1,6 @@
 package com.example.android;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -11,10 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.dejaphoto.R;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -31,10 +30,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 
 public class AddFriendsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -44,11 +46,19 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private TextView mStatusTextView;
     private TextView mDetailTextView;
     private Button sendButton;
+    private Button customizeFriendButton;
+    private String emailInput;
+    private EditText emailEdit;
     private static final int RC_SIGN_IN = 9001;
-    private static final int REQUEST_INVITE = 1;
     private static final String TAG = "SignInActivity";
 
+    private String currUserEmail;
+
+    private String currKey;
+
     private FirebaseAuth mAuth;
+
+    ArrayList friendList;
 
     FirebaseOptions options;
     FirebaseDatabase database;
@@ -81,6 +91,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
         sendButton = (Button) findViewById(R.id.bt_8);
+        customizeFriendButton = (Button) findViewById(R.id.bt_9);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,22 +107,32 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                send();
             }
         });
 
         mAuth = FirebaseAuth.getInstance();
+        currUserEmail = mAuth.getCurrentUser().getEmail();
 
         options = new FirebaseOptions.Builder()
                 .setApplicationId("1:1092866304173:android:4b7ec0d493ab8bad")
                 .setDatabaseUrl("https://dejaphoto-33.firebaseio.com/")
                 .build();
 
-        FirebaseDatabase.getInstance(FirebaseApp.initializeApp(this, options, "secondary"));
-
-        database.getReferenceFromUrl("https://dejaphoto-33.firebaseio.com/");
+        database = FirebaseDatabase.getInstance(FirebaseApp.initializeApp(this, options, "DejaPhoto"));
 
         myRef = database.getReferenceFromUrl("https://dejaphoto-33.firebaseio.com/");
+
+        emailEdit = (EditText) findViewById(R.id.currEmail);
+        emailInput = emailEdit.getText().toString();
+
+        customizeFriendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(User.checkUser(emailInput, myRef))
+                    User.sendNotification(currUserEmail, emailInput, myRef);
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -123,25 +144,45 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         });
     }
 
-    // send friend request
-    public void send() {
-        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
-                .setMessage(getString(R.string.invitation_message))
-                .setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
-                //.setCustomImage(Uri.parse(getString(R.string.invitation_custome_image)))
-                .setCallToActionText(getString(R.string.invitation_cta))
-                .build();
-
-        startActivityForResult(intent, REQUEST_INVITE);
-    }
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        friendList = new ArrayList();
+
+        myRef.child("users").child(currUserEmail).child("requests").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                //TODO handle request
+                currKey = myRef.child("users").child(currUserEmail).child("requests").getKey();
+
+                // add email address into array list
+                friendList.add(currKey);
+
+                // delete email address from request
+                myRef.child("users").child(currUserEmail).child("requests").removeValue();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
         updateUI(currentUser);
     }
+
+    //myRef.child("users").child(emailRecieved).child("notification").child("accept").setValue(currUserEmail);
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -169,19 +210,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 updateUI(null);
             }
             handleSignInResult(result);
-        }
-
-        Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
-        if(requestCode == REQUEST_INVITE) {
-            if(resultCode == RESULT_OK) {
-                // Get the invitation IDs of all sent messages
-                String[] ids = AppInviteInvitation.getInvitationIds(requestCode, data);
-                /*for (String id: ids) {
-                    Log.d(TAG, "onActivityResult: sent invitation " + id);
-                }*/
-            } else {
-                // Sending failed or it was cancelled
-            }
         }
     }
 

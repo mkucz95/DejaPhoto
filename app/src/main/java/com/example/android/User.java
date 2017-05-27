@@ -1,5 +1,7 @@
 package com.example.android;
 
+import android.widget.Toast;
+
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.Map;
 public class User{
     public String username;
     public String email;
+    public static final String request = "Friend Request From";
 
     public User() {
         // Default user constructor
@@ -39,10 +42,26 @@ public class User{
         reference.child("users").child(email).setValue(user); //add new user node
     }
 
+    // send message to a friend request
+    public static void sendNotification(String email1, String email2, DatabaseReference reference) {
+        // add a new field of where notification comes from
+        // add a new field of request coming from
+        reference.child("users").child(email1).child("requests").child(email2).setValue(true);
+
+    }
+
     //call when a friend request is accepted
-    public static void addFriend(String email1, String email2, DatabaseReference reference){
+    public static void addFriend(String currUserEmail, String userAcceptEmail, DatabaseReference reference){
+
         //add both users to each other's friends lists
-        reference.child("users").child(email1).child("friends").child(email2).setValue(true);
-        reference.child("users").child(email2).child("friends").child(email1).setValue(true);
+        reference.child("users").child(currUserEmail)
+                .child("friends")
+                .child(userAcceptEmail)
+                .setValue(true);
+
+        reference.child("users").child(userAcceptEmail)
+                .child("friends")
+                .child(currUserEmail)
+                .setValue(true);
     }
 }
