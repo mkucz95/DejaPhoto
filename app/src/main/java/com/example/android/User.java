@@ -64,4 +64,27 @@ public class User{
                 .child(currUserEmail)
                 .setValue(true);
     }
+/* NEW IMPLEMENTATION
+
+ public static boolean checkExist(String check, DatabaseReference reference){
+      return reference.child("users").child(check) != null;
+ }
+ 
+ public static boolean addElement(String newUser, String currUserEmail, DatabaseReference reference){
+ //add user
+ 
+         User user = new User(name, email);
+         
+         reference.child("users")
+                .child(newUser)
+                .setValue(user);
+ 
+ return true;
+ }
+     
+ public static DatabaseReference getRef(String[] info, DatabaseReference reference){
+     return reference.child("users");
+ }
+
+*/
 }
