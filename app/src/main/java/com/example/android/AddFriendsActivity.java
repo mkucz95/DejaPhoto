@@ -46,7 +46,8 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private TextView mStatusTextView;
     private TextView mDetailTextView;
     private Button sendButton;
-    private Button customizeFriendButton;
+    private Button acceptButton;
+    private Button declineButton;
     private String emailInput;
     private EditText emailEdit;
     private static final int RC_SIGN_IN = 9001;
@@ -58,7 +59,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     private FirebaseAuth mAuth;
 
-    ArrayList friendList;
+    public static ArrayList friendList;
 
     FirebaseOptions options;
     FirebaseDatabase database;
@@ -84,14 +85,16 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-    // Set the dimensions of the sign-in button.
+        // Set the dimensions of the sign-in button.
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
         sendButton = (Button) findViewById(R.id.bt_8);
-        customizeFriendButton = (Button) findViewById(R.id.bt_9);
+
+        acceptButton = (Button) findViewById(R.id.bt_9);
+        declineButton = (Button) findViewById(R.id.bt_10);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +110,27 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(User.checkUser(emailInput, myRef))
+                    User.sendNotification(currUserEmail, emailInput, myRef);
+            }
+        });
+
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User.addFriend(currUserEmail, emailInput, myRef);
+                if(!friendList.isEmpty()) {
+                    friendList.remove(0);
+                }
+            }
+        });
+
+        declineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!friendList.isEmpty()) {
+                    friendList.remove(0);
+                }
             }
         });
 
@@ -124,14 +148,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         emailEdit = (EditText) findViewById(R.id.currEmail);
         emailInput = emailEdit.getText().toString();
-
-        customizeFriendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(User.checkUser(emailInput, myRef))
-                    User.sendNotification(currUserEmail, emailInput, myRef);
-            }
-        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
