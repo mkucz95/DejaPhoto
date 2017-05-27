@@ -1,0 +1,27 @@
+public class Friend implements IDataElement{
+
+ public static boolean checkExist(String check, DatabaseReference reference){
+      return reference.child("friends").child(check) != null;
+ }
+ 
+ public static boolean addElement(String userAcceptEmail, String currUserEmail, DatabaseReference reference){
+ //add friends
+         reference.child("users").child(currUserEmail)
+                .child("friends")
+                .child(userAcceptEmail)
+                .setValue(true);
+
+        reference.child("users").child(userAcceptEmail)
+                .child("friends")
+                .child(currUserEmail)
+                .setValue(true);
+ 
+ return true;
+ }
+     
+ public static DatabaseReference getRef(String[] info, DatabaseReference reference){
+     return reference.child("users").child(info[0]).child("friends");
+ }
+
+
+}
