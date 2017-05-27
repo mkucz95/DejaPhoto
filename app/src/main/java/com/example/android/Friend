@@ -1,5 +1,15 @@
 public class Friend implements IDataElement{
 
+    public String friendEmail;
+    
+    public Request() {
+        // Default user constructor
+    }
+
+    public Request(String friendEmail) {
+        this.friendEmail = friendEmail;
+    }
+
  public static boolean checkExist(String check, DatabaseReference reference){
       return reference.child("friends").child(check) != null;
  }
