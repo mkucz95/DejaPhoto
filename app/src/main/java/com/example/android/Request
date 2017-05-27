@@ -14,11 +14,11 @@ public class Request implements IDataElement{
       return reference.child("requests").child(check) != null;
  }
  
- public static boolean addElement(String userInviteEmail, String currUserEmail, DatabaseReference reference){
+ public static boolean addElement(String from, String to, DatabaseReference reference){
 //add request
-       reference.child("users").child(currUserEmail)
+       reference.child("users").child(to)
                 .child("requests")
-                .child(userInviteEmail)
+                .child(from)
                 .setValue(true);
  return true;
  }
@@ -26,5 +26,6 @@ public class Request implements IDataElement{
  public static DatabaseReference getRef(String[] info, DatabaseReference reference){
      return reference.child("users").child(info[0]).child("requests");
  } //returns reference to the requests of a user
+
  
  }
