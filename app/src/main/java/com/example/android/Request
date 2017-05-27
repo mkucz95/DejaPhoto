@@ -1,0 +1,30 @@
+public class Request implements IDataElement{ 
+    public String requestFrom;
+    
+    public Request() {
+        // Default user constructor
+    }
+
+    public Request(String requestEmail) {
+        this.requestFrom = requestEmail;
+    }
+ 
+ 
+ public static boolean checkExist(String check, DatabaseReference reference){
+      return reference.child("requests").child(check) != null;
+ }
+ 
+ public static boolean addElement(String userInviteEmail, String currUserEmail, DatabaseReference reference){
+//add request
+       reference.child("users").child(currUserEmail)
+                .child("requests")
+                .child(userInviteEmail)
+                .setValue(true);
+ return true;
+ }
+     
+ public static DatabaseReference getRef(String[] info, DatabaseReference reference){
+     return reference.child("users").child(info[0]).child("requests");
+ } //returns reference to the requests of a user
+ 
+ }
