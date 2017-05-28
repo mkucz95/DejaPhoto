@@ -15,7 +15,7 @@ import java.util.Map;
 public class User implements IDataElement{
     public String username;
     public String email;
-    public ArrayList<String> friendList;
+    public ArrayList<String> friendList = new ArrayList<>();
     private DatabaseReference reference;
 
     public void User() {

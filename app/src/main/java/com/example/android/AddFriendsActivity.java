@@ -58,8 +58,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private String currKey;
 
     private FirebaseAuth mAuth;
-
-    public static ArrayList friendList;
     private String[] arr = {};
 
     FirebaseOptions options;
@@ -122,8 +120,8 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Friend friend = new Friend(currUserEmail, currKey, myRef); //add both users to each other's friends
-                friend.addElement();
+                Friends friends = new Friends(currUserEmail, currKey, myRef); //add both users to each other's friends
+                friends.addElement();
 
                 if(!user.friendList.isEmpty()) {
                     user.friendList.remove(0);
@@ -134,8 +132,8 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!friendList.isEmpty()) {
-                    friendList.remove(0);
+                if(!user.friendList.isEmpty()) {
+                    user.friendList.remove(0);
                 }
             }
         });
@@ -172,8 +170,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         final FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        friendList = new ArrayList();
 
         myRef.child("users").child(currUserEmail).child("requests").addChildEventListener(new ChildEventListener() {
             @Override

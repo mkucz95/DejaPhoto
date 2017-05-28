@@ -2,16 +2,16 @@ package com.example.android;
 
 import com.google.firebase.database.DatabaseReference;
 
-public class Friend implements IDataElement{
+public class Friends implements IDataElement{
 
     public String email1, email2;
     private DatabaseReference reference;
     
-    public Friend() {
+    public Friends() {
         // Default user constructor
     }
 
-    public Friend(String friendEmail1, String friendEmail2, DatabaseReference reference) {
+    public Friends(String friendEmail1, String friendEmail2, DatabaseReference reference) {
         this.email1 = friendEmail1;
         this.email2 = friendEmail2;
         this.reference = reference;
