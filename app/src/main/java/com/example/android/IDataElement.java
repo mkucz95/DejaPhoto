@@ -8,5 +8,5 @@ public interface IDataElement{
 
     public boolean addElement();
     
-    public DatabaseReference getRef(String[] info, DatabaseReference reference);
+    public DatabaseReference getRef(String[] info);
 }

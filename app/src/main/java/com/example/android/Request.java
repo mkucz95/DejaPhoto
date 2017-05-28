@@ -32,7 +32,7 @@ public class Request implements IDataElement{
  return true;
  }
     @Override
-    public DatabaseReference getRef(String[] info, DatabaseReference reference){
+    public DatabaseReference getRef(String[] info){
      return reference.child("users").child(info[0]).child("requests");
  } //returns reference to the requests of a user
 

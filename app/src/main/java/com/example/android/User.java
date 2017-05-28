@@ -45,7 +45,7 @@ public class User implements IDataElement{
     }
 
     @Override
-    public DatabaseReference getRef(String[] info, DatabaseReference reference) {
+    public DatabaseReference getRef(String[] info) {
         return reference.child("users");
     }
 

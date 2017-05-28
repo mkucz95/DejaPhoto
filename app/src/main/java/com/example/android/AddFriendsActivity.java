@@ -60,6 +60,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private FirebaseAuth mAuth;
 
     public static ArrayList friendList;
+    private String[] arr = {};
 
     FirebaseOptions options;
     FirebaseDatabase database;
@@ -178,7 +179,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 //TODO handle request
-                currKey = myRef.child("users").child(currUserEmail).child("requests").getKey();
+                currKey = user.getRef(arr).child("requets").getKey();
 
                 // add email address into array list that stores requests
                 user.friendList.add(currKey);
