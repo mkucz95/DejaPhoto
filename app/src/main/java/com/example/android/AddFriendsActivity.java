@@ -64,6 +64,8 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     FirebaseOptions options;
     FirebaseDatabase database;
     DatabaseReference myRef;
+    User user;   //if this doesn;t work include user in global variables
+    Request request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,17 +112,20 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(User.checkUser(emailInput, myRef))
-                    User.sendNotification(currUserEmail, emailInput, myRef);
+                if(User.checkAnyUser(emailInput, myRef))
+                request = new Request(currUserEmail, emailInput, myRef);
+                request.addElement();
             }
         });
 
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.addFriend(currUserEmail, emailInput, myRef);
-                if(!friendList.isEmpty()) {
-                    friendList.remove(0);
+                Friend friend = new Friend(currUserEmail, currKey, myRef); //add both users to each other's friends
+                friend.addElement();
+
+                if(!user.friendList.isEmpty()) {
+                    user.friendList.remove(0);
                 }
             }
         });
@@ -175,11 +180,11 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 //TODO handle request
                 currKey = myRef.child("users").child(currUserEmail).child("requests").getKey();
 
-                // add email address into array list
-                friendList.add(currKey);
+                // add email address into array list that stores requests
+                user.friendList.add(currKey);
 
                 // delete email address from request
-                myRef.child("users").child(currUserEmail).child("requests").removeValue();
+                Request.clearRequest(currKey, currUserEmail, myRef);
             }
 
             @Override
@@ -204,9 +209,12 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
 
         FirebaseUser currUser = mAuth.getCurrentUser();
+
         if(currUser != null){
-            boolean exists = User.checkUser(currUser.getEmail(), myRef); //check to see if user exists
-            if(!exists) User.createNewUser(currUser.getDisplayName(), currUser.getEmail(), myRef);
+            user = new User(currUser.getDisplayName(), currUser.getEmail(), myRef); //new user object
+
+            boolean exists = user.checkExist(user.email); //check to see if user exists
+            if(!exists) user.addElement();
         }
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }

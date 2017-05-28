@@ -1,8 +1,0 @@
-public interface IDataElement{
-
-    public static boolean checkExist(String check, DatabaseReference reference);
-
-    public static boolean addElement(String where, String what, DatabaseReference reference);
-    
-    public static DatabaseReference getRef(String[] info, DatabaseReference reference);
-}
