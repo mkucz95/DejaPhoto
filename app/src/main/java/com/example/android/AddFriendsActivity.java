@@ -91,6 +91,9 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
+
+        requestResult = (TextView) findViewById(R.id.sendResult);
+
         sendButton = (Button) findViewById(R.id.bt_8);
 
         acceptButton = (Button) findViewById(R.id.bt_9);
@@ -114,9 +117,11 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                     request = new Request(currUserEmail, emailInput, myRef);
                     request.addElement();
                     //todo print success message
+                    requestResult.setText("Send successful");
                 }
                 else{
                     //todo print error message
+                    requestResult.setText("User does not exists, try another");
                 }
             }
         });
