@@ -92,6 +92,7 @@ public class ChangeImage extends IntentService {
 
         Log.i("ChangeImage", "newHead: " + newHead);
         Log.i("ChangeImage", "arrayList size: " + Global.displayCycle.size());
+        Log.i("ChangeImage", "Change Interval: " + Global.changeInterval);
 
         if(newHead>=0) {
           Photo photo = Global.displayCycle.get(newHead);

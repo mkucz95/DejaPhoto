@@ -187,6 +187,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     }
 
     public void manageTimer(Context context) { //called when button is clicked
+        Log.i("updateInterval", "Change Interval: " + Global.changeInterval);
         if(Global.timer != null) {
             Global.autoWallpaperChange.cancel();
             Global.autoWallpaperChange = new AutoWallpaperChange(context);

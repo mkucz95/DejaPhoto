@@ -19,6 +19,10 @@ import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
+import org.w3c.dom.Text;
+
+import java.util.Timer;
+
 public class SetActivity extends AppCompatActivity {
 
     public Switch location;
@@ -28,6 +32,7 @@ public class SetActivity extends AppCompatActivity {
     public Switch mode;
     EditText input;
     private Button saveButton;
+    TextView newInterval;
 
     private boolean locationSetting;
     private boolean timeSetting;
@@ -227,13 +232,29 @@ public class SetActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                input = (EditText) findViewById(R.id.user_specify);
+                int interval = Integer.parseInt(input.getText().toString());
 
-                Log.i("saveMsg", "HIT");
+                Log.i("updateInterval", "input: " + interval);
+                //Log.i("updateInterval", "input to string: " + interval);
+                //Log.i("updateInterval", "input to text: " + input.getText());
+                newInterval = (TextView) findViewById(R.id.change_interval);
+                String newInfo = interval + " Seconds";
+                newInterval.setText(newInfo);
+                Global.changeInterval = (interval * 1000);
                 Global.locationSetting = locationSetting;
                 Global.daySetting = dofSetting;
                 Global.karmaSetting = karmaSetting;
                 Global.timeSetting = timeSetting;
                 startRerank();
+                if(Global.timer != null) {
+                    Global.autoWallpaperChange.cancel();
+                    Global.timer.cancel();
+                    Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
+                    Global.timer = new Timer();
+                    Global.timer.schedule(Global.autoWallpaperChange,
+                            Global.changeInterval, Global.changeInterval);
+                }
             }
         });
     }
