@@ -39,6 +39,7 @@
     <string name="user">Display My Photo</string>
     <string name="friend">Display Friend Photo</string>
     <string name="email">user@gmail.com</string>
+    <string name="defaultSync">300 seconds</string>
 
     <string name="deja">Deja</string>
     <string name="photo">Photo</string>

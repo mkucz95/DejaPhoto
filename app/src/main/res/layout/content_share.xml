@@ -20,4 +20,53 @@
         android:textSize="20sp"
         android:textColor="#8E44AD"/>
 
+    <EditText
+        android:id="@+id/sync_freq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/time_interval"
+        android:inputType="number"
+        tools:ignore="LabelFor" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/second"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/prevInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/prevInterval"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/syncInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/defaultSync"
+        android:textColor="#D03E80"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/save_syncSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:onClick="saveSyncInterval"
+        android:text="@string/save"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp" />
+
 </LinearLayout>
