@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "1092866304173",
+    "firebase_url": "https://dejaphoto-33.firebaseio.com",
+    "project_id": "dejaphoto-33",
+    "storage_bucket": "dejaphoto-33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092866304173:android:4b7ec0d493ab8bad",
+        "android_client_info": {
+          "package_name": "com.example.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092866304173-csb568g2fcitctoqvuumt4defemofj9s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android",
+            "certificate_hash": "edcd79fd5b36678e953c4d3e52b798b2b4bf815a"
+          }
+        },
+        {
+          "client_id": "1092866304173-ut590h715jm69sdb3t90qppcgau7b6b4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android",
+            "certificate_hash": "ceb54721d40d3589e32602b747c14858cb68182a"
+          }
+        },
+        {
+          "client_id": "1092866304173-87c56c51hqgscn2levhcdr2dq7kbesft.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android",
+            "certificate_hash": "ad1d1a71d573f2a25f78bbc4263e84908f385ca8"
+          }
+        },
+        {
+          "client_id": "1092866304173-nejrlnghv3l044vtdhvo1f53q27qs1c2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android",
+            "certificate_hash": "647eaeedacb8ce16dc58d948d8d53595c9ab05b6"
+          }
+        },
+        {
+          "client_id": "1092866304173-sca5gquaben0a07eutbrogk1pom6l53d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYRABUzgBhINRXf0OWyELBwfSWsx1neVw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092866304173-sca5gquaben0a07eutbrogk1pom6l53d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
