@@ -50,7 +50,8 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private Button declineButton;
     private String emailInput;
     private EditText emailEdit;
-    private static final int RC_SIGN_IN = 9001;
+    private TextView requestResult;
+    private static final int RC_SIGN_IN = 1;
     private static final String TAG = "SignInActivity";
 
     private String currUserEmail;
@@ -61,14 +62,12 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private String[] arr = {};
 
     FirebaseOptions options;
-    FirebaseDatabase database;
     DatabaseReference myRef;
     User user;   //if this doesn;t work include user in global variables
     Request request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -111,9 +110,14 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(User.checkAnyUser(emailInput, myRef))
-                request = new Request(currUserEmail, emailInput, myRef);
-                request.addElement();
+                if(User.checkAnyUser(emailInput, myRef)) {
+                    request = new Request(currUserEmail, emailInput, myRef);
+                    request.addElement();
+                    //todo print success message
+                }
+                else{
+                    //todo print error message
+                }
             }
         });
 
@@ -139,19 +143,27 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         });
 
         mAuth = FirebaseAuth.getInstance();
-        currUserEmail = mAuth.getCurrentUser().getEmail();
+        currUserEmail = mAuth.getCurrentUser().getEmail().replace(".", ","); //no periods, only commas
 
         options = new FirebaseOptions.Builder()
                 .setApplicationId("1:1092866304173:android:4b7ec0d493ab8bad")
                 .setDatabaseUrl("https://dejaphoto-33.firebaseio.com/")
                 .build();
 
-        database = FirebaseDatabase.getInstance(FirebaseApp.initializeApp(this, options, "DejaPhoto"));
+        FirebaseApp firebaseApp;
 
+        try{
+            firebaseApp = FirebaseApp.getInstance("[DEFAULT]");
+        } catch(IllegalStateException e){
+            firebaseApp = FirebaseApp.initializeApp(this, options);
+        }
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance(firebaseApp);
         myRef = database.getReferenceFromUrl("https://dejaphoto-33.firebaseio.com/");
 
         emailEdit = (EditText) findViewById(R.id.currEmail);
-        emailInput = emailEdit.getText().toString();
+        emailInput = emailEdit.getText().toString().replace(".", ",");
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

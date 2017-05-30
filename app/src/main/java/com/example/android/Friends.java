@@ -12,8 +12,8 @@ public class Friends implements IDataElement{
     }
 
     public Friends(String friendEmail1, String friendEmail2, DatabaseReference reference) {
-        this.email1 = friendEmail1;
-        this.email2 = friendEmail2;
+        this.email1 = friendEmail1.replace(".", ",");
+        this.email2 = friendEmail2.replace(".", ",");
         this.reference = reference;
     }
 

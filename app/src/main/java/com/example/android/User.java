@@ -24,7 +24,7 @@ public class User implements IDataElement{
 
     public User(String username, String email, DatabaseReference reference) {
         this.username = username;
-        this.email = email;
+        this.email = email.replace(".", ",");  //we cannot store certain characters in firebase
         this.reference = reference;
     }
 

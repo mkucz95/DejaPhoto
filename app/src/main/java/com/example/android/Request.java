@@ -12,8 +12,8 @@ public class Request implements IDataElement{
     }
 
     public Request(String fromEmail, String toEmail, DatabaseReference reference) {
-        this.requestFrom = fromEmail;
-        this.requestTo = toEmail;
+        this.requestFrom = fromEmail.replace(".", ",");
+        this.requestTo = toEmail.replace(".", ",");
         this.reference = reference;
     }
 
