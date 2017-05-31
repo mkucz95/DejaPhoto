@@ -315,7 +315,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         requestComeFrom = (TextView) findViewById(R.id.friendFrom);
         if (fUser != null) {
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+            mDetailTextView.setText(getString(R.string.firebase_status_fmt, fUser.getUid()));
 
            // findViewById(R.id.sign_in_button).setVisibility(View.GONE);
            // findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
