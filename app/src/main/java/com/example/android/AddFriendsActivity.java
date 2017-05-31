@@ -59,6 +59,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     private String currKey;
 
+    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private String[] arr = {};
 
@@ -177,7 +178,9 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
 
-        //final FirebaseUser currentUser = mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+
+        //currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
     }
 
@@ -186,7 +189,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        final FirebaseUser currentUser = mAuth.getCurrentUser();
+       currentUser = mAuth.getCurrentUser();
 
         authentication();
 
@@ -220,7 +223,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     }
 
     private void authentication() {
-        mAuth = FirebaseAuth.getInstance();
         if(mAuth != null && mAuth.getCurrentUser() != null) {
             currUserEmail = mAuth.getCurrentUser().getEmail().replace(".", ","); //no periods, only commas
         }
