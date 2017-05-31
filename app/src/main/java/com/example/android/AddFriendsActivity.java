@@ -312,6 +312,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private void updateUI(FirebaseUser fUser) {
         //hideProgressDialog();
         int i = 0;
+        user = new User(fUser.getDisplayName(), fUser.getEmail(), myRef); //new user object
         requestComeFrom = (TextView) findViewById(R.id.friendFrom);
         if (fUser != null) {
             mStatusTextView.setText(getString(R.string.google_status_fmt, fUser.getEmail()));
