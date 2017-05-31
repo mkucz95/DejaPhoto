@@ -38,14 +38,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 
 public class AddFriendsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
     private SignInButton signInButton;
+    private Button signOutButton;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
     private TextView requestComeFrom;
+    private TextView message;
     private Button sendButton;
     private Button acceptButton;
     private Button declineButton;
@@ -75,6 +79,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -91,8 +96,11 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
+        signOutButton = (Button) findViewById(R.id.sign_out_and_disconnect);
+
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
+        message = (TextView) findViewById(R.id.friendFrom);
 
         requestResult = (TextView) findViewById(R.id.sendResult);
 
@@ -104,11 +112,21 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                message.setText("Friend Request From");
                 switch (view.getId()) {
                     case R.id.sign_in_button:
                         signIn();
                         break;
                 }
+            }
+        });
+
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendButton.setVisibility(View.INVISIBLE);
+                emailEdit.setVisibility(View.INVISIBLE);
+                signOut();
             }
         });
 
@@ -131,21 +149,17 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Friends friends = new Friends(currUserEmail, currKey, myRef); //add both users to each other's friends
+                Friends friends = new Friends(currUserEmail, user.friendList.get(0), myRef); //add both users to each other's friends
                 friends.addElement();
 
-                if(!user.friendList.isEmpty()) {
-                    user.friendList.remove(0);
-                }
+               handleRequestDisplay(true);
             }
         });
 
         declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!user.friendList.isEmpty()) {
-                    user.friendList.remove(0);
-                }
+                handleRequestDisplay(true);
             }
         });
 
@@ -190,6 +204,8 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
        currentUser = mAuth.getCurrentUser();
+        if(currentUser == null)
+            signIn();
 
         authentication();
 
@@ -327,36 +343,51 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         if(signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+
+            emailEdit.setVisibility(View.VISIBLE);
+            sendButton.setVisibility(View.VISIBLE);
         }
         else {
             mStatusTextView.setText(R.string.signed_out);
+            user = null;
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+
+            emailEdit.setVisibility(View.INVISIBLE);
+            sendButton.setVisibility(View.INVISIBLE);
         }
     }
 
     private void updateUI(FirebaseUser fUser) {
         //hideProgressDialog();
-        int i = 0;
-        user = new User(fUser.getDisplayName(), fUser.getEmail(), myRef); //new user object
-        requestComeFrom = (TextView) findViewById(R.id.friendFrom);
+
         if (fUser != null) {
+            user = new User(fUser.getDisplayName(), fUser.getEmail(), myRef); //new user object
+            requestComeFrom = (TextView) findViewById(R.id.friendFrom);
+
             mStatusTextView.setText(getString(R.string.google_status_fmt, fUser.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, fUser.getUid()));
 
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+
+            emailEdit.setVisibility(View.VISIBLE);
+            sendButton.setVisibility(View.VISIBLE);
+
+            handleRequestDisplay(false);
+
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
 
+            user = null;
+
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-        }
 
-        while(!user.friendList.isEmpty()) {
-            requestComeFrom.setText(user.friendList.get(i));
+            emailEdit.setVisibility(View.INVISIBLE);
+            sendButton.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -385,5 +416,32 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
        else
            return null;
+    }
+
+    public void displayNoRequests(){ //called when list empty
+        requestComeFrom.setText("");
+        acceptButton.setVisibility(View.INVISIBLE);
+        declineButton.setVisibility(View.INVISIBLE);
+    }
+
+    public void displayNextRequest(){ //called when list not empty
+        requestComeFrom.setText(user.friendList.get(0));
+
+    }
+
+    public void handleRequestDisplay(boolean click){
+        if(!user.friendList.isEmpty()) {
+            if(click) removeRequest();
+            displayNextRequest();
+        }
+        else displayNoRequests();  //no requests
+    }
+
+    public void removeRequest(){
+        user.friendList.remove(0);
+
+        if(user.friendList.size() == 0)
+            displayNoRequests();
+
     }
 }

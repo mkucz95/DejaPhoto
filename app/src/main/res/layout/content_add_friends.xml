@@ -32,7 +32,8 @@
             android:text="@string/sign_out"
             android:textColor="@color/colorPrimary"
             android:textSize="10sp"
-            tools:ignore="ButtonStyle,RtlHardcoded,SmallSp" />
+            tools:ignore="ButtonStyle,RtlHardcoded,SmallSp"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 
@@ -66,7 +67,8 @@
         android:text="@string/email"
         android:textColor="#958E91"
         android:textSize="30sp"
-        tools:ignore="LabelFor,TextFields" />
+        tools:ignore="LabelFor,TextFields"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/sendResult"
@@ -76,7 +78,8 @@
         android:layout_marginTop="10dp"
         android:text=""
         android:textColor="#D03E80"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        />
 
     <Button
         android:id="@+id/bt_8"
@@ -86,7 +89,8 @@
         android:layout_marginTop="30dp"
         android:text="@string/request"
         android:textColor="@color/colorPrimary"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:visibility="invisible"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -102,7 +106,8 @@
             android:text="@string/accept"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"
-            tools:ignore="ButtonStyle,RtlHardcoded" />
+            tools:ignore="ButtonStyle,RtlHardcoded"
+             android:visibility="invisible"/>
 
         <Button
             android:id="@+id/bt_10"
@@ -114,7 +119,8 @@
             android:text="@string/decline"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"
-            tools:ignore="ButtonStyle,RtlHardcoded" />
+            tools:ignore="ButtonStyle,RtlHardcoded"
+            android:visibility="invisible"/>
         </LinearLayout>
 
     <TextView
@@ -123,7 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="@string/friendRequestFrom"
+        android:text=""
         android:textColor="#D03E80"
         android:textSize="15sp" />
 
