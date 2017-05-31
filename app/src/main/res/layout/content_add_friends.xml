@@ -98,4 +98,24 @@
             tools:ignore="ButtonStyle,RtlHardcoded" />
         </LinearLayout>
 
+    <TextView
+        android:id="@+id/friendFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/friendRequestFrom"
+        android:textColor="#D03E80"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/friendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textColor="#D03E80"
+        android:textSize="15sp" />
+
 </LinearLayout>

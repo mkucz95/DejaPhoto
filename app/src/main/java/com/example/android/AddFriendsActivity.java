@@ -45,6 +45,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private SignInButton signInButton;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
+    private TextView requestComeFrom;
     private Button sendButton;
     private Button acceptButton;
     private Button declineButton;
@@ -308,9 +309,11 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }*/
     }
 
-    private void updateUI(FirebaseUser user) {
+    private void updateUI(FirebaseUser fUser) {
         //hideProgressDialog();
-        if (user != null) {
+        int i = 0;
+        requestComeFrom = (TextView) findViewById(R.id.friendFrom);
+        if (fUser != null) {
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
@@ -323,6 +326,9 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }*/
+        while(!user.friendList.isEmpty()) {
+            requestComeFrom.setText(user.friendList.get(i));
+        }
     }
 
     @Override
