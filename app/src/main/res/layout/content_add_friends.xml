@@ -9,19 +9,39 @@
     tools:context="com.example.android.AddFriendsActivity"
     tools:showIn="@layout/activity_add_friends">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp" />
+        android:layout_height="wrap_content">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="0dp"
+            tools:ignore="RtlHardcoded" />
+
+        <Button
+            android:id="@+id/sign_out_and_disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="190dp"
+            android:text="@string/sign_out"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp"
+            tools:ignore="ButtonStyle,RtlHardcoded,SmallSp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:text=""
         android:textColor="#D03E80"
         android:textSize="15sp" />
@@ -30,32 +50,91 @@
         android:id="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:text=""
         android:textColor="#D03E80"
         android:textSize="15sp" />
 
     <EditText
+        android:id="@+id/currEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:inputType="textEmailAddress"
+        android:text="@string/email"
+        android:textColor="#958E91"
+        android:textSize="30sp"
+        tools:ignore="LabelFor,TextFields" />
+
+    <TextView
+        android:id="@+id/sendResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="@string/email"
-        android:textSize="30sp"
-        android:textColor="#958E91"
-        android:inputType="text"
-        tools:ignore="LabelFor" />
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textColor="#D03E80"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/bt_8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:onClick="sendRequest"
-        android:text="@string/send"
+        android:layout_marginTop="30dp"
+        android:text="@string/request"
         android:textColor="@color/colorPrimary"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+         <Button
+            android:id="@+id/bt_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/accept"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+
+        <Button
+            android:id="@+id/bt_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="210dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/decline"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/friendFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/friendRequestFrom"
+        android:textColor="#D03E80"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/friendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textColor="#D03E80"
         android:textSize="15sp" />
 
 </LinearLayout>

@@ -5,8 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import com.example.dejaphoto.R;
 public class ShareActivity extends AppCompatActivity {
 
     public Switch share;
+    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,20 @@ public class ShareActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
 
+        saveButton = (Button) findViewById(R.id.save_syncSet);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText editText = (EditText) findViewById(R.id.sync_freq);
+                int timeSetting = Integer.parseInt(editText.getText().toString());
+                Global.syncInterval = timeSetting;
+
+                Toast.makeText(getApplicationContext(),
+                        "Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+

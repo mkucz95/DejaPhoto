@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">DejaPhoto</string>
 
-    <!-- Strings related to ViewSettings -->
-
     <!-- Example General settings -->
 
     <!-- Example settings for Data & Sync -->
@@ -14,6 +12,16 @@
     <string name="firebase_status_fmt">Firebase User: %s</string>
 
     <string name="google_status_fmt">Google User: %s</string>
+
+    <string name="invitation_title">Deja Photo Friend Request</string>
+
+    <string name="invitation_message">Deja Photo App Install</string>
+
+    <string name="invitation_custome_image">Photo</string>
+
+    <string name="invitation_cta">Install App</string>
+
+    <string name="invitation_deep_link">https://dejaphoto-33.firebaseio.com/</string>
 
     <string name="title_activity_main">DejaPhoto</string>
     <string name="title_activity_album">Album</string>
@@ -31,13 +39,19 @@
     <string name="user">Display My Photo</string>
     <string name="friend">Display Friend Photo</string>
     <string name="email">user@gmail.com</string>
+    <string name="defaultSync">300 seconds</string>
+    <string name="friendRequestFrom">Friend Request From</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="sign_out">Sign Out</string>
 
     <string name="deja">Deja</string>
     <string name="photo">Photo</string>
 
     <string name="second">Seconds</string>
     <string name="save">Save</string>
-    <string name="send">Send Request</string>
+    <string name="request">Send Request</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
 
     <string name="show">Show</string>
     <string name="prevInterval">Current Refresh Interval</string>
@@ -48,7 +62,7 @@
     <string name="button3">Settings</string>
     <string name="button4">Share</string>
     <string name="button5">Download</string>
-    <string name="button6">Add Friends</string>
+    <string name="button6">Friends</string>
     <string name="button7">Display</string>
 
     <string name="title_activity_interval">IntervalActivity</string>

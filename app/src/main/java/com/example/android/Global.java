@@ -39,4 +39,5 @@ public class Global {
 
     public static String karmaPath;
     public static String releasePath;
+    public static int syncInterval = 300;
 }

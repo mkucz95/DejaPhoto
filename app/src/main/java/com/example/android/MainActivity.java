@@ -1,6 +1,8 @@
 package com.example.android;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -38,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Timer;
 
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_CODE = 1;
 
-    static final int SELECT_IMAGE = 1;
+    static final int SELECT_IMAGE = 2;
 
     private String path;
 
@@ -219,37 +222,82 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPhoto () {
-        /*Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(intent, SELECT_IMAGE);*/
-        //..startActivityForResult(intent, SELECT_IMAGE);
         Intent intent = new Intent();
+        //Set intent type -- images
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+        //Allow multiple selections
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
+        Toast.makeText(getApplicationContext(), "Press and hold to select multiple images", Toast.LENGTH_SHORT).show();
     }
 
+    /*
+     * This method receives intent from startActivityForResult and extracts the URI in order
+     * to get image path data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
-            path = getPath(data.getData());
-            Log.i("pictureSelect", "path: " + path);
-            try {
-                copyFile(new File(path), deja);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (data != null) {
+                //Clipdata for multiple selections, Uri format for single selection
+                ClipData clipData = data.getClipData();
+                Uri singleUri = data.getData();
+                //Multiple image case
+                if (clipData != null) {
+                    //Go through each item in clip data
+                    for (int i = 0; i < clipData.getItemCount(); i++) {
+                        ClipData.Item item = clipData.getItemAt(i);
+                        Uri uri = item.getUri();
+                        //Get the absolute path from uri
+                        String path = getImagePath(uri);
+                        try {
+                            copyFile(new File(path), deja);
+                        } catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                //Single image case
+                else if(singleUri != null){
+                    String path = getImagePath(singleUri);
+                    try {
+                        copyFile(new File(path), deja);
+                    } catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
 
+    /*
+     * returns image path from uri using cursor
+     */
+    public String getImagePath(Uri uri){
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":")+1);
+        cursor.close();
+
+        cursor = getContentResolver().query(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+
+        return path;
+    }
+
+    /*
+     * Copies a file from the camera roll to specified directory
+     */
     public void copyFile(File src, File dst) throws IOException {
-        Log.i("pictureSelect", "source file: " + src.getPath());
-        Log.i("pictureSelect", "Dest Folder: " + dst.getPath());
         File file = new File(dst + File.separator + src.getName());
         file.createNewFile();
         Log.i("pictureSelect", "Dest file: " + file.getAbsolutePath());
-
 
         InputStream in = new FileInputStream(src);
         OutputStream out = new FileOutputStream(file);
@@ -263,17 +311,6 @@ public class MainActivity extends AppCompatActivity {
         in.close();
         out.close();
 
-    }
-
-    public String getPath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        startManagingCursor(cursor);
-
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        Toast.makeText(getApplicationContext(), "Picture picked", Toast.LENGTH_LONG).show();
-        return cursor.getString(column_index);
     }
 
     public void startRerank(){
@@ -309,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            //Request Permissions
+            //Request.java Permissions
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
