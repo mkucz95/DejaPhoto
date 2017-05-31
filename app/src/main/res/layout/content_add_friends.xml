@@ -9,13 +9,32 @@
     tools:context="com.example.android.AddFriendsActivity"
     tools:showIn="@layout/activity_add_friends">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        tools:ignore="RtlHardcoded" />
+        android:layout_height="wrap_content">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="0dp"
+            tools:ignore="RtlHardcoded" />
+
+        <Button
+            android:id="@+id/sign_out_and_disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="190dp"
+            android:text="@string/sign_out"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp"
+            tools:ignore="ButtonStyle,RtlHardcoded,SmallSp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/status"

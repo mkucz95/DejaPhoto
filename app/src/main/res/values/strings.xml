@@ -41,6 +41,8 @@
     <string name="email">user@gmail.com</string>
     <string name="defaultSync">300 seconds</string>
     <string name="friendRequestFrom">Friend Request From</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="sign_out">Sign Out</string>
 
     <string name="deja">Deja</string>
     <string name="photo">Photo</string>

@@ -21,6 +21,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -35,8 +37,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 
 public class AddFriendsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -114,7 +114,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(User.checkAnyUser(emailInput, myRef)) {
+                if(User.checkAnyUser(replaceData(getEditTextString(emailEdit)), myRef)) {
                     request = new Request(currUserEmail, emailInput, myRef);
                     request.addElement();
                     //todo print success message
@@ -148,13 +148,12 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
-        currUserEmail = mAuth.getCurrentUser().getEmail().replace(".", ","); //no periods, only commas
-
         options = new FirebaseOptions.Builder()
                 .setApplicationId("1:1092866304173:android:4b7ec0d493ab8bad")
                 .setDatabaseUrl("https://dejaphoto-33.firebaseio.com/")
                 .build();
+
+        emailEdit = (EditText) findViewById(R.id.currEmail);
 
         FirebaseApp firebaseApp;
 
@@ -168,9 +167,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         FirebaseDatabase database = FirebaseDatabase.getInstance(firebaseApp);
         myRef = database.getReferenceFromUrl("https://dejaphoto-33.firebaseio.com/");
 
-        emailEdit = (EditText) findViewById(R.id.currEmail);
-        emailInput = emailEdit.getText().toString().replace(".", ",");
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +176,9 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                         .setAction("Action", null).show();
             }
         });
+
+        //final FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
     }
 
 
@@ -188,6 +187,8 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         final FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        authentication();
 
         myRef.child("users").child(currUserEmail).child("requests").addChildEventListener(new ChildEventListener() {
             @Override
@@ -218,6 +219,15 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         updateUI(currentUser);
     }
 
+    private void authentication() {
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth != null && mAuth.getCurrentUser() != null) {
+            currUserEmail = mAuth.getCurrentUser().getEmail().replace(".", ","); //no periods, only commas
+        }
+        else
+            currUserEmail  = "No User";
+    }
+
     //myRef.child("users").child(emailRecieved).child("notification").child("accept").setValue(currUserEmail);
 
     private void signIn() {
@@ -232,6 +242,21 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             if(!exists) user.addElement();
         }
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void signOut() {
+        // Firebase sign out
+        mAuth.signOut();
+
+        // Google sign out
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(@NonNull Status status) {
+                        updateUI(null);
+                    }
+                }
+        );
     }
 
     @Override
@@ -296,17 +321,17 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
     }
 
-
     private void updateUI(boolean signedIn) {
-        if (signedIn) {
+        if(signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-           // findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-        } /*else {
+            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+        }
+        else {
             mStatusTextView.setText(R.string.signed_out);
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-        }*/
+        }
     }
 
     private void updateUI(FirebaseUser fUser) {
@@ -318,15 +343,16 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             mStatusTextView.setText(getString(R.string.google_status_fmt, fUser.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, fUser.getUid()));
 
-           // findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-           // findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-        } /*else {
+            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+        } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-        }*/
+        }
+
         while(!user.friendList.isEmpty()) {
             requestComeFrom.setText(user.friendList.get(i));
         }
@@ -342,4 +368,20 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     }
 
+    //HELPER METHODS
+    public String replaceData(String input){
+       if(input != null)
+        return input.replace(".", ",");
+
+       else return null;
+
+    }
+
+    public String getEditTextString(EditText input){  //extract string from edit text
+       if(input.getText() != null)
+        return input.getText().toString();
+
+       else
+           return null;
+    }
 }
