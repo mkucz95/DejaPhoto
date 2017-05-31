@@ -24,6 +24,7 @@ public class PhotoStorage implements IDataElement {
     Uri fileUri;
    static boolean uploaded;
     static boolean downloaded = false;
+    static boolean removed = false;
 
     private static final String TAG = "PhotoStorage";
 
@@ -84,4 +85,22 @@ public class PhotoStorage implements IDataElement {
        }
        return downloaded;
     }
+
+    //remove all pictures at location
+    public static boolean remove(StorageReference reference) {
+        reference.delete();
+        reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                removed = true;
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                removed = false;
+            }
+        });
+        return removed;
+    }
+
 }
