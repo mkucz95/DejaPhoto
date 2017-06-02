@@ -128,13 +128,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        display.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startRerank();
-            }
-        });
-
         addFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

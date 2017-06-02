@@ -23,7 +23,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class ShareActivity extends AppCompatActivity {
 
-    public Switch share;
+    private Switch share;
     private Button saveButton;
     private static User currUser = Global.currUser;
     private static Context context;
@@ -67,11 +67,12 @@ public class ShareActivity extends AppCompatActivity {
 
                     } else {
                         Global.shareSetting = false;
+                        share.setChecked(false);
                         Toast.makeText(getApplicationContext(),
                                 "Share setting is off", Toast.LENGTH_SHORT).show();
 
                         //all users photos deleted from web
-                        PhotoStorage.remove(PhotoStorage.getStorageRef(Global.currUser.email));
+                        //PhotoStorage.remove(PhotoStorage.getStorageRef(Global.currUser.email));
                     }
                 }
             }
