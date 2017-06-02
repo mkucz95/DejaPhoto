@@ -62,7 +62,7 @@ public class PhotoStorage implements IDataElement {
     }
 
     @Override
-    public DatabaseReference getRef(String[] info) {
+    public DatabaseReference getRef() {
         return null;
     }
 

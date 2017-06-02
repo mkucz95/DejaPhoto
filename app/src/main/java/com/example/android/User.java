@@ -1,15 +1,19 @@
 package com.example.android;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
@@ -21,14 +25,14 @@ import static android.content.ContentValues.TAG;
 public class User implements IDataElement{
     public String username;
     public String email;
-    public ArrayList<String> friendList = new ArrayList<>();
+    public ArrayList<String> requestList = new ArrayList<>();
     private DatabaseReference reference;
     private final String TAG = "User.java";
     public  static boolean exists = false;
 
 
     public void User() {
-        // Default user constructor
+        // Default currUser constructor
     }
 
     public User(String username, String email, DatabaseReference reference) {
@@ -40,33 +44,21 @@ public class User implements IDataElement{
     @Override
     public boolean checkExist(final String check) {
         Log.d(TAG, "checkExist");
-        /*reference.child("users").child(check).addListenerForSingleValueEvent(new ValueEventListener() {
+        Log.d(TAG, "checkEmail"+check);
+        Log.i(TAG, "whole snap: "+ Global.userSnapshot);
 
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    Log.i(TAG, "data exists");
 
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //do nothing
-            }
-        });*/
-
-        if(reference.child("users").child(check).getKey() == check) {
-            exists = true;
+        if(Global.userSnapshot.child(check).exists()){
+            Log.i(TAG, "userSnap: "+Global.userSnapshot.child(check));
+            return true;
         }
-        
 
-        return exists;
+        return false;
     }
 
     @Override
     public boolean addElement() {
-        //add user
+        //add currUser
 
         Log.d(TAG, "addElement");
 
@@ -78,16 +70,35 @@ public class User implements IDataElement{
     }
 
     @Override
-    public DatabaseReference getRef(String[] info) {
-        return reference.child("users");
+    public DatabaseReference getRef() {
+        return reference.child("users").child(this.email);
     }
 
-    //check if any user exists
-    public static boolean checkAnyUser(String name, DatabaseReference reference) {
-        Log.d("User.java", "checkAnyUser");
 
-        //check to see if user exists in the database
-        return reference.child("users").equalTo(name) != null;
-        //returns true if it finds a users called name
+    public static void setDatabaseListener(final DatabaseReference reference) {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // get map of users in datasnapshot
+                Global.userSnapshot=dataSnapshot;
+                collectAll((Map<String, Object>) dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // handle database error
+            }
+        });
     }
+
+    public static void collectAll(Map<String, Object> users) {
+        ArrayList<String> email = new ArrayList<>();
+        // iterate through each currUser
+        for (Map.Entry<String, Object> entry : users.entrySet()) {
+            // get currUser map
+            String singleUser = entry.getKey();
+            email.add(singleUser);
+        }
+    }
+
 }

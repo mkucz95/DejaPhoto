@@ -25,20 +25,14 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 
 public class AddFriendsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -48,31 +42,27 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     private Button signOutButton;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
-    private TextView requestComeFrom;
-    private TextView message;
+    private static TextView showFriends;
+    private static TextView requestComeFrom;
     private Button sendButton;
-    private Button acceptButton;
-    private Button declineButton;
-    private String emailInput;
+    private static Button acceptButton;
+    private static Button declineButton;
+    private String emailInputRequest;
     private EditText emailEdit;
     private TextView requestResult;
     private static final int RC_SIGN_IN = 1;
     private static final String TAG = "AddFriendsActivity";
+    public static String nextRequest;
 
-    private String currUserEmail;
-
-    private String currKey;
-
-    private FirebaseUser currentUser;
+    private FirebaseUser firebaseUser;
     private FirebaseAuth mAuth;
     private String[] arr = {};
 
     FirebaseOptions options;
     DatabaseReference myRef;
-    User user;   //if this doesn;t work include user in global variables
+
     Request request;
 
-    FirebaseApp firebaseApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +70,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         setContentView(R.layout.activity_add_friends);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -102,9 +91,10 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
-        message = (TextView) findViewById(R.id.friendFrom);
 
         requestResult = (TextView) findViewById(R.id.sendResult);
+        requestComeFrom = (TextView) findViewById(R.id.friendFrom);
+        showFriends =(TextView) findViewById(R.id.friendEmail);
 
         sendButton = (Button) findViewById(R.id.bt_8);
 
@@ -120,17 +110,21 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
 
+        emailEdit = (EditText) findViewById(R.id.currEmail);
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "request sent/clicked");
-                emailInput = replaceData(getEditTextString(emailEdit));
+                emailInputRequest = replaceData(getEditTextString(emailEdit));
+                Log.d(TAG, "emailInput: "+emailInputRequest);
 
-                if(User.checkAnyUser(emailInput, myRef)) {
-                    request = new Request(currUserEmail, emailInput, myRef);
+                if(Global.currUser.checkExist(emailInputRequest)) {
+                    request = new Request(Global.currUser.email, emailInputRequest, myRef);
                     request.addElement();
                     //todo print success message
                     requestResult.setText("Send successful");
+
                 }
                 else{
                     //todo print error message
@@ -142,17 +136,14 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Friends friends = new Friends(currUserEmail, user.friendList.get(0), myRef); //add both users to each other's friends
-                friends.addElement();
-
-               handleRequestDisplay(true);
+                handleClick(true);
             }
         });
 
         declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleRequestDisplay(true);
+                handleClick(false);
             }
         });
 
@@ -161,20 +152,9 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 .setDatabaseUrl("https://dejaphoto-33.firebaseio.com/")
                 .build();
 
-        emailEdit = (EditText) findViewById(R.id.currEmail);
-
-        //FirebaseApp firebaseApp;
-
-        /*try{
-            firebaseApp = FirebaseApp.getInstance("dejaphoto-33");
-        } catch(IllegalStateException e){
-            firebaseApp = FirebaseApp.initializeApp(this, options);
-        }*/
-
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReferenceFromUrl("https://dejaphoto-33.firebaseio.com/");
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -195,70 +175,42 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                     case R.id.sign_in_button:
                         signIn();
                         break;
+
                 }
             }
         });
 
-        //currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-       currentUser = mAuth.getCurrentUser();
-        if(currentUser == null)
+        // Check if Global.currUser is signed in (non-null) and update UI accordingly.
+        User.setDatabaseListener(myRef.child("users"));
+        if(Global.currUser != null){
+            Request.setRequestListener(myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr Global.currUser requests
+            myRef.child("users").child(Global.currUser.email).child("requests").child("new");
+            myRef.child("users").child(Global.currUser.email).child("requests").child("new").removeValue();
+        }
+
+        myRef.child("users").child("user@gmail,com").setValue(true); //update snapshot
+
+
+        firebaseUser = mAuth.getCurrentUser();
+
+        if(firebaseUser == null)
             signIn();
 
-        authentication();
+        updateUI(firebaseUser);
 
-        myRef.child("users").child(currUserEmail).child("requests").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                //TODO handle request
-                currKey = user.getRef(arr).child("requets").getKey();
 
-                // add email address into array list that stores requests
-                user.friendList.add(currKey);
-
-                // delete email address from request
-                Request.clearRequest(currKey, currUserEmail, myRef);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-
-        updateUI(currentUser);
     }
-
-    private void authentication() {
-        Log.d(TAG, "authentication() called");
-
-        if(mAuth != null && mAuth.getCurrentUser() != null) {
-            currUserEmail = mAuth.getCurrentUser().getEmail().replace(".", ","); //no periods, only commas
-        }
-        else
-            currUserEmail  = "No User";
-    }
-
 
     private void signIn() {
         Log.d(TAG, "signIn() called");
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -266,6 +218,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         // Firebase sign out
         mAuth.signOut();
 
+        requestView(false);
         // Google sign out
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -307,13 +260,13 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            // Sign in success, update UI with the signed-in currUser's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            userManager(); //add user to datbase if needed
+                            userManager(); //add currUser to datbase if needed
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display a message to the currUser.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             //Toast.makeText(GoogleSignInActivity.this, "Authentication failed.",
                               //      Toast.LENGTH_SHORT).show();
@@ -350,7 +303,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
         else {
             mStatusTextView.setText(R.string.signed_out);
-            user = null;
+            Global.currUser = null;
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
@@ -364,25 +317,33 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         //hideProgressDialog();
 
         if (fUser != null) {
-            user = new User(fUser.getDisplayName(), fUser.getEmail(), myRef); //new user object
-            requestComeFrom = (TextView) findViewById(R.id.friendFrom);
+            Global.currUser = new User(fUser.getDisplayName(), fUser.getEmail(), myRef); //new currUser object
 
             mStatusTextView.setText(getString(R.string.google_status_fmt, fUser.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, fUser.getUid()));
 
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.sign_in_button).setVisibility(View.INVISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
 
             emailEdit.setVisibility(View.VISIBLE);
             sendButton.setVisibility(View.VISIBLE);
 
-            handleRequestDisplay(false);
+            User.setDatabaseListener(myRef.child("users"));
+            Request.setRequestListener( myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr currUser requests
+
+            myRef.child("users").child(Global.currUser.email).child("requests").child("new");
+            myRef.child("users").child(Global.currUser.email).child("requests").child("new").removeValue();
+
+
+            myRef.child("users").child("currUser@gmail,com").setValue(true); //update snapshot
+
+            //SetRequestListener
 
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
 
-            user = null;
+            Global.currUser = null;
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
@@ -399,16 +360,17 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     @Override
     public void onClick(View v) {
-
     }
 
-    //HELPER METHODS
+
+
+    //HELPER METHODS---------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------
     public String replaceData(String input){
        if(input != null)
         return input.replace(".", ",");
 
        else return null;
-
     }
 
     public String getEditTextString(EditText input){  //extract string from edit text
@@ -419,48 +381,50 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
            return null;
     }
 
-    public void displayNoRequests(){ //called when list empty
-        requestComeFrom.setText("");
-        acceptButton.setVisibility(View.INVISIBLE);
-        declineButton.setVisibility(View.INVISIBLE);
-    }
-
-    public void displayNextRequest(){ //called when list not empty
-        requestComeFrom.setText(user.friendList.get(0));
-
-    }
-
-    public void handleRequestDisplay(boolean click){
-        if(!user.friendList.isEmpty()) {
-            if(click) removeRequest();
-            displayNextRequest();
-        }
-        else displayNoRequests();  //no requests
-    }
-
-    public void removeRequest(){
-        user.friendList.remove(0);
-
-        if(user.friendList.size() == 0)
-            displayNoRequests();
-
-    }
 
     public void userManager(){
         FirebaseUser currUser = mAuth.getCurrentUser();
         Log.d(TAG, "currUser: "+ currUser);
 
-        if(currUser != null){
-            Log.d(TAG, user.toString());
+        if(Global.currUser != null){
+            Log.d(TAG, Global.currUser.toString());
 
-            boolean exists = user.checkExist(user.email); //check to see if user exists
+            boolean exists =  Global.currUser.checkExist(Global.currUser.email); //check to see if currUser exists
 
             if(!exists) {
-                user.addElement();
-                Log.d(TAG, "adding new user @ signIn()");
+                Global.currUser.addElement();
+                Log.d(TAG, "adding new currUser @ signIn()");
             }
-            else Log.i(TAG, "user already in database");
+            else Log.i(TAG, "currUser already in database");
         }
-        else Log.i(TAG, "no user exists");
+        else Log.i(TAG, "no currUser exists");
+    }
+
+    public static void requestView(boolean visible){
+        if(visible){
+            acceptButton.setVisibility(View.VISIBLE);
+            declineButton.setVisibility(View.VISIBLE);
+            requestComeFrom.setText("Friend Request From");
+            showFriends.setText(nextRequest);
+        }
+
+        else{
+            acceptButton.setVisibility(View.INVISIBLE);
+            declineButton.setVisibility(View.INVISIBLE);
+            requestComeFrom.setText("");
+            showFriends.setText("");
+        }
+    }
+
+    public void handleClick(boolean accept){
+        if (accept) {
+            Friends friends = new Friends(Global.currUser.email, Global.currUser.requestList.get(0), myRef); //add both users to each other's friends
+            friends.addElement();
+        } //add friend to friends list
+        //else do nothing
+
+        Request.clearRequest(Global.currUser.email, Global.currUser.requestList.get(0), myRef);
+        Global.currUser.requestList.remove(0);
+        //delete request that was handled
     }
 }

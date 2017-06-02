@@ -2,6 +2,11 @@ package com.example.android;
 
 import android.provider.MediaStore;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -40,4 +45,10 @@ public class Global {
     public static String karmaPath;
     public static String releasePath;
     public static int syncInterval = 300;
+
+    public static DataSnapshot userSnapshot;
+
+    public static User currUser;
+
+
 }

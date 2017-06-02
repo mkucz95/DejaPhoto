@@ -154,7 +154,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Toast.makeText(context, "Click Release again to undo", Toast.LENGTH_LONG).show();
         }
 
-        else if (Global.undoKarmaOn && action.equals("karma") ){ //when the user presses button a second time before the alarm timer runs out
+        else if (Global.undoKarmaOn && action.equals("karma") ){ //when the currUser presses button a second time before the alarm timer runs out
             Log.i("undoManager", "alarmKarma : " +Global.undoKarmaOn);
 
             if(karmaPI != null) {

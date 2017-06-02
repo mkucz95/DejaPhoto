@@ -8,7 +8,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /*
-this class is used to track the 15 seconds a user has to undo karma or release. if they don't undo
+this class is used to track the 15 seconds a currUser has to undo karma or release. if they don't undo
 then it sends and intent service to
 
 implemented based on a similar class structure as the DJWidgetProvider.java

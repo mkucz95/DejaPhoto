@@ -427,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
         long newInterval = Integer.parseInt(input.getText().toString());
 
 
-        //set the interval specified by user
+        //set the interval specified by currUser
         Global.changeInterval = newInterval * 1000;
         Global.timer.cancel();
         Global.timer = new Timer();

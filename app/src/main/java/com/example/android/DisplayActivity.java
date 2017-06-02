@@ -57,7 +57,7 @@ public class DisplayActivity extends AppCompatActivity {
                     } else {
                         Global.displayUser = false;
                         Toast.makeText(getApplicationContext(),
-                                "Will not display user photo", Toast.LENGTH_SHORT).show();
+                                "Will not display currUser photo", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

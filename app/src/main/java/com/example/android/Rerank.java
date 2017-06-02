@@ -115,7 +115,7 @@ public class Rerank extends IntentService {
     }
 
     /*
-    this function accessed shared preferences to see what settings the user has selected for their
+    this function accessed shared preferences to see what settings the currUser has selected for their
     ranking, and returns that in a boolean array, default is true for all settings!
      */
     public boolean[] getSettings(){
