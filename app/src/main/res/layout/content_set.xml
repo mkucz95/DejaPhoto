@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="@string/defaultInterval"
+        android:text=""
         android:textColor="#D03E80"
         android:textSize="15sp" />
 
