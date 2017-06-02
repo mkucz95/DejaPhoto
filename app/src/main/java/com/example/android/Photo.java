@@ -20,6 +20,7 @@ public class Photo {
     private String dayOfWeek;
     private boolean karma = false;
     private boolean released = false;
+    private String folder = "friends";
 
     public Photo(){
     }
@@ -87,5 +88,6 @@ public class Photo {
     public void setReleased(boolean flag){
         this.released = flag;
     }
+    public String getFolder(){ return this.folder; }
 
 }

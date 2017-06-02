@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -62,9 +63,7 @@ public class PhotoStorage implements IDataElement {
     }
 
     @Override
-    public DatabaseReference getRef() {
-        return null;
-    }
+    public DatabaseReference getRef() { return null; }
 
     public static boolean downloadImages(StorageReference reference, String targetPath){
         try {
@@ -102,5 +101,23 @@ public class PhotoStorage implements IDataElement {
         });
         return removed;
     }
+
+    //return storage reference
+    public static StorageReference getStorageRef(String userEmail){
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+
+        return storageReference.child("photos").child(userEmail);
+    }
+
+ /*   public static void uploadImages(String flag){
+        //implement to upload
+        if(flag.equals("all")){
+            //for each image that needs to be uploaded call add element
+        }
+        else if (flag.equals("notAll")){
+            //if we add 2 new pictures, only upload those two
+        }
+    }*/
 
 }

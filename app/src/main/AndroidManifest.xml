@@ -59,8 +59,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
         <activity
             android:name="com.example.android.AlbumActivity"
             android:label="@string/title_activity_album"
@@ -124,7 +126,11 @@
         <activity
             android:name="com.example.android.AddFriendsActivity"
             android:label="@string/title_activity_add_friends"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name="com.example.android.DatabaseMediator"
+            android:exported="false"></service>
     </application>
 
 </manifest>

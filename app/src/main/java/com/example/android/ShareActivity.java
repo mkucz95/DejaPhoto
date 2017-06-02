@@ -1,5 +1,7 @@
 package com.example.android;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,11 +16,17 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ShareActivity extends AppCompatActivity {
 
     public Switch share;
     private Button saveButton;
+    private static User currUser = Global.currUser;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,8 @@ public class ShareActivity extends AppCompatActivity {
             share.setChecked(false);
         }
 
+        context = getApplicationContext();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         share.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -49,10 +59,19 @@ public class ShareActivity extends AppCompatActivity {
                         Global.shareSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Share setting is on", Toast.LENGTH_SHORT).show();
+
+                       // send intent to database handler
+                        Intent intent = new Intent(context, DatabaseMediator.class);
+                        intent.putExtra("upload", true);
+                        startService(intent);
+
                     } else {
                         Global.shareSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Share setting is off", Toast.LENGTH_SHORT).show();
+
+                        //all users photos deleted from web
+                        PhotoStorage.remove(PhotoStorage.getStorageRef(Global.currUser.email));
                     }
                 }
             }

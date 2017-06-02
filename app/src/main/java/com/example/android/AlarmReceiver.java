@@ -1,4 +1,5 @@
 package com.example.android;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +7,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import static android.content.Intent.ACTION_SYNC;
 
 /*
 this class is used to track the 15 seconds a currUser has to undo karma or release. if they don't undo
@@ -54,6 +57,13 @@ public class AlarmReceiver extends BroadcastReceiver
 
             setData(false, Global.releasePath);
         }
+
+        //TODO manage syncing of database
+      /*  else if(ACTION_SYNC.equals(action)){
+            Intent syncIntent = new Intent(context, DatabaseMediator.class );
+           // syncIntent.setAction(SYNC)
+            startService(syncIntent);
+        }*/
     }
 
     public void setData(boolean flag, String path){

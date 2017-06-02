@@ -1,6 +1,9 @@
 package com.example.android;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+
+import java.util.ArrayList;
 
 public class Friends implements IDataElement{
 
@@ -45,6 +48,16 @@ public class Friends implements IDataElement{
 
         public static DatabaseReference getRef(String userEmail, DatabaseReference reference){
         return reference.child("users").child(userEmail).child("friends");
+    }
+
+    //return arraylist of friends of a user
+    public static ArrayList<String> getFriends(String user){
+        ArrayList<String> friends = new ArrayList<>();
+
+        for(DataSnapshot snapshot: Global.userSnapshot.child(user).child("friends").getChildren())
+           friends.add(snapshot.getKey());
+
+        return friends;
     }
  }
 
