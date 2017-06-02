@@ -33,20 +33,20 @@ public class SetActivity extends AppCompatActivity {
     EditText input;
     private Button saveButton;
     TextView newInterval;
-
     private boolean locationSetting;
     private boolean timeSetting;
     private boolean dofSetting;
     private boolean karmaSetting;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.content_set);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        Log.i("deja", "" + Global.changeInterval);
 
+        updateInterval();
         location = (Switch) findViewById(R.id.s_location);
         time = (Switch) findViewById(R.id.s_time);
         dayOfWeek = (Switch) findViewById(R.id.s_dow);
@@ -96,7 +96,7 @@ public class SetActivity extends AppCompatActivity {
 
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -234,11 +234,9 @@ public class SetActivity extends AppCompatActivity {
             public void onClick(View view) {
                 input = (EditText) findViewById(R.id.user_specify);
                 int interval = Integer.parseInt(input.getText().toString());
+                newInterval = (TextView) findViewById(R.id.change_interval);
 
                 Log.i("updateInterval", "input: " + interval);
-                //Log.i("updateInterval", "input to string: " + interval);
-                //Log.i("updateInterval", "input to text: " + input.getText());
-                newInterval = (TextView) findViewById(R.id.change_interval);
                 String newInfo = interval + " Seconds";
                 newInterval.setText(newInfo);
                 Global.changeInterval = (interval * 1000);
@@ -264,6 +262,10 @@ public class SetActivity extends AppCompatActivity {
         startService(intent);
     }
 
-
-
+    public void updateInterval(){
+        newInterval = (TextView) findViewById(R.id.change_interval);
+        String newInfo = Global.changeInterval/100 + " seconds";
+        Log.i("deja", "Setting text to: " + newInfo);
+        newInterval.setText(newInfo);
+    }
 }

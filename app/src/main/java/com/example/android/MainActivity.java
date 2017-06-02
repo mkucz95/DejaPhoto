@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     File deja;
 
     static final int REQUEST_CODE = 1;
-
+    String TAG = "deja";
     static final int SELECT_IMAGE = 2;
 
     private String path;
@@ -84,14 +84,19 @@ public class MainActivity extends AppCompatActivity {
         Button share = (Button) findViewById(R.id.bt_4);
         Button addFriends = (Button) findViewById(R.id.bt_6);
 
-
         //deja = new File("/sdcard/DejaAlbum");
 
         //deja.mkdirs();
-        String rootDirectory = Environment.getExternalStorageDirectory().toString();
-        deja = new File(rootDirectory + "/DejaCopy");
-        deja.mkdir();
+        deja = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaCopy");
+        //deja = new File(rootDirectory + "DCIM/DejaCopy");
 
+        if (!deja.exists()) {
+            Log.i(TAG, "Folder doesn't exist, creating it...");
+            boolean rv = deja.mkdir();
+            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+        } else {
+            Log.i(TAG, "Folder already exists.");
+        }
 
         startApp();
 
@@ -356,6 +361,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             startApp();
         }
+        //startApp();
         Log.i("permission", "done with permissions");
 
     }
