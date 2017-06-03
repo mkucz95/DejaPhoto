@@ -21,25 +21,29 @@ public class DatabaseSync extends TimerTask {
         StorageReference storageReference = PhotoStorage.getStorageRef(Global.currUser.email);
         PhotoStorage photoStorage;
 
-        for(Photo photo: Global.uploadImageQueue){
-            photoStorage = new PhotoStorage(photo.getPath(), storageReference);
-            photoStorage.addElement();
-        }
+if(Global.shareSetting) {  //if sharing is on
+    for (Photo photo : Global.uploadImageQueue) {
+        photoStorage = new PhotoStorage(photo.getPath(), storageReference);
+        photoStorage.addElement();
+    }
+}
 
       /*  for(Photo photo: Global.uploadMetaData){
             photoStorage = new PhotoStorage(photo.getPath(), storageReference);
             photoStorage.addElement();
         }*/
 
-        Log.i(TAG, "downloading images");
-        if(PhotoStorage.dirExists("DejaPhotoFriends")){
-            ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
-            for(String friend: friends) {
+        if(Global.displayFriend) { //if we want to see our own
+          Log.i(TAG, "downloading images");
+          if (PhotoStorage.dirExists("DejaPhotoFriends")) {
+              ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
+              for (String friend : friends) {
 
-                PhotoStorage.downloadImages( PhotoStorage.getStorageRef(friend)
-                        , "sdcard/DejaPhotoFriends");
-            }
-        }
+                  PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
+                          , "sdcard/DejaPhotoFriends");
+              }
+          }
+      }
     }
 
 

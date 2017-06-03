@@ -45,42 +45,34 @@ public class DisplayActivity extends AppCompatActivity {
         user.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (!Global.dejaVuSetting) { //if dejavu mode is off, we cannot change settings
-                    Toast.makeText(getApplicationContext(),
-                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
-                } else { //dejavu mode is on
                     if (isChecked) {
                         Global.displayUser = true;
                         Toast.makeText(getApplicationContext(),
                                 "Display User photo", Toast.LENGTH_SHORT).show();
+                        ViewControl.displayOwn(true);
                     } else {
                         Global.displayUser = false;
                         Toast.makeText(getApplicationContext(),
                                 "Will not display currUser photo", Toast.LENGTH_SHORT).show();
+                        ViewControl.displayOwn(false);
                     }
-                }
             }
         });
 
         friend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (!Global.dejaVuSetting) { //if dejavu mode is off, we cannot change settings
-                    Toast.makeText(getApplicationContext(),
-                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
-                } else { //dejavu mode is on
                     if (isChecked) {
                         Global.displayFriend = true;
                         Toast.makeText(getApplicationContext(),
                                 "Display friend photo", Toast.LENGTH_SHORT).show();
+                        ViewControl.displayFriend(true);
                     } else {
                         Global.displayFriend = false;
                         Toast.makeText(getApplicationContext(),
                                 "Will not display friend photo", Toast.LENGTH_SHORT).show();
+                        ViewControl.displayFriend(false);
                     }
-                }
             }
         });
 
