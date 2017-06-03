@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -13,11 +14,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
 /**
  * Created by mkucz on 5/29/2017.
+ *
+ * code from https://firebase.google.com/docs/storage/android/upload-files
  */
 
 public class PhotoStorage implements IDataElement {
@@ -27,6 +31,7 @@ public class PhotoStorage implements IDataElement {
    static boolean uploaded;
     static boolean downloaded = false;
     static boolean removed = false;
+    static Bitmap bitmap;
 
     private static final String TAG = "PhotoStorage";
 
@@ -37,6 +42,7 @@ public class PhotoStorage implements IDataElement {
         this.imagePath = path;
         this.storageReference = reference;
         this.fileUri = Uri.fromFile(new File(imagePath));
+        this.bitmap = FileManager.getBitmap(imagePath);
     }
 
     @Override
@@ -48,7 +54,24 @@ public class PhotoStorage implements IDataElement {
     public boolean addElement() { //this method uploads the element to specified path in database
         Log.i(TAG, "addElement");
 
-        UploadTask uploadTask = storageReference.putFile(fileUri);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = storageReference.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                uploaded = false;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                uploaded = true;
+            }
+        });
+
+      /*  UploadTask uploadTask = storageReference.putFile(fileUri);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -61,7 +84,7 @@ public class PhotoStorage implements IDataElement {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 uploaded = true;
             }
-        });
+        });*/
         return uploaded;
     }
 
