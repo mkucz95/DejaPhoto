@@ -42,12 +42,15 @@ import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_MULTIPLE_REQUEST = 99;
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
+
+    public static int n = 1;
 
     static final String dejaAlbum = "Deja Photo Album";
     static final String copyDeja = "/Deja Photo Album Copy/";
@@ -145,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     // MS2 click the camera button to open default camera
     public void openCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
@@ -154,50 +157,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            saveImage(thumbnail);
+            saveFile(thumbnail, dejaAlbum);
             Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
         }
     }*/
-
-    public void saveImage(Bitmap myMap) {
-        /*ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        myMap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File file = new File(Environment.getExternalStorageDirectory() + deja);
-        if(!file.exists()) {
-            file.mkdirs();
-        }
-
-        try {
-            File f = new File(file, Calendar.getInstance().getTimeInMillis() + ".jpg");
-            f.createNewFile();
-            FileOutputStream fo = new FileOutputStream(f);
-            fo.write(bytes.toByteArray());
-            MediaScannerConnection.scanFile(this, new String[]{f.getPath()}, new String[]{"image/jpeg"}, null);
-            fo.close();
-            Log.d("TAG", "File Saved:: --->" + f.getAbsolutePath());
-            return f.getAbsolutePath();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";*/
-        /*File outputFile = new File(Environment.getExternalStorageDirectory(), deja);
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
-            myMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-            fileOutputStream.flush();
-            fileOutputStream.close();
-            Log.d("TAG", "File Saved:: --->" + outputFile.getAbsolutePath());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-    }
-
-    public void launchActivity() {
-        Intent intent = new Intent(this, AlbumActivity.class);
-        startActivity(intent);
-    }
 
     public void changeSettings() {
         Intent intent = new Intent(this, SetActivity.class);
@@ -267,6 +230,47 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+        // take a picture and save in deja folder
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            saveFile(thumbnail);
+            Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void saveFile(Bitmap imageToSave) {
+        File direct = new File(Environment.getExternalStorageDirectory() + "/DejaPhoto");
+
+        if(!direct.exists()) {
+            File directory = new File("/sdcard/DejaPhoto/");
+            directory.mkdirs();
+            Log.d("NewDirectory", "album" + directory.exists());
+        }
+
+
+        String captured = "FILENAME-" + n + ".jpg";
+
+        n++;
+
+        File file = new File(new File("/sdcard/DejaPhoto/"), captured);
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+            Log.d("NewDirectory", "file" + file.exists());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(file);
+        mediaScan.setData(contentUri);
+        getApplicationContext().sendBroadcast(mediaScan);
+
+        Log.d("NewDirectory", "+++++++");
     }
 
     /*
