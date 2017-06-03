@@ -2,6 +2,7 @@ package com.example.android;
 
 import android.Manifest;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -33,15 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static int n = 1;
 
-    static final String dejaAlbum = "Deja Photo Album";
-    static final String copyDeja = "/Deja Photo Album Copy/";
-   
-    static final File imageRoot = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), dejaAlbum);
-    private final FileManager fileManager = new FileManager(getApplicationContext());
+    Context context;
 
-    String galleryPath = Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_PICTURES + "/";
+    private FileManager fileManager;
 
-    //File deja = new File(Environment.getExternalStorageDirectory(), copyDeja);
     File deja;
 
     static final int REQUEST_CODE = 1;
@@ -175,6 +171,9 @@ public class MainActivity extends AppCompatActivity {
      * to get image path data
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        context = getApplicationContext();
+        fileManager = new FileManager(context);
+
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
             if (data != null) {

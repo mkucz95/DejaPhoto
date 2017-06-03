@@ -132,7 +132,7 @@ public class PhotoStorage implements IDataElement {
     }
 
     //return storage reference
-    public static StorageReference getStorageRef(String userEmail){
+    public static StorageReference getStorageRef(String userEmail) {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
 

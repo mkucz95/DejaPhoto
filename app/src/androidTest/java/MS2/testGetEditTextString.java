@@ -26,10 +26,6 @@ public class testGetEditTextString {
         AddFriendsActivity addFriendsActivity = addfActivity.getActivity();
         EditText input = (EditText) addfActivity.getActivity().findViewById(R.id.fortest);
 
-
-
-
-
         assertEquals(addFriendsActivity.getEditTextString(input),"test");
 
 

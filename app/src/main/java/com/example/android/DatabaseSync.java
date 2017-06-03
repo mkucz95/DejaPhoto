@@ -13,23 +13,29 @@ import java.util.TimerTask;
  */
 
 public class DatabaseSync extends TimerTask {
-    private final String TAG = "DatabaseSync.java";
+    //private final String TAG = "DatabaseSync.java";
 
     @Override
     public void run() {
-        Log.i(TAG, "uploading images");
-        StorageReference storageReference = PhotoStorage.getStorageRef(Global.currUser.email);
+        /*Log.i(TAG, "uploading images");
+
+        StorageReference storageReference;
+
         PhotoStorage photoStorage;
+
+        storageReference = PhotoStorage.getStorageRef(Global.currUser.email);
+
+        Log.d("storageReference", "value" + storageReference);
 
         for(Photo photo: Global.uploadImageQueue){
             photoStorage = new PhotoStorage(photo.getPath(), storageReference);
             photoStorage.addElement();
         }
 
-      /*  for(Photo photo: Global.uploadMetaData){
+        for(Photo photo: Global.uploadMetaData){
             photoStorage = new PhotoStorage(photo.getPath(), storageReference);
             photoStorage.addElement();
-        }*/
+        }
 
         Log.i(TAG, "downloading images");
         if(PhotoStorage.dirExists("DejaPhotoFriends")){
@@ -39,8 +45,7 @@ public class DatabaseSync extends TimerTask {
                 PhotoStorage.downloadImages( PhotoStorage.getStorageRef(friend)
                         , "sdcard/DejaPhotoFriends");
             }
-        }
+        }*/
     }
-
-
 }
+
