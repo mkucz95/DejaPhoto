@@ -53,14 +53,10 @@ public class ShareActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if (!Global.dejaVuSetting) { //if dejavu mode is off, we cannot change settings
-                    Toast.makeText(getApplicationContext(),
-                            "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
-                } else { //dejavu mode is on
                     if (isChecked) {
                         Global.shareSetting = true;
                         Toast.makeText(getApplicationContext(),
-                                "Share setting is on", Toast.LENGTH_SHORT).show();
+                                "Sharing On", Toast.LENGTH_SHORT).show();
 
                        // send intent to database handler
                         Intent intent = new Intent(context, DatabaseMediator.class);
@@ -71,22 +67,11 @@ public class ShareActivity extends AppCompatActivity {
                         Global.shareSetting = false;
                         share.setChecked(false);
                         Toast.makeText(getApplicationContext(),
-                                "Share setting is off", Toast.LENGTH_SHORT).show();
+                                "Sharing Off", Toast.LENGTH_SHORT).show();
 
                         //all users photos deleted from web
-                        //PhotoStorage.remove(PhotoStorage.getStorageRef(Global.currUser.email));
+                        PhotoStorage.remove(PhotoStorage.getStorageRef(Global.currUser.email));
                     }
-                }
-            }
-        });
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 

@@ -57,7 +57,6 @@ public class Global {
     public static DataSnapshot userSnapshot;
     public static User currUser;
 
-
     public static ArrayList<Photo> uploadImageQueue = new ArrayList<>();
     public static ArrayList<String> uploadMetaData = new ArrayList<>();
 
