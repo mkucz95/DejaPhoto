@@ -293,7 +293,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
     }
 
-    private void updateUI(boolean signedIn) {
+    public void updateUI(boolean signedIn) {
         if(signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
@@ -366,14 +366,14 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     //HELPER METHODS---------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------
-    public String replaceData(String input){
+    public static String replaceData(String input){
        if(input != null)
         return input.replace(".", ",");
 
        else return null;
     }
 
-    public String getEditTextString(EditText input){  //extract string from edit text
+    public static String getEditTextString(EditText input){  //extract string from edit text
        if(input.getText() != null)
         return input.getText().toString();
 
