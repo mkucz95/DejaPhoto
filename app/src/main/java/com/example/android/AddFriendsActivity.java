@@ -366,14 +366,14 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     //HELPER METHODS---------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------
-    public static String replaceData(String input){
+    public String replaceData(String input){
        if(input != null)
         return input.replace(".", ",");
 
        else return null;
     }
 
-    public static String getEditTextString(EditText input){  //extract string from edit text
+    public  String getEditTextString(EditText input){  //extract string from edit text
        if(input.getText() != null)
         return input.getText().toString();
 
@@ -416,7 +416,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
     }
 
-    public void handleClick(boolean accept){
+    public  void  handleClick(boolean accept){
         if (accept) {
             Friends friends = new Friends(Global.currUser.email, Global.currUser.requestList.get(0), myRef); //add both users to each other's friends
             friends.addElement();

@@ -11,7 +11,6 @@ import com.example.dejaphoto.R;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.example.android.AddFriendsActivity.getEditTextString;
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -24,12 +23,13 @@ public class testGetEditTextString {
 
     @Test
     public void test1() {
+        AddFriendsActivity addFriendsActivity = addfActivity.getActivity();
         EditText input = (EditText) addfActivity.getActivity().findViewById(R.id.fortest);
 
-        ;
 
 
-        assertEquals(getEditTextString(input),"test");
+
+        assertEquals(addFriendsActivity.getEditTextString(input),"test");
 
 
 
