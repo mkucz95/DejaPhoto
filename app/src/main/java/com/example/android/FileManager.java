@@ -4,18 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+
+import static android.content.Context.WINDOW_SERVICE;
 
 public class FileManager {
     private final String TAG = "FileManager";
@@ -133,5 +141,44 @@ public class FileManager {
                 Log.i(TAG, "deleteFile--- ERROR: "+path);
             }
         }
+    }
+
+    // resize the file to fit screen size before upload
+    public Bitmap resizeImage(String path) {
+        Bitmap image = FileManager.getBitmap(path);
+
+        Bitmap resizedImage = null;
+
+        if(image != null) {
+            int imageHeight = image.getHeight();
+            if(imageHeight > Global.windowHeight) {
+                imageHeight = Global.windowHeight;
+            }
+
+            int imageWidth = (imageHeight * image.getWidth()) / image.getHeight();
+            if(imageWidth > Global.windowWidth) {
+                imageWidth = Global.windowWidth;
+                imageHeight = (imageWidth * image.getHeight()) / image.getWidth();
+            }
+
+            resizedImage = Bitmap.createScaledBitmap(image, imageWidth, imageHeight, true);
+        }
+
+        return resizedImage;
+    }
+
+    //get bitmap of image from file
+    public static Bitmap getBitmap(String path){
+       Bitmap bitmap = null;
+        try {
+            Log.i("FileManager", "GetBitmap: " + path);
+            FileInputStream imgIS = new FileInputStream(new File(path));
+            BufferedInputStream bufIS = new BufferedInputStream(imgIS);
+           bitmap = BitmapFactory.decodeStream(bufIS); //
+            Log.i("PhotoLocation", "Setting background...");
+        } catch (FileNotFoundException e) { //catch fileinputstream exceptions
+            e.printStackTrace();
+        } //trying to get wallpaper from display cycle node
+        return bitmap;
     }
 }

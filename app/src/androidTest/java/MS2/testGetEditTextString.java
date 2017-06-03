@@ -26,13 +26,7 @@ public class testGetEditTextString {
     public void test1() {
         EditText input = (EditText) addfActivity.getActivity().findViewById(R.id.fortest);
 
-        ;
-
-
         assertEquals(getEditTextString(input),"test");
-
-
-
 
     }
 }

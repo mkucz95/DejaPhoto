@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,11 +69,13 @@ public class MainActivity extends AppCompatActivity {
         Button share = (Button) findViewById(R.id.bt_4);
         Button addFriends = (Button) findViewById(R.id.bt_6);
 
-        //deja = new File("/sdcard/DejaAlbum");
+        Display displayWindow = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        displayWindow.getSize(size);
+        Global.windowWidth = size.x;
+        Global.windowHeight = size.y;
 
-        //deja.mkdirs();
         deja = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaCopy");
-        //deja = new File(rootDirectory + "DCIM/DejaCopy");
 
         if (!deja.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
