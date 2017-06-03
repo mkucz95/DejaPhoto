@@ -42,7 +42,7 @@ public class PhotoStorage implements IDataElement {
         this.imagePath = path;
         this.storageReference = reference;
         this.fileUri = Uri.fromFile(new File(imagePath));
-        this.bitmap = FileManager.getBitmap(imagePath);
+        this.bitmap = FileManager.resizeImage(imagePath);
     }
 
     @Override
