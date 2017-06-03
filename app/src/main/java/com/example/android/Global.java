@@ -39,6 +39,9 @@ public class Global {
         return settings;
     }
 
+    public static int windowWidth = 0;
+    public static int windowHeight = 0;
+
     public static int currIndex = 0;
 
     public static String karmaPath;
