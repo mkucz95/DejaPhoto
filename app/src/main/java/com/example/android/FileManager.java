@@ -144,7 +144,7 @@ public class FileManager {
     }
 
     // resize the file to fit screen size before upload
-    public Bitmap resizeImage(String path) {
+    public static Bitmap resizeImage(String path) {
         Bitmap image = FileManager.getBitmap(path);
 
         Bitmap resizedImage = null;
