@@ -56,8 +56,8 @@ if(Global.shareSetting) {  //if sharing is on
                         , "sdcard/DejaPhotoFriends");
             }
         }*/
-=======
-        if(Global.displayFriend) { //if we want to see our own
+
+        /*if(Global.displayFriend) { //if we want to see our own
           Log.i(TAG, "downloading images");
           if (PhotoStorage.dirExists("DejaPhotoFriends")) {
               ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
@@ -67,8 +67,7 @@ if(Global.shareSetting) {  //if sharing is on
                           , "sdcard/DejaPhotoFriends");
               }
           }
-      }
->>>>>>> ee1e6dbc079d684ae2c87c14508f898b759482bb
+      }*/
     }
 }
 
