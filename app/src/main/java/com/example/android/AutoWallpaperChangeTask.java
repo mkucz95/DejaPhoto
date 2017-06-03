@@ -11,11 +11,11 @@ import java.util.TimerTask;
  * used to manage the auto wallpaper change feature as a TimerTask
  */
 
-public class AutoWallpaperChange extends TimerTask {
+public class AutoWallpaperChangeTask extends TimerTask {
     private static final String ACTION_NEXT = "com.example.android.NEXT";
     Context context;
 
-    AutoWallpaperChange(Context context) {
+    AutoWallpaperChangeTask(Context context) {
         this.context = context;
     }
 

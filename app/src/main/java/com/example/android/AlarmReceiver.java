@@ -29,55 +29,34 @@ public class AlarmReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent)
     { //what happens when the alarm goes off (undoTimer expires)
         Log.i("AlarmReceiver", "AlarmReceiver got PendingIntent");
+        FileManager fileManager = new FileManager(context);
 
         String action = intent.getAction();
 
         Log.i("AlarmReciever", "action:  "+ action);
 
         if(ACTION_KARMA.equals(action) && Global.undoKarmaOn) {
-            Log.i("AlarmReciever", "Karma Intent Received");
+            Log.i("AlarmReciever", "Karma");
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
             //Log.i("setKarma", "Karma added to : " + Global.displayCycle.get(Global.currIndex).getPath());
             //Photo p = Global.displayCycle.get(Global.currIndex);
             //p.setKarma(true);
-            setData(true, Global.karmaPath);
+            fileManager.setDisplayCycleData(true, Global.karmaPath);
             //Log.i("setKarma", Global.displayCycle.get(Global.currIndex).getPath() + "Karma: " + Global.displayCycle.get(Global.currIndex).isKarma());
 
         }
 
         else if(ACTION_RELEASE.equals(action) && Global.undoReleaseOn){
-            Log.i("AlarmReciever", "Release Intent Received");
+            Log.i("AlarmReciever", "Release");
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Global.undoReleaseOn = false; //alarm was fired so now it got turned off
 
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
 
-            setData(false, Global.releasePath);
-        }
-    }
-
-    public void setData(boolean flag, String path){
-        ArrayList<Photo> temp = Global.displayCycle;
-        for(int i = 0; i<temp.size(); i++){
-            Photo photo = temp.get(i);
-            Log.i("setKarma", path + " compare to : " + photo.getPath());
-            if(photo.getPath().equals(path)){
-                if(flag) {
-                    Log.i("setKarma", temp.get(i) + ": added karma");
-                    photo.setKarma(true);
-                }
-                else photo.setReleased(true);  //TODO just delete from array list?
-            }
-            Log.i("setKarma", photo.getPath() + ": karma:  "+ photo.isKarma());
-
-
-        }
-        Global.displayCycle = temp;
-        for(Photo p: Global.displayCycle){
-            Log.i("setKarma", p.getPath() + ": karma:  "+ p.isKarma());
+            fileManager.setDisplayCycleData(false, Global.releasePath);
         }
     }
 

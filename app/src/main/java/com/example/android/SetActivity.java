@@ -1,12 +1,8 @@
 package com.example.android;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,8 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
-
-import org.w3c.dom.Text;
 
 import java.util.Timer;
 
@@ -248,7 +242,7 @@ public class SetActivity extends AppCompatActivity {
                 if(Global.undoTimer != null) {
                     Global.autoWallpaperChange.cancel();
                     Global.undoTimer.cancel();
-                    Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
+                    Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
                     Global.undoTimer = new Timer();
                     Global.undoTimer.schedule(Global.autoWallpaperChange,
                             Global.changeInterval, Global.changeInterval);

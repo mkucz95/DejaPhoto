@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
-import java.util.Timer;
-
 /**
  * Created by Justin on 5/3/17.
  * This class uses android APIs to create a widget that is responsive to presses on buttons
@@ -190,7 +188,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         Log.i("updateInterval", "Change Interval: " + Global.changeInterval);
         if(Global.undoTimer != null) {
             Global.autoWallpaperChange.cancel();
-            Global.autoWallpaperChange = new AutoWallpaperChange(context);
+            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
             Global.undoTimer.schedule(Global.autoWallpaperChange,
                     Global.changeInterval, Global.changeInterval);
         }

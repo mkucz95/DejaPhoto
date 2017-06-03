@@ -1,17 +1,10 @@
 package com.example.android;
 
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,7 +29,7 @@ public class Global {
     //UNDO BUTTON PRESS
     public static boolean undoReleaseOn = false; //whether these alarms are on
     public static boolean undoKarmaOn = false;
-    public static AutoWallpaperChange autoWallpaperChange;
+    public static AutoWallpaperChangeTask autoWallpaperChange;
     public static long changeInterval = 5000; //default is 5
     static Timer undoTimer = new Timer();
 

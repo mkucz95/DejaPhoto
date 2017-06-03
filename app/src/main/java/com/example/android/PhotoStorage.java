@@ -46,6 +46,8 @@ public class PhotoStorage implements IDataElement {
 
     @Override
     public boolean addElement() { //this method uploads the element to specified path in database
+        Log.i(TAG, "addElement");
+
         UploadTask uploadTask = storageReference.putFile(fileUri);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -67,6 +69,8 @@ public class PhotoStorage implements IDataElement {
     public DatabaseReference getRef() { return null; }
 
     public static boolean downloadImages(StorageReference reference, String targetPath){
+        Log.i(TAG, "downloadImages from: "+reference);
+
         try {
          File  localFile = File.createTempFile(targetPath, "jpg");
             reference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -88,6 +92,7 @@ public class PhotoStorage implements IDataElement {
 
     //remove all pictures at location
     public static boolean remove(StorageReference reference) {
+        Log.i(TAG, "remove : "+reference);
         reference.delete();
         reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class FileManager {
     private final String TAG = "FileManager";
@@ -95,6 +96,42 @@ public class FileManager {
         }
         in.close();
         out.close();
+    }
 
+    public void setDisplayCycleData(boolean flag, String path){
+        ArrayList<Photo> temp = Global.displayCycle;
+        for(int i = 0; i<temp.size(); i++){
+            Photo photo = temp.get(i);
+            Log.i("setKarma", path + " compare to : " + photo.getPath());
+            if(photo.getPath().equals(path)){
+                if(flag) {
+                    Log.i("setKarma", temp.get(i) + ": added karma");
+                    photo.setKarma(true);
+                }
+                else{
+                    photo.setReleased(true);
+                    deleteFile(temp.get(i).getPath()); //delete from file
+                    temp.remove(i);
+                }
+            }
+            Log.i("setKarma", photo.getPath() + ": karma:  "+ photo.isKarma());
+
+
+        }
+        Global.displayCycle = temp;
+        for(Photo p: Global.displayCycle){
+            Log.i("setKarma", p.getPath() + ": karma:  "+ p.isKarma());
+        }
+    }
+
+    public void deleteFile(String path){
+        File fileToDelete = new File(path);
+        if (fileToDelete.exists()) {
+            if (fileToDelete.delete()) {
+                Log.i(TAG, "deleteFile--- DELETED: "+path);
+            } else {
+                Log.i(TAG, "deleteFile--- ERROR: "+path);
+            }
+        }
     }
 }

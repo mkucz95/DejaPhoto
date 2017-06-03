@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
     public void startApp(){
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
 
-        Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
+        Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
         Global.undoTimer.schedule(Global.autoWallpaperChange,
                 Global.changeInterval, Global.changeInterval);
 
@@ -324,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
         Global.changeInterval = newInterval * 1000;
         Global.undoTimer.cancel();
         Global.undoTimer = new Timer();
-        Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
+        Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
         Global.undoTimer.schedule(Global.autoWallpaperChange,
                 Global.changeInterval, Global.changeInterval);
 
