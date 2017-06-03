@@ -60,19 +60,12 @@ public class WallpaperChanger extends IntentService {
                 }
 
                 else {
-                    try {//convert image path into something code can use
-                        Log.i("PhotoLocation", "USING IMAGEPATH: " + imagePath);
-                        FileInputStream imgIS = new FileInputStream(new File(imagePath));
-                        BufferedInputStream bufIS = new BufferedInputStream(imgIS);
-                        bitmap = BitmapFactory.decodeStream(bufIS); //
-                        bitmap = checkOrientation(imagePath, bitmap);
-                        Log.i("PhotoLocation", "Setting background...");
-                        setBackground(bitmap);
+                    //convert image path into something code can use
+                        Bitmap bitmap1 =   FileManager.getBitmap(imagePath);
+                        bitmap1 = checkOrientation(imagePath, bitmap1);
+                        setBackground(bitmap1);
                         updateWidget(imagePath);
 
-                    } catch (FileNotFoundException e) { //catch fileinputstream exceptions
-                        e.printStackTrace();
-                    } //trying to get wallpaper from display cycle node
                 }
             }
             stopService(intent);

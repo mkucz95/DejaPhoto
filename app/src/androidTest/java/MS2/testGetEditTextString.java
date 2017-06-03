@@ -29,9 +29,8 @@ public class testGetEditTextString {
 
 
 
+
         assertEquals(addFriendsActivity.getEditTextString(input),"test");
-
-
 
 
     }
