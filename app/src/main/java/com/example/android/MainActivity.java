@@ -2,47 +2,26 @@ package com.example.android;
 
 import android.Manifest;
 import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Path;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Random;
 import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     static final String copyDeja = "/Deja Photo Album Copy/";
    
     static final File imageRoot = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), dejaAlbum);
+    private final FileManager fileManager = new FileManager(getApplicationContext());
 
     String galleryPath = Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_PICTURES + "/";
 
@@ -144,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 addPhoto();
             }
         });
+
+        Global.syncTimerTask = new DatabaseSync();
+        Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000); //schedule timer
     }
 
     // MS2 click the camera button to open default camera
@@ -151,16 +134,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CODE);
     }
-
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            saveFile(thumbnail, dejaAlbum);
-            Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
-        }
-    }*/
 
     public void changeSettings() {
         Intent intent = new Intent(this, SetActivity.class);
@@ -211,9 +184,9 @@ public class MainActivity extends AppCompatActivity {
                         ClipData.Item item = clipData.getItemAt(i);
                         Uri uri = item.getUri();
                         //Get the absolute path from uri
-                        String path = getImagePath(uri);
+                        String path = fileManager.getImagePath(uri);
                         try {
-                            copyFile(new File(path), deja);
+                            fileManager.copyFile(new File(path), deja);
                         } catch(IOException e){
                             e.printStackTrace();
                         }
@@ -221,9 +194,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //Single image case
                 else if(singleUri != null){
-                    String path = getImagePath(singleUri);
+                    String path = fileManager.getImagePath(singleUri);
                     try {
-                        copyFile(new File(path), deja);
+                        fileManager.copyFile(new File(path), deja);
                     } catch(IOException e){
                         e.printStackTrace();
                     }
@@ -234,98 +207,16 @@ public class MainActivity extends AppCompatActivity {
         // take a picture and save in deja folder
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            saveFile(thumbnail);
+            fileManager.saveFile(thumbnail);
             Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void saveFile(Bitmap imageToSave) {
-        File direct = new File(Environment.getExternalStorageDirectory() + "/DejaPhoto");
-
-        if(!direct.exists()) {
-            File directory = new File("/sdcard/DejaPhoto/");
-            directory.mkdirs();
-            Log.d("NewDirectory", "album" + directory.exists());
-        }
-
-
-        String captured = "FILENAME-" + n + ".jpg";
-
-        n++;
-
-        File file = new File(new File("/sdcard/DejaPhoto/"), captured);
-
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.flush();
-            out.close();
-            Log.d("NewDirectory", "file" + file.exists());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(file);
-        mediaScan.setData(contentUri);
-        getApplicationContext().sendBroadcast(mediaScan);
-
-        Log.d("NewDirectory", "+++++++");
-    }
-
-    /*
-     * returns image path from uri using cursor
-     */
-    public String getImagePath(Uri uri){
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":")+1);
-        cursor.close();
-
-        cursor = getContentResolver().query(
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        cursor.close();
-
-        return path;
-    }
-
-    /*
-     * Copies a file from the camera roll to specified directory
-     */
-    public void copyFile(File src, File dst) throws IOException {
-        File file = new File(dst + File.separator + src.getName());
-        file.createNewFile();
-        Log.i("pictureSelect", "Dest file: " + file.getAbsolutePath());
-
-        InputStream in = new FileInputStream(src);
-        OutputStream out = new FileOutputStream(file);
-
-        // Transfer bytes from in to out
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
-        }
-        in.close();
-        out.close();
-
-    }
-
-    public void startRerank(){
-        Intent intent = new Intent (this, Rerank.class);
-        startService(intent);
     }
 
     public void startApp(){
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
 
-
         Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
-        Global.timer.schedule(Global.autoWallpaperChange,
+        Global.undoTimer.schedule(Global.autoWallpaperChange,
                 Global.changeInterval, Global.changeInterval);
 
         Log.i("BuildCycle", "Calling BuildDisplayCycle...");
@@ -429,13 +320,12 @@ public class MainActivity extends AppCompatActivity {
 
         long newInterval = Integer.parseInt(input.getText().toString());
 
-
         //set the interval specified by currUser
         Global.changeInterval = newInterval * 1000;
-        Global.timer.cancel();
-        Global.timer = new Timer();
+        Global.undoTimer.cancel();
+        Global.undoTimer = new Timer();
         Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
-        Global.timer.schedule(Global.autoWallpaperChange,
+        Global.undoTimer.schedule(Global.autoWallpaperChange,
                 Global.changeInterval, Global.changeInterval);
 
         Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();

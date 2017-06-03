@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Justin on 5/15/17.
@@ -37,7 +38,7 @@ public class Global {
     public static boolean undoKarmaOn = false;
     public static AutoWallpaperChange autoWallpaperChange;
     public static long changeInterval = 5000; //default is 5
-    static Timer timer = new Timer();
+    static Timer undoTimer = new Timer();
 
     //RANK SETTINGS
     public static boolean[] getSettings(){
@@ -52,6 +53,8 @@ public class Global {
 
     //DATABASE SETTINGS
     public static int syncInterval = 300;
+    public static TimerTask syncTimerTask;
+    static Timer syncTimer = new Timer();
     public static boolean shareSetting = true, displayUser = true, displayFriend = true;
 
     //CURRENT USER DATA

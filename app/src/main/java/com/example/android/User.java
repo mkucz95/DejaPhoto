@@ -26,6 +26,7 @@ public class User implements IDataElement{
     public String username;
     public String email;
     public ArrayList<String> requestList = new ArrayList<>();
+
     private DatabaseReference reference;
     private final String TAG = "User.java";
     public  static boolean exists = false;

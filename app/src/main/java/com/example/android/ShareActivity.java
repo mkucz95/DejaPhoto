@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Timer;
+
 public class ShareActivity extends AppCompatActivity {
 
     private Switch share;
@@ -96,6 +98,11 @@ public class ShareActivity extends AppCompatActivity {
                 EditText editText = (EditText) findViewById(R.id.sync_freq);
                 int timeSetting = Integer.parseInt(editText.getText().toString());
                 Global.syncInterval = timeSetting;
+
+                //cancel timer and create new one when user changes the sync interval
+                Global.syncTimer.cancel();
+                Global.syncTimer = new Timer();
+                Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000);
 
                 Toast.makeText(getApplicationContext(),
                         "Saved", Toast.LENGTH_SHORT).show();

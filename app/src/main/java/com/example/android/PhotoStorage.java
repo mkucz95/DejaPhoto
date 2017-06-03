@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -119,5 +120,10 @@ public class PhotoStorage implements IDataElement {
             //if we add 2 new pictures, only upload those two
         }
     }*/
+
+    public static boolean dirExists(String directory){
+        File folder = new File(Environment.getExternalStorageDirectory()+"/"+directory);
+        return folder.exists();
+    }
 
 }

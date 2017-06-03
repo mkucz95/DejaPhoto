@@ -245,12 +245,12 @@ public class SetActivity extends AppCompatActivity {
                 Global.karmaSetting = karmaSetting;
                 Global.timeSetting = timeSetting;
                 startRerank();
-                if(Global.timer != null) {
+                if(Global.undoTimer != null) {
                     Global.autoWallpaperChange.cancel();
-                    Global.timer.cancel();
+                    Global.undoTimer.cancel();
                     Global.autoWallpaperChange = new AutoWallpaperChange(getApplicationContext());
-                    Global.timer = new Timer();
-                    Global.timer.schedule(Global.autoWallpaperChange,
+                    Global.undoTimer = new Timer();
+                    Global.undoTimer.schedule(Global.autoWallpaperChange,
                             Global.changeInterval, Global.changeInterval);
                 }
             }

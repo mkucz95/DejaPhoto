@@ -27,7 +27,7 @@ public class AlarmReceiver extends BroadcastReceiver
 
     @Override
     public void onReceive(Context context, Intent intent)
-    { //what happens when the alarm goes off (timer expires)
+    { //what happens when the alarm goes off (undoTimer expires)
         Log.i("AlarmReceiver", "AlarmReceiver got PendingIntent");
 
         String action = intent.getAction();
@@ -57,13 +57,6 @@ public class AlarmReceiver extends BroadcastReceiver
 
             setData(false, Global.releasePath);
         }
-
-        //TODO manage syncing of database
-      /*  else if(ACTION_SYNC.equals(action)){
-            Intent syncIntent = new Intent(context, DatabaseMediator.class );
-           // syncIntent.setAction(SYNC)
-            startService(syncIntent);
-        }*/
     }
 
     public void setData(boolean flag, String path){
