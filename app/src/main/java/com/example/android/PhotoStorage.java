@@ -14,9 +14,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 /**
  * Created by mkucz on 5/29/2017.
@@ -24,7 +29,13 @@ import java.io.IOException;
  * code from https://firebase.google.com/docs/storage/android/upload-files
  */
 
-public class PhotoStorage implements IDataElement {
+public class PhotoStorage implements IDataElement,TestRule {
+
+    @Override
+    public Statement apply(Statement base, Description description) {
+        return null;
+    }
+
     String imagePath;
     StorageReference storageReference;
     Uri fileUri;
@@ -52,7 +63,7 @@ public class PhotoStorage implements IDataElement {
 
     @Override
     public boolean addElement() { //this method uploads the element to specified path in database
-        Log.i(TAG, "addElement");
+        Log.i("ss", "addElement");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
