@@ -12,6 +12,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.ServiceTestCase;
 
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.concurrent.TimeoutException;
 
@@ -20,6 +21,7 @@ import java.util.concurrent.TimeoutException;
  * unit testing for buildDisplayCycle
  */
 
+@RunWith(JUnit4.class)
 public class BuildCycleTest{
 
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";

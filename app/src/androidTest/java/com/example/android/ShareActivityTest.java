@@ -9,13 +9,15 @@ import com.example.dejaphoto.R;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import static junit.framework.Assert.assertEquals;
 
 /**
  * Created by mkucz on 6/5/2017.
  */
-
+@RunWith(JUnit4.class)
 public class ShareActivityTest {
     @Rule
     public ActivityTestRule<ShareActivity> activity = new ActivityTestRule<>(ShareActivity.class);
@@ -50,7 +52,6 @@ public class ShareActivityTest {
 
     @Test
     public void testTestButton(){
-        int interval = Global.syncInterval;
         Button button = (Button) activity.getActivity().findViewById(R.id.test_10sec);
         button.performClick();
 

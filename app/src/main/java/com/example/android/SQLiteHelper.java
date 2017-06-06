@@ -65,7 +65,7 @@ public class SQLiteHelper {
 
             do{ //go through all the images
                 Photo photo;
-                if( matchesCases(cr.getString(colIndex[0])) ) {
+                if( matchesCases(cr.getString(colIndex[0]), Global.displayFriend, Global.displayUser) ) {
 
                     photo = new Photo(cr.getString(colIndex[0]), cr.getString(colIndex[1]),
                             cr.getString(colIndex[2]), cr.getString(colIndex[3]));
@@ -129,9 +129,7 @@ public class SQLiteHelper {
         return -1;
     }
 
-    private boolean matchesCases(String string){
-        boolean friends = Global.displayFriend;
-        boolean own = Global.displayUser;
+    public static boolean matchesCases(String string, boolean friends, boolean own){
         if(own && friends){
             if(string.contains("DejaPhoto") || string.contains("DejaCopy") || string.contains("DejaFriends"))
                 return true;
