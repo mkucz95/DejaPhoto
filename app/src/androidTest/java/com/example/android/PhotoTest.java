@@ -32,8 +32,16 @@ public class PhotoTest{
         SimpleDateFormat today = new SimpleDateFormat("EEEE");
         assertEquals(today.format(date), newPhoto.getWeekOfDate(dateSql));
     }
-/*
+
     @Test
+    public void testConstructr() {
+        assertEquals(newPhoto.getPath(), path);
+        assertEquals(newPhoto.getDateTaken(),time);
+        assertEquals(newPhoto.getLatLong()[0],lat);
+        assertEquals(newPhoto.getLatLong()[1],longitude);}
+/*
+    @Test    }
+
     public void testKarmaTrue(){
         assertEquals(true, newPhoto.decodeDescription(newPhoto.getDescription(), true));
     }
