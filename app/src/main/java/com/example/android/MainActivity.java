@@ -83,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "Folder already exists.");
         }
 
-
-
         startApp();
 
         camera.setOnClickListener(new View.OnClickListener() {

@@ -31,7 +31,6 @@ public class User implements IDataElement{
     private final String TAG = "User.java";
     public  static boolean exists = false;
 
-
     public void User() {
         // Default currUser constructor
     }
@@ -75,14 +74,12 @@ public class User implements IDataElement{
         return reference.child("users").child(this.email);
     }
 
-
     public static void setDatabaseListener(final DatabaseReference reference) {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // get map of users in datasnapshot
                 Global.userSnapshot=dataSnapshot;
-                collectAll((Map<String, Object>) dataSnapshot.getValue());
             }
 
             @Override
@@ -91,15 +88,4 @@ public class User implements IDataElement{
             }
         });
     }
-
-    public static void collectAll(Map<String, Object> users) {
-        ArrayList<String> email = new ArrayList<>();
-        // iterate through each currUser
-        for (Map.Entry<String, Object> entry : users.entrySet()) {
-            // get currUser map
-            String singleUser = entry.getKey();
-            email.add(singleUser);
-        }
-    }
-
 }
