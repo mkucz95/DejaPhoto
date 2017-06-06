@@ -1,4 +1,4 @@
-package MS2;
+package com.example.android;
 
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
@@ -17,7 +17,7 @@ import static junit.framework.Assert.assertEquals;
  * Created by wl36901 on 2017/6/3.
  */
 
-public class testGetEditTextString {
+public class TestGetEditTextString {
     @Rule
     public ActivityTestRule<AddFriendsActivity> addfActivity = new ActivityTestRule<AddFriendsActivity>(AddFriendsActivity.class);
 

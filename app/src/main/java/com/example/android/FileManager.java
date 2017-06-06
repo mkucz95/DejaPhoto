@@ -144,9 +144,7 @@ public class FileManager {
     }
 
     // resize the file to fit screen size before upload
-    public static Bitmap resizeImage(String path) {
-        Bitmap image = FileManager.getBitmap(path);
-
+    public static Bitmap resizeImage(Bitmap image) {
         Bitmap resizedImage = null;
 
         if(image != null) {
@@ -174,8 +172,8 @@ public class FileManager {
             Log.i("FileManager", "GetBitmap: " + path);
             FileInputStream imgIS = new FileInputStream(new File(path));
             BufferedInputStream bufIS = new BufferedInputStream(imgIS);
-           bitmap = BitmapFactory.decodeStream(bufIS); //
-            Log.i("PhotoLocation", "Setting background...");
+            bitmap = BitmapFactory.decodeStream(bufIS);
+            Log.i("FileManager", "GetBitmap Finished: " + bitmap);
         } catch (FileNotFoundException e) { //catch fileinputstream exceptions
             e.printStackTrace();
         } //trying to get wallpaper from display cycle node

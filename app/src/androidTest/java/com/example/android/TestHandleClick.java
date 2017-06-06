@@ -1,4 +1,4 @@
-package MS2;
+package com.example.android;
 
 import android.support.test.rule.ActivityTestRule;
 
@@ -14,7 +14,7 @@ import static junit.framework.Assert.assertEquals;
  * Created by wl36901 on 2017/6/4.
  */
 
-public class testHandleClick {
+public class TestHandleClick {
     @Rule
     public ActivityTestRule<AddFriendsActivity> addfActivity = new ActivityTestRule<AddFriendsActivity>(AddFriendsActivity.class);
 

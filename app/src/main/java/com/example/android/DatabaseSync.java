@@ -13,52 +13,56 @@ import java.util.TimerTask;
  */
 
 public class DatabaseSync extends TimerTask {
-    private final String TAG = "DatabaseSync.java";
+    private final String TAG = "DatabaseSync";
 
     @Override
     public void run() {
-        Log.i(TAG, "uploading images");
+        Log.i(TAG, "Begin Sync, currUser: "+Global.currUser);
 
-        StorageReference storageReference;
+        if (Global.currUser != null) {
+            Log.i(TAG, "uploading images");
 
-        PhotoStorage photoStorage;
+            StorageReference storageReference;
 
-        storageReference = PhotoStorage.getStorageRef(Global.currUser.email);
+            PhotoStorage photoStorage;
 
-        Log.d("storageReference", "value" + storageReference);
+            storageReference = PhotoStorage.getStorageRef(Global.currUser.email);
 
-        for(Photo photo: Global.uploadImageQueue){
-            photoStorage = new PhotoStorage(photo.getPath(), storageReference);
-            photoStorage.addElement();
-        }
+            Log.d("storageReference", "value" + storageReference);
 
-   if(Global.shareSetting) {  //if sharing is on upload images
-    for (Photo photo : Global.uploadImageQueue) {
-        photoStorage = new PhotoStorage(photo.getPath(), storageReference);
-        photoStorage.addElement();
-    }
-}
-        Log.i(TAG, "downloading images");
-        if(PhotoStorage.dirExists("DejaPhotoFriends")){
-            ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
-            for(String friend: friends) {
+            for (Photo photo : Global.uploadImageQueue) {
+                photoStorage = new PhotoStorage(photo.getPath(), storageReference);
+                photoStorage.addElement();
+            }
 
-                PhotoStorage.downloadImages( PhotoStorage.getStorageRef(friend)
-                        , "sdcard/DejaPhotoFriends");
+            if (Global.shareSetting) {  //if sharing is on upload images
+                for (Photo photo : Global.uploadImageQueue) {
+                    photoStorage = new PhotoStorage(photo.getPath(), storageReference);
+                    photoStorage.addElement();
+                }
+            }
+            Log.i(TAG, "downloading images");
+            if (PhotoStorage.dirExists("DejaPhotoFriends")) {
+                ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
+                for (String friend : friends) {
+
+                    PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
+                            , "sdcard/DejaPhotoFriends");
+                }
+            }
+
+            if (Global.displayFriend) { //if we want to see our own
+                Log.i(TAG, "downloading images");
+                if (PhotoStorage.dirExists("DejaPhotoFriends")) {
+                    ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
+                    for (String friend : friends) {
+
+                        PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
+                                , "sdcard/DejaPhotoFriends");
+                    }
+                }
             }
         }
-
-        if(Global.displayFriend) { //if we want to see our own
-          Log.i(TAG, "downloading images");
-          if (PhotoStorage.dirExists("DejaPhotoFriends")) {
-              ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
-              for (String friend : friends) {
-
-                  PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
-                          , "sdcard/DejaPhotoFriends");
-              }
-          }
-      }
     }
 }
 
