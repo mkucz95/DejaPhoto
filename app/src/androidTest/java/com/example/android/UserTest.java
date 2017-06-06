@@ -2,7 +2,11 @@ package com.example.android;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by mkucz on 6/5/2017.
@@ -20,8 +24,10 @@ public class UserTest {
 
     @Test
     public void testAdd(){
-        user.addElement();
-        assertEquals(user.checkExist(user.email), true);  //check to see if false
+       ArrayList<String> test = Friends.getFriends(user.email);
+        assertNotNull(test);  //check to see that friends is not null
+        if(test != null) {
+            assertEquals(test.get(0), "user2@gmail,com");
+        }
     }
-
 }
