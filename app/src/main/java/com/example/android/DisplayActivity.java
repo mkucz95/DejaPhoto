@@ -25,6 +25,9 @@ public class DisplayActivity extends AppCompatActivity {
     public Switch user;
     public Switch friend;
     public Button saveDisplay;
+    private static boolean friendDisplay = Global.displayFriend;
+    private static boolean userDisplay = Global.displayUser;
+    private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +59,11 @@ public class DisplayActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Global.displayUser = true;
+                    userDisplay = true;
                     Toast.makeText(getApplicationContext(),
                             "Display User photo", Toast.LENGTH_SHORT).show();
                 } else {
-                    Global.displayUser = false;
+                    userDisplay = false;
                     Toast.makeText(getApplicationContext(),
                             "Will not display currUser photo", Toast.LENGTH_SHORT).show();
                 }
@@ -71,11 +74,11 @@ public class DisplayActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Global.displayFriend = true;
+                    friendDisplay = true;
                     Toast.makeText(getApplicationContext(),
                             "Display friend photo", Toast.LENGTH_SHORT).show();
                 } else {
-                    Global.displayFriend = false;
+                    friendDisplay = false;
                     Toast.makeText(getApplicationContext(),
                             "Will not display friend photo", Toast.LENGTH_SHORT).show();
                     FileManager.removeFriendImages();
@@ -86,8 +89,18 @@ public class DisplayActivity extends AppCompatActivity {
         saveDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Global.displayFriend = friendDisplay;
+                Global.displayUser = userDisplay;
 
-                Global.setDisplay = true;
+                if(!Global.displayFriend){
+                    FileManager.removeFriendImages();
+                    //if we switch off display friends, remove their photos from device
+                }
+
+                Intent intent = new Intent(getApplicationContext(), BuildDisplayCycle.class);
+                intent.setAction(ACTION_BUILD_CYCLE);
+                startService(intent); //rebuild display cycle with new display settings
+
 
                 Toast.makeText(getApplicationContext(),
                         "Display Setting Saved and Build Display Cycle", Toast.LENGTH_SHORT).show();

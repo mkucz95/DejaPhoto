@@ -32,7 +32,7 @@ public class DatabaseSync extends TimerTask {
             photoStorage.addElement();
         }
 
-   if(Global.shareSetting) {  //if sharing is on
+   if(Global.shareSetting) {  //if sharing is on upload images
     for (Photo photo : Global.uploadImageQueue) {
         photoStorage = new PhotoStorage(photo.getPath(), storageReference);
         photoStorage.addElement();
