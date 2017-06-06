@@ -61,7 +61,7 @@ public class WallpaperChanger extends IntentService {
 
                 else {
                     //convert image path into something code can use
-                        Bitmap bitmap1 =   FileManager.getBitmap(imagePath);
+                        Bitmap bitmap1 = FileManager.getBitmap(imagePath);
                         bitmap1 = checkOrientation(imagePath, bitmap1);
                         setBackground(bitmap1);
                         updateWidget(imagePath);
@@ -101,35 +101,34 @@ public class WallpaperChanger extends IntentService {
         Log.i("PhotoLocation", "In setBackground");
 
 
-        try {
-            Log.i("PhotoLocation", "Setting Bitmap...");
-            Log.i("PhotoLocation", "Bitmap Size: " + "(" + bitmap.getWidth() + ", " + bitmap.getHeight() + ")");
+        if(bitmap != null) {
+            try {
+                Log.i("PhotoLocation", "Setting Bitmap...");
+                Log.i("PhotoLocation", "Bitmap Size: " + "(" + bitmap.getWidth() + ", " + bitmap.getHeight() + ")");
 
-            if(bitmap.getAllocationByteCount() > 3000000) {
-                Log.i("PhotoLocation", "Scaling Bitmap to (" + screenWidth + ", " + screenHeight + ")");
-                if(screenHeight < bitmap.getHeight()){
-                    if(screenWidth < bitmap.getWidth()){
-                        bitmap = Bitmap.createBitmap(bitmap, 0, 0, screenWidth, screenHeight);
+                if (bitmap.getAllocationByteCount() > 3000000) {
+                    Log.i("PhotoLocation", "Scaling Bitmap to (" + screenWidth + ", " + screenHeight + ")");
+                    if (screenHeight < bitmap.getHeight()) {
+                        if (screenWidth < bitmap.getWidth()) {
+                            bitmap = Bitmap.createBitmap(bitmap, 0, 0, screenWidth, screenHeight);
+                        } else {
+                            bitmap = Bitmap.createBitmap(bitmap, 0, 0, screenWidth, screenHeight);
+                        }
+                        Log.i("PhotoLocation", "Scaling to width/height");
+                    } else {
+                        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight());
+                        Log.i("PhotoLocation", "Scaling to width/bitmapHeight");
                     }
-                    else{
-                        bitmap = Bitmap.createBitmap(bitmap, 0, 0, screenWidth, screenHeight);
-                    }
-                    Log.i("PhotoLocation", "Scaling to width/height");
+                } else {
+                    Log.i("PhotoLocation", "Bitmap size < 3mb, not scaling");
                 }
-                else {
-                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight());
-                    Log.i("PhotoLocation", "Scaling to width/bitmapHeight");
-                }
-            }
-            else{
-                Log.i("PhotoLocation", "Bitmap size < 3mb, not scaling");
-            }
-            wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
-            Log.i("PhotoLocation", "Done setting bitmap");
+                wallpaperManager.setBitmap(bitmap); //set wallpaper with new image
+                Log.i("PhotoLocation", "Done setting bitmap");
 
-            //wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions
-        } catch (IOException e) {
-            e.printStackTrace();
+                //wallpaperManager.suggestDesiredDimensions(width, height); //set dimensions
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

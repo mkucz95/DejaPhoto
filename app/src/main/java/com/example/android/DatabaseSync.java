@@ -30,14 +30,14 @@ public class DatabaseSync extends TimerTask {
 
             Log.d("storageReference", "value" + storageReference);
 
-            for (Photo photo : Global.uploadImageQueue) {
-                photoStorage = new PhotoStorage(photo.getPath(), storageReference);
+            for (String photo : Global.uploadImageQueue) {
+                photoStorage = new PhotoStorage(photo, storageReference);
                 photoStorage.addElement();
             }
 
             if (Global.shareSetting) {  //if sharing is on upload images
-                for (Photo photo : Global.uploadImageQueue) {
-                    photoStorage = new PhotoStorage(photo.getPath(), storageReference);
+                for (String photo : Global.uploadImageQueue) {
+                    photoStorage = new PhotoStorage(photo, storageReference);
                     photoStorage.addElement();
                 }
             }

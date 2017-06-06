@@ -81,7 +81,6 @@ public class DisplayActivity extends AppCompatActivity {
                     friendDisplay = false;
                     Toast.makeText(getApplicationContext(),
                             "Will not display friend photo", Toast.LENGTH_SHORT).show();
-                    FileManager.removeFriendImages();
                 }
             }
         });
@@ -93,7 +92,7 @@ public class DisplayActivity extends AppCompatActivity {
                 Global.displayUser = userDisplay;
 
                 if(!Global.displayFriend){
-                    FileManager.removeFriendImages();
+                    FileManager.deleteFolder("DejaPhotoFriends");
                     //if we switch off display friends, remove their photos from device
                 }
 
