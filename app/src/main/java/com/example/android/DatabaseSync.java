@@ -24,6 +24,7 @@ public class DatabaseSync extends TimerTask {
         PhotoStorage photoStorage;
 
         storageReference = PhotoStorage.getStorageRef(Global.currUser.email);
+        Log.i(TAG, "storageRef: " + storageReference);
 
         Log.d("storageReference", "value" + storageReference);
 

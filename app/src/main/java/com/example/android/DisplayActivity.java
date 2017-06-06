@@ -81,7 +81,6 @@ public class DisplayActivity extends AppCompatActivity {
                     friendDisplay = false;
                     Toast.makeText(getApplicationContext(),
                             "Will not display friend photo", Toast.LENGTH_SHORT).show();
-                    FileManager.removeFriendImages();
                 }
             }
         });
