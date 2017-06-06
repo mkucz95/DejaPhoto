@@ -48,7 +48,6 @@ public class DatabaseMediator extends IntentService {
         }
     }
 
-
     public void uploadMetaData(){
         for(int i = 0; i < Global.uploadMetaData.size(); i++ ) {
             //TODO iteration 2
@@ -69,6 +68,4 @@ public class DatabaseMediator extends IntentService {
             //TODO iteration 2
         }
     }
-
-
 }
