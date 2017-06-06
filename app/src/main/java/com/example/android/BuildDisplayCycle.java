@@ -34,7 +34,6 @@ public class BuildDisplayCycle extends IntentService {
             Log.i(TAG, action);
 
            if (ACTION_BUILD_CYCLE.equals(action)) {
-                //buildFromFile(sourceFolder);
                 Log.i(TAG, "Building cycle from MEDIA...");
 
                //call sqlite traverser

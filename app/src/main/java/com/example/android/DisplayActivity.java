@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,12 +53,10 @@ public class DisplayActivity extends AppCompatActivity {
                     Global.displayUser = true;
                     Toast.makeText(getApplicationContext(),
                             "Display User photo", Toast.LENGTH_SHORT).show();
-                    ViewControl.displayOwn(true);
                 } else {
                     Global.displayUser = false;
                     Toast.makeText(getApplicationContext(),
                             "Will not display currUser photo", Toast.LENGTH_SHORT).show();
-                    ViewControl.displayOwn(false);
                 }
             }
         });
@@ -69,12 +68,11 @@ public class DisplayActivity extends AppCompatActivity {
                     Global.displayFriend = true;
                     Toast.makeText(getApplicationContext(),
                             "Display friend photo", Toast.LENGTH_SHORT).show();
-                    ViewControl.displayFriend(true);
                 } else {
                     Global.displayFriend = false;
                     Toast.makeText(getApplicationContext(),
                             "Will not display friend photo", Toast.LENGTH_SHORT).show();
-                    ViewControl.displayFriend(false);
+                    FileManager.removeFriendImages();
                 }
             }
         });

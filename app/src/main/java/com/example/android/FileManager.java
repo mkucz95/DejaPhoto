@@ -181,4 +181,13 @@ public class FileManager {
         } //trying to get wallpaper from display cycle node
         return bitmap;
     }
+
+
+    //remove friends images from phone
+    public static void removeFriendImages(){
+        File dir = new File(Environment.getExternalStorageDirectory()+"DejaPhotoFriends");
+        if(dir.isDirectory()){
+            dir.delete();
+        }
+    }
 }
