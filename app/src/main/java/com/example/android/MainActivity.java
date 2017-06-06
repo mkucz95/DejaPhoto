@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FileManager fileManager;
 
-    File deja;
+    File dejaCopy;
+    File dejaPhoto;
 
     static final int REQUEST_CODE = 1;
     String TAG = "deja";
@@ -71,15 +73,17 @@ public class MainActivity extends AppCompatActivity {
         Global.windowWidth = size.x;
         Global.windowHeight = size.y;
 
-        deja = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaCopy");
+        dejaCopy = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaCopy");
 
-        if (!deja.exists()) {
+        if (!dejaCopy.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
-            boolean rv = deja.mkdir();
+            boolean rv = dejaCopy.mkdir();
             Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
         } else {
             Log.i(TAG, "Folder already exists.");
         }
+
+
 
         startApp();
 
@@ -185,11 +189,13 @@ public class MainActivity extends AppCompatActivity {
                     //Go through each item in clip data
                     for (int i = 0; i < clipData.getItemCount(); i++) {
                         ClipData.Item item = clipData.getItemAt(i);
+                        Log.i(TAG, "" + item.getUri().toString());
                         Uri uri = item.getUri();
                         //Get the absolute path from uri
-                        String path = fileManager.getImagePath(uri);
+                        String p = fileManager.getImagePath(uri);
                         try {
-                            fileManager.copyFile(new File(path), deja);
+                            fileManager.copyFile(new File(p), dejaCopy);
+                            Global.uploadImageQueue.add(p);
                         } catch(IOException e){
                             e.printStackTrace();
                         }
@@ -197,9 +203,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //Single image case
                 else if(singleUri != null){
-                    String path = fileManager.getImagePath(singleUri);
+                    String p  = fileManager.getImagePath(singleUri);
                     try {
-                        fileManager.copyFile(new File(path), deja);
+                        Log.i(TAG, "" + singleUri.toString());
+                        fileManager.copyFile(new File(p), dejaCopy);
+                        Global.uploadImageQueue.add(p);
                     } catch(IOException e){
                         e.printStackTrace();
                     }
@@ -213,6 +221,9 @@ public class MainActivity extends AppCompatActivity {
             fileManager.saveFile(thumbnail);
             Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
         }
+        SQLiteHelper helper = new SQLiteHelper();
+        helper.iterateAllMedia(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Global.wholeTableProjection, this);
+
     }
 
     public void startApp(){

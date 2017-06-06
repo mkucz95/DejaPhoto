@@ -65,18 +65,18 @@ public class SQLiteHelper {
 
             do{ //go through all the images
                 Photo photo;
-              /*  if( matchesCases(cr.getString(colIndex[0])) ) {*/
+                if( matchesCases(cr.getString(colIndex[0])) ) {
 
                     photo = new Photo(cr.getString(colIndex[0]), cr.getString(colIndex[1]),
                             cr.getString(colIndex[2]), cr.getString(colIndex[3]));
 
                     paths.add(photo);
                     Log.i(TAG, ""+photo.getPath());
-              /*  }
+                }
                 else{
                     Log.i(TAG, "Photo not in folders: "+cr.getString(colIndex[0]));
 
-                }*/
+                }
 
 
             } while(cr.moveToNext());
@@ -133,12 +133,12 @@ public class SQLiteHelper {
         boolean friends = Global.displayFriend;
         boolean own = Global.displayUser;
         if(own && friends){
-            if(string.contains("DejaPhoto") || string.contains("DejaCopied") || string.contains("DejaFriends"))
+            if(string.contains("DejaPhoto") || string.contains("DejaCopy") || string.contains("DejaFriends"))
                 return true;
             else return false;
 
         }else if(own){
-            if(string.contains("DejaPhoto") || string.contains("DejaCopied"))
+            if(string.contains("DejaPhoto") || string.contains("DejaCopy"))
                 return true;
             else return false;
         }else {
