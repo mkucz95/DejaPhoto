@@ -39,11 +39,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/deja_photo_widget" />
         </receiver>
-        <receiver android:name="com.example.android.myReceiver">
-            <intent-filter>
-                <action android:name="com.example.android" />
-            </intent-filter>
-        </receiver>
 
         <service
             android:name="com.example.android.WallpaperChanger"

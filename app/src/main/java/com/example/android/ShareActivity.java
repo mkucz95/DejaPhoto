@@ -93,7 +93,7 @@ public class ShareActivity extends AppCompatActivity {
                 Global.syncInterval = timeSetting;
 
                 //cancel timer and create new one when user changes the sync interval
-                timerReset(false);
+                timerReset();
 
                 Toast.makeText(getApplicationContext(),
                         "Saved", Toast.LENGTH_SHORT).show();
@@ -104,7 +104,8 @@ public class ShareActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //cancel timer and create new one when user changes the sync interval
-                timerReset(true);
+                Global.syncInterval = 10;
+                timerReset();
                 textView.setText("10 seconds");
                 Toast.makeText(getApplicationContext(),
                         "Test: 10s sync interval", Toast.LENGTH_SHORT).show();
@@ -112,11 +113,10 @@ public class ShareActivity extends AppCompatActivity {
         });
     }
 
-    private static void timerReset(boolean test){
+    private static void timerReset(){
         Global.syncTimerTask.cancel();
         Global.syncTimerTask = new DatabaseSync();
-        if(test) Global.syncTimer.schedule(Global.syncTimerTask, 0, 10000);
-        else Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000);
+        Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000);
     }
 }
 
