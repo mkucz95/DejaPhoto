@@ -21,7 +21,7 @@ public class SetActivityTest {
 
     @Test
     public void testDejaMode(){
-        Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_mode);
+        Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_share);
         Boolean checked = sw.isChecked();
         if(checked){
             assertEquals(Global.dejaVuSetting, true);
