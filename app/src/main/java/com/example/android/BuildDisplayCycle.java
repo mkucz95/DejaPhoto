@@ -34,7 +34,6 @@ public class BuildDisplayCycle extends IntentService {
             Log.i(TAG, action);
 
            if (ACTION_BUILD_CYCLE.equals(action)) {
-                //buildFromFile(sourceFolder);
                 Log.i(TAG, "Building cycle from MEDIA...");
 
                //call sqlite traverser
@@ -43,8 +42,8 @@ public class BuildDisplayCycle extends IntentService {
                Log.i(TAG, "Reranking... 1st Build");
 
                //after build from file, apply rank settings (released/karma)
-             //  Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
-              // startService(rerankIntent);
+               Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
+               startService(rerankIntent);
            }
             Log.i(TAG, "Stopping service");
             stopService(intent);

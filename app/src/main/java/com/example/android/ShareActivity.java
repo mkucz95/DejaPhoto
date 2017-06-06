@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
@@ -27,8 +28,11 @@ public class ShareActivity extends AppCompatActivity {
 
     private Switch share;
     private Button saveButton;
+    private Button testButton;
+    private TextView textView;
     private static User currUser = Global.currUser;
     private static Context context;
+    private static final int TEST_INTERVAL = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,8 @@ public class ShareActivity extends AppCompatActivity {
         setContentView(R.layout.activity_share);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        textView = (TextView) findViewById(R.id.syncInterval);
 
         share = (Switch) findViewById(R.id.s_share);
         if(Global.shareSetting) {
@@ -76,23 +82,41 @@ public class ShareActivity extends AppCompatActivity {
         });
 
         saveButton = (Button) findViewById(R.id.save_syncSet);
+        testButton = (Button) findViewById(R.id.test_10sec);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText editText = (EditText) findViewById(R.id.sync_freq);
+                textView.setText(editText.getText()+" seconds");
                 int timeSetting = Integer.parseInt(editText.getText().toString());
                 Global.syncInterval = timeSetting;
 
                 //cancel timer and create new one when user changes the sync interval
-                Global.syncTimer.cancel();
-                Global.syncTimer = new Timer();
-                Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000);
+                timerReset(false);
 
                 Toast.makeText(getApplicationContext(),
                         "Saved", Toast.LENGTH_SHORT).show();
             }
         });
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //cancel timer and create new one when user changes the sync interval
+                timerReset(true);
+                textView.setText("10 seconds");
+                Toast.makeText(getApplicationContext(),
+                        "Test: 10s sync interval", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private static void timerReset(boolean test){
+        Global.syncTimerTask.cancel();
+        Global.syncTimerTask = new DatabaseSync();
+        if(test) Global.syncTimer.schedule(Global.syncTimerTask, 0, 10000);
+        else Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000);
     }
 }
 

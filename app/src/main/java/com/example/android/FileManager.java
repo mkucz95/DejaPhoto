@@ -34,20 +34,32 @@ public class FileManager {
     }
 
     public void saveFile(Bitmap imageToSave) {
-        File direct = new File(Environment.getExternalStorageDirectory() + "/DejaPhoto");
+
+        //New directory in DCIM/DejaPhoto
+        File dejaPhoto = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaPhoto");
+
+        if (!dejaPhoto.exists()) {
+            Log.i(TAG, "Folder doesn't exist, creating it...");
+            boolean rv = dejaPhoto.mkdir();
+            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+        } else {
+            Log.i(TAG, "Folder already exists.");
+        }
+
+        /*File direct = new File(Environment.getExternalStorageDirectory() + "/DejaPhoto");
 
         if (!direct.exists()) {
             File directory = new File("/sdcard/DejaPhoto/");
             directory.mkdirs();
             Log.d(TAG, "album" + directory.exists());
-        }
+        }*/
 
 
         String captured = "FILENAME-" + MainActivity.n + ".jpg";
 
         MainActivity.n++;
 
-        File file = new File(new File("/sdcard/DejaPhoto/"), captured);
+        File file = new File(dejaPhoto, captured);
 
         try {
             FileOutputStream out = new FileOutputStream(file);
@@ -70,10 +82,13 @@ public class FileManager {
      */
 
     public String getImagePath(Uri uri) {
+
         Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
         cursor.moveToFirst();
         String document_id = cursor.getString(0);
         document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+
+
         cursor.close();
 
         cursor = context.getContentResolver().query(
@@ -81,6 +96,8 @@ public class FileManager {
                 null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
         cursor.moveToFirst();
         String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        Log.i(TAG, "Get string at: " + cursor.getColumnIndex(MediaStore.Images.Media.DATA) + ": " + path);
+
         cursor.close();
 
         return path;
@@ -96,6 +113,7 @@ public class FileManager {
         InputStream in = new FileInputStream(src);
         OutputStream out = new FileOutputStream(file);
 
+
         // Transfer bytes from in to out
         byte[] buf = new byte[1024];
         int len;
@@ -104,7 +122,10 @@ public class FileManager {
         }
         in.close();
         out.close();
+
     }
+
+
 
     public void setDisplayCycleData(boolean flag, String path){
         ArrayList<Photo> temp = Global.displayCycle;
@@ -144,9 +165,7 @@ public class FileManager {
     }
 
     // resize the file to fit screen size before upload
-    public static Bitmap resizeImage(String path) {
-        Bitmap image = FileManager.getBitmap(path);
-
+    public static Bitmap resizeImage(Bitmap image) {
         Bitmap resizedImage = null;
 
         if(image != null) {
@@ -174,11 +193,20 @@ public class FileManager {
             Log.i("FileManager", "GetBitmap: " + path);
             FileInputStream imgIS = new FileInputStream(new File(path));
             BufferedInputStream bufIS = new BufferedInputStream(imgIS);
-           bitmap = BitmapFactory.decodeStream(bufIS); //
-            Log.i("PhotoLocation", "Setting background...");
+            bitmap = BitmapFactory.decodeStream(bufIS);
+            Log.i("FileManager", "GetBitmap Finished: " + bitmap);
         } catch (FileNotFoundException e) { //catch fileinputstream exceptions
             e.printStackTrace();
         } //trying to get wallpaper from display cycle node
         return bitmap;
+    }
+
+
+    //remove friends images from phone
+    public static void deleteFolder(String name){
+        File dir = new File(Environment.getExternalStorageDirectory()+name);
+        if(dir.isDirectory()){
+            dir.delete();
+        }
     }
 }

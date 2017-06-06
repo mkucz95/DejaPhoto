@@ -5,6 +5,7 @@ import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,6 +23,7 @@ public class PhotoLocation{
     String state;
     ExifInterface exif;
     Double Longitude, Latitude;
+    String TAG = "PhotoLocation";
 
     PhotoLocation(String path, Geocoder gc) {
         Log.i("findLocation", this.toString());
@@ -30,7 +32,16 @@ public class PhotoLocation{
 
     private String location(String path, Geocoder gc) {
         try {
+            Log.i(TAG, "Paths in display cycle: ");
+            for(Photo p : Global.displayCycle) {
+                Log.i(TAG, "" + p.getPath());
+            }
+
+            //Exif data is corrupted from copy, use source path instead
+            path = tempPath(path);
             exif = new ExifInterface(path);
+
+            Log.i(TAG, "Photo Path: " + path);
             String LAT = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
             String LAT_REF = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
             String LONG = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
@@ -162,4 +173,24 @@ public class PhotoLocation{
 
         return result;
     }
+
+    /*
+     * This method checks to see if the photo is from the DejaCopy folder. If it is, the exif data
+     *  must be retrieved from the source photo.
+     */
+    private String tempPath(String path){
+        String filename = path.substring(path.lastIndexOf("/")+1);
+
+        if(path.contains("DejaCopy")){
+            Log.i(TAG, path + " contains 'DejaCopy'");
+            path = "/storage/emulated/0/" + filename;
+            Log.i(TAG, "New path: " + path);
+        }
+        else{
+            Log.i(TAG, "New path not needed");
+        }
+
+        return path;
+    }
+
 }

@@ -42,7 +42,7 @@ public class DatabaseMediator extends IntentService {
     public void uploadQueue(){
         for(int i = 0; i < Global.uploadImageQueue.size(); i++ ) {
             PhotoStorage newPhoto =
-                    new PhotoStorage(Global.uploadImageQueue.get(i).getPath(),
+                    new PhotoStorage(Global.uploadImageQueue.get(i),
                             PhotoStorage.getStorageRef(Global.currUser.email));
             newPhoto.addElement();
         }

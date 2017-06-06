@@ -29,20 +29,14 @@ import java.lang.reflect.Method;
  * code from https://firebase.google.com/docs/storage/android/upload-files
  */
 
-public class PhotoStorage implements IDataElement,TestRule {
-
-    @Override
-    public Statement apply(Statement base, Description description) {
-        return null;
-    }
-
+public class PhotoStorage implements IDataElement {
     String imagePath;
     StorageReference storageReference;
     Uri fileUri;
-   static boolean uploaded;
+    static boolean uploaded;
     static boolean downloaded = false;
     static boolean removed = false;
-    static Bitmap bitmap;
+    private Bitmap bitmap;
 
     private static final String TAG = "PhotoStorage";
 
@@ -53,7 +47,7 @@ public class PhotoStorage implements IDataElement,TestRule {
         this.imagePath = path;
         this.storageReference = reference;
         this.fileUri = Uri.fromFile(new File(imagePath));
-        this.bitmap = FileManager.resizeImage(imagePath);
+        this.bitmap = FileManager.getBitmap(imagePath);
     }
 
     @Override
@@ -63,7 +57,9 @@ public class PhotoStorage implements IDataElement,TestRule {
 
     @Override
     public boolean addElement() { //this method uploads the element to specified path in database
-        Log.i("ss", "addElement");
+        Log.i(TAG, "addElement");
+
+        Log.d(TAG, "bitmap: " + this.bitmap);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
