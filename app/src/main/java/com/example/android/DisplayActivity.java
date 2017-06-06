@@ -93,7 +93,7 @@ public class DisplayActivity extends AppCompatActivity {
                 Global.displayUser = userDisplay;
 
                 if(!Global.displayFriend){
-                    FileManager.removeFriendImages();
+                    FileManager.deleteFolder("DejaPhotoFriends");
                     //if we switch off display friends, remove their photos from device
                 }
 

@@ -184,8 +184,8 @@ public class FileManager {
 
 
     //remove friends images from phone
-    public static void removeFriendImages(){
-        File dir = new File(Environment.getExternalStorageDirectory()+"DejaPhotoFriends");
+    public static void deleteFolder(String name){
+        File dir = new File(Environment.getExternalStorageDirectory()+name);
         if(dir.isDirectory()){
             dir.delete();
         }
