@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.google.firebase.storage.StorageReference;
@@ -17,7 +18,7 @@ public class DatabaseSync extends TimerTask {
 
     @Override
     public void run() {
-        Log.i(TAG, "Begin Sync, currUser: "+Global.currUser);
+        Log.i(TAG, "Begin Sync, currUser: "+ Global.currUser);
 
         if (Global.currUser != null) {
             Log.i(TAG, "uploading images");
@@ -41,26 +42,20 @@ public class DatabaseSync extends TimerTask {
                     photoStorage.addElement();
                 }
             }
-            Log.i(TAG, "downloading images");
-            if (PhotoStorage.dirExists("DejaPhotoFriends")) {
-                ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
-                for (String friend : friends) {
-
-                    PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
-                            , "sdcard/DejaPhotoFriends");
-                }
-            }
 
             if (Global.displayFriend) { //if we want to see our own
                 Log.i(TAG, "downloading images");
-                if (PhotoStorage.dirExists("DejaPhotoFriends")) {
+
                     ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
-                    for (String friend : friends) {
+                    Log.i(TAG, "Friends: "+ friends.toString());
+
+                for (String friend : friends) {
+                        Log.i(TAG, "friend: "+friend +" --- storageRef: "+ PhotoStorage.getStorageRef(friend));
 
                         PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
-                                , "sdcard/DejaPhotoFriends");
+                                , FileManager.getDirPath("DejaPhotoFriends"));
                     }
-                }
+
             }
         }
     }
