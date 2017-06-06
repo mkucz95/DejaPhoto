@@ -202,4 +202,13 @@ public class FileManager {
         } //trying to get wallpaper from display cycle node
         return bitmap;
     }
+
+
+    //remove friends images from phone
+    public static void deleteFolder(String name){
+        File dir = new File(Environment.getExternalStorageDirectory()+name);
+        if(dir.isDirectory()){
+            dir.delete();
+        }
+    }
 }

@@ -52,6 +52,7 @@ public class Global {
     public static TimerTask syncTimerTask;
     static Timer syncTimer = new Timer();
     public static boolean shareSetting = true, displayUser = true, displayFriend = true;
+    public static boolean setDisplay = false;
 
     //CURRENT USER DATA
     public static DataSnapshot userSnapshot;

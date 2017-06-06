@@ -53,6 +53,8 @@
     <string name="request">Send Request</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
+    <string name="test10">Test 10 Seconds</string>
+    <string name="saveDisplay">Save Display</string>
 
     <string name="show">Show</string>
     <string name="prevInterval">Current Refresh Interval</string>
