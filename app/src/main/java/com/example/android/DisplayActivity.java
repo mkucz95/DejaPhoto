@@ -10,16 +10,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
+import java.util.Timer;
+
 public class DisplayActivity extends AppCompatActivity {
 
     public Switch user;
     public Switch friend;
+    public Button saveDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,9 @@ public class DisplayActivity extends AppCompatActivity {
             friend.setChecked(false);
         }
 
+        saveDisplay = (Button) findViewById(R.id.save_display);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         user.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -74,6 +80,17 @@ public class DisplayActivity extends AppCompatActivity {
                             "Will not display friend photo", Toast.LENGTH_SHORT).show();
                     FileManager.removeFriendImages();
                 }
+            }
+        });
+
+        saveDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Global.setDisplay = true;
+
+                Toast.makeText(getApplicationContext(),
+                        "Display Setting Saved and Build Display Cycle", Toast.LENGTH_SHORT).show();
             }
         });
 
