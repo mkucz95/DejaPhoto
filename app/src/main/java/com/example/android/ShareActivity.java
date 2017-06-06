@@ -27,8 +27,10 @@ public class ShareActivity extends AppCompatActivity {
 
     private Switch share;
     private Button saveButton;
+    private Button testButton;
     private static User currUser = Global.currUser;
     private static Context context;
+    private static final int TEST_INTERVAL = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class ShareActivity extends AppCompatActivity {
         });
 
         saveButton = (Button) findViewById(R.id.save_syncSet);
+        testButton = (Button) findViewById(R.id.test_10sec);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +94,19 @@ public class ShareActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),
                         "Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //cancel timer and create new one when user changes the sync interval
+                Global.syncTimer.cancel();
+                Global.syncTimer = new Timer();
+                Global.syncTimer.schedule(Global.syncTimerTask, 0, 10000);
+
+                Toast.makeText(getApplicationContext(),
+                        "Test: 10s sync interval", Toast.LENGTH_SHORT).show();
             }
         });
     }
