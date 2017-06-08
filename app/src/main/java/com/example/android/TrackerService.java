@@ -148,9 +148,6 @@ public class TrackerService extends Service {
             onDestroy();
         }
 
-
-
-
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {

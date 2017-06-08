@@ -46,15 +46,6 @@ public class FileManager {
             Log.i(TAG, "Folder already exists.");
         }
 
-        /*File direct = new File(Environment.getExternalStorageDirectory() + "/DejaPhoto");
-
-        if (!direct.exists()) {
-            File directory = new File("/sdcard/DejaPhoto/");
-            directory.mkdirs();
-            Log.d(TAG, "album" + directory.exists());
-        }*/
-
-
         String captured = "FILENAME-" + MainActivity.n + ".jpg";
 
         MainActivity.n++;
@@ -208,5 +199,10 @@ public class FileManager {
         if(dir.isDirectory()){
             dir.delete();
         }
+    }
+
+    public static String getDirPath(String directory){
+        String folder = Environment.getExternalStorageDirectory()+"/"+directory;
+        return folder;
     }
 }

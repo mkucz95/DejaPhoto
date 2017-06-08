@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.util.Base64;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,6 +32,7 @@ import java.lang.reflect.Method;
 
 public class PhotoStorage implements IDataElement {
     String imagePath;
+    String name;
     StorageReference storageReference;
     Uri fileUri;
     static boolean uploaded;
@@ -43,11 +45,13 @@ public class PhotoStorage implements IDataElement {
     public PhotoStorage() {//default constructor
     }
 
+    //gs://dejaphoto-33.appspot.com/hlcphantom%40gmail%2Ccom/ucsd.jpg
     public PhotoStorage(String path, StorageReference reference){
         this.imagePath = path;
         this.storageReference = reference;
         this.fileUri = Uri.fromFile(new File(imagePath));
         this.bitmap = FileManager.getBitmap(imagePath);
+        this.name = (new File(imagePath)).getName();
     }
 
     @Override
@@ -63,9 +67,19 @@ public class PhotoStorage implements IDataElement {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.recycle();
         byte[] data = baos.toByteArray();
+        String image = Base64.encodeToString(data, Base64.DEFAULT);
 
-        UploadTask uploadTask = storageReference.putBytes(data);
+        Log.d(TAG, "data" + data[0]);
+        Log.d(TAG, "StorageRef" + "99999" + storageReference.toString());
+        Log.d(TAG, "filename" + "NNNNNNNN" + name);
+        if(storageReference.child(image) != null) {
+            uploaded = true;
+        }
+
+        /*UploadTask uploadTask = storageReference.child(image).putBytes(data);
+        Log.d(TAG, "uploadTask" + "LLLLLLL" + uploadTask.isSuccessful());
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -76,7 +90,7 @@ public class PhotoStorage implements IDataElement {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 uploaded = true;
             }
-        });
+        });*/
 
       /*  UploadTask uploadTask = storageReference.putFile(fileUri);
 
@@ -142,8 +156,9 @@ public class PhotoStorage implements IDataElement {
     public static StorageReference getStorageRef(String userEmail) {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
+        Log.d(TAG, "getStorageRef" + userEmail+ " ------- "+storageReference.child(userEmail));
 
-        return storageReference.child("photos").child(userEmail);
+        return storageReference.child(userEmail);
     }
 
  /*   public static void uploadImages(String flag){
@@ -161,4 +176,7 @@ public class PhotoStorage implements IDataElement {
         return folder.exists();
     }
 
+    public static void testUpload(){
+        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
+    }
 }
