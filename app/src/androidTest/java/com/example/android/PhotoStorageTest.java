@@ -6,19 +6,24 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static com.example.android.PhotoStorage.downloadImages;
+import static com.example.android.PhotoStorage.getStorageRef;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
-/**
- * Created by wl36901 on 2017/6/8.
- */
+//A
 
-public class PhotStorageTest {
-    StorageReference storageReference = PhotoStorage.getStorageRef(Global.currUser.email);
+public class PhotoStorageTest {
+    StorageReference storageReference = getStorageRef(Global.currUser.email);
     @Rule
     public PhotoStorage photoStorage = new PhotoStorage("/sdcard/DejaPhoto/FILENAME-2", storageReference);
     @Test
     public void test1() {
         assertTrue(downloadImages(storageReference, "/sdcard/DejaPhoto/"));
+    }
 
-
-    }}
+    String myEmail = "abc@gmail.com";
+    @Test
+    public void testgetStorageRef() {
+        assertEquals(getStorageRef(null), null);
+    }
+}
