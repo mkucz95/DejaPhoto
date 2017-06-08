@@ -54,7 +54,7 @@ public class BuildDisplayCycle extends IntentService {
                Log.i("widgetProv", "6666666666666666");
 
                for(Photo p : Global.displayCycle) {
-                   Log.i("widgetProv", p.photoLocationString);
+                   Log.i("widgetProv", "location: " + p.photoLocationString);
                }
                //after build from file, apply rank settings (released/karma)
                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);

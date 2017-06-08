@@ -19,6 +19,8 @@ import com.example.dejaphoto.R;
 
 import android.app.Activity;
 
+import java.util.Timer;
+
 
 /**
  * Created by Justin on 5/3/17.
@@ -210,7 +212,9 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         Log.i("updateInterval", "Change Interval: " + Global.changeInterval);
         if(Global.undoTimer != null) {
             Global.autoWallpaperChange.cancel();
+            Global.undoTimer.cancel();
             Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
+            Global.undoTimer = new Timer();
             Global.undoTimer.schedule(Global.autoWallpaperChange,
                     Global.changeInterval, Global.changeInterval);
         }
