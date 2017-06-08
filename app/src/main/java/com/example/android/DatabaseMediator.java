@@ -63,8 +63,8 @@ public class DatabaseMediator extends IntentService {
         ArrayList<String> friendEmails = Friends.getFriends(Global.currUser.email);
 
         for(int i = 0; i<friendEmails.size(); i++) {
-            PhotoStorage.downloadImages(PhotoStorage.getStorageRef(Global.currUser.email).child(friendEmails.get(i)),
-                    Global.friendFolderPath);
+            /*PhotoStorage.downloadImages(PhotoStorage.getStorageRef(Global.currUser.email).child(friendEmails.get(i)),
+                    Global.friendFolderPath);*/
         }
     }
 

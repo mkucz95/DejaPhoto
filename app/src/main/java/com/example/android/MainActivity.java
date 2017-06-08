@@ -152,12 +152,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startUpload() {
-        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-1.jpg";
+        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
         StorageReference reference = PhotoStorage.getStorageRef("hlcphantom@gmail,com");
 
-        PhotoStorage photoStorage = new PhotoStorage(path1, reference);
+        //PhotoStorage photoStorage = new PhotoStorage(path1, reference);
        // photoStorage.addElement();
-        PhotoStorage.downloadImages(reference, "DejaPhotoFriends");
+        PhotoStorage.downloadSingleImage(reference, "DejaPhotoFriends");
     }
 
     public void changeSettings() {
