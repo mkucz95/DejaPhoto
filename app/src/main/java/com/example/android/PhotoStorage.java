@@ -35,7 +35,7 @@ public class PhotoStorage implements IDataElement {
     String name;
     StorageReference storageReference;
     Uri fileUri;
-    static boolean uploaded;
+    static boolean uploaded = false;
     static boolean downloaded = false;
     static boolean removed = false;
     private Bitmap bitmap;
@@ -67,32 +67,29 @@ public class PhotoStorage implements IDataElement {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        bitmap.recycle();
         byte[] data = baos.toByteArray();
-        String image = Base64.encodeToString(data, Base64.DEFAULT);
 
         Log.d(TAG, "data" + data[0]);
         Log.d(TAG, "StorageRef" + "99999" + storageReference.toString());
-        Log.d(TAG, "filename" + "NNNNNNNN" + name);
-        if(storageReference.child(image) != null) {
-            uploaded = true;
-        }
 
-        /*UploadTask uploadTask = storageReference.child(image).putBytes(data);
-        Log.d(TAG, "uploadTask" + "LLLLLLL" + uploadTask.isSuccessful());
+        final StorageReference imageRef = getStorageRef(name);
+        UploadTask uploadTask = imageRef.putBytes(data);
+        Log.d(TAG, "newRef" + imageRef);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 uploaded = false;
+                Log.d(TAG, "??????????");
+                Log.d(TAG, "Exception " + exception.getMessage());
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 uploaded = true;
             }
-        });*/
+        });
 
-      /*  UploadTask uploadTask = storageReference.putFile(fileUri);
+        /*UploadTask uploadTask = storageReference.putFile(fileUri);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -156,9 +153,9 @@ public class PhotoStorage implements IDataElement {
     public static StorageReference getStorageRef(String userEmail) {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
-        Log.d(TAG, "getStorageRef" + userEmail+ " ------- "+storageReference.child(userEmail));
+        Log.d(TAG, "getStorageRef" + userEmail+ " ------- " + storageReference);
 
-        return storageReference.child(userEmail);
+        return storageReference;
     }
 
  /*   public static void uploadImages(String flag){

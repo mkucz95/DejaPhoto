@@ -4,10 +4,12 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
@@ -31,6 +33,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     AlarmManager releaseAlarm;
     PendingIntent karmaPI;
     PendingIntent releasePI;
+    RemoteViews views;
 
     Intent intentKarma;
     Intent intentRelease;
@@ -61,13 +64,15 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             PendingIntent pendingIntentNext = PendingIntent.getBroadcast(context, 0, intentNext, 0);
 
             //get layout for our widget, give each button on-click listener
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
+            views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
             views.setOnClickPendingIntent(R.id.previous_pic, pendingIntentPrev);
             views.setOnClickPendingIntent(R.id.karma_btn, pendingIntentKarma);
             views.setOnClickPendingIntent(R.id.release_btn, pendingIntentRelease);
             views.setOnClickPendingIntent(R.id.next_pic, pendingIntentNext);
+            views.setTextViewText(R.id.karma_num, "Karma: " + Global.karmaNum);
+            Log.d("DPWP", "karma" + Global.karmaNum);
 
-            appWidgetManager.updateAppWidget(appWidgetId,views);
+            appWidgetManager.updateAppWidget(new ComponentName(context, DejaPhotoWidgetProvider.class), views);
         }
     }
 
@@ -90,10 +95,9 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
+            Global.karmaNum = 1;
             manageTimer(context);
             undoManager(context, "karma");
-            /*for(Photo p : Global.displayCycle){
-            }*/
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
             manageTimer(context);
             undoManager(context, "release");
@@ -161,7 +165,9 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
                 intentKarma.setAction("");
             }
 
+            Global.karmaNum = 0;
             Global.undoKarmaOn = false; //switch karma alarm off
+            //views.setTextViewText(R.id.karma_num, "0");
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
         }
 
