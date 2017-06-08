@@ -33,14 +33,14 @@ public class FileManager {
             this.context = context;
     }
 
-    public void saveFile(Bitmap imageToSave) {
+    public void saveFile(Bitmap imageToSave, String folder) {
 
         //New directory in DCIM/DejaPhoto
-        File dejaPhoto = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaPhoto");
+        File folderName = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), folder);
 
-        if (!dejaPhoto.exists()) {
+        if (!folderName.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
-            boolean rv = dejaPhoto.mkdir();
+            boolean rv = folderName.mkdir();
             Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
         } else {
             Log.i(TAG, "Folder already exists.");
@@ -50,7 +50,7 @@ public class FileManager {
 
         MainActivity.n++;
 
-        File file = new File(dejaPhoto, captured);
+        File file = new File(folderName, captured);
 
         try {
             FileOutputStream out = new FileOutputStream(file);

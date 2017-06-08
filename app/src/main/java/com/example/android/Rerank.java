@@ -34,7 +34,7 @@ public class Rerank extends IntentService {
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 100;
 
 
-    private String myLat = "", myLong = "";
+    public String myLat = "", myLong = "";
 
     public Rerank() {
         super("Rerank");
@@ -44,16 +44,19 @@ public class Rerank extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Log.i(TAG, "Intent Handled");
         if (intent != null) {
+            Log.i(TAG, "----------------------------");
+            Log.i(TAG, intent.toString());
+            Log.i(TAG, "" + intent.getAction());
+            Log.i(TAG, "----------------------------");
+
 
             boolean[] settings = getSettings();
 
             boolean isLocaOn = settings[1], isTimeOn = settings[2], isWeekOn = settings[3],
                     isKarma =  settings[4];
 
-
             getMyLocation();
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ got my location");
-
 
             Rank newRank = new Rank( myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma, Global.displayCycle);
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
