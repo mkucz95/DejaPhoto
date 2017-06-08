@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 
@@ -30,7 +31,7 @@ public class Global {
     public static boolean undoReleaseOn = false; //whether these alarms are on
     public static boolean undoKarmaOn = false;
     public static AutoWallpaperChangeTask autoWallpaperChange;
-    public static long changeInterval = 5000; //default is 5 seconds
+    public static long changeInterval = 10000; //default is 10 seconds -- changed for testing
     static Timer undoTimer = new Timer();
 
     public static int karmaNum = 0;
@@ -64,6 +65,21 @@ public class Global {
     public static ArrayList<String> uploadMetaData = new ArrayList<>();
 
     public static String friendFolderPath = ""; //TODO
+
+    //Method to check if string is whitespace
+    public static boolean isBlank(String str) {
+        Log.i("isBlank","STRING: '" + str + "'");
+        int strLen;
+        if (str == null || (strLen = str.length()) == 0) {
+            return true;
+        }
+        for (int i = 0; i < strLen; i++) {
+            if ((Character.isWhitespace(str.charAt(i)) == false)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 }

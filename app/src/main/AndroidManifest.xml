@@ -68,7 +68,6 @@
             android:label="@string/title_activity_set"
             android:parentActivityName="com.example.android.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <service
             android:name="com.example.android.ChangeImage"
             android:exported="false">
@@ -125,7 +124,12 @@
 
         <service
             android:name="com.example.android.DatabaseMediator"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity android:name="com.example.android.SetLocationActivity"></activity>
     </application>
+
+
+
 
 </manifest>

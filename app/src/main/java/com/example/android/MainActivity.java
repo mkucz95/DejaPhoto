@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +11,6 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public static int n = 1;
 
     Context context;
+    Activity activity = this;
 
     private FileManager fileManager;
 
@@ -58,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dejaCopy = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaCopy");
+
+        if (!dejaCopy.exists()) {
+            Log.i(TAG, "Folder doesn't exist, creating it...");
+            boolean rv = dejaCopy.mkdir();
+            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+        } else {
+            Log.i(TAG, "Folder already exists.");
+        }
+
         System.out.println(Manifest.permission.READ_EXTERNAL_STORAGE.equals(PackageManager.PERMISSION_GRANTED));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,15 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Global.windowWidth = size.x;
         Global.windowHeight = size.y;
 
-        dejaCopy = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaCopy");
 
-        if (!dejaCopy.exists()) {
-            Log.i(TAG, "Folder doesn't exist, creating it...");
-            boolean rv = dejaCopy.mkdir();
-            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
-        } else {
-            Log.i(TAG, "Folder already exists.");
-        }
 
         startApp();
 
@@ -178,25 +181,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPhoto () {
-        Intent intent = new Intent();
-        //Set intent type -- images
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        //Allow multiple selections
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
+        PhotoPicker photoPick = new PhotoPicker(this.getApplicationContext(), this);
+        photoPick.add();
         Toast.makeText(getApplicationContext(), "Press and hold to select multiple images", Toast.LENGTH_SHORT).show();
     }
 
     /*
-     * This method receives intent from startActivityForResult and extracts the URI in order
-     * to get image path data
-     */
+   * This method receives intent from startActivityForResult and extracts the URI in order
+   * to get image path data
+   */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         context = getApplicationContext();
         fileManager = new FileManager(context);
 
-        super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
             if (data != null) {
                 //Clipdata for multiple selections, Uri format for single selection
@@ -236,13 +233,18 @@ public class MainActivity extends AppCompatActivity {
         // take a picture and save in deja folder
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            fileManager.saveFile(thumbnail);
-            Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
-        }
-        SQLiteHelper helper = new SQLiteHelper();
-        helper.iterateAllMedia(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Global.wholeTableProjection, this);
 
+            fileManager.saveFile(thumbnail, "DejaPhotoCopied");
+            Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
+
+        }
+
+        Intent displayCycleRerank = new Intent(this, BuildDisplayCycle.class);
+        displayCycleRerank.setAction(ACTION_BUILD_CYCLE);
+        startService(displayCycleRerank);
     }
+
+
 
     public void startApp(){
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);

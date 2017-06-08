@@ -33,14 +33,14 @@ public class FileManager {
             this.context = context;
     }
 
-    public void saveFile(Bitmap imageToSave) {
+    public void saveFile(Bitmap imageToSave, String folder) {
 
         //New directory in DCIM/DejaPhoto
-        File dejaPhoto = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaPhoto");
+        File folderName = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), folder);
 
-        if (!dejaPhoto.exists()) {
+        if (!folderName.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
-            boolean rv = dejaPhoto.mkdir();
+            boolean rv = folderName.mkdir();
             Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
         } else {
             Log.i(TAG, "Folder already exists.");
@@ -50,7 +50,7 @@ public class FileManager {
 
         MainActivity.n++;
 
-        File file = new File(dejaPhoto, captured);
+        File file = new File(folderName, captured);
 
         try {
             FileOutputStream out = new FileOutputStream(file);
@@ -117,16 +117,15 @@ public class FileManager {
     }
 
 
-
-    public void setDisplayCycleData(boolean flag, String path){
+    public void setDisplayCycleData(boolean karma, String path){
         ArrayList<Photo> temp = Global.displayCycle;
         for(int i = 0; i<temp.size(); i++){
             Photo photo = temp.get(i);
             Log.i("setKarma", path + " compare to : " + photo.getPath());
             if(photo.getPath().equals(path)){
-                if(flag) {
+                if(karma) {
                     Log.i("setKarma", temp.get(i) + ": added karma");
-                    photo.setKarma(true);
+                    photo.setKarma(photo.getKarma()+1);
                 }
                 else{
                     photo.setReleased(true);
@@ -134,13 +133,13 @@ public class FileManager {
                     temp.remove(i);
                 }
             }
-            Log.i("setKarma", photo.getPath() + ": karma:  "+ photo.isKarma());
+            Log.i("setKarma", photo.getPath() + ": karma:  "+ photo.getKarma());
 
 
         }
         Global.displayCycle = temp;
         for(Photo p: Global.displayCycle){
-            Log.i("setKarma", p.getPath() + ": karma:  "+ p.isKarma());
+            Log.i("setKarma", p.getPath() + ": karma:  "+ p.getKarma());
         }
     }
 
@@ -192,7 +191,6 @@ public class FileManager {
         return bitmap;
     }
 
-
     //remove friends images from phone
     public static void deleteFolder(String name){
         File dir = new File(Environment.getExternalStorageDirectory()+name);
@@ -204,5 +202,25 @@ public class FileManager {
     public static String getDirPath(String directory){
         String folder = Environment.getExternalStorageDirectory()+"/"+directory;
         return folder;
+    }
+
+    /*
+    this method handles adding file paths to upload queue whether this is because changed location or changed karma
+     */
+    public void addToQueue(String path){
+       ArrayList<String> temp = Global.uploadMetaData;
+
+        boolean inQueue = false;
+        for(int i = 0; i < temp.size(); i++){
+            if(temp.get(i).equals(path)){
+                break; //already in the upload queue
+            }
+        }
+
+        if(!inQueue){
+            temp.add(path);
+        }
+
+        Global.uploadMetaData = temp;
     }
 }
