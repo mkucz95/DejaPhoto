@@ -33,6 +33,8 @@ public class Global {
     public static long changeInterval = 5000; //default is 5 seconds
     static Timer undoTimer = new Timer();
 
+    public static int karmaNum = 0;
+
     //RANK SETTINGS
     public static boolean[] getSettings(){
         boolean[] settings = {dejaVuSetting, locationSetting, daySetting, timeSetting, karmaSetting};

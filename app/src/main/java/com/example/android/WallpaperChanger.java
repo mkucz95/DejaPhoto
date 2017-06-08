@@ -81,7 +81,6 @@ public class WallpaperChanger extends IntentService {
         Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
         Log.i("PhotoLocation", "Getting location...");
 
-
         PhotoLocation locName = new PhotoLocation(path, gc);
         rviews.setTextViewText(R.id.display_location, locName.locationName);
 
@@ -89,7 +88,8 @@ public class WallpaperChanger extends IntentService {
             rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_white);
         }
         else{
-            rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_transp);
+            rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_white);
+
         }
         Log.i("PhotoLocation", "Updating widget...");
         appWidgetManager.updateAppWidget(appWidgetIds, rviews);
