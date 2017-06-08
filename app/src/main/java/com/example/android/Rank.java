@@ -84,6 +84,7 @@ public class Rank {
     public void sort() {
         Photo temp;
         long curMiliSecond = System.currentTimeMillis();
+        Log.d("printertime",curMiliSecond+"");
      //   long hour = Long.parseLong(getHour(curMiliSecond));
        // SimpleDateFormat sdf1 = new SimpleDateFormat();
 
