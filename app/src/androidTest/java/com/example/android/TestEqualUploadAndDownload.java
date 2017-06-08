@@ -21,6 +21,5 @@ public class TestEqualUploadAndDownload {
     @Test
     public void test1(){
         ;
-
     }
 }
