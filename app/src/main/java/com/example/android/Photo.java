@@ -64,11 +64,11 @@ public class Photo {
 
     public String[] getLatLong() {
 
-      String[] latLong = {this.latitude, this.longitude};
         Log.d("lattitud",latitude+"");
         Log.d("logtitude",longitude+"");
       return latLong;
-    }
+    }    String[] latLong = {this.latitude, this.longitude};
+
     public String getDayOfWeek() { return dayOfWeek;}
 
     public long getHour(){return hour;}
