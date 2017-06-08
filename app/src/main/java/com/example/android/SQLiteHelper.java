@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Justin on 5/15/17.
+ *
+ * This class helps us iterate and read information from the device storage (SQLite)
  */
 
 public class SQLiteHelper {
@@ -20,9 +22,6 @@ public class SQLiteHelper {
 
     Cursor cr;
     private final String TAG = "SQLiteHelper";
-    Global cycle = new Global();
-
-    ArrayList<Photo> dataPath = new ArrayList<>();
 
     /*
     This method iterates through a specific column given from Uri in Android SQLite and saves each
@@ -86,9 +85,7 @@ public class SQLiteHelper {
             cr.close();
         }
 
-        this.dataPath = paths;
         Global.displayCycle = paths;
-        //DejaPhotoWidgetProvider.size = Global.displayCycle.size();
     }
 
 
@@ -145,6 +142,5 @@ public class SQLiteHelper {
             else return false;
         }
     }
-
 
 }
