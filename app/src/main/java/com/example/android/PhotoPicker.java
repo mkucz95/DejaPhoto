@@ -26,7 +26,7 @@ import static com.example.android.MainActivity.SELECT_IMAGE;
  * AddPhoto class
  */
 
-public class AddPhoto {
+public class PhotoPicker {
 
     /*
      * Instance variables and test variables
@@ -43,7 +43,7 @@ public class AddPhoto {
     /*
      * AddPhoto constructor -- context and activity instance from MainActivity
      */
-    public AddPhoto(Context context, Activity activity){
+    public PhotoPicker(Context context, Activity activity){
         this.context = context;
         this.activity = activity;
     }

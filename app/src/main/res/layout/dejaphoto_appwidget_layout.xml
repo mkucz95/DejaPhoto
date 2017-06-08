@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/display_location"
-        style="@style/Widget.AppCompat.EditText"
+        style="@android:style/Widget.EditText"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginLeft="10dp"
@@ -18,7 +18,19 @@
         android:text=" "
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/widget_shape_location_transp"
+        android:id="@+id/set_location"
+        android:elevation="100dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +85,6 @@
 
         <TextView
             android:id="@+id/karma_num"
-            style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginLeft="10dp"

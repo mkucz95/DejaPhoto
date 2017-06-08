@@ -4,10 +4,13 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+
+import java.util.Locale;
 
 /**
  * ideas guided by https://developer.android.com/guide/topics/providers/content-provider-basics.html
@@ -41,9 +44,24 @@ public class BuildDisplayCycle extends IntentService {
                helper.iterateAllMedia(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Global.wholeTableProjection, this);
                Log.i(TAG, "Reranking... 1st Build");
 
+               Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
+               Log.i("widgetProv", "DisplayCycle size: " + Global.displayCycle.size());
+               for(Photo p : Global.displayCycle) {
+                   PhotoLocation locName = new PhotoLocation(p.getPath(), gc, false);
+                   Log.i("widgetProv", p.getPath() +": " + locName);
+               }
+
+               Log.i("widgetProv", "6666666666666666");
+
+               for(Photo p : Global.displayCycle) {
+                   Log.i("widgetProv", p.photoLocationString);
+               }
                //after build from file, apply rank settings (released/karma)
                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
                startService(rerankIntent);
+
+
+
            }
             Log.i(TAG, "Stopping service");
             stopService(intent);

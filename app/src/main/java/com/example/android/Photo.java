@@ -21,6 +21,7 @@ public class Photo {
     private boolean karma = false;
     private boolean released = false;
     private String folder = "friends";
+    private String locationName;
 
     public Photo(){
     }
@@ -89,5 +90,9 @@ public class Photo {
         this.released = flag;
     }
     public String getFolder(){ return this.folder; }
+    public String userLocationString = "Not Set";
+    public Boolean userLocation = false;
+    public String photoLocationString;
+    public Boolean photoLocation = false;
 
 }

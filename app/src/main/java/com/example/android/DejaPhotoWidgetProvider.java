@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,12 +8,17 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
+
+import android.app.Activity;
+
 
 /**
  * Created by Justin on 5/3/17.
@@ -29,6 +35,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     public static String KARMA_BUTTON = "Karma Added";
     public static String RELEASE_BUTTON = "Picture Released";
     public static String NEXT_PIC = "Next Picture";
+    public static String SET_LOCATION = "Set Location";
     AlarmManager karmaAlarm;
     AlarmManager releaseAlarm;
     PendingIntent karmaPI;
@@ -56,12 +63,17 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Intent intentNext = new Intent(context, DejaPhotoWidgetProvider.class);
             intentNext.setAction(NEXT_PIC);//define action to take when next is pressed
 
+            Intent intentSetLocation = new Intent(context, DejaPhotoWidgetProvider.class);
+            intentSetLocation.setAction(SET_LOCATION);
+
 
             //create pending intent ready to act
             PendingIntent pendingIntentPrev = PendingIntent.getBroadcast(context, 0, intentPrev, 0);
             PendingIntent pendingIntentKarma = PendingIntent.getBroadcast(context, 0, intentKarma, 0);
             PendingIntent pendingIntentRelease = PendingIntent.getBroadcast(context, 0, intentRelease, 0);
             PendingIntent pendingIntentNext = PendingIntent.getBroadcast(context, 0, intentNext, 0);
+            PendingIntent pendingIntentSetLocation = PendingIntent.getBroadcast(context, 0, intentSetLocation, 0);
+
 
             //get layout for our widget, give each button on-click listener
             views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
@@ -70,6 +82,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.release_btn, pendingIntentRelease);
             views.setOnClickPendingIntent(R.id.next_pic, pendingIntentNext);
             views.setTextViewText(R.id.karma_num, "Karma: " + Global.karmaNum);
+            views.setOnClickPendingIntent(R.id.set_location, pendingIntentSetLocation);
             Log.d("DPWP", "karma" + Global.karmaNum);
 
             appWidgetManager.updateAppWidget(new ComponentName(context, DejaPhotoWidgetProvider.class), views);
@@ -106,10 +119,13 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             manageTimer(context);
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_NEXT);
-            if(Global.currIndex == Global.displayCycle.size()) Global.currIndex = 0;
+            if (Global.currIndex == Global.displayCycle.size()) Global.currIndex = 0;
             else Global.currIndex = Global.currIndex + 1;
             changePicture = true;
-
+        } else if(intent.getAction().equals(SET_LOCATION)){
+            Log.i("widgetProv", "IN SETLOCATION");
+            Intent intn = new Intent (context, SetLocationActivity.class);
+            context.startActivity(intn);
         }
 
         if (changePicture) context.startService(changeIntent); //call widgetmanager

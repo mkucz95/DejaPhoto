@@ -30,7 +30,7 @@ public class Global {
     public static boolean undoReleaseOn = false; //whether these alarms are on
     public static boolean undoKarmaOn = false;
     public static AutoWallpaperChangeTask autoWallpaperChange;
-    public static long changeInterval = 5000; //default is 5 seconds
+    public static long changeInterval = 30000; //default is 30 seconds -- changed for testing
     static Timer undoTimer = new Timer();
 
     public static int karmaNum = 0;
@@ -64,8 +64,5 @@ public class Global {
     public static ArrayList<String> uploadMetaData = new ArrayList<>();
 
     public static String friendFolderPath = ""; //TODO
-
-
-
 
 }
