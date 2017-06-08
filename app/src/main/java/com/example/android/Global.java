@@ -64,4 +64,6 @@ public class Global {
     public static String friendFolderPath = ""; //TODO
 
 
+
+
 }
