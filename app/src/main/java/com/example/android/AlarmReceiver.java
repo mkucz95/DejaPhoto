@@ -41,10 +41,11 @@ public class AlarmReceiver extends BroadcastReceiver
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
             //Log.i("setKarma", "Karma added to : " + Global.displayCycle.get(Global.currIndex).getPath());
-            //Photo p = Global.displayCycle.get(Global.currIndex);
-            //p.setKarma(true);
+
             fileManager.setDisplayCycleData(true, Global.karmaPath);
-            //Log.i("setKarma", Global.displayCycle.get(Global.currIndex).getPath() + "Karma: " + Global.displayCycle.get(Global.currIndex).isKarma());
+            fileManager.addToQueue(Global.karmaPath);
+
+            //Log.i("setKarma", Global.displayCycle.get(Global.currIndex).getPath() + "Karma: " + Global.displayCycle.get(Global.currIndex).getKarma());
 
         }
 
