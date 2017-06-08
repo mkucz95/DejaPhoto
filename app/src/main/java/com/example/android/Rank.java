@@ -20,8 +20,6 @@ import static java.lang.StrictMath.abs;
 public class Rank {
     private double localLat, localLng;
 
-    /*we still not get the two varible value*/
-
     boolean isLocaOn = false, isTimeOn = false, isKarma = false, isWeekOn = false;
 
     private ArrayList<Photo> photo;
@@ -34,8 +32,6 @@ public class Rank {
         //photo = Global.displayCycle;
         photo = cycle;
 
-
-
         settings = Global.getSettings();
         setMyLocation(localLat, localLong);
         Log.i("rankClass", "My Location : " + localLat + ", " + localLong );
@@ -47,7 +43,7 @@ public class Rank {
         Log.i("setKarma", "KarmaSetting: " + Global.getSettings()[4]);
 
         for(Photo p : Global.displayCycle){
-            Log.i("setKarma", p.getPath() + " == karma == " + p.isKarma());
+            Log.i("setKarma", p.getPath() + " == karma == " + p.getKarma());
         }
         isLocaOn = b2;
         isWeekOn = b3;
@@ -60,7 +56,10 @@ public class Rank {
         for (Photo x : photo) {
             float[] a = new float[1];
             if (x.getLatLong()[0] != null && x.getLatLong()[1] != null) {
-                Location.distanceBetween(this.localLat, this.localLng, Double.parseDouble(x.getLatLong()[0]), Double.parseDouble(x.getLatLong()[1]), a);
+                Location.distanceBetween(this.localLat, this.localLng,
+                        Double.parseDouble(x.getLatLong()[0]),
+                        Double.parseDouble(x.getLatLong()[1]), a);
+
                 double distance = a[0] / 3.28;
          //       Log.i("rankClass", photo.size() + "");
                 Log.i("distanceRank", x.getPath() + " is " + distance + " feet away from your location");
@@ -69,36 +68,36 @@ public class Rank {
             }
             Log.i("distanceRank", x.getPath() + " : " + x.getDateTaken());
             Log.i("distanceRank", x.getPath() + " : " + x.getDayOfWeek());
-            Log.i("distanceRank", "Karma: " + x.isKarma());
-
-
+            Log.i("distanceRank", "Karma: " + x.getKarma());
         }
         for (Photo y : Global.displayCycle){
             Log.i("Global Photos: ", y.getPath());
         }
-
     }
-
 
 
     public void sort() {
         Photo temp;
         long curMiliSecond = System.currentTimeMillis();
-     //   long hour = Long.parseLong(getHour(curMiliSecond));
-       // SimpleDateFormat sdf1 = new SimpleDateFormat();
+        Log.d("printertime",curMiliSecond+"");
 
         Log.i("rankClass","Sorting...");
 
-        java.sql.Date date = new java.sql.Date(curMiliSecond);                         //long to Date type
-        String dayOfWeek = getWeekOfDate(date);              // Date type to  day of week
-        int dayInt = week(dayOfWeek);                       //the integer for the day of week
+        java.sql.Date date = new java.sql.Date(curMiliSecond);
+        //long to Date type
+
+        String dayOfWeek = getWeekOfDate(date);
+        // Date type to  day of week
+
+        int dayInt = week(dayOfWeek);
+        //the integer for the day of week
 
         int dayIntDiff1, dayIntDiff2; //to compare difference between days
 
         double photo1Lat = 0, photo1Lng = 0, photo2Lat = 0, photo2Lng = 0;
         Log.i("distanceRank","Number of photos: " + photo.size());
         for (int i = 0; i < photo.size(); i++) {
-            Log.i("distanceRank", "iteration " + i + "----------------------------------");
+            Log.i("distanceRank", "iteration " + i + "----------");
             for (Photo p : photo) {
                 Log.i("distanceRank", p.getPath());
             }
@@ -118,11 +117,12 @@ public class Rank {
                 }
 
 
-                int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());       //photo1 's interger for the day of week
+                int dayPhoto1 = week(photo.get(j - 1).getDayOfWeek());
+                //photo1 's interger for the day of week
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
-                boolean karma1 = photo.get(j - 1).isKarma();
-                boolean karma2 = photo.get(j).isKarma();
+                int karma1 = photo.get(j - 1).getKarma();
+                int karma2 = photo.get(j).getKarma();
 
                 float[] dist = new float[1];
 
@@ -147,13 +147,13 @@ public class Rank {
 
                 Log.i("distanceRank", "Karma is on: " + isKarma);
                 if (isKarma) {
-                    Log.d("distanceRank", "Karma setting on &&&&&&&&&&&&&&&&&&");
-                    if (!karma1 && karma2)
+                    Log.d("distanceRank", "Karma setting on");
+                    if (karma1 < karma2)  //  !karma1 && karma2
                         changeInt = changeInt + 1;
-                    else if (karma2 && karma1)
+                    else if(karma1 > karma2) // karma2 && karma1
                         changeInt = changeInt - 1;
-                    else
-                        Log.d("distanceRank", "no karma %%%%%%%%%%%%%%%%%%%%%");
+                    else //karma1 == karma2
+                        Log.d("distanceRank", "karma equal");
                 }
                 if (isLocaOn) {
                     Log.i("distanceRank", "sorting by location...");
@@ -171,7 +171,8 @@ public class Rank {
                 }
                 if (isWeekOn) {
                     Log.i("distanceRank", "Day of week setting on");
-                    Log.i("distanceRank", "Photo 1 day: " + dayIntDiff1 + ", Photo 2 day: " + dayIntDiff2);
+                    Log.i("distanceRank", "Photo 1 day: " + dayIntDiff1 + ", Photo 2 day: "
+                            + dayIntDiff2);
                     if (dayIntDiff1 < dayIntDiff2)
                         changeInt = changeInt - 2;
                     else if (dayIntDiff1 > dayIntDiff2)
@@ -183,12 +184,18 @@ public class Rank {
                 }
                 if (isTimeOn) {
                     Log.i("distanceRank", "Time setting on");
-                    Log.i("distanceRank", photo.get(j - 1).getPath() + " time: " + photo.get(j - 1).getDateTaken() + ", " + photo.get(j).getPath() + " time: " + photo.get(j).getDateTaken());
+                    Log.i("distanceRank", photo.get(j - 1).getPath() + " time: " +
+                            photo.get(j - 1).getDateTaken() + ", " + photo.get(j).getPath() +
+                            " time: " + photo.get(j).getDateTaken());
 
 
-                    if (Long.parseLong(photo.get(j - 1).getDateTaken()) > Long.parseLong(photo.get(j).getDateTaken())) {
+                    if (Long.parseLong(photo.get(j - 1).getDateTaken()) >
+                            Long.parseLong(photo.get(j).getDateTaken())) {
+
                         changeInt = changeInt - 2;
-                    } else if (Long.parseLong(photo.get(j - 1).getDateTaken()) < Long.parseLong(photo.get(j).getDateTaken())) {
+                    } else if (Long.parseLong(photo.get(j - 1).getDateTaken()) <
+                            Long.parseLong(photo.get(j).getDateTaken())) {
+
                         changeInt = changeInt + 2;
                     }
 
@@ -197,7 +204,8 @@ public class Rank {
                 }
                 Log.i("distanceRank", "ChangeInt : " + changeInt);
                 if (changeInt > 0) {
-                    Log.i("distanceRank", "Swapping " + photo.get(j - 1).getPath() + "[" + (j - 1) + "] and " + photo.get(j).getPath() + "[" + (j) + "]");
+                    Log.i("distanceRank", "Swapping " + photo.get(j - 1).getPath() + "[" + (j - 1) +
+                            "] and " + photo.get(j).getPath() + "[" + (j) + "]");
                     temp = photo.get(j - 1);
                     photo.set((j - 1), photo.get(j));
                     photo.set(j, temp);

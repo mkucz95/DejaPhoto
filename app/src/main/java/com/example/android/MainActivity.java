@@ -213,8 +213,10 @@ public class MainActivity extends AppCompatActivity {
         // take a picture and save in deja folder
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            fileManager.saveFile(thumbnail);
-            Toast.makeText(context, "Image saved", Toast.LENGTH_LONG).show();
+
+            fileManager.saveFile(thumbnail, "DejaPhotoCopied");
+            Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
+
         }
 
         Intent displayCycleRerank = new Intent(this, BuildDisplayCycle.class);
