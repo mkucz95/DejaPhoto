@@ -26,7 +26,7 @@ public class Friends implements IDataElement{
  }
 
     @Override
-    public boolean addElement(){
+    public void addElement(){
  //add friends
          reference.child("users").child(currUserEmail)
                 .child("friends")
@@ -37,9 +37,7 @@ public class Friends implements IDataElement{
                 .child("friends")
                 .child(currUserEmail)
                 .setValue(true);
- 
-    return true;
- }
+    }
 
     @Override
     public DatabaseReference getRef() {

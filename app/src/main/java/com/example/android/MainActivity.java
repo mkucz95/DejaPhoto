@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
     File dejaPhoto;
 
     static final int REQUEST_CODE = 1;
-    String TAG = "deja";
+    String TAG = "MainActivity";
     static final int SELECT_IMAGE = 2;
 
     private String path;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         Button display = (Button) findViewById(R.id.bt_7);
         Button share = (Button) findViewById(R.id.bt_4);
         Button addFriends = (Button) findViewById(R.id.bt_6);
+        Button testUpload = (Button) findViewById(R.id.bt_20);
 
         Display displayWindow = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -89,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openCamera();
+            }
+        });
+
+        testUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startUpload();
             }
         });
 
@@ -135,6 +146,15 @@ public class MainActivity extends AppCompatActivity {
     public void openCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    public void startUpload() {
+        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-1.jpg";
+        StorageReference reference = PhotoStorage.getStorageRef("hlcphantom@gmail,com");
+
+        PhotoStorage photoStorage = new PhotoStorage(path1, reference);
+       // photoStorage.addElement();
+        PhotoStorage.downloadImages(reference, "DejaPhotoFriends");
     }
 
     public void changeSettings() {

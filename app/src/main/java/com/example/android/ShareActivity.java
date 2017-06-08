@@ -76,7 +76,9 @@ public class ShareActivity extends AppCompatActivity {
                                 "Sharing Off", Toast.LENGTH_SHORT).show();
 
                         //all users photos deleted from web
-                        PhotoStorage.remove(PhotoStorage.getStorageRef(Global.currUser.email));
+                        Intent intent = new Intent(getApplicationContext(), DatabaseMediator.class);
+                        intent.setAction("com.example.android.action.UPDATE_SHARE");
+                        startService(intent);
                     }
             }
         });

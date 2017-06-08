@@ -28,13 +28,12 @@ public class Request implements IDataElement{
  }
 
  @Override
- public boolean addElement(){
+ public void addElement(){
 //add request
        reference.child("users").child(requestTo)
                 .child("requests")
                 .child(requestFrom)
                 .setValue(true);
- return true;
  }
 
  @Override
