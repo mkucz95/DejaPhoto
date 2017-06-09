@@ -69,15 +69,17 @@ public class SQLiteHelper {
                     photo = new Photo(cr.getString(colIndex[0]), cr.getString(colIndex[1]),
                             cr.getString(colIndex[2]), cr.getString(colIndex[3]));
 
+                   String[] customInfo = FileManager.handleCSV(cr.getString(cr.getColumnIndex
+                           (MediaStore.Images.ImageColumns.DESCRIPTION)));
+
+                    handleCustomInfo(photo, customInfo);
+
                     paths.add(photo);
                     Log.i(TAG, ""+photo.getPath());
                 }
                 else{
                     Log.i(TAG, "Photo not in folders: "+cr.getString(colIndex[0]));
-
                 }
-
-
             } while(cr.moveToNext());
         }
 
@@ -85,17 +87,55 @@ public class SQLiteHelper {
             cr.close();
         }
 
-
         Global.displayCycle = paths;
     }
 
+    //check to see if custom info exists and set to photo obj
+    private void handleCustomInfo(Photo photo, String[] customInfo) {
+        if(customInfo != null){
+            if(customInfo[1] != null){
+                photo.setKarma(Integer.parseInt(customInfo[1]));
+            }
+            if(customInfo[0] != null){
+                photo.photoLocationString = customInfo[0];
+            }
+        }
+    }
+
+    public String getSingleLine(Uri uri, String[] projection, String path, Context context){
+    String info = "";
+
+        this.cr = context.getContentResolver().query(uri, projection, null, null, null);
+
+        if(null == cr) {
+            Log.i(TAG, "ERROR null==cr");
+        }else if( cr.getCount()<1) {
+            Log.i(TAG, "NO MEDIA FOUND");
+        } else { //handle returned data
+            Log.i(TAG, "MEDIA PRESENT");
+            cr.moveToFirst();
+
+            do{ //go through all the images
+                if( path.equals(cr.getString(0))) {
+                    info = cr.getString(1);
+
+                    Log.d(TAG, "info recieved: "+info);
+                    break;
+                }
+            } while(cr.moveToNext());
+        }
+
+        if (cr != null) {
+            cr.close();
+        }
+
+        return info;
+    }
 
     /*
     This method puts data in a certain field in sqlite database
      */
-
     public int storeSQLData(String data, String colToAdd, String path, Context context){
-
         if(null==cr) {
             Log.e(TAG, "ERROR null=cr in write");
         }else if( cr.getCount()<1) {
@@ -105,7 +145,6 @@ public class SQLiteHelper {
             int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
 
             Log.i(TAG, "looking for image");
-
 
                     String[] selectionArgs = {path};
                     String selectionClause =  MediaStore.Images.Media.DATA + " = ?";

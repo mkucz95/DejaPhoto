@@ -21,7 +21,6 @@ import android.app.Activity;
 
 import java.util.Timer;
 
-
 /**
  * Created by Justin on 5/3/17.
  * This class uses android APIs to create a widget that is responsive to presses on buttons
@@ -108,7 +107,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             changePicture = true;
             manageTimer(context); //reset undoTimer
 
-
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
             Global.karmaNum = 1;
             manageTimer(context);
@@ -138,9 +136,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         this.karmaAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         this.releaseAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        intentKarma = new Intent(context, AlarmReceiver.class);
-        intentRelease = new Intent(context, AlarmReceiver.class);
-
+        intentKarma = new Intent(context, PhotoInfoReceiver.class);
+        intentRelease = new Intent(context, PhotoInfoReceiver.class);
 
         if(!Global.undoKarmaOn && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
             intentKarma.setAction(ACTION_KARMA);

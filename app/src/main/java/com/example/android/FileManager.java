@@ -229,4 +229,34 @@ public class FileManager {
 
         Global.uploadMetaData = temp;
     }
+
+    //write karma to file
+    public static void addKarma(String path, Context context){
+        Log.d("FileManager", "addKarma- "+path);
+
+        SQLiteHelper helper = new SQLiteHelper();
+        String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
+        String[] info = handleCSV(raw);
+
+        int currKarma = Integer.parseInt(info[1]);
+        currKarma++;
+
+        helper.storeSQLData(info[0]+","+currKarma, MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+    }
+
+    //write custom location to file
+    public static void changeLoc(String path, String customLoc, Context context){
+        Log.d("FileManager", "addLoc- "+path+" -- "+customLoc);
+
+        SQLiteHelper helper = new SQLiteHelper();
+        String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
+        String[] info = handleCSV(raw);
+
+        helper.storeSQLData(customLoc+","+info[1], MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+
+    }
+
+    public static String[] handleCSV(String info){
+        return info.split(",");
+    }
 }

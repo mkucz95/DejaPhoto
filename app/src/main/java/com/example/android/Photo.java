@@ -93,6 +93,7 @@ public class Photo {
 
     public String userLocationString = "Not Set";
     public Boolean userLocation = false;
+
     public String photoLocationString;
     public Boolean photoLocation = false;
 

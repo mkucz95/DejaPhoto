@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.content.Context;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -22,8 +23,14 @@ public class Global {
     public static ArrayList<Photo> displayCycle = new ArrayList<>();
     public static int head = 0;
 
+    //SQLITE HELPERS
     public static String[] wholeTableProjection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DATE_TAKEN,
-            MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE};
+            MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE, MediaStore.Images.ImageColumns.DESCRIPTION};
+
+    public static String[] descriptionProjection = {MediaStore.Images.Media.DATA,
+            MediaStore.Images.ImageColumns.DESCRIPTION};
+
+    public static Uri mediaUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
     public static boolean dejaVuSetting = true, locationSetting = false,
             daySetting = false, timeSetting = false, karmaSetting = false;

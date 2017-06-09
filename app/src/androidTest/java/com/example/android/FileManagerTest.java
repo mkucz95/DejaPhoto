@@ -21,7 +21,7 @@ import static junit.framework.Assert.assertNull;
  */
 
 @RunWith(JUnit4.class)
-public class TestFileManager {
+public class FileManagerTest {
 
     String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-20.jpg";
     String path2 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";

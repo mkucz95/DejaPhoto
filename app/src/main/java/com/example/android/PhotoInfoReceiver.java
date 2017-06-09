@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -22,26 +23,30 @@ then it sends and intent service to
 implemented based on a similar class structure as the DJWidgetProvider.java
  */
 
-public class AlarmReceiver extends BroadcastReceiver
+public class PhotoInfoReceiver extends BroadcastReceiver
 /*gets system messages when the system or other applications send broadcasts
 * if the broadcast matches our class, it executes the onRecieve method
  */
 {
     private static final String ACTION_KARMA = "com.example.android.KARMA";
     private static final String ACTION_RELEASE = "com.example.android.RELEASE";
+    private final String TAG = "PhotoInfoReciever";
+    Context context;
 
     @Override
     public void onReceive(Context context, Intent intent)
     { //what happens when the alarm goes off (undoTimer expires)
-        Log.i("AlarmReceiver", "AlarmReceiver got PendingIntent");
+        this.context = context;
+
+        Log.i(TAG, "PhotoInfoReciever got PendingIntent");
         FileManager fileManager = new FileManager(context);
 
         String action = intent.getAction();
 
-        Log.i("AlarmReciever", "action:  "+ action);
+        Log.i(TAG, "action:  "+ action);
 
         if(ACTION_KARMA.equals(action) && Global.undoKarmaOn) {
-            Log.i("AlarmReciever", "Karma");
+            Log.i(TAG, "Karma");
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -61,14 +66,14 @@ public class AlarmReceiver extends BroadcastReceiver
                     Global.changeInterval, Global.changeInterval);
 
 
+            FileManager.addKarma(Global.karmaPath, context);
             fileManager.setDisplayCycleData(true, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
-
 
         }
 
         else if(ACTION_RELEASE.equals(action) && Global.undoReleaseOn){
-            Log.i("AlarmReciever", "Release");
+            Log.i(TAG, "Release");
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Global.undoReleaseOn = false; //alarm was fired so now it got turned off
@@ -83,5 +88,6 @@ public class AlarmReceiver extends BroadcastReceiver
             fileManager.setDisplayCycleData(false, Global.releasePath);
         }
     }
+
 
 }

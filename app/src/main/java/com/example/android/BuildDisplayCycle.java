@@ -41,7 +41,7 @@ public class BuildDisplayCycle extends IntentService {
 
                //call sqlite traverser
                SQLiteHelper helper = new SQLiteHelper();
-               helper.iterateAllMedia(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Global.wholeTableProjection, this);
+               helper.iterateAllMedia(Global.mediaUri, Global.wholeTableProjection, this);
                Log.i(TAG, "Reranking... 1st Build");
 
                Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
