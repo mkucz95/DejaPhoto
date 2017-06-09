@@ -20,11 +20,12 @@ import java.util.Timer;
 
 public class SetActivity extends AppCompatActivity {
 
-    /*public Switch location;
+    public Switch location;
     public Switch time;
     public Switch dayOfWeek;
     public Switch karma;
-    public Switch mode;*/
+    public Switch mode;
+
     EditText input;
     private Button saveButton;
     TextView newInterval;
@@ -43,11 +44,11 @@ public class SetActivity extends AppCompatActivity {
 
         updateInterval();
 
-        Switch location = (Switch) findViewById(R.id.s_location);
-        Switch time = (Switch) findViewById(R.id.s_time);
-        Switch dayOfWeek = (Switch) findViewById(R.id.s_dow);
-        Switch karma = (Switch) findViewById(R.id.s_karma);
-        Switch mode = (Switch) findViewById(R.id.s_mode);
+        location = (Switch) findViewById(R.id.s_location);
+         time = (Switch) findViewById(R.id.s_time);
+         dayOfWeek = (Switch) findViewById(R.id.s_dow);
+         karma = (Switch) findViewById(R.id.s_karma);
+         mode = (Switch) findViewById(R.id.s_mode);
 
         Log.d("SetActivity", "MODE: " +mode);
         Log.i("setActivity", ""+ Global.locationSetting);
@@ -56,39 +57,7 @@ public class SetActivity extends AppCompatActivity {
         Log.i("setActivity", ""+ Global.karmaSetting);
         Log.i("setActivity", ""+ Global.dejaVuSetting);
 
-        if (Global.dejaVuSetting) {
-            mode.setChecked(true);
-        } else {
-            mode.setChecked(false);
-        }
-
-        if(Global.locationSetting) {
-            location.setChecked(true);
-        }
-        else {
-            location.setChecked(false);
-        }
-
-        if(Global.timeSetting) {
-            time.setChecked(true);
-        }
-        else {
-            time.setChecked(false);
-        }
-
-        if(Global.daySetting) {
-            dayOfWeek.setChecked(true);
-        }
-        else {
-            dayOfWeek.setChecked(false);
-        }
-
-        if(Global.karmaSetting) {
-            karma.setChecked(true);
-        }
-        else {
-            karma.setChecked(false);
-        }
+        displayUpdate();
 
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -241,6 +210,42 @@ public class SetActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void displayUpdate() {
+        if (Global.dejaVuSetting) {
+            mode.setChecked(true);
+        } else {
+            mode.setChecked(false);
+        }
+
+        if(Global.locationSetting) {
+            location.setChecked(true);
+        }
+        else {
+            location.setChecked(false);
+        }
+
+        if(Global.timeSetting) {
+            time.setChecked(true);
+        }
+        else {
+            time.setChecked(false);
+        }
+
+        if(Global.daySetting) {
+            dayOfWeek.setChecked(true);
+        }
+        else {
+            dayOfWeek.setChecked(false);
+        }
+
+        if(Global.karmaSetting) {
+            karma.setChecked(true);
+        }
+        else {
+            karma.setChecked(false);
+        }
     }
 
     public void startRerank() {
