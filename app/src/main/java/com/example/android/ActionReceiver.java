@@ -56,22 +56,18 @@ public class ActionReceiver extends BroadcastReceiver
             Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
 
             //Set karma num on widget
-            int newKarma = Global.displayCycle.get(Global.head).getKarma()+1;
+            int newKarma = Global.displayCycle.get(Global.head).getKarma() + 1;
             rviews.setTextViewText(R.id.karma_num, "Karma: " + newKarma);
             appWidgetManager.updateAppWidget(appWidgetIds, rviews);
 
-            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
-            Global.undoTimer.schedule(Global.autoWallpaperChange,
-                    Global.changeInterval, Global.changeInterval);
+
+            Global.restartTimer(context);
 
             FileManager.addKarma(Global.karmaPath, context);
             fileManager.setDisplayCycleData(true, newKarma, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
-
-        } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
-            Log.i(TAG, "Release");
-
-        } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
+        }
+        else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
             Log.i(TAG, "Release");
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
@@ -79,9 +75,7 @@ public class ActionReceiver extends BroadcastReceiver
 
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
 
-            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
-            Global.undoTimer.schedule(Global.autoWallpaperChange,
-                    Global.changeInterval, Global.changeInterval);
+            Global.restartTimer(context);
 
             fileManager.setDisplayCycleData(false, 0, Global.releasePath);
         }

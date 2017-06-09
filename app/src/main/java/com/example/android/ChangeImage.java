@@ -107,8 +107,6 @@ public class ChangeImage extends IntentService {
         wallpaperIntent.putExtra("image_path", newPath); //send path as extra on the intent
         wallpaperIntent.setType("text/plain");
 
-        Global.restartTimer(getApplicationContext());
-
         startService(wallpaperIntent); //change the wallpaper
     }
 }
