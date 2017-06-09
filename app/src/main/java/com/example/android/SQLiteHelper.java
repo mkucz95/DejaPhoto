@@ -136,16 +136,6 @@ public class SQLiteHelper {
     This method puts data in a certain field in sqlite database
      */
     public int storeSQLData(String data, String colToAdd, String path, Context context) {
-        if (null == cr) {
-            Log.e(TAG, "ERROR null=cr in write");
-        } else if (cr.getCount() < 1) {
-            Log.e(TAG, "ERROR no elements in table");
-        } else { //handle returned data
-            cr.moveToFirst();
-            int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
-
-            Log.i(TAG, "looking for image");
-
             String[] selectionArgs = {path};
             String selectionClause = MediaStore.Images.Media.DATA + " = ?";
 
@@ -159,11 +149,6 @@ public class SQLiteHelper {
 
             Log.i(TAG, "updated: " + numUpdated + " rows");
             return numUpdated;
-        }
-        if (cr != null) {
-            cr.close();
-        }
-        return -1;
     }
 
     public static boolean matchesCases(String string, boolean friends, boolean own) {

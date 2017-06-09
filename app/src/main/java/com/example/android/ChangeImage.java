@@ -43,6 +43,8 @@ public class ChangeImage extends IntentService {
     }
 
     private void displayFirstImage(){
+        Log.i("Timers", "Displaying First Image");
+        Global.restartTimer(getApplicationContext());
         int counter = Global.displayCycle.size()-1;
         if(counter!=-1){
             changeImgToDisplay(0);
@@ -85,6 +87,7 @@ public class ChangeImage extends IntentService {
         //send new intent to the wallpaper changer intent service
         //includes file path
         String newPath;
+        Log.i("Timers", "Next Image Called");
 
         Log.i("ChangeImage", "newHead: " + newHead);
         Log.i("ChangeImage", "arrayList size: " + Global.displayCycle.size());
@@ -103,6 +106,8 @@ public class ChangeImage extends IntentService {
         wallpaperIntent.setAction(Intent.ACTION_SEND);
         wallpaperIntent.putExtra("image_path", newPath); //send path as extra on the intent
         wallpaperIntent.setType("text/plain");
+
+        Global.restartTimer(getApplicationContext());
 
         startService(wallpaperIntent); //change the wallpaper
     }

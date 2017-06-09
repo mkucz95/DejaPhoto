@@ -28,7 +28,7 @@ public class SetLocationActivity extends AppCompatActivity {
 
         //stop the timer so the photo doesn't change while setting location
         if (Global.autoWallpaperChange != null && Global.undoTimer != null) {
-            Log.i("setLocAct", "Cancelling Alarm and Timer");
+            Log.i("Timers", "Cancelling Alarm and Timer");
             Global.autoWallpaperChange.cancel();
             Global.undoTimer.cancel();
         }

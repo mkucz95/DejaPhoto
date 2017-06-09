@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         Global.context = this.getApplicationContext();
 
-        startApp();
+        //startApp();
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        Log.i("Timers", "Building new Display Cycle");
         Intent displayCycleRerank = new Intent(this, BuildDisplayCycle.class);
         displayCycleRerank.setAction(ACTION_BUILD_CYCLE);
         startService(displayCycleRerank);
@@ -226,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startApp() {
+        Log.i("Timers", "Building first display cycle");
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
         Log.i("BuildCycle", "Calling BuildDisplayCycle...");
         displayCycleIntent.setAction(ACTION_BUILD_CYCLE);

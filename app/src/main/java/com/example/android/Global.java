@@ -97,7 +97,7 @@ public class Global {
     }
 
     public static void restartTimer(Context context){
-        Log.i("updateInterval", "Restarting timer with interval " + Global.changeInterval);
+        Log.i("Timers", "Restarting timer with interval " + Global.changeInterval);
         Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
         Global.undoTimer = new Timer();
         Global.undoTimer.schedule(Global.autoWallpaperChange,
@@ -105,8 +105,10 @@ public class Global {
     }
 
     public static void stopTimer(Context context){
+        Log.i("Timers", "Stopping Timers");
         Global.autoWallpaperChange.cancel();
         Global.undoTimer.cancel();
+        Global.undoTimer.purge();
     }
 
 }
