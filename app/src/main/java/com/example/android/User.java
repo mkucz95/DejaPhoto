@@ -48,9 +48,11 @@ public class User implements IDataElement {
         Log.i(TAG, "whole snap: " + Global.userSnapshot);
 
 
-        if (Global.userSnapshot.child(check).exists()) {
-            Log.i(TAG, "userSnap: " + Global.userSnapshot.child(check));
-            return true;
+        if(Global.userSnapshot != null) {
+            if (Global.userSnapshot.child(check).exists()) {
+                Log.i(TAG, "userSnap: " + Global.userSnapshot.child(check));
+                return true;
+            }
         }
 
         return false;
