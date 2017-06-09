@@ -187,13 +187,17 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         super.onStart();
         // Check if Global.currUser is signed in (non-null) and update UI accordingly.
         User.setDatabaseListener(myRef.child("users"));
+        PhotoStorage.setDatabaseListener(myRef.child("photos"));
+
         if(Global.currUser != null){
             Request.setRequestListener(myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr Global.currUser requests
             myRef.child("users").child(Global.currUser.email).child("requests").child("new");
             myRef.child("users").child(Global.currUser.email).child("requests").child("new").removeValue();
         }
 
-        myRef.child("users").child("user@gmail,com").setValue(true); //update snapshot
+        myRef.child("users").child("user@gmail,com").setValue(true); //update user snapshot
+        myRef.child("photos").child("user@gmail,com").child("update").setValue(true); //update photo snapshot
+        myRef.child("photos").child("user@gmail,com").child("update").removeValue(); //update photo snapshot
 
 
         firebaseUser = mAuth.getCurrentUser();

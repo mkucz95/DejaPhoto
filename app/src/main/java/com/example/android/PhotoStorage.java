@@ -106,17 +106,18 @@ public class PhotoStorage implements IDataElement {
         Log.d(TAG, "task: " + uploadTask.isComplete());
     }
 
-private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
-    Log.d(TAG, "uploadPath: "+taskSnapshot);
+    private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
 
-    @SuppressWarnings("VisibleForTests")
+        Log.d(TAG, "uploadPath: "+taskSnapshot);
+
+        @SuppressWarnings("VisibleForTests")
          String name =  taskSnapshot.getMetadata().getName().replace(".", ",");
 
-    Log.d(TAG, "name of file: "+name);
+        Log.d(TAG, "name of file: "+name);
 
 
-    Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
-}
+        Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
+    }
 
     @Override
     public DatabaseReference getRef() { return null; }
@@ -127,7 +128,7 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
 
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
 
-        final StorageReference imageRef = reference.child("FILENAME-1.jpg");
+        final StorageReference imageRef = reference;
 
         final File localFile = new File(folder, "DOWNLOAD-1.jpg");
         if (!folder.exists()) {
