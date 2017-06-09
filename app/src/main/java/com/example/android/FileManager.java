@@ -260,6 +260,9 @@ public class FileManager {
     }
 
     public static String[] handleCSV(String info) {
-        return info.split(",");
+        if (info != null)
+            return info.split(",");
+
+        else return null;
     }
 }

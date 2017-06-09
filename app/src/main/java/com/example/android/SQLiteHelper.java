@@ -32,7 +32,6 @@ public class SQLiteHelper {
         this.cr = context.getContentResolver().query(uri, projection, null, null, null);
         Log.i(TAG, "In iterateMedia");
 
-
         int[] colIndex = new int[projection.length];
         for (int i = 0; i < projection.length; i++) {
             colIndex[i] = cr.getColumnIndex(projection[i]);
@@ -72,7 +71,9 @@ public class SQLiteHelper {
                     String[] customInfo = FileManager.handleCSV(cr.getString(cr.getColumnIndex
                             (MediaStore.Images.ImageColumns.DESCRIPTION)));
 
-                    handleCustomInfo(photo, customInfo);
+                    if (customInfo != null) {
+                        handleCustomInfo(photo, customInfo);
+                    }
 
                     paths.add(photo);
                     Log.i(TAG, "" + photo.getPath());
