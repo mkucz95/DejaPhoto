@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
         Global.context = this.getApplicationContext();
 
-
         startApp();
 
         camera.setOnClickListener(new View.OnClickListener() {

@@ -49,7 +49,7 @@ public class SQLiteHelper {
         ArrayList<Photo> paths = new ArrayList<>();
         Log.i(TAG, "Paths arrayList created");
 
-        if (projection.length != 4) {
+        if (projection.length != Global.wholeTableProjection.length) {
             Log.i(TAG, "wrong projection passed to sqlite helper : Projection Length: " + projection.length);
             return;
         }

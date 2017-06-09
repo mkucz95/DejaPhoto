@@ -31,11 +31,11 @@ public class FileManager {
     File file;
 
     public FileManager(Context context) {
-            this.context = context;
+        this.context = context;
     }
 
 
-    public void scanSD(File file){
+    public void scanSD(File file) {
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(file);
         mediaScan.setData(contentUri);
@@ -50,7 +50,7 @@ public class FileManager {
         if (!folderName.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
             boolean rv = folderName.mkdir();
-            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+            Log.i(TAG, "Folder creation " + (rv ? "success" : "failed"));
         } else {
             Log.i(TAG, "Folder already exists.");
         }
@@ -123,39 +123,38 @@ public class FileManager {
     }
 
 
-    public void setDisplayCycleData(boolean karma, String path){
+    public void setDisplayCycleData(boolean karma, String path) {
         ArrayList<Photo> temp = Global.displayCycle;
-        for(int i = 0; i<temp.size(); i++){
+        for (int i = 0; i < temp.size(); i++) {
             Photo photo = temp.get(i);
             Log.i("setKarma", path + " compare to : " + photo.getPath());
-            if(photo.getPath().equals(path)){
-                if(karma) {
+            if (photo.getPath().equals(path)) {
+                if (karma) {
                     Log.i("setKarma", temp.get(i) + ": added karma");
-                    photo.setKarma(photo.getKarma()+1);
-                }
-                else{
+                    photo.setKarma(photo.getKarma() + 1);
+                } else {
                     photo.setReleased(true);
                     deleteFile(temp.get(i).getPath()); //delete from file
                     temp.remove(i);
                 }
             }
-            Log.i("setKarma", photo.getPath() + ": karma:  "+ photo.getKarma());
+            Log.i("setKarma", photo.getPath() + ": karma:  " + photo.getKarma());
 
 
         }
         Global.displayCycle = temp;
-        for(Photo p: Global.displayCycle){
-            Log.i("setKarma", p.getPath() + ": karma:  "+ p.getKarma());
+        for (Photo p : Global.displayCycle) {
+            Log.i("setKarma", p.getPath() + ": karma:  " + p.getKarma());
         }
     }
 
-    public void deleteFile(String path){
+    public void deleteFile(String path) {
         File fileToDelete = new File(path);
         if (fileToDelete.exists()) {
             if (fileToDelete.delete()) {
-                Log.i(TAG, "deleteFile--- DELETED: "+path);
+                Log.i(TAG, "deleteFile--- DELETED: " + path);
             } else {
-                Log.i(TAG, "deleteFile--- ERROR: "+path);
+                Log.i(TAG, "deleteFile--- ERROR: " + path);
             }
         }
     }
@@ -164,14 +163,14 @@ public class FileManager {
     public static Bitmap resizeImage(Bitmap image) {
         Bitmap resizedImage = null;
 
-        if(image != null) {
+        if (image != null) {
             int imageHeight = image.getHeight();
-            if(imageHeight > Global.windowHeight) {
+            if (imageHeight > Global.windowHeight) {
                 imageHeight = Global.windowHeight;
             }
 
             int imageWidth = (imageHeight * image.getWidth()) / image.getHeight();
-            if(imageWidth > Global.windowWidth) {
+            if (imageWidth > Global.windowWidth) {
                 imageWidth = Global.windowWidth;
                 imageHeight = (imageWidth * image.getHeight()) / image.getWidth();
             }
@@ -183,8 +182,8 @@ public class FileManager {
     }
 
     //get bitmap of image from file
-    public static Bitmap getBitmap(String path){
-       Bitmap bitmap = null;
+    public static Bitmap getBitmap(String path) {
+        Bitmap bitmap = null;
         try {
             Log.i("FileManager", "GetBitmap: " + path);
             FileInputStream imgIS = new FileInputStream(new File(path));
@@ -198,41 +197,45 @@ public class FileManager {
     }
 
     //remove friends images from phone
-    public static void deleteFolder(String name){
-        File dir = new File(Environment.getExternalStorageDirectory()+name);
-        if(dir.isDirectory()){
+    public static void deleteFolder(String name) {
+        File dir = new File(Environment.getExternalStorageDirectory() + name);
+        if (dir.isDirectory()) {
             dir.delete();
         }
     }
 
-    public static String getDirPath(String directory){
-        String folder = Environment.getExternalStorageDirectory()+"/"+directory;
+    public static String getDirPath(String directory) {
+        String folder = Environment.getExternalStorageDirectory() + "/" + directory;
         return folder;
     }
 
     /*
     this method handles adding file paths to upload queue whether this is because changed location or changed karma
      */
-    public void addToQueue(String path){
-       ArrayList<String> temp = Global.uploadMetaData;
+    public void addToQueue(String path) {
+        ArrayList<String> temp = Global.uploadMetaData;
 
-        boolean inQueue = false;
-        for(int i = 0; i < temp.size(); i++){
-            if(temp.get(i).equals(path)){
-                break; //already in the upload queue
-            }
-        }
+        boolean inQueue = checkInQueue(path, temp);
 
-        if(!inQueue){
+        if (!inQueue) {
             temp.add(path);
         }
 
         Global.uploadMetaData = temp;
     }
 
+    private boolean checkInQueue(String path, ArrayList<String> temp) {
+        for (int i = 0; i < temp.size(); i++) {
+            if (temp.get(i).equals(path)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //write karma to file
-    public static void addKarma(String path, Context context){
-        Log.d("FileManager", "addKarma- "+path);
+    public static void addKarma(String path, Context context) {
+        Log.d("FileManager", "addKarma- " + path);
 
         SQLiteHelper helper = new SQLiteHelper();
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
@@ -241,22 +244,22 @@ public class FileManager {
         int currKarma = Integer.parseInt(info[1]);
         currKarma++;
 
-        helper.storeSQLData(info[0]+","+currKarma, MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+        helper.storeSQLData(info[0] + "," + currKarma, MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
     }
 
     //write custom location to file
-    public static void changeLoc(String path, String customLoc, Context context){
-        Log.d("FileManager", "addLoc- "+path+" -- "+customLoc);
+    public static void changeLoc(String path, String customLoc, Context context) {
+        Log.d("FileManager", "addLoc- " + path + " -- " + customLoc);
 
         SQLiteHelper helper = new SQLiteHelper();
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
         String[] info = handleCSV(raw);
 
-        helper.storeSQLData(customLoc+","+info[1], MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+        helper.storeSQLData(customLoc + "," + info[1], MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
 
     }
 
-    public static String[] handleCSV(String info){
+    public static String[] handleCSV(String info) {
         return info.split(",");
     }
 }

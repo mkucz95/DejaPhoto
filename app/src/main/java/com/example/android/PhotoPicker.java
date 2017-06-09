@@ -27,7 +27,6 @@ import static com.example.android.MainActivity.SELECT_IMAGE;
  */
 
 public class PhotoPicker {
-
     /*
      * Instance variables and test variables
      */
@@ -38,7 +37,6 @@ public class PhotoPicker {
     Intent chooserTestIntent;
     private final String imageType = "image/*";
     private final String selectPicture = "Select Picture";
-
 
     /*
      * AddPhoto constructor -- context and activity instance from MainActivity
