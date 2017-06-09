@@ -120,50 +120,14 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
         //downloadSingleImage(reference, targetPath);
     }
 
-
-//download single image from uri
-/*    public static void downloadUrl(Uri url, String targetPath){
-        Log.d(TAG, "downloadUrl: "+ url );
-        try {
-            File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+
-                    targetPath);
-
-            URL imgUrl = new URL(url.toString());
-            InputStream is = imgUrl.openStream();
-            OutputStream os = new FileOutputStream(folder);
-
-            byte[] b = new byte[2048];
-            int length;
-
-            while ((length = is.read(b)) != -1) {
-                os.write(b, 0, length);
-            }
-
-            is.close();
-            os.close();
-
-            if (!folder.exists()) {
-                Log.i(TAG, "Folder doesn't exist, creating it...");
-                boolean rv = folder.mkdir();
-                Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
-            } else {
-                Log.i(TAG, "Folder already exists.");
-            }
-
-        } catch (IOException e){
-            Log.e(TAG, "directory not found-- downloadUrl");
-        }
-    }
-*/
     //reference for single image, target path is folder to save into
     public static void downloadSingleImage(StorageReference reference, String targetPath) {
         Log.d(TAG, "downloading: "+ reference);
 
-        //try {
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
 
         final StorageReference imageRef = reference.child("FILENAME-1.jpg");
-        //final long ONE_MEGABYTE = 1024 * 1024;
+
         final File localFile = new File(folder, "DOWNLOAD-1.jpg");
         if (!folder.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
@@ -189,7 +153,6 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(localFile);
         mediaScan.setData(contentUri);
-        //context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
     //remove all pictures at location
@@ -199,12 +162,12 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
         reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.i(TAG, "remove success on: "+reference);
+                Log.i(TAG, "remove success on: "+ reference);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.i(TAG, "remove success on: "+reference);
+                Log.i(TAG, "remove success on: "+ reference);
             }
         });
     }
@@ -219,7 +182,7 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
         return storageReference.child(userEmail);
     }
 
- /*   public static void uploadImages(String flag){
+    /*public static void uploadImages(String flag){
         //implement to upload
         if(flag.equals("all")){
             //for each image that needs to be uploaded call add element
@@ -229,8 +192,8 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
         }
     }*/
 
-
-    public static void testUpload(){
-        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
+    public static boolean dirExists(String directory) {
+        File folder = new File(Environment.getExternalStorageDirectory() + "/" + directory);
+        return folder.exists();
     }
 }
