@@ -23,9 +23,13 @@ import org.junit.runners.model.Statement;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.net.URL;
 
 /**
  * Created by mkucz on 5/29/2017.
@@ -107,6 +111,41 @@ public class PhotoStorage implements IDataElement {
         //downloadSingleImage(reference, targetPath);
     }
 
+
+//download single image from uri
+/*    public static void downloadUrl(Uri url, String targetPath){
+        Log.d(TAG, "downloadUrl: "+ url );
+        try {
+            File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+
+                    targetPath);
+
+            URL imgUrl = new URL(url.toString());
+            InputStream is = imgUrl.openStream();
+            OutputStream os = new FileOutputStream(folder);
+
+            byte[] b = new byte[2048];
+            int length;
+
+            while ((length = is.read(b)) != -1) {
+                os.write(b, 0, length);
+            }
+
+            is.close();
+            os.close();
+
+            if (!folder.exists()) {
+                Log.i(TAG, "Folder doesn't exist, creating it...");
+                boolean rv = folder.mkdir();
+                Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+            } else {
+                Log.i(TAG, "Folder already exists.");
+            }
+
+        } catch (IOException e){
+            Log.e(TAG, "directory not found-- downloadUrl");
+        }
+    }
+*/
     //reference for single image, target path is folder to save into
     public static void downloadSingleImage(StorageReference reference, String targetPath) {
         Log.d(TAG, "downloading: "+ reference);
@@ -159,7 +198,6 @@ public class PhotoStorage implements IDataElement {
         });
     }
 
-
     //return storage reference
     public static StorageReference getStorageRef(String userEmail) {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
@@ -180,8 +218,14 @@ public class PhotoStorage implements IDataElement {
         }
     }*/
 
+<<<<<<< HEAD
     public static boolean dirExists(String directory){
         File folder = new File(Environment.getExternalStorageDirectory()+"/"+directory);
         return folder.exists();
+=======
+
+    public static void testUpload(){
+        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
+>>>>>>> 269d0254359d4a45d7044869252d349443f52944
     }
 }

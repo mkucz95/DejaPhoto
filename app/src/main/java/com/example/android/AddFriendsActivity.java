@@ -203,8 +203,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             signIn();
 
         updateUI(firebaseUser);
-
-
     }
 
     private void signIn() {

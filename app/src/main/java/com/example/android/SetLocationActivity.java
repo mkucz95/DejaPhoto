@@ -49,23 +49,19 @@ public class SetLocationActivity extends AppCompatActivity {
 
         currentLocation = (TextView) findViewById(R.id.curr_loc_name);
 
-        Log.i("widgetProv", "++++++++++++++++++++++++++++");
-
         Log.i("widgetProv", "Photo Data Set Locations:");
         for(Photo p : Global.displayCycle){
             Log.i("widgetProv", "" + p.photoLocationString);
         }
-        Log.i("widgetProv", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         Log.i("widgetProv", "User Set Locations:");
         for(int i = 0; i < Global.displayCycle.size(); i++){
             Log.i("widgetProv", Global.displayCycle.get(i).userLocationString);
 
         }
-        Log.i("widgetProv", "++++++++++++++++++++++++++++");
         Log.i("widgetProv", "Current: ");
         Log.i("widgetProv", "User Set: " + Global.displayCycle.get(Global.head).userLocationString);
         Log.i("widgetProv", "Photo Data: " + Global.displayCycle.get(Global.head).photoLocationString);
-        Log.i("widgetProv", "---------------------------");
+
         String locToDisplay;
         if(Global.displayCycle.get(Global.head).userLocation) {
             if(Global.isBlank(Global.displayCycle.get(Global.head).userLocationString)) {

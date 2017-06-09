@@ -36,8 +36,7 @@ public class SetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_set);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
         Log.i("deja", "" + Global.changeInterval);
 
         updateInterval();
@@ -51,46 +50,7 @@ public class SetActivity extends AppCompatActivity {
         Switch mode = (Switch) findViewById(R.id.s_mode);
 
         Log.d("SetActivity", "MODE: " +mode);
-
-        if (Global.dejaVuSetting) {
-            mode.setChecked(true);
-        } else {
-            mode.setChecked(false);
-        }
-
-
-
-        if(Global.locationSetting) {
-            location.setChecked(true);
-        }
-        else {
-            location.setChecked(false);
-        }
-
-        if(Global.timeSetting) {
-            time.setChecked(true);
-        }
-        else {
-            time.setChecked(false);
-        }
-
-        if(Global.daySetting) {
-            dayOfWeek.setChecked(true);
-        }
-        else {
-            dayOfWeek.setChecked(false);
-        }
-
-        if(Global.karmaSetting) {
-            karma.setChecked(true);
-        }
-        else {
-            karma.setChecked(false);
-        }
-
-
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        displayUpdate();
 
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -249,6 +209,49 @@ public class SetActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        displayUpdate();
+    }
+
+    private void displayUpdate( ){
+
+        if (Global.dejaVuSetting) {
+            mode.setChecked(true);
+        } else {
+            mode.setChecked(false);
+        }
+
+        if(Global.locationSetting) {
+            location.setChecked(true);
+        }
+        else {
+            location.setChecked(false);
+        }
+
+        if(Global.timeSetting) {
+            time.setChecked(true);
+        }
+        else {
+            time.setChecked(false);
+        }
+
+        if(Global.daySetting) {
+            dayOfWeek.setChecked(true);
+        }
+        else {
+            dayOfWeek.setChecked(false);
+        }
+
+        if(Global.karmaSetting) {
+            karma.setChecked(true);
+        }
+        else {
+            karma.setChecked(false);
+        }
     }
 
     public void startRerank() {
