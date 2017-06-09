@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.dejaphoto.R;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 import static android.content.Intent.ACTION_SYNC;
 
@@ -56,14 +57,12 @@ public class AlarmReceiver extends BroadcastReceiver
             rviews.setTextViewText(R.id.karma_num, "Karma: " + Global.karmaNum);
             appWidgetManager.updateAppWidget(appWidgetIds, rviews);
 
-            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
-            Global.undoTimer.schedule(Global.autoWallpaperChange,
-                    Global.changeInterval, Global.changeInterval);
-
+            Log.i("updateInterval", "____________________");
+            Log.i("updateInterval", "Restarting timer from AlarmReceiver: Karma");
+            Global.restartTimer(context);
 
             fileManager.setDisplayCycleData(true, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
-
 
         }
 
@@ -75,13 +74,13 @@ public class AlarmReceiver extends BroadcastReceiver
 
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
 
-            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
-            Global.undoTimer.schedule(Global.autoWallpaperChange,
-                    Global.changeInterval, Global.changeInterval);
-
+            Log.i("updateInterval", "____________________");
+            Log.i("updateInterval", "Restarting timer from AlarmReceiver: Release");
+            Global.restartTimer(context);
 
             fileManager.setDisplayCycleData(false, Global.releasePath);
         }
     }
+
 
 }

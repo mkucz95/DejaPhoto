@@ -118,11 +118,7 @@ public class SetLocationActivity extends AppCompatActivity {
     public void onDestroy(){
         super.onDestroy();
         Log.i("setLocAct", "Destroying...Starting new timer task");
-        Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
-        Global.undoTimer = new Timer();
-        Global.undoTimer.schedule(Global.autoWallpaperChange,
-                Global.changeInterval, Global.changeInterval);
-
+        Global.restartTimer(getApplicationContext());
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

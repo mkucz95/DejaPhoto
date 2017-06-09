@@ -44,7 +44,6 @@ public class ChangeImage extends IntentService {
 
     private void displayFirstImage(){
         int counter = Global.displayCycle.size()-1;
-
         if(counter!=-1){
             changeImgToDisplay(0);
         }
