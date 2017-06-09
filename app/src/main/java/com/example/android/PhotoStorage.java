@@ -106,9 +106,12 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
     Log.d(TAG, "uploadPath: "+taskSnapshot);
 
     @SuppressWarnings("VisibleForTests")
-         final String name =  taskSnapshot.getMetadata().getName();
+         String name =  taskSnapshot.getMetadata().getName().replace(".", ",");
 
-    Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name);
+    Log.d(TAG, "name of file: "+name);
+
+
+    Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
 }
     @Override
     public DatabaseReference getRef() { return null; }
