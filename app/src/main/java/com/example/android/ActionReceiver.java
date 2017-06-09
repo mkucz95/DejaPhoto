@@ -69,15 +69,14 @@ public class ActionReceiver extends BroadcastReceiver
             fileManager.setDisplayCycleData(true, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
 
-<<<<<<< HEAD:app/src/main/java/com/example/android/AlarmReceiver.java
         }
 
         else if(ACTION_RELEASE.equals(action) && Global.undoReleaseOn){
             Log.i("AlarmReciever", "Release");
-=======
+
         } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
             Log.i(TAG, "Release");
->>>>>>> dd77280208c0d39aae984ebcd146285629b8972b:app/src/main/java/com/example/android/ActionReceiver.java
+
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Global.undoReleaseOn = false; //alarm was fired so now it got turned off
