@@ -55,9 +55,8 @@ public class FileManager {
             Log.i(TAG, "Folder already exists.");
         }
 
-        String captured = "FILENAME-" + MainActivity.n + ".jpg";
-
-        MainActivity.n++;
+        String captured = Global.currUser.email + "Deja_" + Global.imageNumber + ".jpg";
+        Global.imageNumber++;
 
         File file = new File(folderName, captured);
 
@@ -66,7 +65,10 @@ public class FileManager {
             imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
-            Log.d(TAG, "file" + file.exists());
+
+            Global.uploadImageQueue.add(file.getAbsolutePath());
+            Log.d(TAG, "filePath added: " + file.getAbsolutePath());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

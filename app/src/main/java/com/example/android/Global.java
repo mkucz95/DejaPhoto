@@ -64,6 +64,9 @@ public class Global {
     public static DataSnapshot photoSnapshot;
     public static User currUser;
 
+    //CAMERA
+    public static int imageNumber = 0;
+
     public static Context context;
 
     public static ArrayList<String> uploadImageQueue = new ArrayList<>();

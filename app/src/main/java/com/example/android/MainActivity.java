@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String ACTION_BUILD_CYCLE = "com.example.android.BUILD_CYCLE";
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
 
-    public static int n = 1;
-
     Context context;
     Activity activity = this;
 
@@ -235,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 
-            fileManager.saveFile(thumbnail, "DejaPhotoCopied");
+            fileManager.saveFile(thumbnail, "DejaPhoto");
             Toast.makeText(MainActivity.this, "Image saved", Toast.LENGTH_LONG).show();
 
         }
