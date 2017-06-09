@@ -1,6 +1,5 @@
 package com.example.android;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,16 +7,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
-
-import android.app.Activity;
 
 import java.util.Timer;
 
@@ -136,8 +130,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         this.karmaAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         this.releaseAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        intentKarma = new Intent(context, PhotoInfoReceiver.class);
-        intentRelease = new Intent(context, PhotoInfoReceiver.class);
+        intentKarma = new Intent(context, ActionReceiver.class);
+        intentRelease = new Intent(context, ActionReceiver.class);
 
         if(!Global.undoKarmaOn && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
             intentKarma.setAction(ACTION_KARMA);

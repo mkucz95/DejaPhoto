@@ -23,7 +23,7 @@ then it sends and intent service to
 implemented based on a similar class structure as the DJWidgetProvider.java
  */
 
-public class PhotoInfoReceiver extends BroadcastReceiver
+public class ActionReceiver extends BroadcastReceiver
 /*gets system messages when the system or other applications send broadcasts
 * if the broadcast matches our class, it executes the onRecieve method
  */
