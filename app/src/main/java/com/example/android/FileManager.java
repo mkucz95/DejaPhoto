@@ -68,9 +68,7 @@ public class FileManager {
         context.getApplicationContext().sendBroadcast(mediaScan);
 
         Log.d(TAG, "+++++++");
-    }/*
-     * returns image path from uri using cursor
-     */
+    }
 
     public String getImagePath(Uri uri) {
 

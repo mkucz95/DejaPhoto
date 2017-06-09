@@ -1,5 +1,7 @@
 package com.example.android;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
@@ -37,13 +39,14 @@ import java.net.URL;
 
 public class PhotoStorage implements IDataElement {
     String imagePath;
-    String name;
+    static String name;
     StorageReference storageReference;
     Uri fileUri;
     static boolean uploaded = false;
     static boolean downloaded = false;
     static boolean removed = false;
     private Bitmap bitmap;
+    Context context;
 
     private static final String TAG = "PhotoStorage";
 
@@ -105,7 +108,7 @@ public class PhotoStorage implements IDataElement {
         Log.i(TAG, "downloadImages from: "+reference);
 
         //iterator through reference's children
-        downloadSingleImage(reference, targetPath);
+        //downloadSingleImage(reference, targetPath);
     }
 
 
@@ -144,38 +147,40 @@ public class PhotoStorage implements IDataElement {
     }
 */
     //reference for single image, target path is folder to save into
-    private static void downloadSingleImage(StorageReference reference, String targetPath) {
-        Log.d(TAG, "downloading: "+ reference );
+    public static void downloadSingleImage(StorageReference reference, String targetPath) {
+        Log.d(TAG, "downloading: "+ reference);
 
-        try {
-            File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+
-                    targetPath);
+        //try {
+        File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
 
-            File localFile = File.createTempFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+
-                    targetPath, "jpg");
+        final StorageReference imageRef = reference.child("FILENAME-1.jpg");
+        //final long ONE_MEGABYTE = 1024 * 1024;
+        final File localFile = new File(folder, "DOWNLOAD-1.jpg");
+        if (!folder.exists()) {
+            Log.i(TAG, "Folder doesn't exist, creating it...");
+            boolean rv = folder.mkdir();
+            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+        } else {
+            Log.i(TAG, "Folder already exists.");
+        }
 
-            if (!folder.exists()) {
-                Log.i(TAG, "Folder doesn't exist, creating it...");
-                boolean rv = folder.mkdir();
-                Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
-            } else {
-                Log.i(TAG, "Folder already exists.");
+        imageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG, "download Success");
+                Log.d(TAG, "Path" + localFile.getAbsolutePath());
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.d(TAG, "download Failure");
+            }
+        });
 
-            reference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Log.d(TAG, "download Success");
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    Log.d(TAG, "download Failure");
-                }
-            });
-       } catch (IOException e){
-           Log.e(TAG, "directory not found-- downloadImages");
-       }
+        Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(localFile);
+        mediaScan.setData(contentUri);
+        //context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
     //remove all pictures at location
