@@ -203,12 +203,8 @@ public class SetActivity extends AppCompatActivity {
                 Global.changeInterval = (interval * 1000);
                 startRerank();
                 if (Global.undoTimer != null) {
-                    Global.autoWallpaperChange.cancel();
-                    Global.undoTimer.cancel();
-                    Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
-                    Global.undoTimer = new Timer();
-                    Global.undoTimer.schedule(Global.autoWallpaperChange,
-                            Global.changeInterval, Global.changeInterval);
+                    Global.stopTimer();
+                    Global.restartTimer(getApplicationContext());
                 }
             }
         });

@@ -106,6 +106,7 @@ public class Global {
         Log.i("Timers", "Stopping Timers");
         Global.autoWallpaperChange.cancel();
         Global.undoTimer.cancel();
+        Global.undoTimer.purge();
     }
 
 }
