@@ -142,7 +142,7 @@ public class SQLiteHelper {
             newUserValue.put(colToAdd, data);
 
             //update(@thisUri, with values from ContentValues ...)
-            int numUpdated = context.getContentResolver().update(
+            int numUpdated = Global.context.getContentResolver().update(
                     MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, newUserValue,
                     selectionClause, selectionArgs);
 
