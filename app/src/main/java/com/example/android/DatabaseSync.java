@@ -18,10 +18,18 @@ import java.util.TimerTask;
  * the DatabaseSync object is called when the timer finishes counting down
  */
 
+/* Class: DatabaseSync
+ * Purpose: This class will sync every local change with specified time set
+ */
 public class DatabaseSync extends TimerTask {
     private final String TAG = "DatabaseSync";
     private static final String TARGET = "DejaPhotoFriends";
 
+    /* Method: run
+     * Param: none
+     * Purpose: start to push every pic in specifed folder based on settings
+     * Return: none
+     */
     @Override
     public void run() {
         Log.i(TAG, "Begin Sync, currUser: " + Global.currUser);
@@ -41,6 +49,11 @@ public class DatabaseSync extends TimerTask {
         }
     }
 
+    /* Method: uploadQueue
+     * Param: none
+     * Purpose: push photos to the queue
+     * Return: none
+     */
     public void uploadQueue() {
         Log.i(TAG, "uploading queue");
         for (int i = 0; i < Global.uploadImageQueue.size(); i++) {
@@ -51,18 +64,29 @@ public class DatabaseSync extends TimerTask {
         }
     }
 
+    /* Method: uploadMetaData
+     * Param: none
+     * Purpose: change with updated karma and location
+     * Return: none
+     */
     public void uploadMetaData() {
         for (int i = 0; i < Global.uploadMetaData.size(); i++) {
             //TODO iteration 2
         }
     }
 
+    /* Method: downloadFriends
+     * Param: none
+     * Purpose: download photos from firebase
+     * Return: none
+     */
     public void downloadFriends() {
         //delete friends folder so that we can get new copy from database
         File friendsFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), TARGET);
         if (friendsFolder.exists()) friendsFolder.delete();
 
 
+        // a list ot contain all emails
         ArrayList<String> friendEmails = Friends.getFriends(Global.currUser.email);
 
         for (int i = 0; i < friendEmails.size(); i++) {

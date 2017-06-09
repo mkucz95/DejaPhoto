@@ -24,6 +24,11 @@ public class ChangeImage extends IntentService {
     }
 
 
+    /* Method: onHandleIntent
+     * Param: Intent intent
+     * Purpose: receives the action message and handle each
+     * Return: none
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
@@ -42,6 +47,11 @@ public class ChangeImage extends IntentService {
         }
     }
 
+    /* Method: displayFirstImage
+     * Param: none
+     * Purpose: check the time and start display
+     * Return: none
+     */
     private void displayFirstImage(){
         Log.i("Timers", "Displaying First Image");
         if(Global.undoTimer != null)
@@ -54,6 +64,11 @@ public class ChangeImage extends IntentService {
         }
     }
 
+    /* Method: moveHead
+     * Param: String direction
+     * Purpose: user a circular linked list to move the pointer to the head
+     * Return: int
+     */
     private int moveHead(String direction) {
         int counterInt = Global.displayCycle.size() - 1; //last element index
         int currHead = Global.head; //current index
@@ -86,6 +101,11 @@ public class ChangeImage extends IntentService {
         return currHead;
     }
 
+    /* Method: changeImgToDisplay
+     * Param: int newHead
+     * Purpose: changes the image by calling wallpaper service
+     * Return: none
+     */
     private void changeImgToDisplay(int newHead) {//changes the image by calling wallpaper service
         //send new intent to the wallpaper changer intent service
         //includes file path
