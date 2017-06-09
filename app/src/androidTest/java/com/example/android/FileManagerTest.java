@@ -38,7 +38,15 @@ public class FileManagerTest {
         }
 
         assertEquals(true, success);
+    }
 
+    @Test
+    public void deleteFolderTest(){
+        File test = new File("test");
+        test.mkdir();
+
+        FileManager.deleteFolder("test");
+        assertEquals(test.exists(), false);
     }
 
     @Test

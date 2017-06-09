@@ -28,7 +28,11 @@ public class FileManager {
     public FileManager(Context context) {
         this.context = context;
     }
-    public FileManager(){};
+
+    public FileManager() {
+    }
+
+    ;
 
 
     public void scanSD(File file) {
@@ -174,11 +178,6 @@ public class FileManager {
         if (dir.isDirectory()) {
             dir.delete();
         }
-    }
-
-    public static String getDirPath(String directory) {
-        String folder = Environment.getExternalStorageDirectory() + "/" + directory;
-        return folder;
     }
 
     /*
