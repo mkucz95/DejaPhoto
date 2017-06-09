@@ -95,7 +95,7 @@
         </service>
 
         <receiver
-            android:name="com.example.android.AlarmReceiver"
+            android:name="com.example.android.ActionReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.KARMA" />

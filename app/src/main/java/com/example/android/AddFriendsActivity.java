@@ -94,7 +94,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         requestResult = (TextView) findViewById(R.id.sendResult);
         requestComeFrom = (TextView) findViewById(R.id.friendFrom);
-        showFriends =(TextView) findViewById(R.id.friendEmail);
+        showFriends = (TextView) findViewById(R.id.friendEmail);
 
         sendButton = (Button) findViewById(R.id.bt_8);
 
@@ -117,16 +117,15 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             public void onClick(View view) {
                 Log.d(TAG, "request sent/clicked");
                 emailInputRequest = replaceData(getEditTextString(emailEdit));
-                Log.d(TAG, "emailInput: "+emailInputRequest);
+                Log.d(TAG, "emailInput: " + emailInputRequest);
 
-                if(Global.currUser.checkExist(emailInputRequest)) {
+                if (Global.currUser.checkExist(emailInputRequest)) {
                     request = new Request(Global.currUser.email, emailInputRequest, myRef);
                     request.addElement();
                     //todo print success message
                     requestResult.setText("Send successful");
 
-                }
-                else{
+                } else {
                     //todo print error message
                     requestResult.setText("User does not exists, try another");
                 }
@@ -189,7 +188,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         User.setDatabaseListener(myRef.child("users"));
         PhotoStorage.setDatabaseListener(myRef.child("photos"));
 
-        if(Global.currUser != null){
+        if (Global.currUser != null) {
             Request.setRequestListener(myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr Global.currUser requests
 
             updateListeners();
@@ -197,7 +196,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         firebaseUser = mAuth.getCurrentUser();
 
-        if(firebaseUser == null)
+        if (firebaseUser == null)
             signIn();
 
         updateUI(firebaseUser);
@@ -233,7 +232,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if(result.isSuccess()) {
+            if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
@@ -265,7 +264,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                             // If sign in fails, display a message to the currUser.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             //Toast.makeText(GoogleSignInActivity.this, "Authentication failed.",
-                              //      Toast.LENGTH_SHORT).show();
+                            //      Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
 
@@ -290,14 +289,13 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     }
 
     public void updateUI(boolean signedIn) {
-        if(signedIn) {
+        if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
 
             emailEdit.setVisibility(View.VISIBLE);
             sendButton.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             mStatusTextView.setText(R.string.signed_out);
             Global.currUser = null;
 
@@ -326,7 +324,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
             User.setDatabaseListener(myRef.child("users"));
             PhotoStorage.setDatabaseListener(myRef.child("photos"));
-            Request.setRequestListener( myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr currUser requests
+            Request.setRequestListener(myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr currUser requests
 
 
             updateListeners();
@@ -357,48 +355,44 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     //HELPER METHODS---------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------
-    public String replaceData(String input){
-       if(input != null)
-        return input.replace(".", ",");
+    public String replaceData(String input) {
+        if (input != null)
+            return input.replace(".", ",");
 
-       else return null;
+        else return null;
     }
 
-    public  String getEditTextString(EditText input){  //extract string from edit text
-       if(input.getText() != null)
-        return input.getText().toString();
+    public String getEditTextString(EditText input) {  //extract string from edit text
+        if (input.getText() != null)
+            return input.getText().toString();
 
-       else
-           return null;
+        else
+            return null;
     }
 
-    public void userManager(){
+    public void userManager() {
         FirebaseUser currUser = mAuth.getCurrentUser();
-        Log.d(TAG, "currUser: "+ currUser);
+        Log.d(TAG, "currUser: " + currUser);
 
-        if(Global.currUser != null){
+        if (Global.currUser != null) {
             Log.d(TAG, Global.currUser.toString());
 
-            boolean exists =  Global.currUser.checkExist(Global.currUser.email); //check to see if currUser exists
+            boolean exists = Global.currUser.checkExist(Global.currUser.email); //check to see if currUser exists
 
-            if(!exists) {
+            if (!exists) {
                 Global.currUser.addElement();
                 Log.d(TAG, "adding new currUser @ signIn()");
-            }
-            else Log.i(TAG, "currUser already in database");
-        }
-        else Log.i(TAG, "no currUser exists");
+            } else Log.i(TAG, "currUser already in database");
+        } else Log.i(TAG, "no currUser exists");
     }
 
-    public static void requestView(boolean visible){
-        if(visible){
+    public static void requestView(boolean visible) {
+        if (visible) {
             acceptButton.setVisibility(View.VISIBLE);
             declineButton.setVisibility(View.VISIBLE);
             requestComeFrom.setText("Friend Request From");
             showFriends.setText(nextRequest);
-        }
-
-        else{
+        } else {
             acceptButton.setVisibility(View.INVISIBLE);
             declineButton.setVisibility(View.INVISIBLE);
             requestComeFrom.setText("");
@@ -406,7 +400,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
     }
 
-    public  void  handleClick(boolean accept){
+    public void handleClick(boolean accept) {
         if (accept) {
             Friends friends = new Friends(Global.currUser.email, Global.currUser.requestList.get(0), myRef); //add both users to each other's friends
             friends.addElement();
@@ -418,7 +412,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         //delete request that was handled
     }
 
-    private void updateListeners(){
+    private void updateListeners() {
         myRef.child("users").child("user@gmail,com").setValue(true); //update user snapshot
 
         myRef.child("photos").child("user@gmail,com").child("update").setValue(true); //update photo snapshot

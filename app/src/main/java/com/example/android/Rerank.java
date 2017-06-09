@@ -29,10 +29,8 @@ import java.util.List;
  */
 public class Rerank extends IntentService {
     private static final String ACTION_NEW = "com.example.android.NEW";
-
     private static final String TAG = "RerankService";
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 100;
-
 
     public String myLat = "", myLong = "";
 
@@ -53,12 +51,12 @@ public class Rerank extends IntentService {
             boolean[] settings = getSettings();
 
             boolean isLocaOn = settings[1], isTimeOn = settings[2], isWeekOn = settings[3],
-                    isKarma =  settings[4];
+                    isKarma = settings[4];
 
             getMyLocation();
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ got my location");
 
-            Rank newRank = new Rank( myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma, Global.displayCycle, getApplicationContext());
+            Rank newRank = new Rank(myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma, Global.displayCycle, getApplicationContext());
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
 
             Global.head = 0;
@@ -80,7 +78,7 @@ public class Rerank extends IntentService {
         String provider = "";
         Log.i(TAG, "------------------------In getMyLocation");
         List<String> providerList = lm.getProviders(true);
-        for(String s : providerList){
+        for (String s : providerList) {
             Log.i(TAG, "Provider: " + s);
         }
         if (providerList.contains(LocationManager.GPS_PROVIDER)) {
@@ -105,7 +103,7 @@ public class Rerank extends IntentService {
 
         Location location = lm.getLastKnownLocation(provider);
 
-        if(location != null){
+        if (location != null) {
             Log.i(TAG, "------------------------Got Location: " + location);
             double longitude = location.getLongitude();
             Log.i(TAG, "------------------------Set Longitude t: " + longitude);
@@ -121,8 +119,8 @@ public class Rerank extends IntentService {
     this function accessed shared preferences to see what settings the currUser has selected for their
     ranking, and returns that in a boolean array, default is true for all settings!
      */
-    public boolean[] getSettings(){
-      return Global.getSettings();
+    public boolean[] getSettings() {
+        return Global.getSettings();
     }
 
 }

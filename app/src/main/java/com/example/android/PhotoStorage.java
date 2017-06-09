@@ -38,7 +38,7 @@ import java.net.URL;
 
 /**
  * Created by mkucz on 5/29/2017.
- *
+ * <p>
  * code from https://firebase.google.com/docs/storage/android/upload-files
  */
 
@@ -58,7 +58,7 @@ public class PhotoStorage implements IDataElement {
     public PhotoStorage() {//default constructor
     }
 
-    public PhotoStorage(String path, StorageReference reference){
+    public PhotoStorage(String path, StorageReference reference) {
         this.imagePath = path;
         this.storageReference = reference;
         this.fileUri = Uri.fromFile(new File(imagePath));
@@ -106,25 +106,27 @@ public class PhotoStorage implements IDataElement {
         Log.d(TAG, "task: " + uploadTask.isComplete());
     }
 
-    private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
+    private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot) {
 
-        Log.d(TAG, "uploadPath: "+taskSnapshot);
+        Log.d(TAG, "uploadPath: " + taskSnapshot);
 
         @SuppressWarnings("VisibleForTests")
-         String name =  taskSnapshot.getMetadata().getName().replace(".", ",");
+        String name = taskSnapshot.getMetadata().getName().replace(".", ",");
 
-        Log.d(TAG, "name of file: "+name);
+        Log.d(TAG, "name of file: " + name);
 
 
         Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
     }
 
     @Override
-    public DatabaseReference getRef() { return null; }
+    public DatabaseReference getRef() {
+        return null;
+    }
 
     //reference for single image, target path is folder to save into
     public static void downloadImage(StorageReference reference, String targetPath, String fileName) {
-        Log.d(TAG, "downloading: "+ reference);
+        Log.d(TAG, "downloading: " + reference);
 
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
 
@@ -134,7 +136,7 @@ public class PhotoStorage implements IDataElement {
         if (!folder.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
             boolean rv = folder.mkdir();
-            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+            Log.i(TAG, "Folder creation " + (rv ? "success" : "failed"));
         } else {
             Log.i(TAG, "Folder already exists.");
         }
@@ -163,7 +165,7 @@ public class PhotoStorage implements IDataElement {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
 
-        Log.d(TAG, "getStorageRef" + userEmail+ " ------- " + storageReference);
+        Log.d(TAG, "getStorageRef" + userEmail + " ------- " + storageReference);
 
         return storageReference.child(userEmail);
     }

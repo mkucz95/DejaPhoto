@@ -1,6 +1,7 @@
 package com.example.android;
 
 import android.content.Context;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -13,7 +14,7 @@ import java.util.TimerTask;
 
 /**
  * Created by Justin on 5/15/17.
- *
+ * <p>
  * Used to keep track of various information for our programme
  */
 
@@ -22,13 +23,19 @@ public class Global {
     public static ArrayList<Photo> displayCycle = new ArrayList<>();
     public static int head = 0;
 
+    //SQLITE HELPERS
     public static String[] wholeTableProjection = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.DATE_TAKEN,
-            MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE};
+            MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE, MediaStore.Images.ImageColumns.DESCRIPTION};
+
+    public static String[] descriptionProjection = {MediaStore.Images.Media.DATA,
+            MediaStore.Images.ImageColumns.DESCRIPTION};
+
+    public static Uri mediaUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
     public static boolean dejaVuSetting = true, locationSetting = false,
             daySetting = false, timeSetting = false, karmaSetting = false;
 
-   //keeps track of alarms for the widget button when karma/release pressed
+    //keeps track of alarms for the widget button when karma/release pressed
     //UNDO BUTTON PRESS
     public static boolean undoReleaseOn = false; //whether these alarms are on
     public static boolean undoKarmaOn = false;
@@ -39,7 +46,7 @@ public class Global {
     public static int karmaNum = 0;
 
     //RANK SETTINGS
-    public static boolean[] getSettings(){
+    public static boolean[] getSettings() {
         boolean[] settings = {dejaVuSetting, locationSetting, daySetting, timeSetting, karmaSetting};
         return settings;
     }
@@ -76,7 +83,7 @@ public class Global {
 
     //Method to check if string is whitespace
     public static boolean isBlank(String str) {
-        Log.i("isBlank","STRING: '" + str + "'");
+        Log.i("isBlank", "STRING: '" + str + "'");
         int strLen;
         if (str == null || (strLen = str.length()) == 0) {
             return true;

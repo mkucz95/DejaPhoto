@@ -71,14 +71,21 @@ public class SetLocationActivity extends AppCompatActivity {
                     if(Global.isBlank(newLocation)){
                         newLocation = "No Location Found";
                     }
+
                     rviews.setTextViewText(R.id.display_location, newLocation);
                     Global.displayCycle.get(Global.head).userLocation = true;
                     Global.displayCycle.get(Global.head).photoLocation = false;
                     Global.displayCycle.get(Global.head).userLocationString = newLocation;
-                    Log.i("widgetProv", Global.displayCycle.get(Global.head).userLocationString);
 
+                    //save new loc to file via SQlite
+                    FileManager.changeLoc(Global.displayCycle.get(Global.head).getPath(),
+                            newLocation, getApplicationContext());
+
+                    Log.i("widgetProv", Global.displayCycle.get(Global.head).userLocationString);
                 }
-                Log.i("setLocAct", "Saving...Starting new timer task");
+
+               Log.i("setLocAct", "Saving...Starting new timer task");
+
                 appWidgetManager.updateAppWidget(appWidgetIds, rviews);
                 Intent startMain = new Intent(Intent.ACTION_MAIN);
                 startMain.addCategory(Intent.CATEGORY_HOME);

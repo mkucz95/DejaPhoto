@@ -7,11 +7,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
-public class Request implements IDataElement{
+public class Request implements IDataElement {
     public String requestFrom;
     public String requestTo;
     private DatabaseReference reference;
-    
+
     public Request() {
         // Default currUser constructor
     }
@@ -23,72 +23,75 @@ public class Request implements IDataElement{
     }
 
     @Override
-    public boolean checkExist(String check){
+    public boolean checkExist(String check) {
         return true;
- }
+    }
 
- @Override
- public void addElement(){
-//add request
-       reference.child("users").child(requestTo)
+    @Override
+    public void addElement() {
+        //add request
+        reference.child("users").child(requestTo)
                 .child("requests")
                 .child(requestFrom)
                 .setValue(true);
- }
+    }
 
- @Override
- public DatabaseReference getRef(){
-     return reference.child("users").child(requestTo)
-             .child("requests")
-             .child(requestFrom);
- }
+    @Override
+    public DatabaseReference getRef() {
+        return reference.child("users").child(requestTo)
+                .child("requests")
+                .child(requestFrom);
+    }
 
-    public static void clearRequest(String to, String from, DatabaseReference reference){
+    public static void clearRequest(String to, String from, DatabaseReference reference) {
         reference.child("users").child(to).child("requests").child(from).removeValue();
     }
 
-    public static void setRequestListener(DatabaseReference localRef){
+    public static void setRequestListener(DatabaseReference localRef) {
         localRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 //TODO handle request
 
-                String requestEmail =  dataSnapshot.getKey();
-                Log.d("RequestListener", "DataSnapshot"+ dataSnapshot);
+                String requestEmail = dataSnapshot.getKey();
+                Log.d("RequestListener", "DataSnapshot" + dataSnapshot);
 
                 // add email address into array list that stores requests
                 Global.currUser.requestList.add(requestEmail);
                 AddFriendsActivity.nextRequest = Global.currUser.requestList.get(0).replace(",", ".");
 
-                if(Global.currUser.requestList.size() > 0) {
+                if (Global.currUser.requestList.size() > 0) {
                     AddFriendsActivity.requestView(true); //switch view on
                 }
 
-                Log.d("RequestListener", "childAdded currUser friendslist: "+ Global.currUser.requestList.toString());
+                Log.d("RequestListener", "childAdded currUser friendslist: " + Global.currUser.requestList.toString());
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+            }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                if(Global.currUser.requestList.size() == 0){
+                if (Global.currUser.requestList.size() == 0) {
                     AddFriendsActivity.requestView(false); //switch view on
                     AddFriendsActivity.nextRequest = "";
 
 
-                }
-                else  AddFriendsActivity.nextRequest = Global.currUser.requestList.get(0).replace(",", ".");
+                } else
+                    AddFriendsActivity.nextRequest = Global.currUser.requestList.get(0).replace(",", ".");
 
-                Log.d("RequestListener", "childRemoved--- currUser friendslist: "+Global.currUser.requestList.toString());
+                Log.d("RequestListener", "childRemoved--- currUser friendslist: " + Global.currUser.requestList.toString());
             }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+            }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+            }
         });
     }
 
- }
+}

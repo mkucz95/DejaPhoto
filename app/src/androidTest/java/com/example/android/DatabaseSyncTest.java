@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
  */
 
 @RunWith(JUnit4.class)
-public class TestDatabaseSync {
+public class DatabaseSyncTest {
 
     Timer timer = new Timer();
 

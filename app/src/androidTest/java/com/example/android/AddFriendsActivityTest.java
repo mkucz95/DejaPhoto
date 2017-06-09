@@ -14,7 +14,7 @@ import static junit.framework.Assert.assertEquals;
  * Created by wl36901 on 2017/6/8.
  */
 
-public class TestAddFriendsActivity {
+public class AddFriendsActivityTest {
     @Rule
     public ActivityTestRule<AddFriendsActivity> addfActivity = new ActivityTestRule<AddFriendsActivity>(AddFriendsActivity.class);
 

@@ -20,6 +20,15 @@ import java.util.Timer;
 
 public class SetActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
+=======
+    public Switch location;
+    public Switch time;
+    public Switch dayOfWeek;
+    public Switch karma;
+    public Switch mode;
+
+>>>>>>> dd77280208c0d39aae984ebcd146285629b8972b
     EditText input;
     private Button saveButton;
     TextView newInterval;
@@ -38,52 +47,20 @@ public class SetActivity extends AppCompatActivity {
 
         updateInterval();
 
-        Switch location = (Switch) findViewById(R.id.s_location);
-        Switch time = (Switch) findViewById(R.id.s_time);
-        Switch dayOfWeek = (Switch) findViewById(R.id.s_dow);
-        Switch karma = (Switch) findViewById(R.id.s_karma);
-        Switch mode = (Switch) findViewById(R.id.s_mode);
+        location = (Switch) findViewById(R.id.s_location);
+        time = (Switch) findViewById(R.id.s_time);
+        dayOfWeek = (Switch) findViewById(R.id.s_dow);
+        karma = (Switch) findViewById(R.id.s_karma);
+        mode = (Switch) findViewById(R.id.s_mode);
 
-        Log.d("SetActivity", "MODE: " +mode);
-        Log.i("setActivity", ""+ Global.locationSetting);
-        Log.i("setActivity", ""+ Global.timeSetting);
-        Log.i("setActivity", ""+ Global.daySetting);
-        Log.i("setActivity", ""+ Global.karmaSetting);
-        Log.i("setActivity", ""+ Global.dejaVuSetting);
+        Log.d("SetActivity", "MODE: " + mode);
+        Log.i("setActivity", "" + Global.locationSetting);
+        Log.i("setActivity", "" + Global.timeSetting);
+        Log.i("setActivity", "" + Global.daySetting);
+        Log.i("setActivity", "" + Global.karmaSetting);
+        Log.i("setActivity", "" + Global.dejaVuSetting);
 
-        if (Global.dejaVuSetting) {
-            mode.setChecked(true);
-        } else {
-            mode.setChecked(false);
-        }
-
-        if(Global.locationSetting) {
-            location.setChecked(true);
-        }
-        else {
-            location.setChecked(false);
-        }
-
-        if(Global.timeSetting) {
-            time.setChecked(true);
-        }
-        else {
-            time.setChecked(false);
-        }
-
-        if(Global.daySetting) {
-            dayOfWeek.setChecked(true);
-        }
-        else {
-            dayOfWeek.setChecked(false);
-        }
-
-        if(Global.karmaSetting) {
-            karma.setChecked(true);
-        }
-        else {
-            karma.setChecked(false);
-        }
+        displayUpdate();
 
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -110,12 +87,11 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if(!Global.dejaVuSetting){ //if dejavu mode is off, we cannot change settings
+                if (!Global.dejaVuSetting) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
-                }
-                else { //dejavu mode is on
-                    Intent trackerIntent = new Intent (getApplicationContext(), TrackerService.class);
+                } else { //dejavu mode is on
+                    Intent trackerIntent = new Intent(getApplicationContext(), TrackerService.class);
                     if (isChecked) {
                         Log.i("saveMsg", "Location ON");
                         Global.locationSetting = true;
@@ -149,13 +125,13 @@ public class SetActivity extends AppCompatActivity {
                     if (isChecked) {
                         Log.i("saveMsg", "Time ON");
 
-                        Global.timeSetting=true;
+                        Global.timeSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is on", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.i("saveMsg", "Time OFF");
 
-                        Global.timeSetting=false;
+                        Global.timeSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -229,7 +205,7 @@ public class SetActivity extends AppCompatActivity {
                 newInterval.setText(newInfo);
                 Global.changeInterval = (interval * 1000);
                 startRerank();
-                if(Global.undoTimer != null) {
+                if (Global.undoTimer != null) {
                     Global.autoWallpaperChange.cancel();
                     Global.undoTimer.cancel();
                     Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
@@ -241,14 +217,46 @@ public class SetActivity extends AppCompatActivity {
         });
     }
 
+    private void displayUpdate() {
+        if (Global.dejaVuSetting) {
+            mode.setChecked(true);
+        } else {
+            mode.setChecked(false);
+        }
+
+        if (Global.locationSetting) {
+            location.setChecked(true);
+        } else {
+            location.setChecked(false);
+        }
+
+        if (Global.timeSetting) {
+            time.setChecked(true);
+        } else {
+            time.setChecked(false);
+        }
+
+        if (Global.daySetting) {
+            dayOfWeek.setChecked(true);
+        } else {
+            dayOfWeek.setChecked(false);
+        }
+
+        if (Global.karmaSetting) {
+            karma.setChecked(true);
+        } else {
+            karma.setChecked(false);
+        }
+    }
+
     public void startRerank() {
         Intent intent = new Intent(this, Rerank.class);
         startService(intent);
     }
 
-    public void updateInterval(){
+    public void updateInterval() {
         newInterval = (TextView) findViewById(R.id.change_interval);
-        String newInfo = Global.changeInterval/1000 + " seconds";
+        String newInfo = Global.changeInterval / 1000 + " seconds";
         Log.i("deja", "Setting text to: " + newInfo);
         newInterval.setText(newInfo);
     }
