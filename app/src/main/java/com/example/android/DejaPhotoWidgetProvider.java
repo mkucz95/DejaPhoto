@@ -40,10 +40,10 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     Intent intentKarma;
     Intent intentRelease;
 
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int N = appWidgetIds.length;
 
-        for(int i=0; i<N; i++){ //
+        for (int i = 0; i < N; i++) { //
             int appWidgetId = appWidgetIds[i];
 
             Intent intentPrev = new Intent(context, DejaPhotoWidgetProvider.class);
@@ -96,7 +96,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         if (intent.getAction().equals(PREVIOUS_PIC)) {
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_PREVIOUS);
-            if(Global.currIndex == 0) Global.currIndex = Global.displayCycle.size() - 1;
+            if (Global.currIndex == 0) Global.currIndex = Global.displayCycle.size() - 1;
             else Global.currIndex = Global.currIndex - 1;
             changePicture = true;
             manageTimer(context); //reset undoTimer
@@ -116,9 +116,9 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             if (Global.currIndex == Global.displayCycle.size()) Global.currIndex = 0;
             else Global.currIndex = Global.currIndex + 1;
             changePicture = true;
-        } else if(intent.getAction().equals(SET_LOCATION)){
+        } else if (intent.getAction().equals(SET_LOCATION)) {
             Log.i("widgetProv", "IN SETLOCATION");
-            Intent intn = new Intent (context, SetLocationActivity.class);
+            Intent intn = new Intent(context, SetLocationActivity.class);
             context.startActivity(intn);
         }
 
@@ -126,14 +126,14 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     }
 
 
-    public void undoManager(Context context, String action){
+    public void undoManager(Context context, String action) {
         this.karmaAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         this.releaseAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         intentKarma = new Intent(context, ActionReceiver.class);
         intentRelease = new Intent(context, ActionReceiver.class);
 
-        if(!Global.undoKarmaOn && action.equals("karma")){ //check to see if the alarmmanager returns a object or null (whether alarm is set)
+        if (!Global.undoKarmaOn && action.equals("karma")) { //check to see if the alarmmanager returns a object or null (whether alarm is set)
             intentKarma.setAction(ACTION_KARMA);
             Global.karmaPath = getPath();
 
@@ -143,9 +143,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Global.undoKarmaOn = true; //set the alarm
 
             Toast.makeText(context, "Click Karma again to undo", Toast.LENGTH_LONG).show();
-        }
-
-        else if(!Global.undoReleaseOn && action.equals("release") ){
+        } else if (!Global.undoReleaseOn && action.equals("release")) {
             intentRelease.setAction(ACTION_RELEASE);
             Global.releasePath = getPath();
 
@@ -154,8 +152,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
             Global.undoReleaseOn = true;
 
-            if(Global.undoKarmaOn){
-                if(karmaPI != null) {
+            if (Global.undoKarmaOn) {
+                if (karmaPI != null) {
                     karmaAlarm.cancel(karmaPI);
                     karmaPI.cancel();
                 }
@@ -163,12 +161,10 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             }
 
             Toast.makeText(context, "Click Release again to undo", Toast.LENGTH_LONG).show();
-        }
+        } else if (Global.undoKarmaOn && action.equals("karma")) { //when the currUser presses button a second time before the alarm undoTimer runs out
+            Log.i("undoManager", "alarmKarma : " + Global.undoKarmaOn);
 
-        else if (Global.undoKarmaOn && action.equals("karma") ){ //when the currUser presses button a second time before the alarm undoTimer runs out
-            Log.i("undoManager", "alarmKarma : " +Global.undoKarmaOn);
-
-            if(karmaPI != null) {
+            if (karmaPI != null) {
                 karmaAlarm.cancel(karmaPI); // Millisec * Second * Minute
                 karmaPI.cancel();
                 intentKarma.setAction("");
@@ -178,12 +174,10 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             Global.undoKarmaOn = false; //switch karma alarm off
             //views.setTextViewText(R.id.karma_num, "0");
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
-        }
-
-        else if(Global.undoReleaseOn && action.equals("release")){ //release alarm on
+        } else if (Global.undoReleaseOn && action.equals("release")) { //release alarm on
             Log.i("undoManager", "alarmRelease : " + Global.undoReleaseOn);
 
-            if(releasePI != null) {
+            if (releasePI != null) {
                 releaseAlarm.cancel(releasePI); // Millisec * Second * Minute
                 releasePI.cancel();
                 intentRelease.setAction("");
@@ -194,14 +188,14 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    public String getPath(){
+    public String getPath() {
         Photo photo = Global.displayCycle.get(Global.head);
         return photo.getPath();
     }
 
     public void manageTimer(Context context) { //called when button is clicked
         Log.i("updateInterval", "Change Interval: " + Global.changeInterval);
-        if(Global.undoTimer != null) {
+        if (Global.undoTimer != null) {
             Global.autoWallpaperChange.cancel();
             Global.undoTimer.cancel();
             Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);

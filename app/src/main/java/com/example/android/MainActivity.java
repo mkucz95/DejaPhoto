@@ -35,20 +35,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
 
     Context context;
-    Activity activity = this;
 
     private FileManager fileManager;
-
     File dejaCopy;
-    File dejaPhoto;
 
     static final int REQUEST_CODE = 1;
     String TAG = "MainActivity";
     static final int SELECT_IMAGE = 2;
 
     private String path;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         if (!dejaCopy.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
             boolean rv = dejaCopy.mkdir();
-            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+            Log.i(TAG, "Folder creation " + (rv ? "success" : "failed"));
         } else {
             Log.i(TAG, "Folder already exists.");
         }
@@ -129,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         addFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               addFriend();
+                addFriend();
             }
         });
 
@@ -141,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Global.syncTimerTask = new DatabaseSync();
-        Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000); //schedule timer
+        Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval * 1000); //schedule timer
     }
 
     // MS2 click the camera button to open default camera
@@ -179,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void addPhoto () {
+    public void addPhoto() {
         PhotoPicker photoPick = new PhotoPicker(this.getApplicationContext(), this);
         photoPick.add();
         Toast.makeText(getApplicationContext(), "Press and hold to select multiple images", Toast.LENGTH_SHORT).show();
@@ -193,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         fileManager = new FileManager(context);
 
-        if(resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             if (data != null) {
                 //Clipdata for multiple selections, Uri format for single selection
                 ClipData clipData = data.getClipData();
@@ -210,19 +205,19 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             fileManager.copyFile(new File(p), dejaCopy);
                             Global.uploadImageQueue.add(p);
-                        } catch(IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
                 }
                 //Single image case
-                else if(singleUri != null){
-                    String p  = fileManager.getImagePath(singleUri);
+                else if (singleUri != null) {
+                    String p = fileManager.getImagePath(singleUri);
                     try {
                         Log.i(TAG, "" + singleUri.toString());
                         fileManager.copyFile(new File(p), dejaCopy);
                         Global.uploadImageQueue.add(p);
-                    } catch(IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
@@ -230,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // take a picture and save in deja folder
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 
             fileManager.saveFile(thumbnail, "DejaPhoto");
@@ -244,8 +239,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public void startApp(){
+    public void startApp() {
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
 
         Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
@@ -263,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void requestPermission(){
+    public void requestPermission() {
         Log.i("permission", "checking permission...");
         //Check permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -277,9 +271,8 @@ public class MainActivity extends AppCompatActivity {
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            MY_PERMISSIONS_MULTIPLE_REQUEST);
-        }
-        else{
+                    MY_PERMISSIONS_MULTIPLE_REQUEST);
+        } else {
             startApp();
         }
         //startApp();
@@ -297,46 +290,40 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("permission", "Read Permission Now Granted...");
                 Toast.makeText(this, "Read permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Read Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 5 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 5 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
                 Log.i("permission", "Location Permission Now Granted...");
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 5 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 5 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
                 Log.i("permission", " Location Permission Now Granted...");
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 5 && grantResults[3] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 5 && grantResults[3] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show();
                 Log.i("permission", "Camera Permission Now Granted...");
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Camera Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 5 && grantResults[4] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 5 && grantResults[4] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Write permission granted", Toast.LENGTH_SHORT).show();
                 Log.i("permission", "Write Permission Now Granted...");
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Write Access Denied", Toast.LENGTH_SHORT).show();
             }
 
-        }
-        else {
+        } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
@@ -346,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("saveMsg", "input:" + input);
 
-        if(input == null || input.getText().toString().equals("")){
+        if (input == null || input.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Please enter a valid time Interval", Toast.LENGTH_SHORT).show();
             return;
         }

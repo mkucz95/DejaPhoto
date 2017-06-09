@@ -23,16 +23,15 @@ public class ShareActivityTest {
     public ActivityTestRule<ShareActivity> activity = new ActivityTestRule<>(ShareActivity.class);
 
     @Test
-    public void testShare(){
+    public void testShare() {
         Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_mode);
         Boolean checked = sw.isChecked();
-        if(checked){
+        if (checked) {
             assertEquals(Global.shareSetting, true);
 
             sw.setChecked(false);
             assertEquals(Global.shareSetting, false);
-        }
-        else{
+        } else {
             assertEquals(Global.shareSetting, false);
 
             sw.setChecked(true);
@@ -41,24 +40,24 @@ public class ShareActivityTest {
     }
 
     @Test
-    public void testTextDisplay(){
+    public void testTextDisplay() {
         int interval = Global.syncInterval;
         TextView textView = (TextView) activity.getActivity().findViewById(R.id.syncInterval);
         String intervalString = textView.getText().toString();
 
-        assertEquals(intervalString.contains(""+interval), true);
+        assertEquals(intervalString.contains("" + interval), true);
         //make sure string contains the number
     }
 
     @Test
-    public void testTestButton(){
+    public void testTestButton() {
         Button button = (Button) activity.getActivity().findViewById(R.id.test_10sec);
         button.performClick();
 
         TextView textView = (TextView) activity.getActivity().findViewById(R.id.syncInterval);
         String intervalString = textView.getText().toString();
 
-        assertEquals(intervalString.contains(""+10), true);
+        assertEquals(intervalString.contains("" + 10), true);
         assertEquals(Global.syncInterval, 10);
         //make sure string contains the number
     }

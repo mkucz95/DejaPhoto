@@ -54,21 +54,21 @@ public class ShareActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    if (isChecked) {
-                        Global.shareSetting = true;
-                        Toast.makeText(getApplicationContext(),
-                                "Sharing On", Toast.LENGTH_SHORT).show();
+                if (isChecked) {
+                    Global.shareSetting = true;
+                    Toast.makeText(getApplicationContext(),
+                            "Sharing On", Toast.LENGTH_SHORT).show();
 
-                    } else {
-                        Global.shareSetting = false;
-                        share.setChecked(false);
-                        Toast.makeText(getApplicationContext(),
-                                "Sharing Off", Toast.LENGTH_SHORT).show();
+                } else {
+                    Global.shareSetting = false;
+                    share.setChecked(false);
+                    Toast.makeText(getApplicationContext(),
+                            "Sharing Off", Toast.LENGTH_SHORT).show();
 
-                     //remove references to curr user's pictures if they switch off
-                        DatabaseReference reference = Global.currUser.userPhotosRef();
-                        if(reference != null) reference.removeValue();
-                    }
+                    //remove references to curr user's pictures if they switch off
+                    DatabaseReference reference = Global.currUser.userPhotosRef();
+                    if (reference != null) reference.removeValue();
+                }
             }
         });
 
@@ -109,18 +109,17 @@ public class ShareActivity extends AppCompatActivity {
     /*
     sets the view of the UI to the desired setting
      */
-    private void displayUpdate(boolean switchUpdate){
-       if(switchUpdate) {
-           if (Global.shareSetting) {
-               share.setChecked(true);
-           } else {
-               share.setChecked(false);
-           }
-       }
-       else{
-           String text = Global.syncInterval + " seconds";
-           textView.setText(text);
-       }
+    private void displayUpdate(boolean switchUpdate) {
+        if (switchUpdate) {
+            if (Global.shareSetting) {
+                share.setChecked(true);
+            } else {
+                share.setChecked(false);
+            }
+        } else {
+            String text = Global.syncInterval + " seconds";
+            textView.setText(text);
+        }
 
     }
 
@@ -132,10 +131,10 @@ public class ShareActivity extends AppCompatActivity {
         displayUpdate(false);
     }
 
-    private static void timerReset(){
+    private static void timerReset() {
         Global.syncTimerTask.cancel();
         Global.syncTimerTask = new DatabaseSync();
-        Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000);
+        Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval * 1000);
     }
 }
 

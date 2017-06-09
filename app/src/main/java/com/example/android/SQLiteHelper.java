@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Justin on 5/15/17.
- *
+ * <p>
  * This class helps us iterate and read information from the device storage (SQLite)
  */
 
@@ -34,8 +34,8 @@ public class SQLiteHelper {
 
 
         int[] colIndex = new int[projection.length];
-        for(int i = 0; i < projection.length; i++){
-                 colIndex[i] = cr.getColumnIndex(projection[i]);
+        for (int i = 0; i < projection.length; i++) {
+            colIndex[i] = cr.getColumnIndex(projection[i]);
         }
 
         /*
@@ -49,38 +49,37 @@ public class SQLiteHelper {
         ArrayList<Photo> paths = new ArrayList<>();
         Log.i(TAG, "Paths arrayList created");
 
-        if(projection.length != 4) {
+        if (projection.length != 4) {
             Log.i(TAG, "wrong projection passed to sqlite helper : Projection Length: " + projection.length);
             return;
         }
 
-        if(null == cr) {
+        if (null == cr) {
             Log.i(TAG, "ERROR null==cr");
-        }else if( cr.getCount()<1) {
+        } else if (cr.getCount() < 1) {
             Log.i(TAG, "NO MEDIA FOUND");
         } else { //handle returned data
             Log.i(TAG, "MEDIA PRESENT");
             cr.moveToFirst();
 
-            do{ //go through all the images
+            do { //go through all the images
                 Photo photo;
-                if( matchesCases(cr.getString(colIndex[0]), Global.displayFriend, Global.displayUser) ) {
+                if (matchesCases(cr.getString(colIndex[0]), Global.displayFriend, Global.displayUser)) {
 
                     photo = new Photo(cr.getString(colIndex[0]), cr.getString(colIndex[1]),
                             cr.getString(colIndex[2]), cr.getString(colIndex[3]));
 
-                   String[] customInfo = FileManager.handleCSV(cr.getString(cr.getColumnIndex
-                           (MediaStore.Images.ImageColumns.DESCRIPTION)));
+                    String[] customInfo = FileManager.handleCSV(cr.getString(cr.getColumnIndex
+                            (MediaStore.Images.ImageColumns.DESCRIPTION)));
 
                     handleCustomInfo(photo, customInfo);
 
                     paths.add(photo);
-                    Log.i(TAG, ""+photo.getPath());
+                    Log.i(TAG, "" + photo.getPath());
+                } else {
+                    Log.i(TAG, "Photo not in folders: " + cr.getString(colIndex[0]));
                 }
-                else{
-                    Log.i(TAG, "Photo not in folders: "+cr.getString(colIndex[0]));
-                }
-            } while(cr.moveToNext());
+            } while (cr.moveToNext());
         }
 
         if (cr != null) {
@@ -92,37 +91,37 @@ public class SQLiteHelper {
 
     //check to see if custom info exists and set to photo obj
     private void handleCustomInfo(Photo photo, String[] customInfo) {
-        if(customInfo != null){
-            if(customInfo[1] != null){
+        if (customInfo != null) {
+            if (customInfo[1] != null) {
                 photo.setKarma(Integer.parseInt(customInfo[1]));
             }
-            if(customInfo[0] != null){
+            if (customInfo[0] != null) {
                 photo.photoLocationString = customInfo[0];
             }
         }
     }
 
-    public String getSingleLine(Uri uri, String[] projection, String path, Context context){
-    String info = "";
+    public String getSingleLine(Uri uri, String[] projection, String path, Context context) {
+        String info = "";
 
         this.cr = context.getContentResolver().query(uri, projection, null, null, null);
 
-        if(null == cr) {
+        if (null == cr) {
             Log.i(TAG, "ERROR null==cr");
-        }else if( cr.getCount()<1) {
+        } else if (cr.getCount() < 1) {
             Log.i(TAG, "NO MEDIA FOUND");
         } else { //handle returned data
             Log.i(TAG, "MEDIA PRESENT");
             cr.moveToFirst();
 
-            do{ //go through all the images
-                if( path.equals(cr.getString(0))) {
+            do { //go through all the images
+                if (path.equals(cr.getString(0))) {
                     info = cr.getString(1);
 
-                    Log.d(TAG, "info recieved: "+info);
+                    Log.d(TAG, "info recieved: " + info);
                     break;
                 }
-            } while(cr.moveToNext());
+            } while (cr.moveToNext());
         }
 
         if (cr != null) {
@@ -135,10 +134,10 @@ public class SQLiteHelper {
     /*
     This method puts data in a certain field in sqlite database
      */
-    public int storeSQLData(String data, String colToAdd, String path, Context context){
-        if(null==cr) {
+    public int storeSQLData(String data, String colToAdd, String path, Context context) {
+        if (null == cr) {
             Log.e(TAG, "ERROR null=cr in write");
-        }else if( cr.getCount()<1) {
+        } else if (cr.getCount() < 1) {
             Log.e(TAG, "ERROR no elements in table");
         } else { //handle returned data
             cr.moveToFirst();
@@ -146,38 +145,38 @@ public class SQLiteHelper {
 
             Log.i(TAG, "looking for image");
 
-                    String[] selectionArgs = {path};
-                    String selectionClause =  MediaStore.Images.Media.DATA + " = ?";
+            String[] selectionArgs = {path};
+            String selectionClause = MediaStore.Images.Media.DATA + " = ?";
 
-                    ContentValues newUserValue = new ContentValues();
-                    newUserValue.put(colToAdd, data);
+            ContentValues newUserValue = new ContentValues();
+            newUserValue.put(colToAdd, data);
 
-                    //update(@thisUri, with values from ContentValues ...)
-                    int numUpdated  = context.getContentResolver().update(
-                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, newUserValue,
-                            selectionClause, selectionArgs);
+            //update(@thisUri, with values from ContentValues ...)
+            int numUpdated = context.getContentResolver().update(
+                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, newUserValue,
+                    selectionClause, selectionArgs);
 
-                    Log.i(TAG, "updated: " + numUpdated + " rows");
+            Log.i(TAG, "updated: " + numUpdated + " rows");
             return numUpdated;
-                }
+        }
         if (cr != null) {
             cr.close();
         }
         return -1;
     }
 
-    public static boolean matchesCases(String string, boolean friends, boolean own){
-        if(own && friends){
-            if(string.contains("DejaPhoto") || string.contains("DejaCopy") || string.contains("DejaFriends"))
+    public static boolean matchesCases(String string, boolean friends, boolean own) {
+        if (own && friends) {
+            if (string.contains("DejaPhoto") || string.contains("DejaCopy") || string.contains("DejaFriends"))
                 return true;
             else return false;
 
-        }else if(own){
-            if(string.contains("DejaPhoto") || string.contains("DejaCopy"))
+        } else if (own) {
+            if (string.contains("DejaPhoto") || string.contains("DejaCopy"))
                 return true;
             else return false;
-        }else {
-            if(string.contains("DejaFriends"))
+        } else {
+            if (string.contains("DejaFriends"))
                 return true;
             else return false;
         }

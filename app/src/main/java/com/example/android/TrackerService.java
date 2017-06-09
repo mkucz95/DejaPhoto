@@ -29,10 +29,8 @@ public class TrackerService extends Service {
     Location initLocation;
     int THREAD_PRIORITY_BACKGROUND = 10;
 
-
     private static final double LOCATION_RERANK = 304.8; // 1000 feet in meters
     private static final long TIME_RERANK = 2; // 2 hours
-
 
     // Handler that receives messages from the thread
     private final class ServiceHandler extends Handler {
@@ -63,7 +61,7 @@ public class TrackerService extends Service {
         // main thread, which we don't want to block.  We also make it
         // background priority so CPU-intensive work will not disrupt our UI.
         //LocationManager locationManager =
-                //(LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //(LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         //Criteria criteria = new Criteria();
         //criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -119,7 +117,7 @@ public class TrackerService extends Service {
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
 
-    public void initLocation(LocationManager locationManager){
+    public void initLocation(LocationManager locationManager) {
 
         Log.i("TrackerService", "initLocation");
 
@@ -139,11 +137,10 @@ public class TrackerService extends Service {
 
         // Initial Location
         initLocation = locationManager.getLastKnownLocation(provider);
-        if(initLocation != null) {
+        if (initLocation != null) {
             initLatitude = initLocation.getLatitude();
             initLongitude = initLocation.getLongitude();
-        }
-        else{
+        } else {
             Toast.makeText(this, "Location Not Found", Toast.LENGTH_SHORT).show();
             onDestroy();
         }
@@ -151,7 +148,7 @@ public class TrackerService extends Service {
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                if(location != null) {
+                if (location != null) {
                     updateLocation(location);
                 }
             }
@@ -182,22 +179,22 @@ public class TrackerService extends Service {
     public void updateLocation(Location location) {
         double currLatitude;
         double currLongitute;
-        if(location == null){
+        if (location == null) {
             Toast.makeText(getApplicationContext(), "Location could not be found", Toast.LENGTH_SHORT).show();
             return;
         }
         int currTime;
         Log.i("TrackerService", "in updateLocation");
 
-        currTime = (int) ((location.getTime() / (1000*60*60)) % 24);
+        currTime = (int) ((location.getTime() / (1000 * 60 * 60)) % 24);
 
-        if(location != null) {
+        if (location != null) {
             currLatitude = location.getLatitude();
             currLongitute = location.getLongitude();
         }
 
         // Check if out of location boundary for every update
-        if(location.distanceTo(initLocation) > LOCATION_RERANK) {
+        if (location.distanceTo(initLocation) > LOCATION_RERANK) {
             Log.i("TrackerService", "===========================New Location Detected: " + location);
             initLocation = location;
             // call rerank
@@ -208,7 +205,7 @@ public class TrackerService extends Service {
         }
 
         // Check if out of time boundary for every update
-       if((currTime - initTime) > TIME_RERANK) {
+        if ((currTime - initTime) > TIME_RERANK) {
             initLocation = location;
             this.initTime = currTime;
             // call rerank

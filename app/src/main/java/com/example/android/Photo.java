@@ -23,12 +23,11 @@ public class Photo {
     private String folder = "friends";
     private String locationName;
 
-    public Photo(){
+    public Photo() {
     }
 
     //constructor gets information from the rerank method
-    public Photo(String imagePath, String date_taken, String latitude, String longitude)
-    {
+    public Photo(String imagePath, String date_taken, String latitude, String longitude) {
 
         this.imagePath = imagePath;
 
@@ -48,7 +47,7 @@ public class Photo {
 
     //long time from 1970 transfer day of week
     public static String getWeekOfDate(Date dt) {
-        String[] weekDays = {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        String[] weekDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(dt);
@@ -65,14 +64,20 @@ public class Photo {
 
     public String[] getLatLong() {
 
-        Log.d("lattitud",latitude+"");
-        Log.d("logtitude",longitude+"");
-      return latLong;
-    }    String[] latLong = {this.latitude, this.longitude};
+        Log.d("lattitud", latitude + "");
+        Log.d("logtitude", longitude + "");
+        return latLong;
+    }
 
-    public String getDayOfWeek() { return dayOfWeek;}
+    String[] latLong = {this.latitude, this.longitude};
 
-    public long getHour(){return hour;}
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public long getHour() {
+        return hour;
+    }
 
     public String getDateTaken() {
         return date_taken;
@@ -82,14 +87,17 @@ public class Photo {
         return this.karma;
     }
 
-    public void setKarma(int boolKarma){
+    public void setKarma(int boolKarma) {
         this.karma = boolKarma;
     }
 
-    public void setReleased(boolean flag){
+    public void setReleased(boolean flag) {
         this.released = flag;
     }
-    public String getFolder(){ return this.folder; }
+
+    public String getFolder() {
+        return this.folder;
+    }
 
     public String userLocationString = "Not Set";
     public Boolean userLocation = false;

@@ -45,7 +45,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         saveDisplay = (Button) findViewById(R.id.save_display);
 
-      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         user.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -83,7 +83,7 @@ public class DisplayActivity extends AppCompatActivity {
                 Global.displayFriend = friendDisplay;
                 Global.displayUser = userDisplay;
 
-                if(!Global.displayFriend){
+                if (!Global.displayFriend) {
                     FileManager.deleteFolder("DejaPhotoFriends");
                     //if we switch off display friends, remove their photos from device
                 }
@@ -100,7 +100,7 @@ public class DisplayActivity extends AppCompatActivity {
 
     }
 
-    private void displayUpdate(){
+    private void displayUpdate() {
         if (Global.displayUser) {
             user.setChecked(true);
         } else {

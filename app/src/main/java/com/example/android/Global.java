@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 /**
  * Created by Justin on 5/15/17.
- *
+ * <p>
  * Used to keep track of various information for our programme
  */
 
@@ -35,7 +35,7 @@ public class Global {
     public static boolean dejaVuSetting = true, locationSetting = false,
             daySetting = false, timeSetting = false, karmaSetting = false;
 
-   //keeps track of alarms for the widget button when karma/release pressed
+    //keeps track of alarms for the widget button when karma/release pressed
     //UNDO BUTTON PRESS
     public static boolean undoReleaseOn = false; //whether these alarms are on
     public static boolean undoKarmaOn = false;
@@ -46,7 +46,7 @@ public class Global {
     public static int karmaNum = 0;
 
     //RANK SETTINGS
-    public static boolean[] getSettings(){
+    public static boolean[] getSettings() {
         boolean[] settings = {dejaVuSetting, locationSetting, daySetting, timeSetting, karmaSetting};
         return settings;
     }
@@ -83,7 +83,7 @@ public class Global {
 
     //Method to check if string is whitespace
     public static boolean isBlank(String str) {
-        Log.i("isBlank","STRING: '" + str + "'");
+        Log.i("isBlank", "STRING: '" + str + "'");
         int strLen;
         if (str == null || (strLen = str.length()) == 0) {
             return true;

@@ -36,33 +36,32 @@ public class BuildDisplayCycle extends IntentService {
             final String action = intent.getAction();
             Log.i(TAG, action);
 
-           if (ACTION_BUILD_CYCLE.equals(action)) {
+            if (ACTION_BUILD_CYCLE.equals(action)) {
                 Log.i(TAG, "Building cycle from MEDIA...");
 
-               //call sqlite traverser
-               SQLiteHelper helper = new SQLiteHelper();
-               helper.iterateAllMedia(Global.mediaUri, Global.wholeTableProjection, this);
-               Log.i(TAG, "Reranking... 1st Build");
+                //call sqlite traverser
+                SQLiteHelper helper = new SQLiteHelper();
+                helper.iterateAllMedia(Global.mediaUri, Global.wholeTableProjection, this);
+                Log.i(TAG, "Reranking... 1st Build");
 
-               Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
-               Log.i("widgetProv", "DisplayCycle size: " + Global.displayCycle.size());
-               for(Photo p : Global.displayCycle) {
-                   PhotoLocation locName = new PhotoLocation(p.getPath(), gc, false);
-                   Log.i("widgetProv", p.getPath() +": " + locName);
-               }
+                Geocoder gc = new Geocoder(this.getApplicationContext(), Locale.getDefault());//Locale.getDefault()follow the system's language
+                Log.i("widgetProv", "DisplayCycle size: " + Global.displayCycle.size());
+                for (Photo p : Global.displayCycle) {
+                    PhotoLocation locName = new PhotoLocation(p.getPath(), gc, false);
+                    Log.i("widgetProv", p.getPath() + ": " + locName);
+                }
 
-               Log.i("widgetProv", "6666666666666666");
+                Log.i("widgetProv", "6666666666666666");
 
-               for(Photo p : Global.displayCycle) {
-                   Log.i("widgetProv", "location: " + p.photoLocationString);
-               }
-               //after build from file, apply rank settings (released/karma)
-               Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
-               startService(rerankIntent);
+                for (Photo p : Global.displayCycle) {
+                    Log.i("widgetProv", "location: " + p.photoLocationString);
+                }
+                //after build from file, apply rank settings (released/karma)
+                Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
+                startService(rerankIntent);
 
 
-
-           }
+            }
             Log.i(TAG, "Stopping service");
             stopService(intent);
         }

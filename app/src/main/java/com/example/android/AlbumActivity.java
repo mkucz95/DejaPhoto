@@ -33,48 +33,32 @@ public class AlbumActivity extends AppCompatActivity {
         dejaAlbum = (Switch) findViewById(R.id.deja_album);
         cameraAlbum = (Switch) findViewById(R.id.camera_album);
 
-
-
         setDejaAlbum();
-
-
-
-
-
-
-
-
     }
 
-
-
-    public void setDejaAlbum () {
+    public void setDejaAlbum() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(sharedPreferences.getBoolean("Deja Album Preference", false) == true) {
+        if (sharedPreferences.getBoolean("Deja Album Preference", false) == true) {
             dejaAlbum.setChecked(true);
             cameraAlbum.setClickable(false);
 
-        }
-
-        else {
+        } else {
             dejaAlbum.setChecked(false);
         }
 
-        if(sharedPreferences.getBoolean("Camera Album Preference", false) == true) {
+        if (sharedPreferences.getBoolean("Camera Album Preference", false) == true) {
             cameraAlbum.setChecked(true);
             dejaAlbum.setClickable(false);
-        }
-        else {
+        } else {
             cameraAlbum.setChecked(false);
         }
-
 
         final LinearLayout l = (LinearLayout) findViewById(R.id.l_Album);
         dejaAlbum.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     SharedPreferences sharedPreferences = getSharedPreferences("Deja Photo", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("Deja Album Preference", true);
@@ -85,8 +69,7 @@ public class AlbumActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Deja Photo is chosen", Toast.LENGTH_SHORT).show();
 
-                }
-                else {
+                } else {
                     SharedPreferences sharedPreferences = getSharedPreferences("Deja Photo", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("Deja Album Preference", false);
@@ -101,12 +84,10 @@ public class AlbumActivity extends AppCompatActivity {
             }
         });
 
-
-
         cameraAlbum.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     SharedPreferences sharedPreferences = getSharedPreferences("Deja Photo", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("Camera Album Preference", true);
@@ -117,8 +98,7 @@ public class AlbumActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Camera Roll is chosen", Toast.LENGTH_SHORT).show();
 
-                }
-                else {
+                } else {
                     SharedPreferences sharedPreferences = getSharedPreferences("Deja Photo", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("Camera Album Preference", false);

@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.util.Log;
 
 /**
- *     This intent service changes the image when called according to the passed parameter
- *     it also moves the head of the display cycle to hold the number/position of the picture that
- *     is displayed.
- *     It calls the wallpaper service manager to actually change the wallpaper
+ * This intent service changes the image when called according to the passed parameter
+ * it also moves the head of the display cycle to hold the number/position of the picture that
+ * is displayed.
+ * It calls the wallpaper service manager to actually change the wallpaper
  */
 public class ChangeImage extends IntentService {
     private static final String ACTION_PREVIOUS = "com.example.android.PREVIOUS";
@@ -30,7 +30,7 @@ public class ChangeImage extends IntentService {
             final String action = intent.getAction();
             int newHead;
             if (ACTION_PREVIOUS.equals(action)) { //move to previous pic
-                 newHead = moveHead(PREV_PIC);
+                newHead = moveHead(PREV_PIC);
                 changeImgToDisplay(newHead);
             } else if (ACTION_NEXT.equals(action)) { //move to next pic
                 newHead = moveHead(NEXT_PIC);
@@ -42,62 +42,59 @@ public class ChangeImage extends IntentService {
         }
     }
 
-    private void displayFirstImage(){
-        int counter = Global.displayCycle.size()-1;
+    private void displayFirstImage() {
+        int counter = Global.displayCycle.size() - 1;
 
-        if(counter!=-1){
+        if (counter != -1) {
             changeImgToDisplay(0);
         }
     }
 
-    private int moveHead(String direction){
-        int counterInt = Global.displayCycle.size()-1; //last element index
+    private int moveHead(String direction) {
+        int counterInt = Global.displayCycle.size() - 1; //last element index
         int currHead = Global.head; //current index
 
-        Log.d("ChangeImage", "currHead: "+ currHead);
-        Log.d("ChangeImage","counterInt"+ counterInt);
+        Log.d("ChangeImage", "currHead: " + currHead);
+        Log.d("ChangeImage", "counterInt" + counterInt);
 
-        if(counterInt==-1){ //there are no images in the list
+        if (counterInt == -1) { //there are no images in the list
             return -1;
         }
 
         //change the head based on which button was pressed
-        if(direction.equalsIgnoreCase(PREV_PIC) && currHead == 0) {
-            Log.i("changeImage", "prev clicked, currHead: 0, newHead: "+counterInt);
+        if (direction.equalsIgnoreCase(PREV_PIC) && currHead == 0) {
+            Log.i("changeImage", "prev clicked, currHead: 0, newHead: " + counterInt);
 
             currHead = counterInt;
-        }
-        else if(direction.equalsIgnoreCase(PREV_PIC) && currHead != 0) {
-            Log.i("changeImage", "prev clicked, currHead: "+ currHead +", newHead: "+(currHead-1));
+        } else if (direction.equalsIgnoreCase(PREV_PIC) && currHead != 0) {
+            Log.i("changeImage", "prev clicked, currHead: " + currHead + ", newHead: " + (currHead - 1));
 
             currHead--;
-        }
-        else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead == counterInt) {
-            Log.i("changeImage", "next clicked, currHead: "+ currHead + ", newHead: "+0);
+        } else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead == counterInt) {
+            Log.i("changeImage", "next clicked, currHead: " + currHead + ", newHead: " + 0);
 
             currHead = 0;
-        }
-        else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead != counterInt) {
-            Log.i("changeImage", "prev clicked, currHead: "+ currHead +", newHead: "+(currHead+1));
+        } else if (direction.equalsIgnoreCase(NEXT_PIC) && currHead != counterInt) {
+            Log.i("changeImage", "prev clicked, currHead: " + currHead + ", newHead: " + (currHead + 1));
             currHead++;
         }
         Global.head = currHead;  //set the head for the next image
         return currHead;
     }
 
-    private void changeImgToDisplay(int newHead){//changes the image by calling wallpaper service
+    private void changeImgToDisplay(int newHead) {//changes the image by calling wallpaper service
         //send new intent to the wallpaper changer intent service
         //includes file path
-         String newPath;
+        String newPath;
 
         Log.i("ChangeImage", "newHead: " + newHead);
         Log.i("ChangeImage", "arrayList size: " + Global.displayCycle.size());
         Log.i("ChangeImage", "Change Interval: " + Global.changeInterval);
 
-        if(newHead>=0) {
-          Photo photo = Global.displayCycle.get(newHead);
+        if (newHead >= 0) {
+            Photo photo = Global.displayCycle.get(newHead);
             newPath = photo.getPath();
-        } else{
+        } else {
             newPath = "DEFAULTPICTURE";
         }
 

@@ -1,4 +1,5 @@
 package com.example.android;
+
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
@@ -26,16 +27,14 @@ implemented based on a similar class structure as the DJWidgetProvider.java
 public class ActionReceiver extends BroadcastReceiver
 /*gets system messages when the system or other applications send broadcasts
 * if the broadcast matches our class, it executes the onRecieve method
- */
-{
+ */ {
     private static final String ACTION_KARMA = "com.example.android.KARMA";
     private static final String ACTION_RELEASE = "com.example.android.RELEASE";
     private final String TAG = "PhotoInfoReciever";
     Context context;
 
     @Override
-    public void onReceive(Context context, Intent intent)
-    { //what happens when the alarm goes off (undoTimer expires)
+    public void onReceive(Context context, Intent intent) { //what happens when the alarm goes off (undoTimer expires)
         this.context = context;
 
         Log.i(TAG, "PhotoInfoReciever got PendingIntent");
@@ -43,9 +42,9 @@ public class ActionReceiver extends BroadcastReceiver
 
         String action = intent.getAction();
 
-        Log.i(TAG, "action:  "+ action);
+        Log.i(TAG, "action:  " + action);
 
-        if(ACTION_KARMA.equals(action) && Global.undoKarmaOn) {
+        if (ACTION_KARMA.equals(action) && Global.undoKarmaOn) {
             Log.i(TAG, "Karma");
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
@@ -70,9 +69,7 @@ public class ActionReceiver extends BroadcastReceiver
             fileManager.setDisplayCycleData(true, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
 
-        }
-
-        else if(ACTION_RELEASE.equals(action) && Global.undoReleaseOn){
+        } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
             Log.i(TAG, "Release");
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off

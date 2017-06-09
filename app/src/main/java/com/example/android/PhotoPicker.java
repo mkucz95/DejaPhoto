@@ -43,7 +43,7 @@ public class PhotoPicker {
     /*
      * AddPhoto constructor -- context and activity instance from MainActivity
      */
-    public PhotoPicker(Context context, Activity activity){
+    public PhotoPicker(Context context, Activity activity) {
         this.context = context;
         this.activity = activity;
     }
@@ -51,7 +51,7 @@ public class PhotoPicker {
     /*
      * This method prompts the chooser to appear. The result is handled in MainActivity
      */
-    public void add(){
+    public void add() {
         Intent intent = new Intent();
         //Set intent type -- images
         intent.setType(imageType);

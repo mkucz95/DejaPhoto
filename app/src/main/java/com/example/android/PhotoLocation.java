@@ -14,7 +14,7 @@ import java.util.List;
  * This class gets longitude and latitude values from the EXIF data in each photo
  * The long/lat values are then converted to a city value or street address with geocode
  */
-public class PhotoLocation{
+public class PhotoLocation {
 
     public String locationName;
     String city;
@@ -37,17 +37,15 @@ public class PhotoLocation{
     }
 
     private String location(String path, Geocoder gc, Boolean flag) {
-        if(Global.displayCycle.get(Global.head).userLocation && flag){
+        if (Global.displayCycle.get(Global.head).userLocation && flag) {
             Log.i("widgetProv", "USERLOCATION SET");
             locationName = Global.displayCycle.get(Global.head).userLocationString;
             return locationName;
-        }
-        else if(Global.displayCycle.get(Global.head).photoLocation && flag){
+        } else if (Global.displayCycle.get(Global.head).photoLocation && flag) {
             Log.i("widgetProv", "USERLOCATION NOT YET SET");
             locationName = Global.displayCycle.get(Global.head).photoLocationString;
             return locationName;
-        }
-        else {
+        } else {
             Log.i("widgetProv", "FIRST RUNTHROUGH");
 
             try {
@@ -175,26 +173,26 @@ public class PhotoLocation{
     }
 
     //Converts exif long lat format to real long lat values
-    private Double convertToDegree(String value){
+    private Double convertToDegree(String value) {
         Double result;
         String[] DMS = value.split(",", 3);
 
         String[] stringD = DMS[0].split("/", 2);
         Double D0 = new Double(stringD[0]);
         Double D1 = new Double(stringD[1]);
-        Double FloatD = D0/D1;
+        Double FloatD = D0 / D1;
 
         String[] stringM = DMS[1].split("/", 2);
         Double M0 = new Double(stringM[0]);
         Double M1 = new Double(stringM[1]);
-        Double FloatM = M0/M1;
+        Double FloatM = M0 / M1;
 
         String[] stringS = DMS[2].split("/", 2);
         Double S0 = new Double(stringS[0]);
         Double S1 = new Double(stringS[1]);
-        Double FloatS = S0/S1;
+        Double FloatS = S0 / S1;
 
-        result = new Double(FloatD + (FloatM/60) + (FloatS/3600));
+        result = new Double(FloatD + (FloatM / 60) + (FloatS / 3600));
 
         return result;
     }
@@ -203,15 +201,14 @@ public class PhotoLocation{
      * This method checks to see if the photo is from the DejaCopy folder. If it is, the exif data
      *  must be retrieved from the source photo.
      */
-    private String tempPath(String path){
-        String filename = path.substring(path.lastIndexOf("/")+1);
+    private String tempPath(String path) {
+        String filename = path.substring(path.lastIndexOf("/") + 1);
 
-        if(path.contains("DejaCopy")){
+        if (path.contains("DejaCopy")) {
             Log.i(TAG, path + " contains 'DejaCopy'");
             path = "/storage/emulated/0/" + filename;
             Log.i(TAG, "New path: " + path);
-        }
-        else{
+        } else {
             Log.i(TAG, "New path not needed");
         }
 
