@@ -326,6 +326,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             sendButton.setVisibility(View.VISIBLE);
 
             User.setDatabaseListener(myRef.child("users"));
+            PhotoStorage.setDatabaseListener(myRef.child("photos"));
             Request.setRequestListener( myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr currUser requests
 
             myRef.child("users").child(Global.currUser.email).child("requests").child("new");

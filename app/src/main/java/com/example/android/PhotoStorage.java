@@ -11,7 +11,11 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
@@ -113,9 +117,9 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
 
     Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
 }
+
     @Override
     public DatabaseReference getRef() { return null; }
-
 
     //reference for single image, target path is folder to save into
     public static void downloadImage(StorageReference reference, String targetPath) {
@@ -175,5 +179,20 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
     public static boolean dirExists(String directory) {
         File folder = new File(Environment.getExternalStorageDirectory() + "/" + directory);
         return folder.exists();
+    }
+
+    public static void setDatabaseListener(final DatabaseReference reference) {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // get map of users in datasnapshot
+                Global.photosSnapshot = dataSnapshot;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // handle database error
+            }
+        });
     }
 }
