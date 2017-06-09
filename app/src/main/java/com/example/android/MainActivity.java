@@ -1,7 +1,6 @@
 package com.example.android;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -187,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "" + item.getUri().toString());
                         Uri uri = item.getUri();
                         //Get the absolute path from uri
-                        String p = fileManager.getImagePath(uri);
+                        String p = SQLiteHelper.getImagePath(fileManager.context, uri);
                         try {
                             fileManager.copyFile(new File(p), dejaCopy);
                             Global.uploadImageQueue.add(p);
@@ -196,9 +194,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
+
                 //Single image case
                 else if (singleUri != null) {
-                    String p = fileManager.getImagePath(singleUri);
+                    String p = SQLiteHelper.getImagePath(fileManager.context, singleUri);
                     try {
                         Log.i(TAG, "" + singleUri.toString());
                         fileManager.copyFile(new File(p), dejaCopy);

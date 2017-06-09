@@ -1,10 +1,15 @@
 package com.example.android;
 
+import android.content.Context;
+import android.net.Uri;
+
 import com.example.android.SQLiteHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.io.File;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -16,8 +21,15 @@ import static junit.framework.Assert.assertEquals;
 public class SQLiteHelperTest {
 
     @Test
-    public void testRead() {
+    public void getUriTest() {
+        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-20.jpg";
+        String path2 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
 
+        Context context = null;
+        Uri uri = Uri.fromFile(new File(path2));
+        String pathTest = SQLiteHelper.getImagePath(context, uri);
+
+        assertEquals(path1, pathTest);
     }
 
     @Test

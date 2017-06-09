@@ -8,10 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -23,8 +20,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import static android.content.Context.WINDOW_SERVICE;
-
 public class FileManager {
     private final String TAG = "FileManager";
     Context context;
@@ -34,7 +29,10 @@ public class FileManager {
         this.context = context;
     }
 
+    public FileManager() {
+    }
 
+    //used after downloading images so that we can see them in gallery
     public void scanSD(File file) {
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(file);
@@ -42,10 +40,10 @@ public class FileManager {
         context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
+    //saves images to a specified folder
     public void saveFile(Bitmap imageToSave, String folder) {
-
-        //New directory in DCIM/DejaPhoto
-        File folderName = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), folder);
+        File folderName = new File(Environment.
+                getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), folder);
 
         if (!folderName.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
@@ -78,30 +76,7 @@ public class FileManager {
         Log.d(TAG, "+++++++");
     }
 
-    public String getImagePath(Uri uri) {
-
-        Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-
-
-        cursor.close();
-
-        cursor = context.getContentResolver().query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        Log.i(TAG, "Get string at: " + cursor.getColumnIndex(MediaStore.Images.Media.DATA) + ": " + path);
-
-        cursor.close();
-
-        return path;
-    }/*
-     * Copies a file from the camera roll to specified directory
-     */
-
+    //copies files over to new destination-- used by photo picker
     public void copyFile(File src, File dst) throws IOException {
         File file = new File(dst + File.separator + src.getName());
         file.createNewFile();
@@ -109,7 +84,6 @@ public class FileManager {
 
         InputStream in = new FileInputStream(src);
         OutputStream out = new FileOutputStream(file);
-
 
         // Transfer bytes from in to out
         byte[] buf = new byte[1024];
@@ -122,16 +96,15 @@ public class FileManager {
 
     }
 
-
-    public void setDisplayCycleData(boolean karma, String path) {
+    public void setDisplayCycleData(boolean addKarma, int karma, String path) {
         ArrayList<Photo> temp = Global.displayCycle;
         for (int i = 0; i < temp.size(); i++) {
             Photo photo = temp.get(i);
             Log.i("setKarma", path + " compare to : " + photo.getPath());
             if (photo.getPath().equals(path)) {
-                if (karma) {
+                if (addKarma) {
                     Log.i("setKarma", temp.get(i) + ": added karma");
-                    photo.setKarma(photo.getKarma() + 1);
+                    photo.setKarma(karma);
                 } else {
                     photo.setReleased(true);
                     deleteFile(temp.get(i).getPath()); //delete from file
@@ -139,7 +112,6 @@ public class FileManager {
                 }
             }
             Log.i("setKarma", photo.getPath() + ": karma:  " + photo.getKarma());
-
 
         }
         Global.displayCycle = temp;
@@ -204,11 +176,6 @@ public class FileManager {
         }
     }
 
-    public static String getDirPath(String directory) {
-        String folder = Environment.getExternalStorageDirectory() + "/" + directory;
-        return folder;
-    }
-
     /*
     this method handles adding file paths to upload queue whether this is because changed location or changed karma
      */
@@ -242,6 +209,7 @@ public class FileManager {
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
         String[] info = handleCSV(raw);
         int currKarma;
+
         String currLocation;
 
         if(info != null) {
@@ -279,13 +247,12 @@ public class FileManager {
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
         String[] info = handleCSV(raw);
 
-        if(info[1] != null)
+        if (info[1] != null)
             helper.storeSQLData(customLoc + "," + info[1],
                     MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
 
         else helper.storeSQLData(customLoc + ",0",
                 MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
-
     }
 
     public static String[] handleCSV(String info) {

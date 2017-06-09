@@ -22,7 +22,6 @@ public class SQLiteHelper {
 
     Cursor cr;
     private final String TAG = "SQLiteHelper";
-
     /*
     This method iterates through a specific column given from Uri in Android SQLite and saves each
     data field to an array list in the order that it reads it.
@@ -167,5 +166,26 @@ public class SQLiteHelper {
             else return false;
         }
     }
+
+    public static String getImagePath(Context context, Uri uri) {
+        Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+
+        cursor.close();
+
+        cursor = context.getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        Log.i("SQLite Helper", "Get string at: " + cursor.getColumnIndex(MediaStore.Images.Media.DATA) + ": " + path);
+
+        cursor.close();
+
+        return path;
+    }
+
 
 }

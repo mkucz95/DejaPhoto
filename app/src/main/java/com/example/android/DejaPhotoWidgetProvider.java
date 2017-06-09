@@ -69,6 +69,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             PendingIntent pendingIntentNext = PendingIntent.getBroadcast(context, 0, intentNext, 0);
             PendingIntent pendingIntentSetLocation = PendingIntent.getBroadcast(context, 0, intentSetLocation, 0);
 
+            int currKarma = Global.displayCycle.get(Global.head).getKarma();
 
             //get layout for our widget, give each button on-click listener
             views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
@@ -76,9 +77,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.karma_btn, pendingIntentKarma);
             views.setOnClickPendingIntent(R.id.release_btn, pendingIntentRelease);
             views.setOnClickPendingIntent(R.id.next_pic, pendingIntentNext);
-            views.setTextViewText(R.id.karma_num, "Karma: " + Global.karmaNum);
+            views.setTextViewText(R.id.karma_num, "Karma: " + currKarma);
             views.setOnClickPendingIntent(R.id.set_location, pendingIntentSetLocation);
-            Log.d("DPWP", "karma" + Global.karmaNum);
 
             appWidgetManager.updateAppWidget(new ComponentName(context, DejaPhotoWidgetProvider.class), views);
         }
@@ -102,7 +102,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             changePicture = true;
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
-            Global.karmaNum++;
             undoManager(context, "karma");
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
             undoManager(context, "release");
@@ -170,7 +169,6 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
                 intentKarma.setAction("");
             }
 
-            Global.karmaNum = 0;
             Global.undoKarmaOn = false; //switch karma alarm off
             //views.setTextViewText(R.id.karma_num, "0");
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
