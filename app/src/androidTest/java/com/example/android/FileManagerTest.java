@@ -3,7 +3,6 @@ package com.example.android;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Environment;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,18 +26,32 @@ public class FileManagerTest {
     String path2 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
 
     @Test
-    public void csvTest1(){
-       assertNull(FileManager.handleCSV(null));
+    public void addQueueTest() {
+        FileManager fileManager = new FileManager();
+        fileManager.addToQueue("test");
+
+        boolean success = false;
+
+        if (Global.uploadMetaData.get(Global.uploadMetaData.size() - 1).equals("test"))
+            success = true;
+
+        assertEquals(true, success);
+
     }
 
     @Test
-    public void csvTest2(){
+    public void csvTest1() {
+        assertNull(FileManager.handleCSV(null));
+    }
+
+    @Test
+    public void csvTest2() {
         String[] test = {"a", "b"};
         assertEquals(FileManager.handleCSV("a,b"), test);
     }
 
     @Test
-    public void csvTest3(){
+    public void csvTest3() {
         String[] test = {"ab"};
         assertEquals(FileManager.handleCSV("ab"), test);
     }
@@ -63,13 +76,4 @@ public class FileManagerTest {
         assertNotSame(bitmap1, bitmap2);
     }
 
-    @Test
-    public void getUriTest() {
-        Context context = null;
-       FileManager fileManager = new FileManager(context);
-        Uri uri = Uri.fromFile(new File(path2));
-       String pathTest = fileManager.getImagePath(uri);
-
-        assertEquals(path1, pathTest);
-    }
 }

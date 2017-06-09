@@ -8,10 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -23,8 +20,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import static android.content.Context.WINDOW_SERVICE;
-
 public class FileManager {
     private final String TAG = "FileManager";
     Context context;
@@ -33,6 +28,7 @@ public class FileManager {
     public FileManager(Context context) {
         this.context = context;
     }
+    public FileManager(){};
 
 
     public void scanSD(File file) {
@@ -77,30 +73,6 @@ public class FileManager {
 
         Log.d(TAG, "+++++++");
     }
-
-    public String getImagePath(Uri uri) {
-
-        Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-
-
-        cursor.close();
-
-        cursor = context.getContentResolver().query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        Log.i(TAG, "Get string at: " + cursor.getColumnIndex(MediaStore.Images.Media.DATA) + ": " + path);
-
-        cursor.close();
-
-        return path;
-    }/*
-     * Copies a file from the camera roll to specified directory
-     */
 
     public void copyFile(File src, File dst) throws IOException {
         File file = new File(dst + File.separator + src.getName());
@@ -241,18 +213,16 @@ public class FileManager {
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
         String[] info = handleCSV(raw);
         int currKarma;
-        if(info[1] != null){
+        if (info[1] != null) {
             currKarma = Integer.parseInt(info[1]);
             currKarma++;
-        }
-        else
+        } else
             currKarma = 0;
 
-        if(info[0] != null) {
+        if (info[0] != null) {
             helper.storeSQLData(info[0] + "," + currKarma,
                     MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
-        }
-        else{
+        } else {
             helper.storeSQLData("," + currKarma,
                     MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
         }
@@ -267,13 +237,12 @@ public class FileManager {
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
         String[] info = handleCSV(raw);
 
-        if(info[1] != null)
+        if (info[1] != null)
             helper.storeSQLData(customLoc + "," + info[1],
                     MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
 
         else helper.storeSQLData(customLoc + ",0",
                 MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
-
     }
 
     public static String[] handleCSV(String info) {
