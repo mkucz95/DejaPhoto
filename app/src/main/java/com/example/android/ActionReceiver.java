@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.example.dejaphoto.R;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 import static android.content.Intent.ACTION_SYNC;
 
@@ -54,35 +53,34 @@ public class ActionReceiver extends BroadcastReceiver
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
             RemoteViews rviews = new RemoteViews(AppWidget.getPackageName(), R.layout.dejaphoto_appwidget_layout);
 
-
             Toast.makeText(context, "Karma Added", Toast.LENGTH_SHORT).show();
 
             //Set karma num on widget
-            rviews.setTextViewText(R.id.karma_num, "Karma: " + Global.karmaNum);
+            int newKarma = Global.displayCycle.get(Global.head).getKarma()+1;
+            rviews.setTextViewText(R.id.karma_num, "Karma: " + newKarma);
             appWidgetManager.updateAppWidget(appWidgetIds, rviews);
 
-            Log.i("updateInterval", "____________________");
-            Log.i("updateInterval", "Restarting timer from AlarmReceiver: Karma");
-            Global.restartTimer(context);
+            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
+            Global.undoTimer.schedule(Global.autoWallpaperChange,
+                    Global.changeInterval, Global.changeInterval);
 
             FileManager.addKarma(Global.karmaPath, context);
-            fileManager.setDisplayCycleData(true, Global.karmaPath);
+            fileManager.setDisplayCycleData(true, newKarma, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
-        }
 
-        else if(ACTION_RELEASE.equals(action) && Global.undoReleaseOn){
-            Log.i("AlarmReciever", "Release");
+        } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
+            Log.i(TAG, "Release");
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Global.undoReleaseOn = false; //alarm was fired so now it got turned off
 
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
 
-            Log.i("updateInterval", "____________________");
-            Log.i("updateInterval", "Restarting timer from AlarmReceiver: Release");
-            Global.restartTimer(context);
+            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
+            Global.undoTimer.schedule(Global.autoWallpaperChange,
+                    Global.changeInterval, Global.changeInterval);
 
-            fileManager.setDisplayCycleData(false, Global.releasePath);
+            fileManager.setDisplayCycleData(false, 0, Global.releasePath);
         }
     }
 

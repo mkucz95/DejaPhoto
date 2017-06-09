@@ -32,6 +32,7 @@ public class FileManager {
     public FileManager() {
     }
 
+    //used after downloading images so that we can see them in gallery
     public void scanSD(File file) {
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(file);
@@ -39,6 +40,7 @@ public class FileManager {
         context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
+    //saves images to a specified folder
     public void saveFile(Bitmap imageToSave, String folder) {
         File folderName = new File(Environment.
                 getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), folder);
@@ -74,6 +76,7 @@ public class FileManager {
         Log.d(TAG, "+++++++");
     }
 
+    //copies files over to new destination-- used by photo picker
     public void copyFile(File src, File dst) throws IOException {
         File file = new File(dst + File.separator + src.getName());
         file.createNewFile();
@@ -81,7 +84,6 @@ public class FileManager {
 
         InputStream in = new FileInputStream(src);
         OutputStream out = new FileOutputStream(file);
-
 
         // Transfer bytes from in to out
         byte[] buf = new byte[1024];
@@ -94,16 +96,15 @@ public class FileManager {
 
     }
 
-
-    public void setDisplayCycleData(boolean karma, String path) {
+    public void setDisplayCycleData(boolean addKarma, int karma, String path) {
         ArrayList<Photo> temp = Global.displayCycle;
         for (int i = 0; i < temp.size(); i++) {
             Photo photo = temp.get(i);
             Log.i("setKarma", path + " compare to : " + photo.getPath());
             if (photo.getPath().equals(path)) {
-                if (karma) {
+                if (addKarma) {
                     Log.i("setKarma", temp.get(i) + ": added karma");
-                    photo.setKarma(photo.getKarma() + 1);
+                    photo.setKarma(karma);
                 } else {
                     photo.setReleased(true);
                     deleteFile(temp.get(i).getPath()); //delete from file
@@ -111,7 +112,6 @@ public class FileManager {
                 }
             }
             Log.i("setKarma", photo.getPath() + ": karma:  " + photo.getKarma());
-
 
         }
         Global.displayCycle = temp;
