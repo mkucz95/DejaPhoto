@@ -93,7 +93,7 @@ public class FileManager {
         }
         in.close();
         out.close();
-
+        scanSD(file);
     }
 
     public void setDisplayCycleData(boolean addKarma, int karma, String path) {
