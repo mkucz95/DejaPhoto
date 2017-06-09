@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -71,13 +72,13 @@ public class DatabaseSync extends TimerTask {
     public void manageDownload(DataSnapshot snapshot, String user){
         for(DataSnapshot image: snapshot.getChildren()){
 
-            String fileName = image.getKey();
+            String fileName = image.getKey().replace(",", ".");
 
             Log.i(TAG, "filename downloading: "+fileName);
 
             StorageReference storageReference = PhotoStorage.getStorageRef(user).child(fileName);
 
-            PhotoStorage.downloadImage(storageReference, TARGET);
+            PhotoStorage.downloadImage(storageReference, TARGET, fileName);
         }
     }
 

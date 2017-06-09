@@ -123,14 +123,14 @@ public class PhotoStorage implements IDataElement {
     public DatabaseReference getRef() { return null; }
 
     //reference for single image, target path is folder to save into
-    public static void downloadImage(StorageReference reference, String targetPath) {
+    public static void downloadImage(StorageReference reference, String targetPath, String fileName) {
         Log.d(TAG, "downloading: "+ reference);
 
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
 
         final StorageReference imageRef = reference;
 
-        final File localFile = new File(folder, "DOWNLOAD-1.jpg");
+        final File localFile = new File(folder, fileName);
         if (!folder.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
             boolean rv = folder.mkdir();
@@ -155,6 +155,7 @@ public class PhotoStorage implements IDataElement {
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(localFile);
         mediaScan.setData(contentUri);
+        Global.context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
     //return storage reference
@@ -187,7 +188,7 @@ public class PhotoStorage implements IDataElement {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // get map of users in datasnapshot
-                Global.photosSnapshot = dataSnapshot;
+                Global.photoSnapshot = dataSnapshot;
             }
 
             @Override

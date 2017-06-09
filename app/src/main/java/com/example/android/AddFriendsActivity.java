@@ -191,14 +191,9 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         if(Global.currUser != null){
             Request.setRequestListener(myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr Global.currUser requests
-            myRef.child("users").child(Global.currUser.email).child("requests").child("new");
-            myRef.child("users").child(Global.currUser.email).child("requests").child("new").removeValue();
+
+            updateListeners();
         }
-
-        myRef.child("users").child("user@gmail,com").setValue(true); //update user snapshot
-        myRef.child("photos").child("user@gmail,com").child("update").setValue(true); //update photo snapshot
-        myRef.child("photos").child("user@gmail,com").child("update").removeValue(); //update photo snapshot
-
 
         firebaseUser = mAuth.getCurrentUser();
 
@@ -333,13 +328,9 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             PhotoStorage.setDatabaseListener(myRef.child("photos"));
             Request.setRequestListener( myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr currUser requests
 
-            myRef.child("users").child(Global.currUser.email).child("requests").child("new");
-            myRef.child("users").child(Global.currUser.email).child("requests").child("new").removeValue();
 
+            updateListeners();
 
-            myRef.child("users").child("currUser@gmail,com").setValue(true); //update snapshot
-
-            //SetRequestListener
 
         } else {
             mStatusTextView.setText(R.string.signed_out);
@@ -425,5 +416,15 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         Request.clearRequest(Global.currUser.email, Global.currUser.requestList.get(0), myRef);
         Global.currUser.requestList.remove(0);
         //delete request that was handled
+    }
+
+    private void updateListeners(){
+        myRef.child("users").child("user@gmail,com").setValue(true); //update user snapshot
+
+        myRef.child("photos").child("user@gmail,com").child("update").setValue(true); //update photo snapshot
+        myRef.child("photos").child("user@gmail,com").child("update").removeValue(); //update photo snapshot
+
+        myRef.child("users").child(Global.currUser.email).child("requests").child("new");
+        myRef.child("users").child(Global.currUser.email).child("requests").child("new").removeValue();
     }
 }

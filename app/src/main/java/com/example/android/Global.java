@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.content.Context;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -60,8 +61,10 @@ public class Global {
 
     //CURRENT USER DATA
     public static DataSnapshot userSnapshot;
-    public static DataSnapshot photosSnapshot;
+    public static DataSnapshot photoSnapshot;
     public static User currUser;
+
+    public static Context context;
 
     public static ArrayList<String> uploadImageQueue = new ArrayList<>();
     public static ArrayList<String> uploadMetaData = new ArrayList<>();
@@ -82,7 +85,4 @@ public class Global {
         }
         return true;
     }
-
-    public static DataSnapshot photoSnapshot;
-
 }

@@ -28,9 +28,18 @@ import static android.content.Context.WINDOW_SERVICE;
 public class FileManager {
     private final String TAG = "FileManager";
     Context context;
+    File file;
 
     public FileManager(Context context) {
             this.context = context;
+    }
+
+
+    public void scanSD(File file){
+        Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(file);
+        mediaScan.setData(contentUri);
+        context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
     public void saveFile(Bitmap imageToSave, String folder) {
@@ -62,10 +71,7 @@ public class FileManager {
             e.printStackTrace();
         }
 
-        Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(file);
-        mediaScan.setData(contentUri);
-        context.getApplicationContext().sendBroadcast(mediaScan);
+        scanSD(file);
 
         Log.d(TAG, "+++++++");
     }

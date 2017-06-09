@@ -44,6 +44,7 @@ public class SetActivity extends AppCompatActivity {
         time = (Switch) findViewById(R.id.s_time);
         dayOfWeek = (Switch) findViewById(R.id.s_dow);
         karma = (Switch) findViewById(R.id.s_karma);
+        mode = (Switch) findViewById(R.id.s_mode);
 
         final LinearLayout l = (LinearLayout) findViewById(R.id.l_settings);
         setContentView(R.layout.content_set);
@@ -218,7 +219,6 @@ public class SetActivity extends AppCompatActivity {
     }
 
     private void displayUpdate( ){
-
         if (Global.dejaVuSetting) {
             mode.setChecked(true);
         } else {

@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Global.windowWidth = size.x;
         Global.windowHeight = size.y;
 
+        Global.context = this.getApplicationContext();
 
 
         startApp();
