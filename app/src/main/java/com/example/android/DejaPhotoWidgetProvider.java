@@ -69,7 +69,10 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             PendingIntent pendingIntentNext = PendingIntent.getBroadcast(context, 0, intentNext, 0);
             PendingIntent pendingIntentSetLocation = PendingIntent.getBroadcast(context, 0, intentSetLocation, 0);
 
-            int currKarma = Global.displayCycle.get(Global.head).getKarma();
+            int currKarma = 0;
+
+            if(Global.displayCycle.size()!=0)
+                currKarma = Global.displayCycle.get(Global.head).getKarma();
 
             //get layout for our widget, give each button on-click listener
             views = new RemoteViews(context.getPackageName(), R.layout.dejaphoto_appwidget_layout);
@@ -77,6 +80,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.karma_btn, pendingIntentKarma);
             views.setOnClickPendingIntent(R.id.release_btn, pendingIntentRelease);
             views.setOnClickPendingIntent(R.id.next_pic, pendingIntentNext);
+
             views.setTextViewText(R.id.karma_num, "Karma: " + currKarma);
             views.setOnClickPendingIntent(R.id.set_location, pendingIntentSetLocation);
 
