@@ -57,7 +57,7 @@ public class User implements IDataElement{
     }
 
     @Override
-    public boolean addElement() {
+    public void addElement() {
         //add currUser
 
         Log.d(TAG, "addElement");
@@ -65,8 +65,6 @@ public class User implements IDataElement{
         reference.child("users")
                 .child(this.email)
                 .child(this.email).setValue(true);
-
-        return true;
     }
 
     @Override
@@ -87,5 +85,12 @@ public class User implements IDataElement{
                 // handle database error
             }
         });
+    }
+
+    public DatabaseReference userPhotosRef(){
+        DatabaseReference databaseReference = reference.getRoot().child("photos").child(this.email);
+        Log.d(TAG, "photos ref: "+ databaseReference);
+
+        return databaseReference;
     }
 }

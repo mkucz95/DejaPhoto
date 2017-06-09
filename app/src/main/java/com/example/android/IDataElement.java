@@ -6,7 +6,7 @@ public interface IDataElement{
 
     public boolean checkExist(String check);
 
-    public boolean addElement();
+    public void addElement();
     
     public DatabaseReference getRef();
 }

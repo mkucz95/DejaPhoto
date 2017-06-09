@@ -20,6 +20,8 @@ import com.example.dejaphoto.R;
 
 import java.util.Timer;
 
+import static com.example.dejaphoto.R.string.share;
+
 public class DisplayActivity extends AppCompatActivity {
 
     public Switch user;
@@ -37,23 +39,13 @@ public class DisplayActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         user = (Switch) findViewById(R.id.s_displayUser);
-        if (Global.displayUser) {
-            user.setChecked(true);
-        } else {
-            user.setChecked(false);
-        }
-
         friend = (Switch) findViewById(R.id.s_displayFriend);
-        if (Global.displayFriend) {
-            friend.setChecked(true);
-        } else {
-            friend.setChecked(false);
-        }
+
+        displayUpdate();
 
         saveDisplay = (Button) findViewById(R.id.save_display);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         user.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -108,4 +100,24 @@ public class DisplayActivity extends AppCompatActivity {
 
     }
 
+    private void displayUpdate(){
+        if (Global.displayUser) {
+            user.setChecked(true);
+        } else {
+            user.setChecked(false);
+        }
+
+        if (Global.displayFriend) {
+            friend.setChecked(true);
+        } else {
+            friend.setChecked(false);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        displayUpdate();
+    }
 }

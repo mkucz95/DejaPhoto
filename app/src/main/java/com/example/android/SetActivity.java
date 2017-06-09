@@ -38,8 +38,6 @@ public class SetActivity extends AppCompatActivity {
         Log.i("setActivity", "IN ONCREATE");
 
         super.onCreate(savedInstanceState);
-        Log.i("deja", "" + Global.changeInterval);
-
         final LinearLayout l = (LinearLayout) findViewById(R.id.l_settings);
         setContentView(R.layout.content_set);
 
@@ -244,8 +242,6 @@ public class SetActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     public void startRerank() {
         Intent intent = new Intent(this, Rerank.class);
