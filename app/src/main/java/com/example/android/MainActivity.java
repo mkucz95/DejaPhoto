@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        Toast.makeText(getApplicationContext(),
+                "Please Sign In First", Toast.LENGTH_SHORT).show();
+
         requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -73,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         Button display = (Button) findViewById(R.id.bt_7);
         Button share = (Button) findViewById(R.id.bt_4);
         Button addFriends = (Button) findViewById(R.id.bt_6);
-        Button testUpload = (Button) findViewById(R.id.bt_20);
 
         Display displayWindow = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -89,13 +91,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openCamera();
-            }
-        });
-
-        testUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startUpload();
             }
         });
 
@@ -144,14 +139,6 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE);
     }
 
-    public void startUpload() {
-        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
-
-        StorageReference reference = PhotoStorage.getStorageRef("hlcphantom@gmail,com");
-        PhotoStorage photoStorage = new PhotoStorage(path1, reference);
-
-        photoStorage.addElement();
-    }
 
     public void changeSettings() {
         Intent intent = new Intent(this, SetActivity.class);

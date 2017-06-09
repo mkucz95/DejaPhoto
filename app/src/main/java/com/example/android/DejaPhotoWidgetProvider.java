@@ -102,14 +102,15 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             manageTimer(context); //reset undoTimer
 
         } else if (intent.getAction().equals(KARMA_BUTTON)) {
-            Global.karmaNum = 1;
-            manageTimer(context);
+            Global.karmaNum++;
+            Global.stopTimer(context);
             undoManager(context, "karma");
         } else if (intent.getAction().equals(RELEASE_BUTTON)) {
-            manageTimer(context);
+            Global.stopTimer(context);
             undoManager(context, "release");
 
         } else if (intent.getAction().equals(NEXT_PIC)) {
+            Log.i("updateInterval", "Next Photo Called");
             manageTimer(context);
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_NEXT);
@@ -122,9 +123,8 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             context.startActivity(intn);
         }
 
-        if (changePicture) context.startService(changeIntent); //call widgetmanager
+        if (changePicture) context.startService(changeIntent); //call changeImage
     }
-
 
     public void undoManager(Context context, String action) {
         this.karmaAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -172,6 +172,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
             Global.karmaNum = 0;
             Global.undoKarmaOn = false; //switch karma alarm off
+            Global.restartTimer(context);
             //views.setTextViewText(R.id.karma_num, "0");
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
         } else if (Global.undoReleaseOn && action.equals("release")) { //release alarm on
@@ -184,6 +185,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
             }
 
             Global.undoReleaseOn = false; //switch release alarm off
+            Global.restartTimer(context);
             Toast.makeText(context, "Undo Successful", Toast.LENGTH_SHORT).show();
         }
     }
@@ -194,14 +196,13 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
     }
 
     public void manageTimer(Context context) { //called when button is clicked
-        Log.i("updateInterval", "Change Interval: " + Global.changeInterval);
-        if (Global.undoTimer != null) {
-            Global.autoWallpaperChange.cancel();
-            Global.undoTimer.cancel();
-            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
-            Global.undoTimer = new Timer();
-            Global.undoTimer.schedule(Global.autoWallpaperChange,
-                    Global.changeInterval, Global.changeInterval);
+        if(Global.undoTimer != null) {
+            Log.i("updateInterval", "Cancelling timers");
+            Global.stopTimer(context);
+            Log.i("updateInterval", "____________________");
+            Log.i("updateInterval", "Restarting timer from dejaWidget");
+            Global.restartTimer(context);
+
         }
     }
 }

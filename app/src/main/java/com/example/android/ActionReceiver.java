@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.dejaphoto.R;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 import static android.content.Intent.ACTION_SYNC;
 
@@ -60,27 +61,32 @@ public class ActionReceiver extends BroadcastReceiver
             rviews.setTextViewText(R.id.karma_num, "Karma: " + Global.karmaNum);
             appWidgetManager.updateAppWidget(appWidgetIds, rviews);
 
-            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
-            Global.undoTimer.schedule(Global.autoWallpaperChange,
-                    Global.changeInterval, Global.changeInterval);
-
+            Log.i("updateInterval", "____________________");
+            Log.i("updateInterval", "Restarting timer from AlarmReceiver: Karma");
+            Global.restartTimer(context);
 
             FileManager.addKarma(Global.karmaPath, context);
             fileManager.setDisplayCycleData(true, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
 
+<<<<<<< HEAD:app/src/main/java/com/example/android/AlarmReceiver.java
+        }
+
+        else if(ACTION_RELEASE.equals(action) && Global.undoReleaseOn){
+            Log.i("AlarmReciever", "Release");
+=======
         } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
             Log.i(TAG, "Release");
+>>>>>>> dd77280208c0d39aae984ebcd146285629b8972b:app/src/main/java/com/example/android/ActionReceiver.java
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Global.undoReleaseOn = false; //alarm was fired so now it got turned off
 
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
 
-            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
-            Global.undoTimer.schedule(Global.autoWallpaperChange,
-                    Global.changeInterval, Global.changeInterval);
-
+            Log.i("updateInterval", "____________________");
+            Log.i("updateInterval", "Restarting timer from AlarmReceiver: Release");
+            Global.restartTimer(context);
 
             fileManager.setDisplayCycleData(false, Global.releasePath);
         }

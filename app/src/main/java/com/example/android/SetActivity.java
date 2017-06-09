@@ -20,12 +20,15 @@ import java.util.Timer;
 
 public class SetActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
+=======
     public Switch location;
     public Switch time;
     public Switch dayOfWeek;
     public Switch karma;
     public Switch mode;
 
+>>>>>>> dd77280208c0d39aae984ebcd146285629b8972b
     EditText input;
     private Button saveButton;
     TextView newInterval;
@@ -191,9 +194,12 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 input = (EditText) findViewById(R.id.user_specify);
-                int interval = Integer.parseInt(input.getText().toString());
+                String inputCheck = input.getText().toString();
+                if(Global.isBlank(inputCheck)){
+                    inputCheck = Long.toString(Global.changeInterval);
+                }
+                int interval = Integer.parseInt(inputCheck);
                 newInterval = (TextView) findViewById(R.id.change_interval);
-
                 Log.i("updateInterval", "input: " + interval);
                 String newInfo = interval + " Seconds";
                 newInterval.setText(newInfo);

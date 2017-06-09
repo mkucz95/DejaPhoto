@@ -95,4 +95,18 @@ public class Global {
         }
         return true;
     }
+
+    public static void restartTimer(Context context){
+        Log.i("updateInterval", "Restarting timer with interval " + Global.changeInterval);
+        Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
+        Global.undoTimer = new Timer();
+        Global.undoTimer.schedule(Global.autoWallpaperChange,
+                Global.changeInterval, Global.changeInterval);
+    }
+
+    public static void stopTimer(Context context){
+        Global.autoWallpaperChange.cancel();
+        Global.undoTimer.cancel();
+    }
+
 }
