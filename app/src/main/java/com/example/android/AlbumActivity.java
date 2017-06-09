@@ -33,12 +33,30 @@ public class AlbumActivity extends AppCompatActivity {
         dejaAlbum = (Switch) findViewById(R.id.deja_album);
         cameraAlbum = (Switch) findViewById(R.id.camera_album);
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
 
+
+        setDejaAlbum();
+
+
+
+
+
+
+
+
+    }
+
+
+
+    public void setDejaAlbum () {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Deja Photo", 0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if(sharedPreferences.getBoolean("Deja Album Preference", false) == true) {
             dejaAlbum.setChecked(true);
             cameraAlbum.setClickable(false);
+
         }
+
         else {
             dejaAlbum.setChecked(false);
         }
@@ -51,10 +69,8 @@ public class AlbumActivity extends AppCompatActivity {
             cameraAlbum.setChecked(false);
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final LinearLayout l = (LinearLayout) findViewById(R.id.l_Album);
-
         dejaAlbum.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -84,6 +100,8 @@ public class AlbumActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
         cameraAlbum.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

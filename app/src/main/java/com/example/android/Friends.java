@@ -3,9 +3,13 @@ package com.example.android;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
+
 import java.util.ArrayList;
 
-public class Friends implements IDataElement{
+public class Friends implements IDataElement, TestRule{
 
     public String currUserEmail, friendWhoRequested;
     private DatabaseReference reference;
@@ -56,6 +60,12 @@ public class Friends implements IDataElement{
            friends.add(snapshot.getKey());
 
         return friends;
+
     }
- }
+
+    @Override
+    public Statement apply(Statement base, Description description) {
+        return null;
+    }
+}
 
