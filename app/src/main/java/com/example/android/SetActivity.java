@@ -17,13 +17,14 @@ import com.example.dejaphoto.R;
 
 import java.util.Timer;
 
+
 public class SetActivity extends AppCompatActivity {
 
-    public Switch location;
+    /*public Switch location;
     public Switch time;
     public Switch dayOfWeek;
     public Switch karma;
-    public Switch mode;
+    public Switch mode;*/
     EditText input;
     private Button saveButton;
     TextView newInterval;
@@ -34,31 +35,34 @@ public class SetActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_set);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        Log.i("deja", "" + Global.changeInterval);
+        Log.i("setActivity", "IN ONCREATE");
 
-        updateInterval();
-        location = (Switch) findViewById(R.id.s_location);
-        time = (Switch) findViewById(R.id.s_time);
-        dayOfWeek = (Switch) findViewById(R.id.s_dow);
-        karma = (Switch) findViewById(R.id.s_karma);
+        super.onCreate(savedInstanceState);
+        Log.i("deja", "" + Global.changeInterval);
 
         final LinearLayout l = (LinearLayout) findViewById(R.id.l_settings);
         setContentView(R.layout.content_set);
+
+        updateInterval();
+
+        Switch location = (Switch) findViewById(R.id.s_location);
+        Switch time = (Switch) findViewById(R.id.s_time);
+        Switch dayOfWeek = (Switch) findViewById(R.id.s_dow);
+        Switch karma = (Switch) findViewById(R.id.s_karma);
         Switch mode = (Switch) findViewById(R.id.s_mode);
 
         Log.d("SetActivity", "MODE: " +mode);
+        Log.i("setActivity", ""+ Global.locationSetting);
+        Log.i("setActivity", ""+ Global.timeSetting);
+        Log.i("setActivity", ""+ Global.daySetting);
+        Log.i("setActivity", ""+ Global.karmaSetting);
+        Log.i("setActivity", ""+ Global.dejaVuSetting);
 
         if (Global.dejaVuSetting) {
             mode.setChecked(true);
         } else {
             mode.setChecked(false);
         }
-
-
 
         if(Global.locationSetting) {
             location.setChecked(true);
@@ -87,10 +91,6 @@ public class SetActivity extends AppCompatActivity {
         else {
             karma.setChecked(false);
         }
-
-
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -125,7 +125,7 @@ public class SetActivity extends AppCompatActivity {
                     Intent trackerIntent = new Intent (getApplicationContext(), TrackerService.class);
                     if (isChecked) {
                         Log.i("saveMsg", "Location ON");
-                        locationSetting = true;
+                        Global.locationSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is on", Toast.LENGTH_SHORT).show();
                         Log.i("trackerService", "Starting trackerService Intent");
@@ -134,7 +134,7 @@ public class SetActivity extends AppCompatActivity {
                     } else {
                         Log.i("saveMsg", "Location OFF");
 
-                        locationSetting = false;
+                        Global.locationSetting = false;
 
                         Toast.makeText(getApplicationContext(),
                                 "Location setting is off", Toast.LENGTH_SHORT).show();
@@ -156,13 +156,13 @@ public class SetActivity extends AppCompatActivity {
                     if (isChecked) {
                         Log.i("saveMsg", "Time ON");
 
-                        timeSetting=true;
+                        Global.timeSetting=true;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is on", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.i("saveMsg", "Time OFF");
 
-                        timeSetting=false;
+                        Global.timeSetting=false;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -181,13 +181,13 @@ public class SetActivity extends AppCompatActivity {
                     if (isChecked) {
                         Log.i("saveMsg", "Day ON");
 
-                        dofSetting = true;
+                        Global.daySetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Day of Week setting is on", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.i("saveMsg", "Day OFF");
 
-                        dofSetting = false;
+                        Global.daySetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Day of Week setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -205,14 +205,14 @@ public class SetActivity extends AppCompatActivity {
                 } else { //dejavu mode is on
                     if (isChecked) {
                         Log.i("saveMsg", "Karma ON");
-                        karmaSetting = true;
+                        Global.karmaSetting = true;
                         Log.i("setKarma", "KarmaSetting: " + Global.getSettings()[4]);
                         Toast.makeText(getApplicationContext(),
                                 "Karma setting is on", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.i("saveMsg", "Karma OFF");
 
-                        karmaSetting = false;
+                        Global.karmaSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Karma setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -220,9 +220,7 @@ public class SetActivity extends AppCompatActivity {
             }
         });
 
-
         saveButton = (Button) findViewById(R.id.bt_7);
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,10 +232,6 @@ public class SetActivity extends AppCompatActivity {
                 String newInfo = interval + " Seconds";
                 newInterval.setText(newInfo);
                 Global.changeInterval = (interval * 1000);
-                Global.locationSetting = locationSetting;
-                Global.daySetting = dofSetting;
-                Global.karmaSetting = karmaSetting;
-                Global.timeSetting = timeSetting;
                 startRerank();
                 if(Global.undoTimer != null) {
                     Global.autoWallpaperChange.cancel();
@@ -251,6 +245,8 @@ public class SetActivity extends AppCompatActivity {
         });
     }
 
+
+
     public void startRerank() {
         Intent intent = new Intent(this, Rerank.class);
         startService(intent);
@@ -258,7 +254,7 @@ public class SetActivity extends AppCompatActivity {
 
     public void updateInterval(){
         newInterval = (TextView) findViewById(R.id.change_interval);
-        String newInfo = Global.changeInterval/100 + " seconds";
+        String newInfo = Global.changeInterval/1000 + " seconds";
         Log.i("deja", "Setting text to: " + newInfo);
         newInterval.setText(newInfo);
     }

@@ -58,7 +58,7 @@ public class Rerank extends IntentService {
             getMyLocation();
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ got my location");
 
-            Rank newRank = new Rank( myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma, Global.displayCycle);
+            Rank newRank = new Rank( myLat, myLong, isTimeOn, isLocaOn, isWeekOn, isKarma, Global.displayCycle, getApplicationContext());
             Log.i(TAG, "++++++++++++++++++++++++++++++++++++++ New Rank Created");
 
             Global.head = 0;

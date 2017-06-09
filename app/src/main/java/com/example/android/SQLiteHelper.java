@@ -85,6 +85,7 @@ public class SQLiteHelper {
             cr.close();
         }
 
+
         Global.displayCycle = paths;
     }
 
