@@ -68,6 +68,7 @@
     <string name="button5">Download</string>
     <string name="button6">Friends</string>
     <string name="button7">Display</string>
+    <string name="button20">Test Download</string>
 
     <string name="title_activity_interval">IntervalActivity</string>
     <string name="title_activity_share">ShareActivity</string>

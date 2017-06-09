@@ -52,8 +52,8 @@ public class DatabaseSync extends TimerTask {
                 for (String friend : friends) {
                         Log.i(TAG, "friend: "+friend +" --- storageRef: "+ PhotoStorage.getStorageRef(friend));
 
-                        PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
-                                , FileManager.getDirPath("DejaPhotoFriends"));
+                        /*PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
+                                , FileManager.getDirPath("DejaPhotoFriends"));*/
                     }
 
             }

@@ -2,7 +2,6 @@ package com.example.android;
 
 import android.app.Activity;
 import android.support.test.rule.ActivityTestRule;
-import android.util.Log;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,7 +14,7 @@ import static junit.framework.Assert.assertNotNull;
  * Created by Justin on 6/7/17.
  */
 
-public class AddPhotoTest extends ActivityTestRule<MainActivity>{
+public class PhotoPickerTest extends ActivityTestRule<MainActivity>{
 
     private Activity mActivity;
     final String testIntent = "Intent { act=android.intent.action.GET_CONTENT typ=image/* (has extras) }";
@@ -27,7 +26,7 @@ public class AddPhotoTest extends ActivityTestRule<MainActivity>{
             "{ act=android.intent.action.GET_CONTENT typ=image/* (has extras) }, " +
             "android.intent.extra.TITLE=Select Picture}]";
 
-    public AddPhotoTest() {
+    public PhotoPickerTest() {
         super(MainActivity.class);
     }
 
@@ -47,43 +46,43 @@ public class AddPhotoTest extends ActivityTestRule<MainActivity>{
     }
 
     @Test
-    public void addPhotoTest1(){
-        AddPhoto testAdd = new AddPhoto(this.mActivity.getApplicationContext(), this.mActivity);
+    public void photoPickerTest1(){
+        PhotoPicker testAdd = new PhotoPicker(this.mActivity.getApplicationContext(), this.mActivity);
         testAdd.add();
         assertEquals(testAdd.testIntent.toString(), testIntent);
     }
 
     @Test
-    public void addPhotoTest2(){
-        AddPhoto testAdd = new AddPhoto(this.mActivity.getApplicationContext(), this.mActivity);
+    public void photoPickerTest2(){
+        PhotoPicker testAdd = new PhotoPicker(this.mActivity.getApplicationContext(), this.mActivity);
         testAdd.add();
         assertEquals(testAdd.testIntent.getExtras().toString(), testIntentExtras);
     }
 
     @Test
-    public void addPhotoTest3(){
-        AddPhoto testAdd = new AddPhoto(this.mActivity.getApplicationContext(), this.mActivity);
+    public void photoPickerTest3(){
+        PhotoPicker testAdd = new PhotoPicker(this.mActivity.getApplicationContext(), this.mActivity);
         testAdd.add();
         assertEquals(testAdd.testIntent.getAction(), testIntentAction);
     }
 
     @Test
-    public void addPhotoTest4(){
-        AddPhoto testAdd = new AddPhoto(this.mActivity.getApplicationContext(), this.mActivity);
+    public void photoPickerTest4(){
+        PhotoPicker testAdd = new PhotoPicker(this.mActivity.getApplicationContext(), this.mActivity);
         testAdd.add();
         assertEquals(testAdd.chooserTestIntent.getAction(), testChooserIntentAction);
     }
 
     @Test
-    public void addPhotoTest5(){
-        AddPhoto testAdd = new AddPhoto(this.mActivity.getApplicationContext(), this.mActivity);
+    public void photoPickerTest5(){
+        PhotoPicker testAdd = new PhotoPicker(this.mActivity.getApplicationContext(), this.mActivity);
         testAdd.add();
         assertEquals(testAdd.chooserTestIntent.toString(), testChooserIntent);
     }
 
     @Test
-    public void addPhotoTest6(){
-        AddPhoto testAdd = new AddPhoto(this.mActivity.getApplicationContext(), this.mActivity);
+    public void photoPickerTest6(){
+        PhotoPicker testAdd = new PhotoPicker(this.mActivity.getApplicationContext(), this.mActivity);
         testAdd.add();
         assertEquals(testAdd.chooserTestIntent.getExtras().toString(), testChooserIntentExtras);
     }

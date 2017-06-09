@@ -42,14 +42,9 @@ public class ShareActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         textView = (TextView) findViewById(R.id.syncInterval);
-
         share = (Switch) findViewById(R.id.s_share);
-        if(Global.shareSetting) {
-            share.setChecked(true);
-        }
-        else {
-            share.setChecked(false);
-        }
+
+        displayUpdate(true); //update the switches do display settings
 
         context = getApplicationContext();
 
@@ -76,7 +71,9 @@ public class ShareActivity extends AppCompatActivity {
                                 "Sharing Off", Toast.LENGTH_SHORT).show();
 
                         //all users photos deleted from web
-                        PhotoStorage.remove(PhotoStorage.getStorageRef(Global.currUser.email));
+                        Intent intent = new Intent(getApplicationContext(), DatabaseMediator.class);
+                        intent.setAction("com.example.android.action.UPDATE_SHARE");
+                        startService(intent);
                     }
             }
         });
@@ -88,9 +85,10 @@ public class ShareActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText editText = (EditText) findViewById(R.id.sync_freq);
-                textView.setText(editText.getText()+" seconds");
                 int timeSetting = Integer.parseInt(editText.getText().toString());
+
                 Global.syncInterval = timeSetting;
+                displayUpdate(false);
 
                 //cancel timer and create new one when user changes the sync interval
                 timerReset();
@@ -105,12 +103,39 @@ public class ShareActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //cancel timer and create new one when user changes the sync interval
                 Global.syncInterval = 10;
+                displayUpdate(false);
+
                 timerReset();
-                textView.setText("10 seconds");
                 Toast.makeText(getApplicationContext(),
                         "Test: 10s sync interval", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    /*
+    sets the view of the UI to the desired setting
+     */
+    private void displayUpdate(boolean switchUpdate){
+       if(switchUpdate) {
+           if (Global.shareSetting) {
+               share.setChecked(true);
+           } else {
+               share.setChecked(false);
+           }
+       }
+       else{
+           String text = Global.syncInterval + " seconds";
+           textView.setText(text);
+       }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        displayUpdate(true);
+        displayUpdate(false);
     }
 
     private static void timerReset(){

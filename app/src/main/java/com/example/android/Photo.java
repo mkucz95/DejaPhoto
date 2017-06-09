@@ -18,9 +18,10 @@ public class Photo {
     private String date_taken;
     private long hour;
     private String dayOfWeek;
-    private boolean karma = false;
+    private int karma = 0;
     private boolean released = false;
     private String folder = "friends";
+    private String locationName;
 
     public Photo(){
     }
@@ -77,11 +78,11 @@ public class Photo {
         return date_taken;
     }
 
-    public boolean isKarma() {
+    public int getKarma() {
         return this.karma;
     }
 
-    public void setKarma(boolean boolKarma){
+    public void setKarma(int boolKarma){
         this.karma = boolKarma;
     }
 
@@ -89,5 +90,9 @@ public class Photo {
         this.released = flag;
     }
     public String getFolder(){ return this.folder; }
+    public String userLocationString = "Not Set";
+    public Boolean userLocation = false;
+    public String photoLocationString;
+    public Boolean photoLocation = false;
 
 }

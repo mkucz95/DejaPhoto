@@ -83,14 +83,16 @@ public class WallpaperChanger extends IntentService {
 
         PhotoLocation locName = new PhotoLocation(path, gc);
         rviews.setTextViewText(R.id.display_location, locName.locationName);
-
-        if(locName.locationName != " ") {
+        Log.i("LocName", path + " name: [" + locName.locationName + "]");
+        if(!Global.isBlank(locName.locationName)){
             rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_white);
         }
         else{
+            rviews.setTextViewText(R.id.display_location, "No Location Found");
             rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_white);
 
         }
+        rviews.setTextViewText(R.id.karma_num, "Karma: " + Global.displayCycle.get(Global.head).getKarma());
         Log.i("PhotoLocation", "Updating widget...");
         appWidgetManager.updateAppWidget(appWidgetIds, rviews);
     }

@@ -11,7 +11,6 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
     File dejaPhoto;
 
     static final int REQUEST_CODE = 1;
-    String TAG = "deja";
+    String TAG = "MainActivity";
     static final int SELECT_IMAGE = 2;
 
     private String path;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Button display = (Button) findViewById(R.id.bt_7);
         Button share = (Button) findViewById(R.id.bt_4);
         Button addFriends = (Button) findViewById(R.id.bt_6);
+        Button testUpload = (Button) findViewById(R.id.bt_20);
 
         Display displayWindow = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -93,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openCamera();
+            }
+        });
+
+        testUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startUpload();
             }
         });
 
@@ -141,6 +151,15 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE);
     }
 
+    public void startUpload() {
+        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
+
+        StorageReference reference = PhotoStorage.getStorageRef("hlcphantom@gmail,com");
+        PhotoStorage photoStorage = new PhotoStorage(path1, reference);
+
+        photoStorage.addElement();
+    }
+
     public void changeSettings() {
         Intent intent = new Intent(this, SetActivity.class);
         startActivity(intent);
@@ -162,8 +181,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPhoto () {
-        AddPhoto photoAdd = new AddPhoto(this.getApplicationContext(), this);
-        photoAdd.add();
+        PhotoPicker photoPick = new PhotoPicker(this.getApplicationContext(), this);
+        photoPick.add();
         Toast.makeText(getApplicationContext(), "Press and hold to select multiple images", Toast.LENGTH_SHORT).show();
     }
 

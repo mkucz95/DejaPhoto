@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class DatabaseMediator extends IntentService {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_ALL = "com.example.android.action.uploadAll";
+    private static final String ACTION_UPDATE_SHARE = "com.example.android.action.UPDATE_SHARE";
     private static final String ACTION_QUEUE = "com.example.android.action.uploadFromQueue";
     private static final String ACTION_SYNC = "com.example.android.action.SYNC";
 
@@ -36,6 +36,11 @@ public class DatabaseMediator extends IntentService {
                 uploadMetaData();
                 downloadFriends();
             }
+
+            else if(ACTION_UPDATE_SHARE.equals(action)){
+               //clean our images from storage
+               syncSettings();
+           }
         }
     }
 
@@ -58,8 +63,8 @@ public class DatabaseMediator extends IntentService {
         ArrayList<String> friendEmails = Friends.getFriends(Global.currUser.email);
 
         for(int i = 0; i<friendEmails.size(); i++) {
-            PhotoStorage.downloadImages(PhotoStorage.getStorageRef(Global.currUser.email).child(friendEmails.get(i)),
-                    Global.friendFolderPath);
+            /*PhotoStorage.downloadImages(PhotoStorage.getStorageRef(Global.currUser.email).child(friendEmails.get(i)),
+                    Global.friendFolderPath);*/
         }
     }
 
@@ -68,4 +73,11 @@ public class DatabaseMediator extends IntentService {
             //TODO iteration 2
         }
     }
+
+    public void syncSettings(){
+        String user = Global.currUser.email;
+
+        //PhotoStorage.removeStorage();
+    }
+
 }

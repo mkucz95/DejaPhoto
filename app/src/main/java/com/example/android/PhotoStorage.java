@@ -1,5 +1,7 @@
 package com.example.android;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
@@ -12,6 +14,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -21,8 +24,13 @@ import org.junit.runners.model.Statement;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.net.URI;
+import java.net.URL;
 
 /**
  * Created by mkucz on 5/29/2017.
@@ -32,26 +40,27 @@ import java.lang.reflect.Method;
 
 public class PhotoStorage implements IDataElement {
     String imagePath;
-    String name;
+    static String name;
     StorageReference storageReference;
     Uri fileUri;
     static boolean uploaded = false;
     static boolean downloaded = false;
     static boolean removed = false;
     private Bitmap bitmap;
+    Context context;
 
     private static final String TAG = "PhotoStorage";
 
     public PhotoStorage() {//default constructor
     }
 
-    //gs://dejaphoto-33.appspot.com/hlcphantom%40gmail%2Ccom/ucsd.jpg
     public PhotoStorage(String path, StorageReference reference){
         this.imagePath = path;
         this.storageReference = reference;
         this.fileUri = Uri.fromFile(new File(imagePath));
         this.bitmap = FileManager.getBitmap(imagePath);
         this.name = (new File(imagePath)).getName();
+
     }
 
     @Override
@@ -60,7 +69,7 @@ public class PhotoStorage implements IDataElement {
     }
 
     @Override
-    public boolean addElement() { //this method uploads the element to specified path in database
+    public void addElement() { //this method uploads the element to specified path in database
         Log.i(TAG, "addElement");
 
         Log.d(TAG, "bitmap: " + this.bitmap);
@@ -70,95 +79,113 @@ public class PhotoStorage implements IDataElement {
         byte[] data = baos.toByteArray();
 
         Log.d(TAG, "data" + data[0]);
-        Log.d(TAG, "StorageRef" + "99999" + storageReference.toString());
+        Log.d(TAG, "StorageRef" + storageReference.toString());
 
-        final StorageReference imageRef = getStorageRef(name);
+        final StorageReference imageRef = storageReference.child(name);
+
         UploadTask uploadTask = imageRef.putBytes(data);
         Log.d(TAG, "newRef" + imageRef);
+
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                uploaded = false;
-                Log.d(TAG, "??????????");
-                Log.d(TAG, "Exception " + exception.getMessage());
+                Log.d(TAG, "onFailure");
+                Log.d(TAG, "Exception " + exception);
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                uploaded = true;
+                Log.d(TAG, "onSuccess");
+                PhotoStorage.uploadPath(taskSnapshot);
             }
         });
-
-        /*UploadTask uploadTask = storageReference.putFile(fileUri);
-
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-                uploaded = false;
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                uploaded = true;
-            }
-        });*/
-        return uploaded;
+        Log.d(TAG, "task: " + uploadTask.isComplete());
     }
 
+private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
+    Log.d(TAG, "uploadPath: "+taskSnapshot);
+
+    @SuppressWarnings("VisibleForTests")
+         String name =  taskSnapshot.getMetadata().getName().replace(".", ",");
+
+    Log.d(TAG, "name of file: "+name);
+
+
+    Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
+}
     @Override
     public DatabaseReference getRef() { return null; }
 
-    public static boolean downloadImages(StorageReference reference, String targetPath){
+    public static void downloadImages(StorageReference reference, String targetPath){
         Log.i(TAG, "downloadImages from: "+reference);
 
-        try {
-         File  localFile = File.createTempFile(targetPath, "jpg");
-            reference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    downloaded = true;
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    downloaded=false;
-                }
-            });
-       } catch (IOException e){
-           Log.e(TAG, "directory not found--- downloadImages");
-       }
-       return downloaded;
+        //iterator through reference's children
+        //downloadSingleImage(reference, targetPath);
+    }
+
+    //reference for single image, target path is folder to save into
+    public static void downloadSingleImage(StorageReference reference, String targetPath) {
+        Log.d(TAG, "downloading: "+ reference);
+
+        File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
+
+        final StorageReference imageRef = reference.child("FILENAME-1.jpg");
+
+        final File localFile = new File(folder, "DOWNLOAD-1.jpg");
+        if (!folder.exists()) {
+            Log.i(TAG, "Folder doesn't exist, creating it...");
+            boolean rv = folder.mkdir();
+            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+        } else {
+            Log.i(TAG, "Folder already exists.");
+        }
+
+        imageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG, "download Success");
+                Log.d(TAG, "Path" + localFile.getAbsolutePath());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.d(TAG, "download Failure");
+            }
+        });
+
+        Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(localFile);
+        mediaScan.setData(contentUri);
     }
 
     //remove all pictures at location
-    public static boolean remove(StorageReference reference) {
+    public static void removeStorage(final StorageReference reference) {
         Log.i(TAG, "remove : "+reference);
         reference.delete();
         reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                removed = true;
+                Log.i(TAG, "remove success on: "+ reference);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                removed = false;
+                Log.i(TAG, "remove success on: "+ reference);
             }
         });
-        return removed;
     }
 
     //return storage reference
     public static StorageReference getStorageRef(String userEmail) {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
+
         Log.d(TAG, "getStorageRef" + userEmail+ " ------- " + storageReference);
 
-        return storageReference;
+        return storageReference.child(userEmail);
     }
 
- /*   public static void uploadImages(String flag){
+    /*public static void uploadImages(String flag){
         //implement to upload
         if(flag.equals("all")){
             //for each image that needs to be uploaded call add element
@@ -168,12 +195,8 @@ public class PhotoStorage implements IDataElement {
         }
     }*/
 
-    public static boolean dirExists(String directory){
-        File folder = new File(Environment.getExternalStorageDirectory()+"/"+directory);
+    public static boolean dirExists(String directory) {
+        File folder = new File(Environment.getExternalStorageDirectory() + "/" + directory);
         return folder.exists();
-    }
-
-    public static void testUpload(){
-        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
     }
 }
