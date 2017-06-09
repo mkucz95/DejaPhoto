@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -59,6 +60,7 @@ public class PhotoStorage implements IDataElement {
         this.fileUri = Uri.fromFile(new File(imagePath));
         this.bitmap = FileManager.getBitmap(imagePath);
         this.name = (new File(imagePath)).getName();
+
     }
 
     @Override
@@ -94,13 +96,20 @@ public class PhotoStorage implements IDataElement {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Log.d(TAG, "onSuccess");
-                @SuppressWarnings("VisibleForTests")
-                Uri url = taskSnapshot.getDownloadUrl();
+                PhotoStorage.uploadPath(taskSnapshot);
             }
         });
         Log.d(TAG, "task: " + uploadTask.isComplete());
     }
 
+private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
+    Log.d(TAG, "uploadPath: "+taskSnapshot);
+
+    @SuppressWarnings("VisibleForTests")
+         final String name =  taskSnapshot.getMetadata().getName();
+
+    Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name);
+}
     @Override
     public DatabaseReference getRef() { return null; }
 
