@@ -94,6 +94,11 @@ public class RankTest extends TestCase{
         t1.add(testPhoto5);
         assertEquals(t1.get(0),testPhoto1);
 
+        //test time and local
+        t1.add(testPhoto3);
+        t1.add(testPhoto4);
+        assertEquals(testPhoto1,t1.get(0));
+
 
 
 
