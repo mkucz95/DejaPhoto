@@ -90,6 +90,7 @@ public class Photo {
         this.released = flag;
     }
     public String getFolder(){ return this.folder; }
+
     public String userLocationString = "Not Set";
     public Boolean userLocation = false;
     public String photoLocationString;

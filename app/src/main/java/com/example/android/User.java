@@ -86,4 +86,11 @@ public class User implements IDataElement{
             }
         });
     }
+
+    public DatabaseReference userPhotosRef(){
+        DatabaseReference databaseReference = reference.getRoot().child("photos").child(this.email);
+        Log.d(TAG, "photos ref: "+ databaseReference);
+
+        return databaseReference;
+    }
 }

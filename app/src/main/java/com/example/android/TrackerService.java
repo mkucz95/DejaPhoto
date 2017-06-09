@@ -182,9 +182,12 @@ public class TrackerService extends Service {
     public void updateLocation(Location location) {
         double currLatitude;
         double currLongitute;
+        if(location == null){
+            Toast.makeText(getApplicationContext(), "Location could not be found", Toast.LENGTH_SHORT).show();
+            return;
+        }
         int currTime;
         Log.i("TrackerService", "in updateLocation");
-
 
         currTime = (int) ((location.getTime() / (1000*60*60)) % 24);
 

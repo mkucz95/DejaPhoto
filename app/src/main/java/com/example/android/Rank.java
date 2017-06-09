@@ -1,7 +1,9 @@
 package com.example.android;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Geocoder;
 import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,12 +11,14 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 //import java.util.Collections;
 //import java.util.Comparator;
 //import java.util.Date;
 //
 //import static java.lang.Math.pow;
 //import static java.lang.Math.sqrt;
+import static android.content.ContentValues.TAG;
 import static java.lang.StrictMath.abs;
 
 public class Rank {
@@ -28,7 +32,7 @@ public class Rank {
     private boolean[] settings; //location, time, day, karma
 
     public Rank( String localLat, String localLong, boolean b1, boolean b2, boolean
-            b3, boolean b4, ArrayList<Photo> cycle) {
+            b3, boolean b4, ArrayList<Photo> cycle, Context context) {
         //photo = Global.displayCycle;
         photo = cycle;
 
@@ -51,7 +55,7 @@ public class Rank {
         isKarma = b4;
         Log.i("location~~~",localLat+"");
         Log.i("location~~~",localLng+"");
-        sort(); //sort the array list
+        sort(context); //sort the array list
 
         for (Photo x : photo) {
             float[] a = new float[1];
@@ -76,7 +80,7 @@ public class Rank {
     }
 
 
-    public void sort() {
+    public void sort(Context context) {
         Photo temp;
         long curMiliSecond = System.currentTimeMillis();
         Log.d("printertime",curMiliSecond+"");
@@ -103,17 +107,18 @@ public class Rank {
             }
             for (int j = 1; j < photo.size(); j++) {
                 Log.i("jis ", j + " i is " + i);
-                String[] photo1GPS = photo.get(j - 1).getLatLong();
-                String[] photo2GPS = photo.get(j).getLatLong();
+
+                Geocoder gc = new Geocoder(context, Locale.getDefault());//Locale.getDefault()follow the system's language
+
+                PhotoLocation photo1Location = new PhotoLocation(photo.get(j-1).getPath(), gc, false);
+                PhotoLocation photo2Location = new PhotoLocation(photo.get(j).getPath(), gc, false);
 
                 try {
-                    photo1Lat = Double.parseDouble(photo1GPS[0]);
-                    photo1Lng = Double.parseDouble(photo1GPS[1]);
-                    photo2Lat = Double.parseDouble(photo2GPS[0]);
-                    photo2Lng = Double.parseDouble(photo2GPS[1]);
+                    photo1Lat = photo1Location.Latitude;
+                    photo1Lng = photo1Location.Longitude;
+                    photo2Lat = photo2Location.Latitude;
+                    photo2Lng = photo2Location.Longitude;
                 } catch (Exception e) {
-                    //no location information in the pictures
-//                    return;
                 }
 
 
@@ -122,18 +127,21 @@ public class Rank {
                 int dayPhoto2 = week(photo.get(j).getDateTaken());
 
                 int karma1 = photo.get(j - 1).getKarma();
+                Log.i("KarmaCheck", "Photo1" + karma1);
                 int karma2 = photo.get(j).getKarma();
+                Log.i("KarmaCheck", "Photo2" + karma2);
 
                 float[] dist = new float[1];
 
                 Location.distanceBetween(localLat, localLng, photo1Lat, photo1Lng, dist);
+
                 double distance1 = dist[0] / 3.28;   //meter to feet -- Distance between photo1 and current location
-                //Log.i("distanceRank ", "Distance from " + photo.get(j-1).getPath() + " : " + distance1 + "ft" );
+                Log.i("RankCheck ", "Distance from " + photo.get(j-1).getPath() + " : " + distance1 + "ft" );
                 Log.i("location!!!", distance1+"");
                 float[] dist1 = new float[1];
                 Location.distanceBetween(localLat, localLng, photo2Lat, photo2Lng, dist1);
                 double distance2 = dist1[0] / 3.28; // Distance in ft between photo2 and current location
-                //Log.i("distanceRank", "Distance from " + photo.get(j).getPath() + " : " + distance2 + "ft");
+                Log.i("RankCheck", "Distance from " + photo.get(j).getPath() + " : " + distance2 + "ft");
                 Log.i("location!!!",distance2+"");
                 /*find the real different on the day of the week*/
                 if (abs(dayPhoto1 - dayInt) > 3)
@@ -213,9 +221,23 @@ public class Rank {
             }
         }
 
+        for(Photo p : this.photo){
+            for(Photo x: Global.displayCycle){
+                if(p.getPath().equals(x.getPath())){
+                    Log.i("RebuildCycle", p.getPath() + " == " + x.getPath());
+                    Log.i("RebuildCycle", "replacing Photo in this.photo with x...");
+                    p = x;
+                }
+            }
+        }
+        Log.i("RankCheck", "________________________");
+
+
+
         Global.displayCycle = this.photo; //update the global variable for display cycle
+
         for (Photo y : Global.displayCycle) {
-            Log.i("distanceRank: ", y.getPath());
+            Log.i("RankCheck", y.getPath());
         }
     }
 
@@ -264,6 +286,20 @@ public class Rank {
             return 5;
         else
             return 6;
+    }
 
+    private String tempPath(String path){
+        String filename = path.substring(path.lastIndexOf("/")+1);
+
+        if(path.contains("DejaCopy")){
+            Log.i(TAG, path + " contains 'DejaCopy'");
+            path = "/storage/emulated/0/" + filename;
+            Log.i(TAG, "New path: " + path);
+        }
+        else{
+            Log.i(TAG, "New path not needed");
+        }
+
+        return path;
     }
 }

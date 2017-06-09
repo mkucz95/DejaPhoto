@@ -11,7 +11,11 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
@@ -102,36 +106,31 @@ public class PhotoStorage implements IDataElement {
         Log.d(TAG, "task: " + uploadTask.isComplete());
     }
 
-private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
-    Log.d(TAG, "uploadPath: "+taskSnapshot);
+    private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
 
-    @SuppressWarnings("VisibleForTests")
+        Log.d(TAG, "uploadPath: "+taskSnapshot);
+
+        @SuppressWarnings("VisibleForTests")
          String name =  taskSnapshot.getMetadata().getName().replace(".", ",");
 
-    Log.d(TAG, "name of file: "+name);
+        Log.d(TAG, "name of file: "+name);
 
 
-    Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
-}
+        Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
+    }
+
     @Override
     public DatabaseReference getRef() { return null; }
 
-    public static void downloadImages(StorageReference reference, String targetPath){
-        Log.i(TAG, "downloadImages from: "+reference);
-
-        //iterator through reference's children
-        //downloadSingleImage(reference, targetPath);
-    }
-
     //reference for single image, target path is folder to save into
-    public static void downloadSingleImage(StorageReference reference, String targetPath) {
+    public static void downloadImage(StorageReference reference, String targetPath, String fileName) {
         Log.d(TAG, "downloading: "+ reference);
 
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
 
-        final StorageReference imageRef = reference.child("FILENAME-1.jpg");
+        final StorageReference imageRef = reference;
 
-        final File localFile = new File(folder, "DOWNLOAD-1.jpg");
+        final File localFile = new File(folder, fileName);
         if (!folder.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
             boolean rv = folder.mkdir();
@@ -156,23 +155,7 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(localFile);
         mediaScan.setData(contentUri);
-    }
-
-    //remove all pictures at location
-    public static void removeStorage(final StorageReference reference) {
-        Log.i(TAG, "remove : "+reference);
-        reference.delete();
-        reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.i(TAG, "remove success on: "+ reference);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i(TAG, "remove success on: "+ reference);
-            }
-        });
+        Global.context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
     //return storage reference
@@ -198,5 +181,20 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
     public static boolean dirExists(String directory) {
         File folder = new File(Environment.getExternalStorageDirectory() + "/" + directory);
         return folder.exists();
+    }
+
+    public static void setDatabaseListener(final DatabaseReference reference) {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // get map of users in datasnapshot
+                Global.photoSnapshot = dataSnapshot;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // handle database error
+            }
+        });
     }
 }

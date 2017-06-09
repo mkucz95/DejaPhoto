@@ -28,9 +28,18 @@ import static android.content.Context.WINDOW_SERVICE;
 public class FileManager {
     private final String TAG = "FileManager";
     Context context;
+    File file;
 
     public FileManager(Context context) {
             this.context = context;
+    }
+
+
+    public void scanSD(File file){
+        Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(file);
+        mediaScan.setData(contentUri);
+        context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
     public void saveFile(Bitmap imageToSave, String folder) {
@@ -46,9 +55,8 @@ public class FileManager {
             Log.i(TAG, "Folder already exists.");
         }
 
-        String captured = "FILENAME-" + MainActivity.n + ".jpg";
-
-        MainActivity.n++;
+        String captured = Global.currUser.email + "Deja_" + Global.imageNumber + ".jpg";
+        Global.imageNumber++;
 
         File file = new File(folderName, captured);
 
@@ -57,15 +65,15 @@ public class FileManager {
             imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
-            Log.d(TAG, "file" + file.exists());
+
+            Global.uploadImageQueue.add(file.getAbsolutePath());
+            Log.d(TAG, "filePath added: " + file.getAbsolutePath());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(file);
-        mediaScan.setData(contentUri);
-        context.getApplicationContext().sendBroadcast(mediaScan);
+        scanSD(file);
 
         Log.d(TAG, "+++++++");
     }
