@@ -32,8 +32,10 @@ public class FileManagerTest {
 
         boolean success = false;
 
-        if (Global.uploadMetaData.get(Global.uploadMetaData.size() - 1).equals("test"))
+        if (Global.uploadMetaData.get(Global.uploadMetaData.size() - 1).equals("test")) {
             success = true;
+            Global.uploadMetaData.remove(Global.uploadMetaData.size() - 1);
+        }
 
         assertEquals(true, success);
 
