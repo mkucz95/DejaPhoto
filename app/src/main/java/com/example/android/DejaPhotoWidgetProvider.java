@@ -98,7 +98,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         //needed to prevent crash, auto changer override
 
         if (intent.getAction().equals(PREVIOUS_PIC)) {
-            Global.stopTimer(context);
+            resetTimer(context);
             Toast.makeText(context, PREVIOUS_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_PREVIOUS);
             if (Global.currIndex == 0) Global.currIndex = Global.displayCycle.size() - 1;
@@ -112,7 +112,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
         } else if (intent.getAction().equals(NEXT_PIC)) {
             Log.i("updateInterval", "Next Photo Called");
-            Global.stopTimer(context);
+            resetTimer(context);
             Toast.makeText(context, NEXT_PIC, Toast.LENGTH_SHORT).show();
             changeIntent.setAction(ACTION_NEXT);
             if (Global.currIndex == Global.displayCycle.size()) Global.currIndex = 0;
@@ -135,7 +135,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         intentRelease = new Intent(context, ActionReceiver.class);
 
         if (!Global.undoKarmaOn && action.equals("karma")) { //check to see if the alarmmanager returns a object or null (whether alarm is set)
-            Global.stopTimer(context);
+            Global.stopTimer();
             intentKarma.setAction(ACTION_KARMA);
             Global.karmaPath = getPath();
 
@@ -146,7 +146,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
 
             Toast.makeText(context, "Click Karma again to undo", Toast.LENGTH_LONG).show();
         } else if (!Global.undoReleaseOn && action.equals("release")) {
-            Global.stopTimer(context);
+            Global.stopTimer();
             intentRelease.setAction(ACTION_RELEASE);
             Global.releasePath = getPath();
 
@@ -195,9 +195,9 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         return photo.getPath();
     }
 
-    public void manageTimer(Context context) { //called when button is clicked
+    public void resetTimer(Context context) { //called when button is clicked
         if(Global.undoTimer != null) {
-            Global.stopTimer(context);
+            Global.stopTimer();
             Global.restartTimer(context);
         }
     }

@@ -102,11 +102,10 @@ public class Global {
                 Global.changeInterval, Global.changeInterval);
     }
 
-    public static void stopTimer(Context context){
+    public static void stopTimer(){
         Log.i("Timers", "Stopping Timers");
         Global.autoWallpaperChange.cancel();
         Global.undoTimer.cancel();
-        Global.undoTimer.purge();
     }
 
 }
