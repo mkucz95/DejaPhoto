@@ -76,6 +76,7 @@ public class Global {
 
     public static ArrayList<String> uploadImageQueue = new ArrayList<>();
     public static ArrayList<String> uploadMetaData = new ArrayList<>();
+    public static ArrayList<String> tempQueue = new ArrayList<>();
 
     public static String friendFolderPath = ""; //TODO
 
