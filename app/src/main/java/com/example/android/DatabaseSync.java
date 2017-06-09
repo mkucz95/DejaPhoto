@@ -2,12 +2,14 @@ package com.example.android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
@@ -56,6 +58,11 @@ public class DatabaseSync extends TimerTask {
     }
 
     public void downloadFriends(){
+        //delete friends folder so that we can get new copy from database
+        File friendsFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), TARGET);
+        if(friendsFolder.exists()) friendsFolder.delete();
+
+
         ArrayList<String> friendEmails = Friends.getFriends(Global.currUser.email);
 
         for(int i = 0; i<friendEmails.size(); i++) {
