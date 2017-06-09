@@ -71,6 +71,9 @@ public class ActionReceiver extends BroadcastReceiver
         } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
             Log.i(TAG, "Release");
 
+        } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
+            Log.i(TAG, "Release");
+
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Global.undoReleaseOn = false; //alarm was fired so now it got turned off
 

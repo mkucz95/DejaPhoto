@@ -2,6 +2,7 @@ package com.example.android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.TimerTask;
 
@@ -21,6 +22,7 @@ public class AutoWallpaperChangeTask extends TimerTask {
 
     @Override
     public void run() {
+        Log.i("Timers", "AutoWallpaperChangeTask Called");
         Intent changeIntent = new Intent(context, ChangeImage.class);
         changeIntent.setAction(ACTION_NEXT); //show next picture
         context.startService(changeIntent); //call change image

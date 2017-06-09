@@ -1,12 +1,18 @@
 package com.example.android;
 
+import android.os.Environment;
+
 import com.google.firebase.storage.StorageReference;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.io.File;
+
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -31,6 +37,7 @@ public class PhotoStorageTest {
     }
 
     String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-1.jpg";
+    String path2 = "/storage/emulated/0/DejaCopy/10_UCSD.jpg";
 
     @Test
     public void testUpload1() {
@@ -40,4 +47,27 @@ public class PhotoStorageTest {
         photoStorage.addElement();
         assertTrue(true);
     }
+
+    @Test
+    public void testUpload2() {
+        StorageReference reference = PhotoStorage.getStorageRef("hlcphantom@gmail,com");
+
+        PhotoStorage photoStorage = new PhotoStorage(path2, reference);
+        photoStorage.addElement();
+        assertTrue(true);
+    }
+
+    @Test
+    public void testGetStorageRef1() {
+        StorageReference reference = PhotoStorage.getStorageRef("hlcphantom@gmail,com");
+
+        assertNotNull(reference);
+    }
+
+    @Test
+    public void testDirExists1() {
+        File folder = new File(Environment.getExternalStorageDirectory() + "/" + "WTF");
+        assertTrue(!folder.exists());
+    }
+
 }

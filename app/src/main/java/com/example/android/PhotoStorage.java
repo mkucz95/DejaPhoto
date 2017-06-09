@@ -170,16 +170,6 @@ public class PhotoStorage implements IDataElement {
         return storageReference.child(userEmail);
     }
 
-    /*public static void uploadImages(String flag){
-        //implement to upload
-        if(flag.equals("all")){
-            //for each image that needs to be uploaded call add element
-        }
-        else if (flag.equals("notAll")){
-            //if we add 2 new pictures, only upload those two
-        }
-    }*/
-
     public static boolean dirExists(String directory) {
         File folder = new File(Environment.getExternalStorageDirectory() + "/" + directory);
         return folder.exists();
