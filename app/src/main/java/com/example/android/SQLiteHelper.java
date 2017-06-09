@@ -138,10 +138,15 @@ public class SQLiteHelper {
             String[] selectionArgs = {path};
             String selectionClause = MediaStore.Images.Media.DATA + " = ?";
 
-            ContentValues newUserValue = new ContentValues();
+        Log.i(TAG, "selectionArgs: "+selectionArgs[0]);
+        Log.i(TAG, "selectionClause: "+selectionClause);
+
+        ContentValues newUserValue = new ContentValues();
             newUserValue.put(colToAdd, data);
 
-            //update(@thisUri, with values from ContentValues ...)
+        Log.i(TAG, "contentVals: "+newUserValue);
+
+        //update(@thisUri, with values from ContentValues ...)
             int numUpdated = Global.context.getContentResolver().update(
                     MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, newUserValue,
                     selectionClause, selectionArgs);

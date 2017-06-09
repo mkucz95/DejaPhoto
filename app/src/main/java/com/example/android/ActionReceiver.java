@@ -17,22 +17,31 @@ import java.util.ArrayList;
 
 import static android.content.Intent.ACTION_SYNC;
 
-/*
-this class is used to track the 15 seconds a currUser has to undo karma or release. if they don't undo
-then it sends and intent service to
-
-implemented based on a similar class structure as the DJWidgetProvider.java
+/* Class: ActionReceiver
+ * Function: this class is used to track the 15 seconds a currUser has to undo karma or release.
+ *           if they don't undo then it sends and intent service to
+ *
+ *           implemented based on a similar class structure as the DJWidgetProvider.java
  */
+public class ActionReceiver extends BroadcastReceiver {
 
-public class ActionReceiver extends BroadcastReceiver
-/*gets system messages when the system or other applications send broadcasts
-* if the broadcast matches our class, it executes the onRecieve method
- */ {
+    /* Variables Declaration
+     *
+     * gets system messages when the system or other applications send broadcasts
+     * if the broadcast matches our class, it executes the onRecieve method
+     */
+
     private static final String ACTION_KARMA = "com.example.android.KARMA";
     private static final String ACTION_RELEASE = "com.example.android.RELEASE";
     private final String TAG = "PhotoInfoReciever";
     Context context;
 
+    /* Method: onReceive
+     * Param: Context context, Intent intent
+     * Function: this method is responding to the karma and release button event
+     *           and make corresponding action
+     * Return: none
+     */
     @Override
     public void onReceive(Context context, Intent intent) { //what happens when the alarm goes off (undoTimer expires)
         this.context = context;
@@ -63,6 +72,7 @@ public class ActionReceiver extends BroadcastReceiver
 
             Global.restartTimer(context);
 
+            // Delegate FileManager to take corresponding actions
             FileManager.addKarma(Global.karmaPath, context);
             fileManager.setDisplayCycleData(true, newKarma, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
@@ -75,7 +85,14 @@ public class ActionReceiver extends BroadcastReceiver
 
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
 
+<<<<<<< HEAD
+            // Change the Global settings
+            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
+            Global.undoTimer.schedule(Global.autoWallpaperChange,
+                    Global.changeInterval, Global.changeInterval);
+=======
             Global.restartTimer(context);
+>>>>>>> b8aaf48c9bb3adcb9b7d613022dc8bf1f78779f3
 
             fileManager.setDisplayCycleData(false, 0, Global.releasePath);
         }
