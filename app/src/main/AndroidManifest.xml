@@ -122,10 +122,6 @@
             android:label="@string/title_activity_add_friends"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <service
-            android:name="com.example.android.DatabaseMediator"
-            android:exported="false" />
-
         <activity android:name="com.example.android.SetLocationActivity"></activity>
     </application>
 
