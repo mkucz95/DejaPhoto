@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dejaCopy = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaCopy");
+        dejaCopy = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaPhotoCopied");
 
         if (!dejaCopy.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");

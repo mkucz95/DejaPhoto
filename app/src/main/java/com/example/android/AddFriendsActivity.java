@@ -514,6 +514,9 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         if (accept) {
             Friends friends = new Friends(Global.currUser.email, Global.currUser.requestList.get(0), myRef); //add both users to each other's friends
             friends.addElement();
+            if(Global.currUser.requestList.size() == 0){
+                requestView(false);
+            }
         } //add friend to friends list
         //else do nothing
 

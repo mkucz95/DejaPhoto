@@ -85,12 +85,6 @@ public class ActionReceiver extends BroadcastReceiver {
 
             Toast.makeText(context, "Released", Toast.LENGTH_SHORT).show();
 
-
-            // Change the Global settings
-            Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
-            Global.undoTimer.schedule(Global.autoWallpaperChange,
-                    Global.changeInterval, Global.changeInterval);
-            
             Global.restartTimer(context);
 
             fileManager.setDisplayCycleData(false, 0, Global.releasePath);
