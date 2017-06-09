@@ -59,21 +59,15 @@ public class ShareActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),
                                 "Sharing On", Toast.LENGTH_SHORT).show();
 
-                       // send intent to database handler
-                        Intent intent = new Intent(context, DatabaseMediator.class);
-                        intent.putExtra("upload", true);
-                        startService(intent);
-
                     } else {
                         Global.shareSetting = false;
                         share.setChecked(false);
                         Toast.makeText(getApplicationContext(),
                                 "Sharing Off", Toast.LENGTH_SHORT).show();
 
-                        //all users photos deleted from web
-                        Intent intent = new Intent(getApplicationContext(), DatabaseMediator.class);
-                        intent.setAction("com.example.android.action.UPDATE_SHARE");
-                        startService(intent);
+                     //remove references to curr user's pictures if they switch off
+                        DatabaseReference reference = Global.currUser.userPhotosRef();
+                        if(reference != null) reference.removeValue();
                     }
             }
         });

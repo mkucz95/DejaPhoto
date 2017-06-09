@@ -1,8 +1,10 @@
 package com.example.android;
 
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -15,49 +17,69 @@ import java.util.TimerTask;
 
 public class DatabaseSync extends TimerTask {
     private final String TAG = "DatabaseSync";
+    private static final String TARGET = "DejaPhotoFriends";
 
     @Override
     public void run() {
         Log.i(TAG, "Begin Sync, currUser: "+ Global.currUser);
 
         if (Global.currUser != null) {
-            Log.i(TAG, "uploading images");
-
-            StorageReference storageReference;
-
-            PhotoStorage photoStorage;
-
-            storageReference = PhotoStorage.getStorageRef(Global.currUser.email);
-
-            Log.d("storageReference", "value" + storageReference);
-
-            for (String photo : Global.uploadImageQueue) {
-                photoStorage = new PhotoStorage(photo, storageReference);
-                photoStorage.addElement();
-            }
-
             if (Global.shareSetting) {  //if sharing is on upload images
-                for (String photo : Global.uploadImageQueue) {
-                    photoStorage = new PhotoStorage(photo, storageReference);
-                    photoStorage.addElement();
-                }
+                Log.i(TAG, "uploading images");
+                uploadQueue();
+                uploadMetaData();
             }
 
             if (Global.displayFriend) { //if we want to see our own
                 Log.i(TAG, "downloading images");
 
-                    ArrayList<String> friends = Friends.getFriends(Global.currUser.email);
-                    Log.i(TAG, "Friends: "+ friends.toString());
-
-                for (String friend : friends) {
-                        Log.i(TAG, "friend: "+friend +" --- storageRef: "+ PhotoStorage.getStorageRef(friend));
-
-                        /*PhotoStorage.downloadImages(PhotoStorage.getStorageRef(friend)
-                                , FileManager.getDirPath("DejaPhotoFriends"));*/
+                downloadFriends();
                     }
+            }
+        }
 
+    public void uploadQueue(){
+        Log.i(TAG, "uploading queue");
+        for(int i = 0; i < Global.uploadImageQueue.size(); i++ ) {
+            PhotoStorage newPhoto =
+                    new PhotoStorage(Global.uploadImageQueue.get(i),
+                            PhotoStorage.getStorageRef(Global.currUser.email));
+            newPhoto.addElement();
+        }
+    }
+
+    public void uploadMetaData(){
+        for(int i = 0; i < Global.uploadMetaData.size(); i++ ) {
+            //TODO iteration 2
+        }
+    }
+
+    public void downloadFriends(){
+        ArrayList<String> friendEmails = Friends.getFriends(Global.currUser.email);
+
+        for(int i = 0; i<friendEmails.size(); i++) {
+            for(DataSnapshot snapshot: Global.photoSnapshot.getChildren()){
+                if(snapshot.getKey().equals(friendEmails.get(i))) {
+                    Log.i(TAG, "snapshot: "+snapshot.getKey());
+                    manageDownload(snapshot, friendEmails.get(i));
+                }
             }
         }
     }
+
+    //manage calling the downloads for each image of each user
+    public void manageDownload(DataSnapshot snapshot, String user){
+        for(DataSnapshot image: snapshot.getChildren()){
+
+            String fileName = image.getKey();
+
+            Log.i(TAG, "filename downloading: "+fileName);
+
+            StorageReference storageReference = PhotoStorage.getStorageRef(user).child(fileName);
+
+            PhotoStorage.downloadImage(storageReference, TARGET);
+        }
+    }
+
 }
 
