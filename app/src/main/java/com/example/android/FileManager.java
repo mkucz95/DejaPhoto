@@ -205,22 +205,37 @@ public class FileManager {
         Log.d("FileManager", "addKarma- " + path);
 
         SQLiteHelper helper = new SQLiteHelper();
+
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
         String[] info = handleCSV(raw);
         int currKarma;
-        if (info[1] != null) {
-            currKarma = Integer.parseInt(info[1]);
-            currKarma++;
-        } else
-            currKarma = 0;
 
-        if (info[0] != null) {
-            helper.storeSQLData(info[0] + "," + currKarma,
-                    MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
-        } else {
-            helper.storeSQLData("," + currKarma,
+        String currLocation;
+
+        if(info != null) {
+            if (info[1] != null) {
+                currKarma = Integer.parseInt(info[1]);
+                currKarma++;
+            } else {
+                currKarma = 0;
+            }
+            if(info[0] != null) {
+                helper.storeSQLData(info[0] + "," + currKarma,
+                        MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+            }
+            else{
+                helper.storeSQLData("," + currKarma,
+                        MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+            }
+        }
+        else{
+            currKarma = 0;
+            currLocation = "";
+            helper.storeSQLData(currLocation + "," + currKarma,
                     MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
         }
+
+
 
     }
 

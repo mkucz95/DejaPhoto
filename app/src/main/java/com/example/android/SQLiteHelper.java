@@ -135,34 +135,24 @@ public class SQLiteHelper {
     This method puts data in a certain field in sqlite database
      */
     public int storeSQLData(String data, String colToAdd, String path, Context context) {
-        if (null == cr) {
-            Log.e(TAG, "ERROR null=cr in write");
-        } else if (cr.getCount() < 1) {
-            Log.e(TAG, "ERROR no elements in table");
-        } else { //handle returned data
-            cr.moveToFirst();
-            int pathIndex = cr.getColumnIndex(MediaStore.MediaColumns.DATA);
-
-            Log.i(TAG, "looking for image");
-
             String[] selectionArgs = {path};
             String selectionClause = MediaStore.Images.Media.DATA + " = ?";
 
-            ContentValues newUserValue = new ContentValues();
+        Log.i(TAG, "selectionArgs: "+selectionArgs[0]);
+        Log.i(TAG, "selectionClause: "+selectionClause);
+
+        ContentValues newUserValue = new ContentValues();
             newUserValue.put(colToAdd, data);
 
-            //update(@thisUri, with values from ContentValues ...)
-            int numUpdated = context.getContentResolver().update(
+        Log.i(TAG, "contentVals: "+newUserValue);
+
+        //update(@thisUri, with values from ContentValues ...)
+            int numUpdated = Global.context.getContentResolver().update(
                     MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, newUserValue,
                     selectionClause, selectionArgs);
 
             Log.i(TAG, "updated: " + numUpdated + " rows");
             return numUpdated;
-        }
-        if (cr != null) {
-            cr.close();
-        }
-        return -1;
     }
 
     public static boolean matchesCases(String string, boolean friends, boolean own) {

@@ -193,7 +193,7 @@ public class SetActivity extends AppCompatActivity {
                 input = (EditText) findViewById(R.id.user_specify);
                 String inputCheck = input.getText().toString();
                 if(Global.isBlank(inputCheck)){
-                    inputCheck = Long.toString(Global.changeInterval);
+                    inputCheck = Long.toString(Global.changeInterval/1000);
                 }
                 int interval = Integer.parseInt(inputCheck);
                 newInterval = (TextView) findViewById(R.id.change_interval);

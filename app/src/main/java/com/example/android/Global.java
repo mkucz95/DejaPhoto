@@ -41,7 +41,7 @@ public class Global {
     public static boolean undoKarmaOn = false;
     public static AutoWallpaperChangeTask autoWallpaperChange;
     public static long changeInterval = 10000; //default is 10 seconds -- changed for testing
-    static Timer undoTimer = new Timer();
+    static Timer undoTimer;
 
     //RANK SETTINGS
     public static boolean[] getSettings() {
@@ -95,14 +95,15 @@ public class Global {
     }
 
     public static void restartTimer(Context context){
-        Log.i("updateInterval", "Restarting timer with interval " + Global.changeInterval);
+        Log.i("Timers", "Restarting timer with interval " + Global.changeInterval);
         Global.autoWallpaperChange = new AutoWallpaperChangeTask(context);
         Global.undoTimer = new Timer();
         Global.undoTimer.schedule(Global.autoWallpaperChange,
                 Global.changeInterval, Global.changeInterval);
     }
 
-    public static void stopTimer(Context context){
+    public static void stopTimer(){
+        Log.i("Timers", "Stopping Timers");
         Global.autoWallpaperChange.cancel();
         Global.undoTimer.cancel();
     }
