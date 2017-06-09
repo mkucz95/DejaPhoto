@@ -182,7 +182,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -360,8 +359,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     public void onClick(View v) {
     }
 
-
-
     //HELPER METHODS---------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------
     public String replaceData(String input){
@@ -378,7 +375,6 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
        else
            return null;
     }
-
 
     public void userManager(){
         FirebaseUser currUser = mAuth.getCurrentUser();

@@ -116,15 +116,9 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
     @Override
     public DatabaseReference getRef() { return null; }
 
-    public static void downloadImages(StorageReference reference, String targetPath){
-        Log.i(TAG, "downloadImages from: "+reference);
-
-        //iterator through reference's children
-        //downloadSingleImage(reference, targetPath);
-    }
 
     //reference for single image, target path is folder to save into
-    public static void downloadSingleImage(StorageReference reference, String targetPath) {
+    public static void downloadImage(StorageReference reference, String targetPath) {
         Log.d(TAG, "downloading: "+ reference);
 
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
@@ -156,23 +150,6 @@ private static void uploadPath(UploadTask.TaskSnapshot taskSnapshot){
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(localFile);
         mediaScan.setData(contentUri);
-    }
-
-    //remove all pictures at location
-    public static void removeStorage(final StorageReference reference) {
-        Log.i(TAG, "remove : "+reference);
-        reference.delete();
-        reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.i(TAG, "remove success on: "+ reference);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i(TAG, "remove success on: "+ reference);
-            }
-        });
     }
 
     //return storage reference

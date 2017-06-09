@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -81,5 +82,6 @@ public class Global {
         return true;
     }
 
+    public static DataSnapshot photoSnapshot;
 
 }

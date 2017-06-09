@@ -86,4 +86,8 @@ public class User implements IDataElement{
             }
         });
     }
+
+    public DatabaseReference userPhotosRef(){
+        return reference.getRoot().child("photos").child(this.email);
+    }
 }

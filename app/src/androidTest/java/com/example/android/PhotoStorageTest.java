@@ -5,7 +5,6 @@ import com.google.firebase.storage.StorageReference;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.example.android.PhotoStorage.downloadImages;
 import static com.example.android.PhotoStorage.getStorageRef;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;

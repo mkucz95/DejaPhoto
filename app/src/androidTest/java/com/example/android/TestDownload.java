@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static com.example.android.PhotoStorage.downloadImages;
 import static junit.framework.Assert.assertTrue;
 
 /**
