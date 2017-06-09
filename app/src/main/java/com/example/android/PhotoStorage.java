@@ -111,11 +111,10 @@ public class PhotoStorage implements IDataElement {
     public static void downloadSingleImage(StorageReference reference, String targetPath) {
         Log.d(TAG, "downloading: "+ reference);
 
-        //try {
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), targetPath);
 
         final StorageReference imageRef = reference.child("FILENAME-1.jpg");
-        //final long ONE_MEGABYTE = 1024 * 1024;
+
         final File localFile = new File(folder, "DOWNLOAD-1.jpg");
         if (!folder.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
@@ -141,7 +140,6 @@ public class PhotoStorage implements IDataElement {
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(localFile);
         mediaScan.setData(contentUri);
-        //context.getApplicationContext().sendBroadcast(mediaScan);
     }
 
     //remove all pictures at location
@@ -151,12 +149,12 @@ public class PhotoStorage implements IDataElement {
         reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.i(TAG, "remove success on: "+reference);
+                Log.i(TAG, "remove success on: "+ reference);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.i(TAG, "remove success on: "+reference);
+                Log.i(TAG, "remove success on: "+ reference);
             }
         });
     }
@@ -185,9 +183,5 @@ public class PhotoStorage implements IDataElement {
     public static boolean dirExists(String directory){
         File folder = new File(Environment.getExternalStorageDirectory()+"/"+directory);
         return folder.exists();
-    }
-
-    public static void testUpload(){
-        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
     }
 }
