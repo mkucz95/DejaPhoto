@@ -32,9 +32,6 @@ public class FileManager {
     public FileManager() {
     }
 
-    ;
-
-
     public void scanSD(File file) {
         Intent mediaScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(file);
@@ -43,9 +40,8 @@ public class FileManager {
     }
 
     public void saveFile(Bitmap imageToSave, String folder) {
-
-        //New directory in DCIM/DejaPhoto
-        File folderName = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), folder);
+        File folderName = new File(Environment.
+                getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), folder);
 
         if (!folderName.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
