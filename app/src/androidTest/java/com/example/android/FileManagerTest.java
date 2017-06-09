@@ -27,6 +27,23 @@ public class FileManagerTest {
     String path2 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
 
     @Test
+    public void csvTest1(){
+       assertNull(FileManager.handleCSV(null));
+    }
+
+    @Test
+    public void csvTest2(){
+        String[] test = {"a", "b"};
+        assertEquals(FileManager.handleCSV("a,b"), test);
+    }
+
+    @Test
+    public void csvTest3(){
+        String[] test = {"ab"};
+        assertEquals(FileManager.handleCSV("ab"), test);
+    }
+
+    @Test
     public void bitmapTest1() {
         Bitmap bitmap = FileManager.getBitmap(path1);
         assertEquals(bitmap, null);
