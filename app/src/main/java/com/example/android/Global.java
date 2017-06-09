@@ -41,7 +41,7 @@ public class Global {
     public static boolean undoKarmaOn = false;
     public static AutoWallpaperChangeTask autoWallpaperChange;
     public static long changeInterval = 10000; //default is 10 seconds -- changed for testing
-    static Timer undoTimer = new Timer();
+    static Timer undoTimer;
 
     //RANK SETTINGS
     public static boolean[] getSettings() {

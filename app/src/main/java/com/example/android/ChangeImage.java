@@ -44,6 +44,9 @@ public class ChangeImage extends IntentService {
 
     private void displayFirstImage(){
         Log.i("Timers", "Displaying First Image");
+        if(Global.undoTimer != null)
+            Global.stopTimer();
+
         Global.restartTimer(getApplicationContext());
         int counter = Global.displayCycle.size()-1;
         if(counter!=-1){
