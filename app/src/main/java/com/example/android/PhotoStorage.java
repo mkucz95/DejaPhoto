@@ -116,7 +116,7 @@ public class PhotoStorage implements IDataElement {
 
         final StorageReference imageRef = reference.child("FILENAME-1.jpg");
         //final long ONE_MEGABYTE = 1024 * 1024;
-        File localFile = new File(folder, "DOWNLOAD-1.jpg");
+        final File localFile = new File(folder, "DOWNLOAD-1.jpg");
         if (!folder.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
             boolean rv = folder.mkdir();
@@ -129,7 +129,7 @@ public class PhotoStorage implements IDataElement {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                 Log.d(TAG, "download Success");
-                //Log.d(TAG, "Path" + localFile.getAbsolutePath());
+                Log.d(TAG, "Path" + localFile.getAbsolutePath());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
