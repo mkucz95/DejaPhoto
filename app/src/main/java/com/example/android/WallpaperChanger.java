@@ -91,12 +91,7 @@ public class WallpaperChanger extends IntentService {
         appWidgetManager.updateAppWidget(appWidgetIds, rviews);
     }
 
-<<<<<<< HEAD
-    public void setBackground(Bitmap bitmap){ //set wallpaper based on inputted bitmap
-
-=======
     public void setBackground(Bitmap bitmap) { //set wallpaper based on inputted bitmap
->>>>>>> dd77280208c0d39aae984ebcd146285629b8972b
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
         //call java wallpapermanager api
         Log.i("PhotoLocation", "In setBackground");

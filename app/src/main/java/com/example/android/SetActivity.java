@@ -20,15 +20,12 @@ import java.util.Timer;
 
 public class SetActivity extends AppCompatActivity {
 
-<<<<<<< HEAD
-=======
     public Switch location;
     public Switch time;
     public Switch dayOfWeek;
     public Switch karma;
     public Switch mode;
 
->>>>>>> dd77280208c0d39aae984ebcd146285629b8972b
     EditText input;
     private Button saveButton;
     TextView newInterval;

@@ -240,11 +240,23 @@ public class FileManager {
         SQLiteHelper helper = new SQLiteHelper();
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
         String[] info = handleCSV(raw);
+        int currKarma;
+        if(info[1] != null){
+            currKarma = Integer.parseInt(info[1]);
+            currKarma++;
+        }
+        else
+            currKarma = 0;
 
-        int currKarma = Integer.parseInt(info[1]);
-        currKarma++;
+        if(info[0] != null) {
+            helper.storeSQLData(info[0] + "," + currKarma,
+                    MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+        }
+        else{
+            helper.storeSQLData("," + currKarma,
+                    MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+        }
 
-        helper.storeSQLData(info[0] + "," + currKarma, MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
     }
 
     //write custom location to file
@@ -255,7 +267,12 @@ public class FileManager {
         String raw = helper.getSingleLine(Global.mediaUri, Global.descriptionProjection, path, context);
         String[] info = handleCSV(raw);
 
-        helper.storeSQLData(customLoc + "," + info[1], MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+        if(info[1] != null)
+            helper.storeSQLData(customLoc + "," + info[1],
+                    MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
+
+        else helper.storeSQLData(customLoc + ",0",
+                MediaStore.Images.ImageColumns.DESCRIPTION, path, context);
 
     }
 

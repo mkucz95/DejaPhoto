@@ -59,6 +59,8 @@ public class BuildDisplayCycle extends IntentService {
                 //after build from file, apply rank settings (released/karma)
                 Intent rerankIntent = new Intent(this.getApplicationContext(), Rerank.class);
                 startService(rerankIntent);
+                Global.restartTimer(getApplicationContext());
+
 
 
             }
