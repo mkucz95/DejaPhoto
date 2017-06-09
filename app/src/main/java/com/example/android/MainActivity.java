@@ -227,15 +227,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void startApp() {
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-
-        Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
-        Global.undoTimer.schedule(Global.autoWallpaperChange,
-                Global.changeInterval, Global.changeInterval);
-
         Log.i("BuildCycle", "Calling BuildDisplayCycle...");
         displayCycleIntent.setAction(ACTION_BUILD_CYCLE);
         startService(displayCycleIntent);
-
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

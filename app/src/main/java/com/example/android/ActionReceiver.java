@@ -68,7 +68,6 @@ public class ActionReceiver extends BroadcastReceiver
             FileManager.addKarma(Global.karmaPath, context);
             fileManager.setDisplayCycleData(true, Global.karmaPath);
             fileManager.addToQueue(Global.karmaPath);
-
         }
 
         else if(ACTION_RELEASE.equals(action) && Global.undoReleaseOn){
@@ -76,7 +75,6 @@ public class ActionReceiver extends BroadcastReceiver
 
         } else if (ACTION_RELEASE.equals(action) && Global.undoReleaseOn) {
             Log.i(TAG, "Release");
-
 
             Global.undoKarmaOn = false; //alarm was fired so now it got turned off
             Global.undoReleaseOn = false; //alarm was fired so now it got turned off

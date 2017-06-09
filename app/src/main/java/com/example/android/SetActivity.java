@@ -26,7 +26,6 @@ public class SetActivity extends AppCompatActivity {
     public Switch karma;
     public Switch mode;
 
-
     EditText input;
     private Button saveButton;
     TextView newInterval;
