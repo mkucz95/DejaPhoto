@@ -24,6 +24,13 @@ public class Friends implements IDataElement, TestRule {
         this.reference = reference;
     }
 
+    public String useEmail(String s){
+        return s.replace(".", ",");
+    }
+    public DatabaseReference dateReq(DatabaseReference s){
+        return s;
+    }
+
     @Override
     public boolean checkExist(String check) {
         return reference.child("friends").child(check) != null;

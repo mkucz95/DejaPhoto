@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.dejaphoto.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -58,6 +59,7 @@ public class ShareActivity extends AppCompatActivity {
                     Global.shareSetting = true;
                     Toast.makeText(getApplicationContext(),
                             "Sharing On", Toast.LENGTH_SHORT).show();
+
 
                 } else {
                     Global.shareSetting = false;
