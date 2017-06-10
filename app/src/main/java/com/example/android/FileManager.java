@@ -93,6 +93,7 @@ public class FileManager {
         }
         in.close();
         out.close();
+        scanSD(file);
 
     }
 

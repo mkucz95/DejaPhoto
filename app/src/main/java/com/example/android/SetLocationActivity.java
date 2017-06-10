@@ -13,6 +13,8 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.example.dejaphoto.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Timer;
 
@@ -76,11 +78,16 @@ public class SetLocationActivity extends AppCompatActivity {
                     Global.displayCycle.get(Global.head).photoLocation = false;
                     Global.displayCycle.get(Global.head).userLocationString = newLocation;
 
-                    //save new loc to file via SQlite
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+                    String filename = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
+                    reference.child("photos").child(Global.currUser.email.replace(".",",")).child(filename.replace(".",",")).child("location").setValue(newLocation);
+
+
+                    /*save new loc to file via SQlite
                     String path = Global.displayCycle.get(Global.head).getPath();
                     FileManager.changeLoc(path, newLocation, getApplicationContext());
                     FileManager fileManager = new FileManager(getApplicationContext());
-                    fileManager.addToQueue(path); //queue for upload
+                    fileManager.addToQueue(path); //queue for upload*/
 
                     Log.i("widgetProv", Global.displayCycle.get(Global.head).userLocationString);
                 }
@@ -107,11 +114,16 @@ public class SetLocationActivity extends AppCompatActivity {
                     rviews.setTextViewText(R.id.display_location, Global.displayCycle.get(Global.head).photoLocationString);
                     Global.displayCycle.get(Global.head).userLocation = false;
                     Global.displayCycle.get(Global.head).photoLocation = true;
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+                    String filename = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
+                    reference.child("photos").child(Global.currUser.email.replace(".",",")).child(filename.replace(".",",")).child("location").setValue(Global.displayCycle.get(Global.head).photoLocationString);
+
                 } else {
                     rviews.setTextViewText(R.id.display_location, "No Location Found");
                     Global.displayCycle.get(Global.head).userLocation = true;
                     Global.displayCycle.get(Global.head).photoLocation = false;
                 }
+
                 appWidgetManager.updateAppWidget(appWidgetIds, rviews);
                 Intent startMain = new Intent(Intent.ACTION_MAIN);
                 startMain.addCategory(Intent.CATEGORY_HOME);

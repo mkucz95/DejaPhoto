@@ -39,7 +39,7 @@ import java.net.URL;
 /**
  * Created by mkucz on 5/29/2017.
  * <p>
- * code from https://firebase.google.com/docs/storage/android/upload-files
+ * code from https://firebase.google.com/docs/storage/android/oad-files
  */
 
 public class PhotoStorage implements IDataElement {
@@ -59,7 +59,8 @@ public class PhotoStorage implements IDataElement {
     }
 
     public PhotoStorage(String path, StorageReference reference) {
-        this.imagePath = path;
+
+        this.imagePath = tempPath(path);
         this.storageReference = reference;
         this.fileUri = Uri.fromFile(new File(imagePath));
         this.bitmap = FileManager.getBitmap(imagePath);
@@ -117,6 +118,8 @@ public class PhotoStorage implements IDataElement {
 
 
         Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).setValue(true);
+        Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).child("karma").setValue(0);
+        Global.currUser.getRef().getRoot().child("photos").child(Global.currUser.email).child(name).child("location").setValue("");
     }
 
     @Override
@@ -189,4 +192,19 @@ public class PhotoStorage implements IDataElement {
             }
         });
     }
+
+    private String tempPath(String path) {
+        String filename = path.substring(path.lastIndexOf("/") + 1);
+
+        if (path.contains("DejaCopy")) {
+            Log.i(TAG, path + " contains 'DejaCopy'");
+            path = "/storage/emulated/0/" + filename;
+            Log.i(TAG, "New path: " + path);
+        } else {
+            Log.i(TAG, "New path not needed");
+        }
+
+        return path;
+    }
+
 }

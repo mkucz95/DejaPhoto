@@ -121,6 +121,7 @@ public class DejaPhotoWidgetProvider extends AppWidgetProvider {
         } else if (intent.getAction().equals(SET_LOCATION)) {
             Log.i("widgetProv", "IN SETLOCATION");
             Intent intn = new Intent(context, SetLocationActivity.class);
+            intn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intn);
         }
 

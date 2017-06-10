@@ -12,6 +12,8 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -69,6 +71,13 @@ public class ActionReceiver extends BroadcastReceiver {
             rviews.setTextViewText(R.id.karma_num, "Karma: " + newKarma);
             appWidgetManager.updateAppWidget(appWidgetIds, rviews);
 
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+            String filename = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
+
+            for (String s : Friends.getFriends(Global.currUser.email)) {
+                reference.child("photos").child(s.replace(".", ",")).child(filename.replace(".", ",")).child("karma").setValue(newKarma);
+                Log.i("AddKarma", "photos -> " + s.replace(".", ",") + " -> " + filename.replace(".", ",") + " -> karma " + newKarma);
+            }
 
             Global.restartTimer(context);
 

@@ -5,6 +5,12 @@ import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +31,10 @@ public class PhotoLocation {
     Double Longitude, Latitude;
     String TAG = "PhotoLocation";
     Photo temp;
+    ArrayList<String> locations = new ArrayList<>();
+    String locationDB;
+    int check;
+
 
     PhotoLocation(String path, Geocoder gc, Boolean flag) {
         Log.i("findLocation", this.toString());
@@ -44,6 +54,43 @@ public class PhotoLocation {
         } else if (Global.displayCycle.get(Global.head).photoLocation && flag) {
             Log.i("widgetProv", "USERLOCATION NOT YET SET");
             locationName = Global.displayCycle.get(Global.head).photoLocationString;
+
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+            String filename = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
+            if(Global.currUser != null) {
+                for (String s : Friends.getFriends(Global.currUser.email)) {
+                    reference = reference.child("photos").child(s).child(filename.replace(".", ",")).child("location");
+                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Object o = dataSnapshot.getValue();
+                            if (o != null) {
+                                locations.add(o.toString());
+                                check = 1;
+                            } else {
+                                locations.add(Global.displayCycle.get(Global.head).photoLocationString);
+                                check = 1;
+                            }
+                            Log.i("locationName", "Getting location from DB: " + locationName);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+                while (check == 0) {
+                    Log.i("locationName", "waiting for thread to finish");
+                }
+
+                locationName = locations.get(0);
+            }
+            else{
+                return Global.displayCycle.get(Global.head).photoLocationString;
+            }
             return locationName;
         } else {
             Log.i("widgetProv", "FIRST RUNTHROUGH");
@@ -168,6 +215,12 @@ public class PhotoLocation {
                     Log.i("EDITLOCATION", "Has Location been set?: " + x.userLocation);
                 }
             }
+            /*DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+            String filename = Global.displayCycle.get(Global.head).getPath().substring(path.lastIndexOf("/") + 1);
+            if(reference != null) {
+                if(Global.currUser != null)
+                    reference.child("photos").child(Global.currUser.email.replace(".", ",")).child(filename.replace(".", ",")).child("location").setValue(locationName);
+            }*/
             return locationName;
         }
     }
@@ -214,6 +267,8 @@ public class PhotoLocation {
 
         return path;
     }
+
+
 
 
 }

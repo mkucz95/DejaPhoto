@@ -4,6 +4,12 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * This intent service changes the image when called according to the passed parameter
  * it also moves the head of the display cycle to hold the number/position of the picture that
@@ -19,6 +25,9 @@ public class ChangeImage extends IntentService {
     private static final String NEXT_PIC = "next";
     private static final String PREV_PIC = "previous";
 
+
+    int karmaNum;
+    int check;
     public ChangeImage() {
         super("ChangeImage");
     }
@@ -129,6 +138,10 @@ public class ChangeImage extends IntentService {
         wallpaperIntent.setAction(Intent.ACTION_SEND);
         wallpaperIntent.putExtra("image_path", newPath); //send path as extra on the intent
         wallpaperIntent.setType("text/plain");
+
+
+
+
 
         startService(wallpaperIntent); //change the wallpaper
     }
