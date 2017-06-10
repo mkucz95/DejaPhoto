@@ -22,14 +22,14 @@ import static android.content.ContentValues.TAG;
  * Created by Michael on 5/25/17.
  */
 
-public class User implements IDataElement{
+public class User implements IDataElement {
     public String username;
     public String email;
     public ArrayList<String> requestList = new ArrayList<>();
 
     private DatabaseReference reference;
     private final String TAG = "User.java";
-    public  static boolean exists = false;
+    public static boolean exists = false;
 
     public void User() {
         // Default currUser constructor
@@ -44,13 +44,15 @@ public class User implements IDataElement{
     @Override
     public boolean checkExist(final String check) {
         Log.d(TAG, "checkExist");
-        Log.d(TAG, "checkEmail"+check);
-        Log.i(TAG, "whole snap: "+ Global.userSnapshot);
+        Log.d(TAG, "checkEmail" + check);
+        Log.i(TAG, "whole snap: " + Global.userSnapshot);
 
 
-        if(Global.userSnapshot.child(check).exists()){
-            Log.i(TAG, "userSnap: "+Global.userSnapshot.child(check));
-            return true;
+        if(Global.userSnapshot != null) {
+            if (Global.userSnapshot.child(check).exists()) {
+                Log.i(TAG, "userSnap: " + Global.userSnapshot.child(check));
+                return true;
+            }
         }
 
         return false;
@@ -77,7 +79,7 @@ public class User implements IDataElement{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // get map of users in datasnapshot
-                Global.userSnapshot=dataSnapshot;
+                Global.userSnapshot = dataSnapshot;
             }
 
             @Override
@@ -87,9 +89,9 @@ public class User implements IDataElement{
         });
     }
 
-    public DatabaseReference userPhotosRef(){
+    public DatabaseReference userPhotosRef() {
         DatabaseReference databaseReference = reference.getRoot().child("photos").child(this.email);
-        Log.d(TAG, "photos ref: "+ databaseReference);
+        Log.d(TAG, "photos ref: " + databaseReference);
 
         return databaseReference;
     }

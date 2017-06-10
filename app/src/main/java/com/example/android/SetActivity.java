@@ -45,17 +45,17 @@ public class SetActivity extends AppCompatActivity {
         updateInterval();
 
         location = (Switch) findViewById(R.id.s_location);
-         time = (Switch) findViewById(R.id.s_time);
-         dayOfWeek = (Switch) findViewById(R.id.s_dow);
-         karma = (Switch) findViewById(R.id.s_karma);
-         mode = (Switch) findViewById(R.id.s_mode);
+        time = (Switch) findViewById(R.id.s_time);
+        dayOfWeek = (Switch) findViewById(R.id.s_dow);
+        karma = (Switch) findViewById(R.id.s_karma);
+        mode = (Switch) findViewById(R.id.s_mode);
 
-        Log.d("SetActivity", "MODE: " +mode);
-        Log.i("setActivity", ""+ Global.locationSetting);
-        Log.i("setActivity", ""+ Global.timeSetting);
-        Log.i("setActivity", ""+ Global.daySetting);
-        Log.i("setActivity", ""+ Global.karmaSetting);
-        Log.i("setActivity", ""+ Global.dejaVuSetting);
+        Log.d("SetActivity", "MODE: " + mode);
+        Log.i("setActivity", "" + Global.locationSetting);
+        Log.i("setActivity", "" + Global.timeSetting);
+        Log.i("setActivity", "" + Global.daySetting);
+        Log.i("setActivity", "" + Global.karmaSetting);
+        Log.i("setActivity", "" + Global.dejaVuSetting);
 
         displayUpdate();
 
@@ -84,12 +84,11 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if(!Global.dejaVuSetting){ //if dejavu mode is off, we cannot change settings
+                if (!Global.dejaVuSetting) { //if dejavu mode is off, we cannot change settings
                     Toast.makeText(getApplicationContext(),
                             "DejaVu Mode is Off", Toast.LENGTH_SHORT).show();
-                }
-                else { //dejavu mode is on
-                    Intent trackerIntent = new Intent (getApplicationContext(), TrackerService.class);
+                } else { //dejavu mode is on
+                    Intent trackerIntent = new Intent(getApplicationContext(), TrackerService.class);
                     if (isChecked) {
                         Log.i("saveMsg", "Location ON");
                         Global.locationSetting = true;
@@ -123,13 +122,13 @@ public class SetActivity extends AppCompatActivity {
                     if (isChecked) {
                         Log.i("saveMsg", "Time ON");
 
-                        Global.timeSetting=true;
+                        Global.timeSetting = true;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is on", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.i("saveMsg", "Time OFF");
 
-                        Global.timeSetting=false;
+                        Global.timeSetting = false;
                         Toast.makeText(getApplicationContext(),
                                 "Time setting is off", Toast.LENGTH_SHORT).show();
                     }
@@ -192,21 +191,20 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 input = (EditText) findViewById(R.id.user_specify);
-                int interval = Integer.parseInt(input.getText().toString());
+                String inputCheck = input.getText().toString();
+                if(Global.isBlank(inputCheck)){
+                    inputCheck = Long.toString(Global.changeInterval/1000);
+                }
+                int interval = Integer.parseInt(inputCheck);
                 newInterval = (TextView) findViewById(R.id.change_interval);
-
                 Log.i("updateInterval", "input: " + interval);
                 String newInfo = interval + " Seconds";
                 newInterval.setText(newInfo);
                 Global.changeInterval = (interval * 1000);
                 startRerank();
-                if(Global.undoTimer != null) {
-                    Global.autoWallpaperChange.cancel();
-                    Global.undoTimer.cancel();
-                    Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
-                    Global.undoTimer = new Timer();
-                    Global.undoTimer.schedule(Global.autoWallpaperChange,
-                            Global.changeInterval, Global.changeInterval);
+                if (Global.undoTimer != null) {
+                    Global.stopTimer();
+                    Global.restartTimer(getApplicationContext());
                 }
             }
         });
@@ -219,31 +217,27 @@ public class SetActivity extends AppCompatActivity {
             mode.setChecked(false);
         }
 
-        if(Global.locationSetting) {
+        if (Global.locationSetting) {
             location.setChecked(true);
-        }
-        else {
+        } else {
             location.setChecked(false);
         }
 
-        if(Global.timeSetting) {
+        if (Global.timeSetting) {
             time.setChecked(true);
-        }
-        else {
+        } else {
             time.setChecked(false);
         }
 
-        if(Global.daySetting) {
+        if (Global.daySetting) {
             dayOfWeek.setChecked(true);
-        }
-        else {
+        } else {
             dayOfWeek.setChecked(false);
         }
 
-        if(Global.karmaSetting) {
+        if (Global.karmaSetting) {
             karma.setChecked(true);
-        }
-        else {
+        } else {
             karma.setChecked(false);
         }
     }
@@ -253,9 +247,9 @@ public class SetActivity extends AppCompatActivity {
         startService(intent);
     }
 
-    public void updateInterval(){
+    public void updateInterval() {
         newInterval = (TextView) findViewById(R.id.change_interval);
-        String newInfo = Global.changeInterval/1000 + " seconds";
+        String newInfo = Global.changeInterval / 1000 + " seconds";
         Log.i("deja", "Setting text to: " + newInfo);
         newInterval.setText(newInfo);
     }

@@ -14,7 +14,11 @@ import static org.junit.Assert.assertNotNull;
 
 public class UserTest {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
     DatabaseReference databaseReference = firebaseDatabase.getReference();
+
+    DatabaseReference photoRefence = databaseReference.getRoot().child("photos").child("hlcphanto@gmail,com");
+
     User user = new User("test", "test@gmail,com", databaseReference);
 
     @Test
@@ -29,5 +33,10 @@ public class UserTest {
         if(test != null) {
             assertEquals(test.get(0), "user2@gmail,com");
         }
+    }
+
+    @Test
+    public void testPhotoRef() {
+        assertNotNull(photoRefence);
     }
 }

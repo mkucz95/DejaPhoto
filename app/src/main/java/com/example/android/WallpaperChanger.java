@@ -41,9 +41,6 @@ public class WallpaperChanger extends IntentService {
     int screenHeight = getScreenHeight();
     public RemoteViews rviews;
 
-
-
-
     public WallpaperChanger() {
         super("WallpaperChanger");
     }
@@ -51,20 +48,18 @@ public class WallpaperChanger extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
-            synchronized (this){
+            synchronized (this) {
                 String imagePath = intent.getExtras().getString("image_path"); //takes info passed from intent
                 Bitmap bitmap;
-                if(imagePath.equals("DEFAULTPICTURE")){
-                    bitmap = BitmapFactory.decodeResource( this.getResources(), R.drawable.default_picture);
+                if (imagePath.equals("DEFAULTPICTURE")) {
+                    bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.default_picture);
                     setBackground(bitmap);
-                }
-
-                else {
+                } else {
                     //convert image path into something code can use
-                        Bitmap bitmap1 = FileManager.getBitmap(imagePath);
-                        bitmap1 = checkOrientation(imagePath, bitmap1);
-                        setBackground(bitmap1);
-                        updateWidget(imagePath);
+                    Bitmap bitmap1 = FileManager.getBitmap(imagePath);
+                    bitmap1 = checkOrientation(imagePath, bitmap1);
+                    setBackground(bitmap1);
+                    updateWidget(imagePath);
 
                 }
             }
@@ -72,7 +67,7 @@ public class WallpaperChanger extends IntentService {
         }
     }
 
-    public void updateWidget(String path){
+    public void updateWidget(String path) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         ComponentName AppWidget = new ComponentName(this.getPackageName(), DejaPhotoWidgetProvider.class.getName());
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
@@ -84,10 +79,9 @@ public class WallpaperChanger extends IntentService {
         PhotoLocation locName = new PhotoLocation(path, gc);
         rviews.setTextViewText(R.id.display_location, locName.locationName);
         Log.i("LocName", path + " name: [" + locName.locationName + "]");
-        if(!Global.isBlank(locName.locationName)){
+        if (!Global.isBlank(locName.locationName)) {
             rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_white);
-        }
-        else{
+        } else {
             rviews.setTextViewText(R.id.display_location, "No Location Found");
             rviews.setInt(R.id.display_location, "setBackgroundResource", R.drawable.widget_shape_location_white);
 
@@ -97,13 +91,15 @@ public class WallpaperChanger extends IntentService {
         appWidgetManager.updateAppWidget(appWidgetIds, rviews);
     }
 
-    public void setBackground(Bitmap bitmap){ //set wallpaper based on inputted bitmap
+
+    public void setBackground(Bitmap bitmap) { //set wallpaper based on inputted bitmap
+
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
         //call java wallpapermanager api
         Log.i("PhotoLocation", "In setBackground");
 
 
-        if(bitmap != null) {
+        if (bitmap != null) {
             try {
                 Log.i("PhotoLocation", "Setting Bitmap...");
                 Log.i("PhotoLocation", "Bitmap Size: " + "(" + bitmap.getWidth() + ", " + bitmap.getHeight() + ")");
@@ -136,7 +132,7 @@ public class WallpaperChanger extends IntentService {
 
 
     //Checks to see if we need to change the image orientation
-    public Bitmap checkOrientation(String imagePath, Bitmap bitmap){
+    public Bitmap checkOrientation(String imagePath, Bitmap bitmap) {
         Log.i("checkOrientation", "Checking orientation...");
         try {
             ExifInterface ei = new ExifInterface(imagePath);
@@ -160,7 +156,7 @@ public class WallpaperChanger extends IntentService {
                 default:
                     break;
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return bitmap;
@@ -185,14 +181,12 @@ public class WallpaperChanger extends IntentService {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
+    public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
-
-
 }

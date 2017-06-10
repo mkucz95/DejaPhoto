@@ -2,8 +2,6 @@ package com.example.android;
 
 import junit.framework.TestCase;
 import com.example.android.Photo;
-
-import android.content.Context;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
@@ -21,7 +19,7 @@ import static junit.framework.Assert.assertEquals;
 //TODO finish test rewrite
 
 public class RankTest {
-    Context context;
+
 
     String currTime = "1496885534406";
     String localLat = "32.866499999999995";
@@ -56,7 +54,7 @@ public class RankTest {
     Photo testPhoto4 = new Photo(path, time, lat, longitude);
 
 
-    ;
+     ;
     String path5 = "/storage/emulated/0/2.JPG";
     String lat5 = "60.44296666666666";
     String longitude5 = "-130.5743111111111";
@@ -77,11 +75,14 @@ public class RankTest {
     @Test
     public void testLocal() {
 
+
         t1.add(testPhoto1);
         t1.add(testPhoto2);
         t1.add(testPhoto3);
-        Rank r3 = new Rank(localLat, localLng, false, true, false, false, t1, context);
+        Rank r3 = new Rank(localLat, localLng, false, true, false, false, t1);
         assertEquals(t1.get(0),testPhoto1);
+
+
     }
 
     @Test
@@ -91,24 +92,25 @@ public class RankTest {
         t1.add(testPhoto1);
         t1.add(testPhoto2);
         t1.add(testPhoto3);
-        // t1.add(testPhoto5);
-        Rank r3 = new Rank(localLat, localLng, true, false, false, false, t1, context);
+       // t1.add(testPhoto5);
+        Rank r3 = new Rank(localLat, localLng, true, false, false, false, t1);
 
         assertEquals(t1.get(0), testPhoto5);
     }
 
     @Test
     public void timeAndLocalTest() {
-        //test time and local
+    //test time and local
         t1.clear();
         t1.add(testPhoto1);
         t1.add(testPhoto5);
         t1.add(testPhoto3);
-        //  t1.add(testPhoto4);
-        Rank r4 = new Rank(localLat, localLng, true, true, false, false, t1, context);
+      //  t1.add(testPhoto4);
+        Rank r4 = new Rank(localLat, localLng, true, true, false, false, t1);
 
-        assertEquals(testPhoto1, t1.get(0));
+    assertEquals(testPhoto1, t1.get(0));
     }
+
 
     @Test
     public void karmaTest(){
@@ -117,7 +119,10 @@ public class RankTest {
         t1.add(testPhoto1);
         t1.add(testPhoto4);
         t1.add(testPhoto3);
-        Rank r2 = new Rank(localLat, localLng,false,false,false,true,t1, context);
+        Rank r2 = new Rank(localLat, localLng,false,false,false,true,t1 );
         assertEquals(t1.get(0),testPhoto4);
     }
+
+
+
 }

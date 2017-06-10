@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
 import com.example.dejaphoto.R;
+
 import java.util.Timer;
 
 public class SetLocationActivity extends AppCompatActivity {
@@ -25,8 +27,8 @@ public class SetLocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         //stop the timer so the photo doesn't change while setting location
-        if(Global.autoWallpaperChange != null && Global.undoTimer != null){
-            Log.i("setLocAct", "Cancelling Alarm and Timer");
+        if (Global.autoWallpaperChange != null && Global.undoTimer != null) {
+            Log.i("Timers", "Cancelling Alarm and Timer");
             Global.autoWallpaperChange.cancel();
             Global.undoTimer.cancel();
         }
@@ -37,20 +39,17 @@ public class SetLocationActivity extends AppCompatActivity {
         currentLocation = (TextView) findViewById(R.id.curr_loc_name);
         String locToDisplay;
 
-        if(Global.displayCycle.get(Global.head).userLocation) {
-            if(Global.isBlank(Global.displayCycle.get(Global.head).userLocationString)) {
+        if (Global.displayCycle.get(Global.head).userLocation) {
+            if (Global.isBlank(Global.displayCycle.get(Global.head).userLocationString)) {
                 locToDisplay = "No Location Found";
-            }
-            else {
+            } else {
                 locToDisplay = "'" + Global.displayCycle.get(Global.head).userLocationString + "'";
             }
             currentLocation.setText(locToDisplay);
-        }
-        else if(Global.displayCycle.get(Global.head).photoLocation) {
-            if(Global.isBlank(Global.displayCycle.get(Global.head).photoLocationString)) {
+        } else if (Global.displayCycle.get(Global.head).photoLocation) {
+            if (Global.isBlank(Global.displayCycle.get(Global.head).photoLocationString)) {
                 locToDisplay = "No Location Found";
-            }
-            else{
+            } else {
                 locToDisplay = Global.displayCycle.get(Global.head).photoLocationString;
             }
             currentLocation.setText(locToDisplay);
@@ -67,18 +66,27 @@ public class SetLocationActivity extends AppCompatActivity {
 
                 newLoc = (EditText) findViewById(R.id.new_loc);
                 String newLocation = newLoc.getText().toString();
-                if(newLocation != null){
-                    if(Global.isBlank(newLocation)){
+                if (newLocation != null) {
+                    if (Global.isBlank(newLocation)) {
                         newLocation = "No Location Found";
                     }
+
                     rviews.setTextViewText(R.id.display_location, newLocation);
                     Global.displayCycle.get(Global.head).userLocation = true;
                     Global.displayCycle.get(Global.head).photoLocation = false;
                     Global.displayCycle.get(Global.head).userLocationString = newLocation;
-                    Log.i("widgetProv", Global.displayCycle.get(Global.head).userLocationString);
 
+                    //save new loc to file via SQlite
+                    String path = Global.displayCycle.get(Global.head).getPath();
+                    FileManager.changeLoc(path, newLocation, getApplicationContext());
+                    FileManager fileManager = new FileManager(getApplicationContext());
+                    fileManager.addToQueue(path); //queue for upload
+
+                    Log.i("widgetProv", Global.displayCycle.get(Global.head).userLocationString);
                 }
+
                 Log.i("setLocAct", "Saving...Starting new timer task");
+
                 appWidgetManager.updateAppWidget(appWidgetIds, rviews);
                 Intent startMain = new Intent(Intent.ACTION_MAIN);
                 startMain.addCategory(Intent.CATEGORY_HOME);
@@ -88,19 +96,18 @@ public class SetLocationActivity extends AppCompatActivity {
         });
 
         defaultLocation = (Button) findViewById(R.id.revert_default);
-        defaultLocation.setOnClickListener(new View.OnClickListener(){
+        defaultLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
                 ComponentName AppWidget = new ComponentName(getApplicationContext(), DejaPhotoWidgetProvider.class.getName());
                 int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
                 RemoteViews rviews = new RemoteViews(AppWidget.getPackageName(), R.layout.dejaphoto_appwidget_layout);
-                if(Global.displayCycle.get(Global.head).photoLocationString != null) {
+                if (Global.displayCycle.get(Global.head).photoLocationString != null) {
                     rviews.setTextViewText(R.id.display_location, Global.displayCycle.get(Global.head).photoLocationString);
                     Global.displayCycle.get(Global.head).userLocation = false;
                     Global.displayCycle.get(Global.head).photoLocation = true;
-                }
-                else{
+                } else {
                     rviews.setTextViewText(R.id.display_location, "No Location Found");
                     Global.displayCycle.get(Global.head).userLocation = true;
                     Global.displayCycle.get(Global.head).photoLocation = false;
@@ -115,14 +122,10 @@ public class SetLocationActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         Log.i("setLocAct", "Destroying...Starting new timer task");
-        Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
-        Global.undoTimer = new Timer();
-        Global.undoTimer.schedule(Global.autoWallpaperChange,
-                Global.changeInterval, Global.changeInterval);
-
+        Global.restartTimer(getApplicationContext());
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -132,8 +135,7 @@ public class SetLocationActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onUserLeaveHint()
-    {
+    protected void onUserLeaveHint() {
         super.onUserLeaveHint();
         Log.i("setLocAct", "Home button pressed...Destroying...");
 

@@ -35,8 +35,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+/* Class: AddFriendsActivity
+ * Function: This class will add the friends into the firebase for each app user
+ *           and take care of any friends requests, so that user can accept or
+ *           decline the request
+ */
 public class AddFriendsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
+    // Variable declaration
     private GoogleApiClient mGoogleApiClient;
     private SignInButton signInButton;
     private Button signOutButton;
@@ -64,6 +70,12 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
     Request request;
 
 
+    /* Method: onCreate
+     * Param: Bundle savedInstance
+     * Function: This method will display the main layout of when the app starts
+     *           and set sign in button's listeners to make action
+     * Return: null
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,13 +101,16 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
         signOutButton = (Button) findViewById(R.id.sign_out_and_disconnect);
 
+        // Print out message when signed in
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
 
+        // Print out message when there are requests
         requestResult = (TextView) findViewById(R.id.sendResult);
         requestComeFrom = (TextView) findViewById(R.id.friendFrom);
-        showFriends =(TextView) findViewById(R.id.friendEmail);
+        showFriends = (TextView) findViewById(R.id.friendEmail);
 
+        // set button listeners
         sendButton = (Button) findViewById(R.id.bt_8);
 
         acceptButton = (Button) findViewById(R.id.bt_9);
@@ -110,6 +125,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
 
+        // Customized email input to add friends
         emailEdit = (EditText) findViewById(R.id.currEmail);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -117,22 +133,22 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             public void onClick(View view) {
                 Log.d(TAG, "request sent/clicked");
                 emailInputRequest = replaceData(getEditTextString(emailEdit));
-                Log.d(TAG, "emailInput: "+emailInputRequest);
+                Log.d(TAG, "emailInput: " + emailInputRequest);
 
-                if(Global.currUser.checkExist(emailInputRequest)) {
+                if (Global.currUser.checkExist(emailInputRequest)) {
                     request = new Request(Global.currUser.email, emailInputRequest, myRef);
                     request.addElement();
                     //todo print success message
                     requestResult.setText("Send successful");
 
-                }
-                else{
+                } else {
                     //todo print error message
                     requestResult.setText("User does not exists, try another");
                 }
             }
         });
 
+        // button listeners to take care of handling friends requests
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,6 +169,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 .build();
 
 
+        // Connect our app with the firebase address
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReferenceFromUrl("https://dejaphoto-33.firebaseio.com/");
 
@@ -165,8 +182,10 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
 
+        // Set the authentication rule for our database
         mAuth = FirebaseAuth.getInstance();
 
+        // sign in button listener
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,6 +201,13 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
     }
 
+
+    /* Method: onStart
+     * Param: none
+     * Function: this method will update user interface and set a
+     *           database listener when new user's emails are added
+     * Return: none
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -189,27 +215,40 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         User.setDatabaseListener(myRef.child("users"));
         PhotoStorage.setDatabaseListener(myRef.child("photos"));
 
-        if(Global.currUser != null){
+        if (Global.currUser != null) {
             Request.setRequestListener(myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr Global.currUser requests
 
             updateListeners();
         }
 
+        // Get the current user authenticated
         firebaseUser = mAuth.getCurrentUser();
 
-        if(firebaseUser == null)
+        // sign in
+        if (firebaseUser == null)
             signIn();
 
         updateUI(firebaseUser);
     }
 
+    /* Method: signIn
+     * Param: none
+     * Function: create a new intent to sign in google account
+     * return: none
+     */
     private void signIn() {
         Log.d(TAG, "signIn() called");
 
+        // Connect google account
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    /* Method: signOut
+     * Param: none
+     * Function: sign out both firebase and google account
+     * Return: none
+     */
     private void signOut() {
         // Firebase sign out
         mAuth.signOut();
@@ -226,6 +265,13 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         );
     }
 
+    /* Method: onActivityResult
+     * Param: int requestCode, int resultCode, Intent data
+     * Function: this method will handle the intent and to check if
+     *           the user email is valid and then sign in the user with
+     *           his gmail
+     * Return: none
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -233,23 +279,30 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if(result.isSuccess()) {
+            if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
+                // update UI
                 updateUI(null);
             }
             handleSignInResult(result);
         }
     }
 
+    /* Method: firebaseAuthWithGoogle
+     * Param: GoogleInAccount acct
+     * Function: Connect firebase account with google account
+     * Return: none
+     */
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
         //showProgressDialog();
         // [END_EXCLUDE]
 
+        // Create credential for current user
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -265,7 +318,7 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                             // If sign in fails, display a message to the currUser.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             //Toast.makeText(GoogleSignInActivity.this, "Authentication failed.",
-                              //      Toast.LENGTH_SHORT).show();
+                            //      Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
 
@@ -276,6 +329,12 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
                 });
     }
 
+    /* Method: handleSignInResult
+     * Param: GoogleSignInResult result
+     * Function: handles the firebase sign in with gmail and prints out
+     *           message if succeed
+     * Return: none
+     */
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
@@ -289,15 +348,21 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
     }
 
+    /* Method: updateUi
+     * Param: boolean signedIn
+     * Function: update user interface based on siged in with google account on app
+     * Return: none
+     */
     public void updateUI(boolean signedIn) {
-        if(signedIn) {
+        // Set sign out button visible
+        if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
 
             emailEdit.setVisibility(View.VISIBLE);
             sendButton.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
+            // prints out message and make sign in visible
             mStatusTextView.setText(R.string.signed_out);
             Global.currUser = null;
 
@@ -309,12 +374,18 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
     }
 
+    /* Method: updateUi
+    * Param: Firebase fUser
+    * Function: update user interface based on siged in with google account on firebase
+    * Return: none
+    */
     private void updateUI(FirebaseUser fUser) {
         //hideProgressDialog();
 
         if (fUser != null) {
             Global.currUser = new User(fUser.getDisplayName(), fUser.getEmail(), myRef); //new currUser object
 
+            // mainly update UI on app
             mStatusTextView.setText(getString(R.string.google_status_fmt, fUser.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, fUser.getUid()));
 
@@ -326,13 +397,14 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
 
             User.setDatabaseListener(myRef.child("users"));
             PhotoStorage.setDatabaseListener(myRef.child("photos"));
-            Request.setRequestListener( myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr currUser requests
+            Request.setRequestListener(myRef.child("users").child(Global.currUser.email).child("requests")); //set listener to curr currUser requests
 
-
+            // take a snapshot for any user change on firebase
             updateListeners();
 
 
         } else {
+            // mainly update UI on App
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
 
@@ -346,59 +418,86 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
     }
 
+    /* Method: onConnectionFailed
+     * Param: ConnectionResult connectionResult
+     * Function: listens to if the sign in process is cancelled
+     * Return: none
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 
+    /* Method: onClick
+     * Param: View v
+     * Function: none
+     * Return: none
+     */
     @Override
     public void onClick(View v) {
     }
 
     //HELPER METHODS---------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------
-    public String replaceData(String input){
-       if(input != null)
-        return input.replace(".", ",");
+    /* Method: replaceData
+     * Param: String input
+     * Function: replace illegal characters on firebase with others
+     * Return: String
+     */
+    public String replaceData(String input) {
+        if (input != null)
+            return input.replace(".", ",");
 
-       else return null;
+        else return null;
     }
 
-    public  String getEditTextString(EditText input){  //extract string from edit text
-       if(input.getText() != null)
-        return input.getText().toString();
+    /* Method: getEditTextString
+     * Param: EditText input
+     * Purpose: extract string from edit text
+     * Return: String
+     */
+    public String getEditTextString(EditText input) {  //extract string from edit text
+        if (input.getText() != null)
+            return input.getText().toString();
 
-       else
-           return null;
+        else
+            return null;
     }
 
-    public void userManager(){
+    /* Method: userManage
+     * Param: none
+     * Purpose: to check if the user exists already on firebase
+     * Return: none
+     */
+    public void userManager() {
         FirebaseUser currUser = mAuth.getCurrentUser();
-        Log.d(TAG, "currUser: "+ currUser);
+        Log.d(TAG, "currUser: " + currUser);
 
-        if(Global.currUser != null){
+        if (Global.currUser != null) {
             Log.d(TAG, Global.currUser.toString());
 
-            boolean exists =  Global.currUser.checkExist(Global.currUser.email); //check to see if currUser exists
+            boolean exists = Global.currUser.checkExist(Global.currUser.email); //check to see if currUser exists
 
-            if(!exists) {
+            if (!exists) {
+                // Add current user if not exists on firebase
                 Global.currUser.addElement();
                 Log.d(TAG, "adding new currUser @ signIn()");
-            }
-            else Log.i(TAG, "currUser already in database");
-        }
-        else Log.i(TAG, "no currUser exists");
+            } else Log.i(TAG, "currUser already in database");
+        } else Log.i(TAG, "no currUser exists");
     }
 
-    public static void requestView(boolean visible){
-        if(visible){
+    /* Method: requestView
+     * Param: boolean visible
+     * Purpose: update ui to notice user all friends requests
+     * Return: none
+     */
+    public static void requestView(boolean visible) {
+        if (visible) {
             acceptButton.setVisibility(View.VISIBLE);
             declineButton.setVisibility(View.VISIBLE);
             requestComeFrom.setText("Friend Request From");
             showFriends.setText(nextRequest);
-        }
-
-        else{
+        } else {
             acceptButton.setVisibility(View.INVISIBLE);
             declineButton.setVisibility(View.INVISIBLE);
             requestComeFrom.setText("");
@@ -406,10 +505,18 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         }
     }
 
-    public  void  handleClick(boolean accept){
+    /* Method: handleClick
+     * Param: boolean accept
+     * Purpose: handle friend acceptance and decline
+     * Return: none
+     */
+    public void handleClick(boolean accept) {
         if (accept) {
             Friends friends = new Friends(Global.currUser.email, Global.currUser.requestList.get(0), myRef); //add both users to each other's friends
             friends.addElement();
+            if(Global.currUser.requestList.size() == 0){
+                requestView(false);
+            }
         } //add friend to friends list
         //else do nothing
 
@@ -418,7 +525,12 @@ public class AddFriendsActivity extends AppCompatActivity implements GoogleApiCl
         //delete request that was handled
     }
 
-    private void updateListeners(){
+    /* Method: updateListeners
+     * Param: none
+     * Purpose: actual change on data change
+     * Return: none
+     */
+    private void updateListeners() {
         myRef.child("users").child("user@gmail,com").setValue(true); //update user snapshot
 
         myRef.child("photos").child("user@gmail,com").child("update").setValue(true); //update photo snapshot

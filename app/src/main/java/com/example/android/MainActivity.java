@@ -1,7 +1,6 @@
 package com.example.android;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dejaphoto.R;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,12 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String GET_INITIAL_LOCATION = "com.example.android.GET_INITIAL_LOCATION";
 
     Context context;
-    Activity activity = this;
 
     private FileManager fileManager;
-
     File dejaCopy;
-    File dejaPhoto;
 
     static final int REQUEST_CODE = 1;
     String TAG = "MainActivity";
@@ -48,21 +43,22 @@ public class MainActivity extends AppCompatActivity {
 
     private String path;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Toast.makeText(getApplicationContext(),
+                "Please Sign In First", Toast.LENGTH_SHORT).show();
 
         requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dejaCopy = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaCopy");
+        dejaCopy = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DejaPhotoCopied");
 
         if (!dejaCopy.exists()) {
             Log.i(TAG, "Folder doesn't exist, creating it...");
             boolean rv = dejaCopy.mkdir();
-            Log.i(TAG, "Folder creation " + ( rv ? "success" : "failed"));
+            Log.i(TAG, "Folder creation " + (rv ? "success" : "failed"));
         } else {
             Log.i(TAG, "Folder already exists.");
         }
@@ -78,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         Button display = (Button) findViewById(R.id.bt_7);
         Button share = (Button) findViewById(R.id.bt_4);
         Button addFriends = (Button) findViewById(R.id.bt_6);
-        Button testUpload = (Button) findViewById(R.id.bt_20);
 
         Display displayWindow = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -88,20 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
         Global.context = this.getApplicationContext();
 
-
-        startApp();
+        //startApp();
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openCamera();
-            }
-        });
-
-        testUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startUpload();
             }
         });
 
@@ -129,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         addFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               addFriend();
+                addFriend();
             }
         });
 
@@ -141,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Global.syncTimerTask = new DatabaseSync();
-        Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval*1000); //schedule timer
+        Global.syncTimer.schedule(Global.syncTimerTask, 0, Global.syncInterval * 1000); //schedule timer
     }
 
     // MS2 click the camera button to open default camera
@@ -150,14 +137,6 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE);
     }
 
-    public void startUpload() {
-        String path1 = "/storage/emulated/0/DejaPhoto/FILENAME-2.jpg";
-
-        StorageReference reference = PhotoStorage.getStorageRef("hlcphantom@gmail,com");
-        PhotoStorage photoStorage = new PhotoStorage(path1, reference);
-
-        photoStorage.addElement();
-    }
 
     public void changeSettings() {
         Intent intent = new Intent(this, SetActivity.class);
@@ -179,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void addPhoto () {
+    public void addPhoto() {
         PhotoPicker photoPick = new PhotoPicker(this.getApplicationContext(), this);
         photoPick.add();
         Toast.makeText(getApplicationContext(), "Press and hold to select multiple images", Toast.LENGTH_SHORT).show();
@@ -193,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         fileManager = new FileManager(context);
 
-        if(resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             if (data != null) {
                 //Clipdata for multiple selections, Uri format for single selection
                 ClipData clipData = data.getClipData();
@@ -206,23 +185,24 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "" + item.getUri().toString());
                         Uri uri = item.getUri();
                         //Get the absolute path from uri
-                        String p = fileManager.getImagePath(uri);
+                        String p = SQLiteHelper.getImagePath(fileManager.context, uri);
                         try {
                             fileManager.copyFile(new File(p), dejaCopy);
                             Global.uploadImageQueue.add(p);
-                        } catch(IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
                 }
+
                 //Single image case
-                else if(singleUri != null){
-                    String p  = fileManager.getImagePath(singleUri);
+                else if (singleUri != null) {
+                    String p = SQLiteHelper.getImagePath(fileManager.context, singleUri);
                     try {
                         Log.i(TAG, "" + singleUri.toString());
                         fileManager.copyFile(new File(p), dejaCopy);
                         Global.uploadImageQueue.add(p);
-                    } catch(IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
@@ -230,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // take a picture and save in deja folder
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 
             fileManager.saveFile(thumbnail, "DejaPhoto");
@@ -238,24 +218,19 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        Log.i("Timers", "Building new Display Cycle");
         Intent displayCycleRerank = new Intent(this, BuildDisplayCycle.class);
         displayCycleRerank.setAction(ACTION_BUILD_CYCLE);
         startService(displayCycleRerank);
     }
 
 
-
-    public void startApp(){
+    public void startApp() {
+        Log.i("Timers", "Building first display cycle");
         Intent displayCycleIntent = new Intent(this, BuildDisplayCycle.class);
-
-        Global.autoWallpaperChange = new AutoWallpaperChangeTask(getApplicationContext());
-        Global.undoTimer.schedule(Global.autoWallpaperChange,
-                Global.changeInterval, Global.changeInterval);
-
         Log.i("BuildCycle", "Calling BuildDisplayCycle...");
         displayCycleIntent.setAction(ACTION_BUILD_CYCLE);
         startService(displayCycleIntent);
-
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -263,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void requestPermission(){
+    public void requestPermission() {
         Log.i("permission", "checking permission...");
         //Check permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -277,9 +252,8 @@ public class MainActivity extends AppCompatActivity {
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            MY_PERMISSIONS_MULTIPLE_REQUEST);
-        }
-        else{
+                    MY_PERMISSIONS_MULTIPLE_REQUEST);
+        } else {
             startApp();
         }
         //startApp();
@@ -297,46 +271,40 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("permission", "Read Permission Now Granted...");
                 Toast.makeText(this, "Read permission granted", Toast.LENGTH_SHORT).show();
                 //Permission Granted, photos now accessible
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Read Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 5 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 5 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
                 Log.i("permission", "Location Permission Now Granted...");
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 5 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 5 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show();
                 Log.i("permission", " Location Permission Now Granted...");
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Location Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 5 && grantResults[3] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 5 && grantResults[3] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show();
                 Log.i("permission", "Camera Permission Now Granted...");
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Camera Access Denied", Toast.LENGTH_SHORT).show();
             }
-            if(grantResults.length == 5 && grantResults[4] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 5 && grantResults[4] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Write permission granted", Toast.LENGTH_SHORT).show();
                 Log.i("permission", "Write Permission Now Granted...");
-            }
-            else {
+            } else {
                 //Permission denied
                 Toast.makeText(this, "Write Access Denied", Toast.LENGTH_SHORT).show();
             }
 
-        }
-        else {
+        } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
@@ -346,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("saveMsg", "input:" + input);
 
-        if(input == null || input.getText().toString().equals("")){
+        if (input == null || input.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Please enter a valid time Interval", Toast.LENGTH_SHORT).show();
             return;
         }

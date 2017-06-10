@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static com.example.android.Global.context;
 import static com.example.android.Rank.week;
 import static junit.framework.Assert.assertEquals;
 
@@ -56,7 +57,7 @@ public class RankTest {
     Photo testPhoto4 = new Photo(path, time, lat, longitude);
 
 
-    ;
+     ;
     String path5 = "/storage/emulated/0/2.JPG";
     String lat5 = "60.44296666666666";
     String longitude5 = "-130.5743111111111";
@@ -80,8 +81,15 @@ public class RankTest {
         t1.add(testPhoto1);
         t1.add(testPhoto2);
         t1.add(testPhoto3);
+<<<<<<< HEAD
+       // Rank r3 = new Rank(localLat, localLng, false, true, false, false, t1);
+        assertEquals(t1.get(2),testPhoto1);
+
+
+=======
         Rank r3 = new Rank(localLat, localLng, false, true, false, false, t1, context);
         assertEquals(t1.get(0),testPhoto1);
+>>>>>>> a127613694996f201f4a0c337948d8be09bef787
     }
 
     @Test
@@ -91,23 +99,31 @@ public class RankTest {
         t1.add(testPhoto1);
         t1.add(testPhoto2);
         t1.add(testPhoto3);
-        // t1.add(testPhoto5);
+       // t1.add(testPhoto5);
+<<<<<<< HEAD
+        //Rank r3 = new Rank(localLat, localLng, true, false, false, false, t1);
+=======
         Rank r3 = new Rank(localLat, localLng, true, false, false, false, t1, context);
+>>>>>>> a127613694996f201f4a0c337948d8be09bef787
 
         assertEquals(t1.get(0), testPhoto5);
     }
 
     @Test
     public void timeAndLocalTest() {
-        //test time and local
+    //test time and local
         t1.clear();
         t1.add(testPhoto1);
         t1.add(testPhoto5);
         t1.add(testPhoto3);
-        //  t1.add(testPhoto4);
+      //  t1.add(testPhoto4);
+<<<<<<< HEAD
+       // Rank r4 = new Rank(localLat, localLng, true, true, false, false, t1);
+=======
         Rank r4 = new Rank(localLat, localLng, true, true, false, false, t1, context);
+>>>>>>> a127613694996f201f4a0c337948d8be09bef787
 
-        assertEquals(testPhoto1, t1.get(0));
+    assertEquals(testPhoto1, t1.get(0));
     }
 
     @Test
@@ -117,7 +133,11 @@ public class RankTest {
         t1.add(testPhoto1);
         t1.add(testPhoto4);
         t1.add(testPhoto3);
+<<<<<<< HEAD
+        //Rank r2 = new Rank(localLat, localLng,false,false,false,true,t1 );
+=======
         Rank r2 = new Rank(localLat, localLng,false,false,false,true,t1, context);
+>>>>>>> a127613694996f201f4a0c337948d8be09bef787
         assertEquals(t1.get(0),testPhoto4);
     }
 }
