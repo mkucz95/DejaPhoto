@@ -4,6 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dejaphoto.R;
 
@@ -29,7 +30,7 @@ public class ShareActivityTest {
     public void testShare() {
         Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_mode);
 //        shareActivity.displayUpdate(true);
-        onView(withId(R.id.s_mode)).perform(click());
+       // onView(withId(R.id.s_mode)).perform(click());
         Boolean checked = sw.isChecked();
         if (checked) {
             assertEquals(Global.shareSetting, true);
@@ -64,6 +65,6 @@ public class ShareActivityTest {
 
         assertEquals(intervalString.contains("" + 10), true);
         assertEquals(Global.syncInterval, 10);
-        //make sure string contains the number
+//        make sure string contains the number
     }
 }
