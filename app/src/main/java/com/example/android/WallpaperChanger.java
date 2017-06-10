@@ -209,35 +209,28 @@ public class WallpaperChanger extends IntentService {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         String filename = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
+
         if(Global.currUser != null) {
-            for ( String s : Friends.getFriends(Global.currUser.email)) {
-                userName = s;
-                reference = reference.child("photos").child(s).child(filename.replace(".", ",")).child("karma");
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Object o = dataSnapshot.getValue();
-                        if (o != null) {
-                            karmaNum = Integer.parseInt(o.toString());
-                            check = 1;
-                        } else {
-                            karmaNum = 0;
-                            check = 1;
-                        }
-                        Log.i("locationName", "Getting karma from DB: " + karmaNum);
+            reference = reference.child("photos").child(Friends.getFriends(Global.currUser.email).get(0)).child(filename.replace(".", ",")).child("karma");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Object o = dataSnapshot.getValue();
+                    if (o != null) {
+                        karmaNum = Integer.parseInt(o.toString());
+                        check = 1;
+                    } else {
+                        karmaNum = 0;
+                        check = 1;
                     }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                if(check==1){
-                    Log.i("locationName", userName + ", Breaking...");
-                    break;
+                    Log.i("locationName", "Getting karma from DB: " + karmaNum);
                 }
-            }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             while (check == 0) {
                 Log.i("karmaNum", "waiting for thread to finish");
             }
@@ -248,12 +241,15 @@ public class WallpaperChanger extends IntentService {
         Global.displayCycle.get(Global.head).setKarma(karmaNum);
         rviews.setTextViewText(R.id.karma_num, "Karma: "+ karmaNum);
         appWidgetManager.updateAppWidget(appWidgetIds, rviews);
-        Log.i("locationName", userName);
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        String file = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
-        Log.i("locationName", file);
-        ref.child("photos").child(userName).child(file.replace(".",",")).child("karma").setValue(karmaNum);
-        Log.i("locationName", ref + ": " + userName  + " -> " + file + "->" + karmaNum);
+
+        if(!Global.isBlank(userName)) {
+            Log.i("locationName", "" + userName);
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+            String file = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
+            Log.i("locationName", file);
+            ref.child("photos").child(userName).child(file.replace(".", ",")).child("karma").setValue(karmaNum);
+            Log.i("locationName", ref + ": " + userName + " -> " + file + "->" + karmaNum);
+        }
 
     }
 }

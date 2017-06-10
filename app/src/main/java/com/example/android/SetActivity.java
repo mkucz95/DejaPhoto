@@ -36,6 +36,8 @@ public class SetActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        Log.i("SHowfriends", Friends.getFriends("mati,kucz95@gmail,com").toString());
+
         Log.i("setActivity", "IN ONCREATE");
 
         super.onCreate(savedInstanceState);

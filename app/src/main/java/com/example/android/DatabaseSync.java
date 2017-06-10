@@ -7,6 +7,8 @@ import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
@@ -70,8 +72,16 @@ public class DatabaseSync extends TimerTask {
      * Return: none
      */
     public void uploadMetaData() {
-        for (int i = 0; i < Global.uploadMetaData.size(); i++) {
-            //TODO iteration 2
+        for (Photo p : Global.displayCycle) {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+            if(p.getPath().contains("DejaPhotoCopied")) {
+                Log.i("uploading", p.getPath());
+                String filename = p.getPath().substring(p.getPath().lastIndexOf("/") + 1);
+                if(p.userLocation)
+                    reference.child("photos").child(Global.currUser.email.replace(".", ",")).child(filename.replace(".", ",")).child("location").setValue(p.userLocationString);
+                else
+                    reference.child("photos").child(Global.currUser.email.replace(".", ",")).child(filename.replace(".", ",")).child("location").setValue(p.photoLocationString);
+            }
         }
     }
 
@@ -97,6 +107,7 @@ public class DatabaseSync extends TimerTask {
                 }
             }
         }
+
     }
 
     //manage calling the downloads for each image of each user

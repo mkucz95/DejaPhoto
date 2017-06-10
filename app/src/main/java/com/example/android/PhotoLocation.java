@@ -59,28 +59,27 @@ public class PhotoLocation {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
             String filename = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
             if(Global.currUser != null) {
-                for (String s : Friends.getFriends(Global.currUser.email)) {
-                    reference = reference.child("photos").child(s).child(filename.replace(".", ",")).child("location");
-                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Object o = dataSnapshot.getValue();
-                            if (o != null) {
-                                locations.add(o.toString());
-                                check = 1;
-                            } else {
-                                locations.add(Global.displayCycle.get(Global.head).photoLocationString);
-                                check = 1;
-                            }
-                            Log.i("locationName", "Getting location from DB: " + locationName);
+                reference = reference.child("photos").child(Friends.getFriends(Global.currUser.email).get(0)).child(filename.replace(".", ",")).child("location");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Object o = dataSnapshot.getValue();
+                        if (o != null) {
+                            locations.add(o.toString());
+                            check = 1;
+                        } else {
+                            locations.add(Global.displayCycle.get(Global.head).photoLocationString);
+                            check = 1;
                         }
+                        Log.i("locationName", "Getting location from DB: " + locationName);
+                    }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
-                }
+                    }
+                });
+
 
                 while (check == 0) {
                     Log.i("locationName", "waiting for thread to finish");

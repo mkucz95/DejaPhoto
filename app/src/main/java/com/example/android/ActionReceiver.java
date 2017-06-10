@@ -74,10 +74,9 @@ public class ActionReceiver extends BroadcastReceiver {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
             String filename = Global.displayCycle.get(Global.head).getPath().substring(Global.displayCycle.get(Global.head).getPath().lastIndexOf("/") + 1);
 
-            for (String s : Friends.getFriends(Global.currUser.email)) {
-                reference.child("photos").child(s.replace(".", ",")).child(filename.replace(".", ",")).child("karma").setValue(newKarma);
-                Log.i("AddKarma", "photos -> " + s.replace(".", ",") + " -> " + filename.replace(".", ",") + " -> karma " + newKarma);
-            }
+            reference.child("photos").child(Friends.getFriends(Global.currUser.email).get(0).replace(".", ",")).child(filename.replace(".", ",")).child("karma").setValue(newKarma);
+            Log.i("AddKarma", "photos -> " + Friends.getFriends(Global.currUser.email).get(0).replace(".", ",") + " -> " + filename.replace(".", ",") + " -> karma " + newKarma);
+
 
             Global.restartTimer(context);
 
