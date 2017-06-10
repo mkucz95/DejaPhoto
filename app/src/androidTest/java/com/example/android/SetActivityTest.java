@@ -8,6 +8,9 @@ import com.example.dejaphoto.R;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -19,27 +22,28 @@ public class SetActivityTest {
     @Rule
     public ActivityTestRule<SetActivity> activity = new ActivityTestRule<>(SetActivity.class);
 
-    @Test
-    public void testDejaMode(){
-        Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_share);
-        Boolean checked = sw.isChecked();
-        if(checked){
-            assertEquals(Global.dejaVuSetting, true);
-
-            sw.setChecked(false);
-            assertEquals(Global.dejaVuSetting, false);
-        }
-        else{
-            assertEquals(Global.dejaVuSetting, false); //all should be off if dejamode off
-            assertEquals(Global.locationSetting, false);
-            assertEquals(Global.timeSetting, false);
-            assertEquals(Global.daySetting, false);
-            assertEquals(Global.karmaSetting, false);
-
-            sw.setChecked(true);
-            assertEquals(Global.dejaVuSetting, true);
-        }
-    }
+//    @Test
+//    public void testDejaMode(){
+//        onView(withId(R.id.s_share)).perform(click());
+//        Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_share);
+//        Boolean checked = sw.isChecked();
+//        if(checked){
+//            assertEquals(Global.dejaVuSetting, true);
+//
+//            sw.setChecked(false);
+//            assertEquals(Global.dejaVuSetting, false);
+//        }
+//        else{
+//            assertEquals(Global.dejaVuSetting, false); //all should be off if dejamode off
+//            assertEquals(Global.locationSetting, false);
+//            assertEquals(Global.timeSetting, false);
+//            assertEquals(Global.daySetting, false);
+//            assertEquals(Global.karmaSetting, false);
+//
+//            sw.setChecked(true);
+//            assertEquals(Global.dejaVuSetting, true);
+//        }
+//    }
 
     @Test
     public void testLocation(){
@@ -53,8 +57,9 @@ public class SetActivityTest {
         }
         else{
             assertEquals(Global.locationSetting, false);
-
-            sw.setChecked(true);
+            onView(withId(R.id.s_location)).perform(click());
+            onView(withId(R.id.bt_7)).perform(click());
+          //  sw.setChecked(true);
             assertEquals(Global.locationSetting, true);
         }
     }
@@ -71,8 +76,9 @@ public class SetActivityTest {
         }
         else{
             assertEquals(Global.karmaSetting, false);
-
-            sw.setChecked(true);
+            onView(withId(R.id.s_karma)).perform(click());
+            onView(withId(R.id.bt_7)).perform(click());
+          //  sw.setChecked(true);
             assertEquals(Global.karmaSetting, true);
         }
     }
@@ -89,8 +95,10 @@ public class SetActivityTest {
         }
         else{
             assertEquals(Global.timeSetting, false);
+            onView(withId(R.id.s_time)).perform(click());
+            onView(withId(R.id.bt_7)).perform(click());
 
-            sw.setChecked(true);
+//            sw.setChecked(true);
             assertEquals(Global.timeSetting, true);
         }
 
@@ -108,8 +116,9 @@ public class SetActivityTest {
         }
         else{
             assertEquals(Global.daySetting, false);
-
-            sw.setChecked(true);
+            onView(withId(R.id.s_dow)).perform(click());
+            onView(withId(R.id.bt_7)).perform(click());
+          //  sw.setChecked(true);
             assertEquals(Global.daySetting, true);
         }
     }

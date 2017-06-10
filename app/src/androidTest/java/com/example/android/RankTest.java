@@ -81,7 +81,7 @@ public class RankTest {
         t1.add(testPhoto2);
         t1.add(testPhoto3);
         Rank r3 = new Rank(localLat, localLng, false, true, false, false, t1, context);
-        assertEquals(t1.get(0),testPhoto1);
+        assertEquals(t1.get(2),testPhoto1);
     }
 
     @Test
