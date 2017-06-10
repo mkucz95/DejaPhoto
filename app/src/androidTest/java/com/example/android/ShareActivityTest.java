@@ -12,6 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -21,10 +24,12 @@ import static junit.framework.Assert.assertEquals;
 public class ShareActivityTest {
     @Rule
     public ActivityTestRule<ShareActivity> activity = new ActivityTestRule<>(ShareActivity.class);
-
+    ShareActivity shareActivity = activity.getActivity();
     @Test
     public void testShare() {
         Switch sw = (Switch) activity.getActivity().findViewById(R.id.s_mode);
+//        shareActivity.displayUpdate(true);
+        onView(withId(R.id.s_mode)).perform(click());
         Boolean checked = sw.isChecked();
         if (checked) {
             assertEquals(Global.shareSetting, true);
